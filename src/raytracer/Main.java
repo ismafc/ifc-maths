@@ -758,17 +758,43 @@ Números de Friedman:
         System.out.println("Max = " + pesomax + ", Min = " + peso + ", Saving = " + (pesomax - peso));
 
  */
-
+    
+/*
+        // problema 120
+        // Resto mayor
+        int summaxmod = 0;
+        for (int a = 3; a <= 1000; a++) {
+            int n = 1;
+            BigInteger den = BigInteger.valueOf(a).pow(2);
+            int maxmod = 0;
+            while (true) {
+                BigInteger num = BigInteger.valueOf(a - 1).pow(n).add(BigInteger.valueOf(a + 1).pow(n));
+                int mod = num.mod(den).intValue();
+                maxmod = (mod > maxmod) ? mod : maxmod;
+                if (n >= 2 * a)
+                    break;
+                n += 2;
+            }
+            summaxmod += maxmod;
+        }        
+        System.out.println(summaxmod + "!");//333082500
+*/
+    
     /**
      * Entry point funcion
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // Start PE
-        // problema 145
-        // números reversibles
+        // problema 125
+        // Palindromos sumas de cuadrados consecutivos (100000000)
         // End PE
-
+        for (int n = 1; n < 1000; n++) {
+            if (isPalindrome10(n)) {
+                System.out.println(n);
+            }
+        }        
+        
         // TODO code application logic here
         Object3D o = new Object3D(1.0, 1.0, 0.0);
         Vector3D v = new Vector3D(o);
