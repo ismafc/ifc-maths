@@ -6,7 +6,7 @@
 
 package raytracer;
 
-import java.io.*;
+//import java.io.*;
 import java.math.*;
 import java.util.*;
 
@@ -66,9 +66,23 @@ Números de Friedman:
 */
 
     private static boolean isPrime(long n) {
-        if (n % 2L == 0L)
+        if (n == 1)
+            return false;
+        if (n % 2 == 0)
+            return n == 2;
+        for (long i = 3; i <= Math.sqrt(Math.abs(n)); i += 2) {
+            if (n % i == 0)
+                return false;
+        }
+        return true;
+    }
+
+    private static boolean isPrime(Long n) {
+        if (n == 1L)
+            return false;
+        if (n % 2L == 0)
             return n == 2L;
-        for (long i = 3L; i <= Math.sqrt(Math.abs(n)); i += 2L) {
+        for (long i = 3L; i <= Math.sqrt(n); i += 2L) {
             if (n % i == 0L)
                 return false;
         }
@@ -112,15 +126,15 @@ Números de Friedman:
         return false;
     }
 
-    static private void combinacion(int i, long num, Vector<Integer> posibles) {
+    static private void combinacion(int i, long num, ArrayList<Integer> posibles) {
         if (i == 0) {
-            num += (long)posibles.lastElement();
+            num += (long)posibles.get(posibles.size() - 1);
             // Tratamos el número final
         }
         else {
             long nnum = num;
             for (Integer d : posibles) {
-                Vector<Integer> np = new Vector<Integer>(posibles);
+                ArrayList<Integer> np = new ArrayList<Integer>(posibles);
                 np.remove(d);
                 num = nnum + (long)d * (long)Math.pow(10, i);
                 combinacion(i - 1, num, np);
@@ -231,6 +245,17 @@ Números de Friedman:
         return true;
     }
 
+    private static boolean isPalindrome10L(Long n) {
+        Long digits = Math.round(Math.floor(Math.log10(n))) + 1L;
+        for (int digit = 0; digit < digits / 2; digit++) {
+            int d1 = (int)(n / Math.pow(10, digit)) % 10;
+            int d2 = (int)(n / Math.pow(10, digits - digit - 1)) % 10;
+            if (d1 != d2)
+                return false;
+        }
+        return true;
+    }
+
     private static boolean isPalindrome2(int n) {
         String nb = Integer.toBinaryString(n);
         for (int i = 0; i < nb.length() / 2; i++) {
@@ -247,7 +272,7 @@ Números de Friedman:
         return prod;
     }
 
-    // Lista todos los número sin repetir entre los disponibles con 'digitos' digitos
+    // Lista todos los números sin repetir entre los disponibles con 'digitos' digitos
     private static void addNewDigit(int digito, long num, ArrayList<Integer> disponibles) {
         if (digito == 0) {
 	    System.out.println(num);
@@ -336,7 +361,7 @@ Números de Friedman:
         catch (Exception e) {}
     */
 
-    // Esta el (0,0) dentro del triángulo t?
+    // Esta el (0,0) dentro del tri�ngulo t?
     static private boolean isZeroIn(Triangle t) {
         double minx = Math.min(t.coord[0], Math.min(t.coord[2], t.coord[4]));
         double maxx = Math.max(t.coord[0], Math.max(t.coord[2], t.coord[4]));
@@ -438,6 +463,19 @@ Números de Friedman:
         return (t == (double)((int)t));
     }
 
+    // Cuenta las apariciones del carácter 'c' en la cadena 's'
+    public static int count(String s, char c) {
+        if (s == null) {
+            return 0;
+        }
+        int ocur = 0;
+        for (char cc : s.toCharArray()) {
+            ocur += (cc == c ? 1 : 0);
+        }
+        return ocur;
+    }
+
+    
 //
 //
 //
@@ -493,7 +531,7 @@ Números de Friedman:
         return guess;
     }
 
-    public static int getSum(Vector<Integer> set, int group, boolean first) {
+    public static int getSum(ArrayList<Integer> set, int group, boolean first) {
         int sum = 0;
         if (first) {
             for (int i = 0; i < group; i++)
@@ -505,16 +543,15 @@ Números de Friedman:
         }
         return sum;
     }
-
-    @SuppressWarnings("unchecked")
-    public static Vector<Vector<Integer>> expandGroups(Vector<Integer> group, Vector<Integer> set, int elements) {
-        Vector<Vector<Integer>> groups = new Vector<Vector<Integer>>();
+/*
+    public static ArrayList<ArrayList<Integer>> expandGroups(ArrayList<Integer> group, ArrayList<Integer> set, int elements) {
+        ArrayList<ArrayList<Integer>> groups = new ArrayList<ArrayList<Integer>>();
         if (elements > 0) {
             for (int i = 0; i < set.size(); i++) {
-                Vector<Integer> newg = (Vector<Integer>)group.clone();
+                ArrayList<Integer> newg = (ArrayList<Integer>)group.clone();
                 newg.add(set.get(i));
                 groups.add(newg);
-                Vector<Integer> setclone = (Vector<Integer>)set.clone();
+                ArrayList<Integer> setclone = (ArrayList<Integer>)set.clone();
                 for (int index = 0; index <= i; index++)
                     setclone.remove(0);
                 groups.addAll(expandGroups(newg, setclone, elements - 1));
@@ -524,16 +561,16 @@ Números de Friedman:
         return groups;
     }
 
-    public static int getSum(Vector<Integer> v) {
+    public static int getSum(ArrayList<Integer> v) {
         int s = 0;
         for (Integer i : v)
             s += i;
         return s;
     }
 
-    public static boolean findSameSum(Vector<Integer> group, Vector<Integer> set) {
-        Vector<Vector<Integer>> groups = new Vector<Vector<Integer>>();
-        groups.addAll(expandGroups(new Vector<Integer>(), set, group.size()));
+    public static boolean findSameSum(ArrayList<Integer> group, ArrayList<Integer> set) {
+        ArrayList<ArrayList<Integer>> groups = new ArrayList<ArrayList<Integer>>();
+        groups.addAll(expandGroups(new ArrayList<Integer>(), set, group.size()));
         int sum = getSum(group);
         int v = 0;
         while (v < groups.size()) {
@@ -558,8 +595,8 @@ Números de Friedman:
         return false;
     }
 
-    @SuppressWarnings("unchecked")
-    public static int analizeSet(Vector<Integer> set) {
+
+    public static int analizeSet(ArrayList<Integer> set) {
         int sum = 0;
         // No puede haber dos iguales
         for (int i = 0; i < set.size() - 1; i++) {
@@ -567,16 +604,16 @@ Números de Friedman:
             if (set.get(i) == set.get(i + 1))
                 return 0;
         }
-        sum += set.lastElement();
+        sum += set.get(set.size() - 1);
         
-        // Comprovar que si tienen más elementos, la suma es mayor
+        // Comprovar que si tienen m�s elementos, la suma es mayor
         // Se comprueba el peor caso de cada subgrupo, por ejemplo, de un subgrupo de 3 se mira
         // que la suma de los 3 menores sea mayor o igual que la suma de los 2 mayores
         // Con eso se aseguro que todos los subgrupos 3,2 cumplen la premisa.
-        // Así para todos los subgrupos n, n-1
+        // As� para todos los subgrupos n, n-1
         for (int group = 2; group <= set.size() / 2 + (set.size() % 2); group++) {
             if (getSum(set, group, true) <= getSum(set, group - 1, false)) {
-                System.out.println("Se encontró subgrupo más grande (" + group + ") con suma menor: " + set);
+                System.out.println("Se encontr� subgrupo m�s grande (" + group + ") con suma menor: " + set);
                 //int index = (set.size() % 2 == 0) ? (set.size() / 2 - 1) : set.size() / 2;
                 //int maxsum = set.get(index) * index;
                 //System.out.println(maxsum);
@@ -584,18 +621,18 @@ Números de Friedman:
             }
         }
         // Comprobar sumas de subgrupos diferentes
-        // Solo quedan los subconjuntos con el mismo número de elementos
+        // Solo quedan los subconjuntos con el mismo n�mero de elementos
         System.out.println("Analizando: " + set);
         for (int elements = 2; elements <= set.size() / 2; elements++) {
-            Vector<Vector<Integer>> groups = new Vector<Vector<Integer>>();
-            groups.addAll(expandGroups(new Vector<Integer>(), set, elements));
+            ArrayList<ArrayList<Integer>> groups = new ArrayList<ArrayList<Integer>>();
+            groups.addAll(expandGroups(new ArrayList<Integer>(), set, elements));
             int v = 0;
             while (v < groups.size()) {
                 if (groups.get(v).size() < elements)
                     groups.remove(v);
                 else {
-                    Vector<Integer> group = groups.get(v);
-                    int firstIndex = set.indexOf(group.firstElement());
+                    ArrayList<Integer> group = groups.get(v);
+                    int firstIndex = set.indexOf(group.get(0));
                     int lastIndex = firstIndex;
                     boolean bad = true;
                     for (int i = 1; i < group.size(); i++) {
@@ -614,9 +651,9 @@ Números de Friedman:
             }
             v = 0;
             while (v < groups.size()) {
-                Vector<Integer> setcloned = (Vector<Integer>)set.clone();
-                Vector<Integer> group = groups.get(v);
-                int i = setcloned.indexOf(group.firstElement());
+                ArrayList<Integer> setcloned = (ArrayList<Integer>)set.clone();
+                ArrayList<Integer> group = groups.get(v);
+                int i = setcloned.indexOf(group.get(0));
                 while (i >= 0) {
                     setcloned.remove(0);
                     i--;
@@ -631,9 +668,9 @@ Números de Friedman:
         }
         return sum;
     }
-
-    public static Vector<Integer> ObtenerAdyacencias(Vector<Integer> network, int a) {
-        Vector<Integer> adyacencias = new Vector<Integer>();
+*/
+    public static ArrayList<Integer> ObtenerAdyacencias(ArrayList<Integer> network, int a) {
+        ArrayList<Integer> adyacencias = new ArrayList<Integer>();
         int ancho = (int)Math.sqrt((double)network.size());
         for (int index = 0; index < ancho; index++) {
             if (network.get(a * ancho + index) > 0)
@@ -642,7 +679,7 @@ Números de Friedman:
         return adyacencias;
     }
 
-    public static int obtenerPeso(Vector<Integer> network) {
+    public static int obtenerPeso(ArrayList<Integer> network) {
         int pesoa = 0;
         int ancho = (int)Math.sqrt((double)network.size());
         for (int j = 1; j < ancho; j++) {
@@ -653,12 +690,12 @@ Números de Friedman:
         return pesoa;
     }
 
-    public static boolean sonAdyacentes(Vector<Integer> network, int a, int b) {
-        Vector<Integer> adyacencias = new Vector<Integer>();
-        Vector<Integer> done = new Vector<Integer>();
+    public static boolean sonAdyacentes(ArrayList<Integer> network, int a, int b) {
+        ArrayList<Integer> adyacencias = new ArrayList<Integer>();
+        ArrayList<Integer> done = new ArrayList<Integer>();
         adyacencias.add(a);
         while (adyacencias.size() > 0) {
-            Vector<Integer> nadd = ObtenerAdyacencias(network, adyacencias.get(0));
+            ArrayList<Integer> nadd = ObtenerAdyacencias(network, adyacencias.get(0));
             done.add(adyacencias.get(0));
             for (Integer i : nadd) {
                 if (i == b)
@@ -675,46 +712,69 @@ Números de Friedman:
         return false;
     }
 
-    public static Vector<Integer> minima = new Vector<Integer>();
-    public static int peso = Integer.MAX_VALUE;
-    public static int pesomax = Integer.MAX_VALUE;
-    public static Hashtable<Vector<Integer>, Integer> processed = new Hashtable<Vector<Integer>, Integer>();
-
-    @SuppressWarnings("unchecked")
-    public static void desgranar(Tree<Vector<Integer>> nodo) {
-        Vector<Integer> network = nodo.getValue();
+    public static Triangle chooseMinimumEdge(ArrayList<Integer> network, ArrayList<Integer> vnodes) {
+        Triangle min = new Triangle();
+        min.coord[2] = Double.MAX_VALUE;
         int ancho = (int)Math.sqrt((double)network.size());
-        for (int j = 1; j < ancho; j++) {
-            for (int i = 0; i < j; i++) {
-                int pesoa = network.get(j * ancho + i);
-                if (pesoa > 0) {
-                    Vector<Integer> nnetwork = (Vector<Integer>)network.clone();
-                    nnetwork.set(j * ancho + i, 0);
-                    nnetwork.set(i * ancho + j, 0);
-                    if (!processed.containsKey(nnetwork)) {
-                        if (sonAdyacentes(nnetwork, i, j)) {
-                            int npeso = obtenerPeso(nnetwork);
-                            processed.put(nnetwork, npeso);
-                            if (npeso < peso) {
-                                minima = nnetwork;
-                                peso = npeso;
-                            }
-                            Tree<Vector<Integer>> branch = new Tree<Vector<Integer>>();
-                            branch.setValue(nnetwork);
-                            nodo.addBranch(branch);
-                            desgranar(branch);
-                        }
-                    }
-                    //else
-                    //    System.out.println("Ya procesado!");
+        for (Integer node : vnodes) {
+            for (int index = 0; index < ancho; index++) {
+                if (network.get(node * ancho + index) == 0)
+                    continue;
+                if (min.coord[2] > network.get(node * ancho + index) &&
+                    !vnodes.contains(index)) {
+                    min.coord[0] = index;
+                    min.coord[1] = node;
+                    min.coord[2] = network.get(node * ancho + index);
                 }
             }
         }
+        vnodes.add((int)min.coord[0]);
+        network.set((int)(min.coord[1] * ancho + min.coord[0]), 0);
+        network.set((int)(min.coord[0] * ancho + min.coord[1]), 0);
+        return min;
     }
 
-/*
-         Vector<Integer> network = new Vector<Integer>();
+    public static void ejercicio110() {
+        // 1/x + 1/y = 1/n
+        // Número de soluciones para un 'n' determinado (menor 'n' para el que hay más de 4 millones de solucines
+        // - x > n
+        // - y > n
+        // n + 1 <= x <= n(n+1)
+        // relacionado con la descomposición en factores
+        long solutions = 0;
+        //long n = 2*2*2*2*2*3*3*3*3*5*5*5*5*7*7*11;
+        // 2*2=3            (4)
+        // 2*3=5            (6)
+        // 2*2*2=4          (8)
+        // 3*3=3            (9)
+        // 2*5=5            (10)
+        // 2*2*3=8          (12)
+        // 2*7=5            (14)
+        // 3*5=5            (15)
+        // 2*2*2*2=5        (16)
+        // 3*3*2=8          (18)
+        // 3*3*2*2=8        (36)
+
+        long n = Long.MAX_VALUE;
+        n = 2*2*2*3*3;
+        long lastx = n * (n + 1);
+        for (long x = n + 1; x <= lastx; x++) {
+            if (x * n % (x - n) == 0) {
+                //System.out.println("1/" + x + " + 1/" + (x * n / (x - n)) + " = 1/" + n);
+                lastx = x * n / (x - n);
+                solutions++;
+            }
+            else
+                lastx = x * n / (x - n) + 1;
+        }
+        System.out.println("Solutions for n = " + n + " = " + solutions);
+    }
+
+/*      Leer un grafo poderado desde fichero
+ *
+        ArrayList<Integer> network = new ArrayList<Integer>();
         String text = "";
+        int aristas = 0;
         try {
             int c;
             int iaux = 0;
@@ -724,6 +784,8 @@ Números de Friedman:
                     iaux = 0;
                     if (!text.equals("-"))
                         iaux = Integer.parseInt(text);
+                    if (iaux != 0)
+                        aristas++;
                     network.add(iaux);
                     text = "";
                 }
@@ -732,6 +794,8 @@ Números de Friedman:
                     if (!text.equals("-"))
                         iaux = Integer.parseInt(text);
                     network.add(iaux);
+                    if (iaux != 0)
+                        aristas++;
                     text = "";
                 }
                 else if (c == 10)
@@ -742,60 +806,431 @@ Números de Friedman:
             fr.close();
         }
         catch (Exception e) {}
-        peso = obtenerPeso(network);
-        pesomax = peso;
-
-        Tree<Vector<Integer>> arbol = new Tree<Vector<Integer>>();
-        minima = network;
-        processed.put(network, peso);
-        arbol.setValue(network);
-
-        // Voy a ir quitando aristas (si es posible)
-        // no puedo quitarla si es el único camino que comunica los dos vértices, o sea,
-        // o uno de los dos vértices se queda sin aristas adyacentes o
-        // ya no existe camino para ir de un vertice al otro por otro lado.
-        desgranar(arbol);
-        System.out.println("Max = " + pesomax + ", Min = " + peso + ", Saving = " + (pesomax - peso));
-
- */
-    
-/*
-        // problema 120
-        // Resto mayor
-        int summaxmod = 0;
-        for (int a = 3; a <= 1000; a++) {
-            int n = 1;
-            BigInteger den = BigInteger.valueOf(a).pow(2);
-            int maxmod = 0;
-            while (true) {
-                BigInteger num = BigInteger.valueOf(a - 1).pow(n).add(BigInteger.valueOf(a + 1).pow(n));
-                int mod = num.mod(den).intValue();
-                maxmod = (mod > maxmod) ? mod : maxmod;
-                if (n >= 2 * a)
-                    break;
-                n += 2;
+        int peso = obtenerPeso(network);
+        aristas /= 2;
+        System.out.println("Red con " + aristas + " aristas");
+        for (int j = 1; j < 40; j++) {
+           for (int i = 1; i < 40; i++) {
+                if (!sonAdyacentes(network, i, j))
+                    System.out.println("No son adyacentes!");
             }
-            summaxmod += maxmod;
-        }        
-        System.out.println(summaxmod + "!");//333082500
+        }
+    */
+
+/*
+ *      Encontrar �rbol m�nimo
+ *
+        ArrayList<Integer> visitedNodes = new ArrayList<Integer>();
+        ArrayList<Triangle> visitedEdges = new ArrayList<Triangle>();
+        visitedNodes.add(0);
+        int ancho = (int)Math.sqrt((double)network.size());
+        int npeso = 0;
+        while (visitedNodes.size() < ancho) {
+            visitedEdges.add(chooseMinimumEdge(network, visitedNodes));
+            npeso += visitedEdges.lastElement().coord[2];
+        }
+        System.out.println("Peso = " + peso + "; Peso min = " + npeso + "; dif = " + (peso - npeso));
 */
+
+/* DARDOS!!!
+    public static boolean alreadyIn(ArrayList<Triangle> combs, Triangle c) {
+        for (Triangle cc : combs) {
+            if (cc.coord[0] == c.coord[2] && cc.coord[2] == c.coord[0])
+                return true;
+        }
+        return false;
+    }
+
+        1.- Debe acabar con un doble. Empezamos por ah� como �ltima tirada.
+            para cada doble, si lo que queda es < 0 o 1 = kk y paramos. Si es 0 hemos llegado.
+        2.- Para cada caso positivo de los anteriores iniciamos el segundo paso (pen�ltima tirada)
+            con lo que queda por sumar. Restamos los simples, dobles y triples. Si es < 0 = kk y
+            paramos. Si es 0 hemos llegado. Si lo que queda por restar > 60 kk y paramos.
+        3.- Para cada caso de los anteriores probamos todas las opciones que den 0.
+            Comprobar posibles repeticiones en el orden de las dos primeras tiradas.
+
+        int totalc = 0;
+        for (int score = 2; score < 100; score++) {
+            ArrayList<Triangle> combinations = new ArrayList<Triangle>();
+            ArrayList<Triangle> combinations1 = new ArrayList<Triangle>();
+            int rest;
+            for (int points = 1; points <= 20; points++) {
+                rest = score - points * 2;
+                if (rest < 0)
+                    break;
+                else if (rest >= 0) {
+                    Triangle c = new Triangle();
+                    c.coord[4] = 200 + points;
+                    c.coord[5] = 2 * points;
+                    if (rest == 0)
+                        combinations.add(c);
+                    else
+                        combinations1.add(c);
+                }
+            }
+            rest = score - 25 * 2;
+            if (rest >= 0) {
+                Triangle c = new Triangle();
+                c.coord[4] = 200 + 25;
+                c.coord[5] = 2 * 25;
+                if (rest == 0)
+                    combinations.add(c);
+                else
+                    combinations1.add(c);
+            }
+
+            // Ahora desplegamos la combinaciones incompletas de una tirada
+            ArrayList<Triangle> combinations2 = new ArrayList<Triangle>();
+            int newscore;
+            for (Triangle c : combinations1) {
+                newscore = score - (int)c.coord[5];
+                for (int points = 1; points <= 20; points++) {
+                    rest = newscore - points;
+                    if (rest >= 0) {
+                        Triangle cc = new Triangle();
+                        cc.coord[2] = 100 + points;
+                        cc.coord[3] = points;
+                        cc.coord[4] = c.coord[4];
+                        cc.coord[5] = c.coord[5];
+                        if (rest == 0)
+                            combinations.add(cc);
+                        else
+                            combinations2.add(cc);
+                    }
+                    else
+                        break;
+                    rest = newscore - points * 2;
+                    if (rest >= 0) {
+                        Triangle cc = new Triangle();
+                        cc.coord[2] = 200 + points;
+                        cc.coord[3] = 2 * points;
+                        cc.coord[4] = c.coord[4];
+                        cc.coord[5] = c.coord[5];
+                        if (rest == 0)
+                            combinations.add(cc);
+                        else
+                            combinations2.add(cc);
+                    }
+                    else
+                        continue;
+                    rest = newscore - points * 3;
+                    if (rest >= 0) {
+                        Triangle cc = new Triangle();
+                        cc.coord[2] = 300 + points;
+                        cc.coord[3] = 3 * points;
+                        cc.coord[4] = c.coord[4];
+                        cc.coord[5] = c.coord[5];
+                        if (rest == 0)
+                            combinations.add(cc);
+                        else
+                            combinations2.add(cc);
+                    }
+                }
+
+                int points = 25;
+                rest = newscore - points;
+                if (rest >= 0) {
+                    Triangle cc = new Triangle();
+                    cc.coord[2] = 100 + points;
+                    cc.coord[3] = points;
+                    cc.coord[4] = c.coord[4];
+                    cc.coord[5] = c.coord[5];
+                    if (rest == 0)
+                        combinations.add(cc);
+                    else
+                        combinations2.add(cc);
+                }
+                rest = newscore - points * 2;
+                if (rest >= 0) {
+                    Triangle cc = new Triangle();
+                    cc.coord[2] = 200 + points;
+                    cc.coord[3] = 2 * points;
+                    cc.coord[4] = c.coord[4];
+                    cc.coord[5] = c.coord[5];
+                    if (rest == 0)
+                        combinations.add(cc);
+                    else
+                        combinations2.add(cc);
+                }
+            }
+
+            // Ahora desplegamos la combinaciones incompletas de dos tiradas
+            for (Triangle c : combinations2) {
+                newscore = score - (int)c.coord[5] - (int)c.coord[3];
+                for (int points = 1; points <= 20; points++) {
+                    rest = newscore - points;
+                    if (rest == 0) {
+                        Triangle cc = new Triangle();
+                        cc.coord[0] = 100 + points;
+                        cc.coord[1] = points;
+                        cc.coord[2] = c.coord[2];
+                        cc.coord[3] = c.coord[3];
+                        cc.coord[4] = c.coord[4];
+                        cc.coord[5] = c.coord[5];
+                        if (!alreadyIn(combinations, cc))
+                            combinations.add(cc);
+                    }
+                    rest = newscore - points * 2;
+                    if (rest == 0) {
+                        Triangle cc = new Triangle();
+                        cc.coord[0] = 200 + points;
+                        cc.coord[1] = 2 * points;
+                        cc.coord[2] = c.coord[2];
+                        cc.coord[3] = c.coord[3];
+                        cc.coord[4] = c.coord[4];
+                        cc.coord[5] = c.coord[5];
+                        if (!alreadyIn(combinations, cc))
+                            combinations.add(cc);
+                    }
+                    rest = newscore - points * 3;
+                    if (rest == 0) {
+                        Triangle cc = new Triangle();
+                        cc.coord[0] = 300 + points;
+                        cc.coord[1] = 3 * points;
+                        cc.coord[2] = c.coord[2];
+                        cc.coord[3] = c.coord[3];
+                        cc.coord[4] = c.coord[4];
+                        cc.coord[5] = c.coord[5];
+                        if (!alreadyIn(combinations, cc))
+                            combinations.add(cc);
+                    }
+                }
+                int points = 25;
+                rest = newscore - points;
+                if (rest == 0) {
+                    Triangle cc = new Triangle();
+                    cc.coord[0] = 100 + points;
+                    cc.coord[1] = points;
+                    cc.coord[2] = c.coord[2];
+                    cc.coord[3] = c.coord[3];
+                    cc.coord[4] = c.coord[4];
+                    cc.coord[5] = c.coord[5];
+                    if (!alreadyIn(combinations, cc))
+                        combinations.add(cc);
+                }
+                rest = newscore - points * 2;
+                if (rest == 0) {
+                    Triangle cc = new Triangle();
+                    cc.coord[0] = 200 + points;
+                    cc.coord[1] = 2 * points;
+                    cc.coord[2] = c.coord[2];
+                    cc.coord[3] = c.coord[3];
+                    cc.coord[4] = c.coord[4];
+                    cc.coord[5] = c.coord[5];
+                    if (!alreadyIn(combinations, cc))
+                        combinations.add(cc);
+                }
+            }
+            totalc += combinations.size();
+            System.out.println(score + " -> Combinations = " + combinations.size());
+        }
+        System.out.println("Total combinations = " + totalc);
+*/
+
+    public static long combinaciones(long ltotal, long lmin) {
+        long total = 0;
+        for (long l = lmin; l <= ltotal; l++) {
+            total += (ltotal - l + 1);
+            if (ltotal - l <= lmin)
+                continue;
+            for (long i = 0; i < (ltotal - l + 1); i++) {
+                total += combinaciones(ltotal - l - 1 - i, lmin);
+            }
+        }
+        return total;
+    }
+
+    static private boolean isReversible(long n) {
+        long nn = Long.valueOf(rotate(Long.toString(n))) + n;
+        long digits = (long)Math.log10(nn) + 1;
+        long dd;
+        for (long d = 0; d < digits; d++) {
+            if ((nn / (long)Math.pow(10, d)) % 2 == 0)
+                return false;
+        }
+        return true;
+    }
+
+    // Start PE 123
+    // ((Pn-1)^n + (Pn+1)^n) mod Pn^2 > 10^10
+    // encontrar n (Pn es el primo n-esimo)
+    static int problem123() {
+        BigInteger pn = new BigInteger("100001");
+        BigInteger order = new BigInteger("9593"); // Del primo 100003
+        BigInteger limit = new BigInteger("10000000000");
+        while (true) {
+            if (isPrime(pn.longValue())) {
+                BigInteger pn_1 = pn.subtract(BigInteger.ONE).pow(order.intValue());
+                BigInteger pn1 = pn.add(BigInteger.ONE).pow(order.intValue());
+                BigInteger pn2 = pn.multiply(pn);
+                BigInteger r = pn_1.add(pn1).mod(pn2);
+                if (r.compareTo(limit) == 1) {
+                    return order.intValue();
+                }
+                order = order.add(BigInteger.ONE);
+            }
+            pn = pn.add(BigInteger.ONE);
+        }
+    }
+
+    // Start PE 125
+    // Suma de los palíndrimos < 'to' que son suma de cuadrados (2 o más)
+    static long problem125(long to) {
+        long sum = 0L;
+        for (long pa = 1L; pa < to; pa++) {
+            if (isPalindrome10L(pa)) {
+                long n = Math.round(Math.floor(Math.sqrt(pa)));
+                long s = (n * (n + 1) * (2 * n + 1) / 6);
+                while (s > pa && n > 0) {
+                    long nn = n;
+                    long sumaux = nn * nn;
+                    while (sumaux < pa || nn == 1) {
+                        nn--;
+                        sumaux += (nn * nn);
+                    }
+                    if (sumaux == pa) {
+                        if (nn < n) {
+                            sum += pa;
+                            System.out.println(pa + " = " + nn + " to " + n);
+                        }
+                        break;
+                    }
+                    n--;
+                    s = (n * (n + 1) * (2 * n + 1) / 6);
+                }
+                if (s == pa && 1 < n) {
+                    System.out.println(pa + " = " + 1 + " to " + n);
+                    sum += pa;
+                }
+                // n1(n1+1)(2n1+1)/6 - n2(n2+1)(2n2+1)/6 = pa
+            }
+        }
+        System.out.println(sum);
+        return sum;
+    }
+
+    // Ejercicio 121!!
+    static long probabilidades = 0;
     
+    public static void sumaProbabilidades(String base) {
+        long i = 1L;
+        long mul = 1L;
+        for (char c : base.toCharArray()) {
+            if (c == 'N') {
+                mul = mul * i;
+            }
+            i++;
+        }
+        probabilidades += mul;
+    }
+    
+    public static void binomial(long m, long n, String base) {
+        long a = m - n;
+        if (count(base, 'N') >= n) {
+            while (base.length() < m)
+                base += 'A';
+            sumaProbabilidades(base);
+            System.out.println(base + "(" + probabilidades + ")");
+        }
+        else if (count(base, 'A') >= a) {
+            while (base.length() < m)
+                base += 'N';
+            sumaProbabilidades(base);
+            System.out.println(base + "(" + probabilidades + ")");
+        }
+        else {
+            String baseA = base + 'A';
+            String baseN = base + 'N';
+            binomial(m, n, baseA);
+            binomial(m, n, baseN);
+        }
+    }
+
+    // Start PE 121
+    // Juego de la bolsa con bolas rojas y azules
+    static public void ejercicio121() {
+        long m = 15;
+        for (long n = 0; n < ((m % 2 == 0) ? (m / 2) : (m / 2 + 1)); n++) {
+            binomial(m, n, "");
+        }
+        long f = factorial(m + 1L);
+        double premio = (double)probabilidades / (double)f;
+        System.out.println(probabilidades + " Sobre " + f + " = " + premio + " (" + (1.0 / premio) + ")");
+    }
+
     /**
      * Entry point funcion
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Start PE
-        // problema 125
-        // Palindromos sumas de cuadrados consecutivos (100000000)
-        // End PE
-        for (int n = 1; n < 1000; n++) {
-            if (isPalindrome10(n)) {
-                System.out.println(n);
-            }
-        }        
+        // Start PE 126
+        // Capas de cuboides 
+        // Para cada coordenada (x,y,z) intentamos cubrir los 6 lados: 
+        // (x+1,y,z), (x-1,y,z), (x,y+1,z), (x,y-1,z), (x,y,z+1), (x,y,z-1)
+        // Descartando los que ya estén
         
-        // TODO code application logic here
+        HashMap<Integer, Integer> C = new HashMap<>();        
+        for (int w = 1; w <= 20; w++) {
+            for (int h = 1; h <= w; h++) {
+                for (int z = 1; z <= h; z++) {
+                    // Cuboide inicial de w.h.z
+                    
+                    // Puntos del cuboide original (x,y,z)
+                    HashMap<Point3D, Boolean> dots = new HashMap<>();
+                    for (int xx = 0; xx < w; xx++) {
+                        for (int yy = 0; yy < h; yy++) {
+                            for (int zz = 0; zz < z; zz++) {
+                                Point3D p = new Point3D(xx, yy, zz);
+                                dots.put(p, Boolean.TRUE);
+                            }
+                        }
+                    }
+                    
+                    //  Ahora calculamos nuevas capas
+                    int c = dots.size();
+                    while (c < 20*20*20) {
+                        HashMap<Point3D, Boolean> dotsc = new HashMap<>();
+                        Point3D pp;
+                        for (Point3D p : dots.keySet()) {
+                            pp = new Point3D(p.x - 1, p.y, p.z);
+                            if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                dotsc.put(pp, Boolean.TRUE);
+                            }
+                            pp = new Point3D(p.x + 1, p.y, p.z);
+                            if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                dotsc.put(pp, Boolean.TRUE);
+                            }
+                            pp = new Point3D(p.x, p.y - 1, p.z);
+                            if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                dotsc.put(pp, Boolean.TRUE);
+                            }
+                            pp = new Point3D(p.x, p.y + 1, p.z);
+                            if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                dotsc.put(pp, Boolean.TRUE);
+                            }
+                            pp = new Point3D(p.x, p.y, p.z - 1);
+                            if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                dotsc.put(pp, Boolean.TRUE);
+                            }
+                            pp = new Point3D(p.x, p.y, p.z + 1);                            
+                            if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                dotsc.put(pp, Boolean.TRUE);
+                            }
+                        }
+                        c = dotsc.size();
+                        dots.putAll(dotsc);
+                        C.put(c, !C.containsKey(c) ? 1 : C.get(c) + 1);
+                    }
+                }
+            }
+        }
+        for (Integer n : C.keySet()) {
+            System.out.println("C(" + n + ")=" + C.get(n));
+        }
+        
+        // End PE
+
+        // Code application logic here
         Object3D o = new Object3D(1.0, 1.0, 0.0);
         Vector3D v = new Vector3D(o);
         Vector3D w = new Vector3D();
