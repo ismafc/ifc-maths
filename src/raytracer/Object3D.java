@@ -329,14 +329,33 @@ public class Object3D {
     }
     
     /**
-     * Asks if this Object3D is equal than input value (x,y and z are equals one by one)
-     * @param o Object to compare to this Object3D
-     * @return True if both objects are equals and False if not. 
+     * Compares Object3D 'o' with 'this' point
+     * @param o Object3D to compare with
+     * @return True if 'o' and 'this' are equals and False if they are not equals
      */
-    public boolean equals(Object3D o) {
-        return x == o.x && y == o.y && z == o.z;
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Object3D) {
+            return ((Object3D)o).x == x && 
+                   ((Object3D)o).y == y &&
+                   ((Object3D)o).z == z;
+        }
+        return false;
     }
 
+    /**
+     * Generates hash code for this Object3D
+     * @return integer with hash code based on 'x', 'y' and 'z'
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 13 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 13 * hash + (int) (Double.doubleToLongBits(this.z) ^ (Double.doubleToLongBits(this.z) >>> 32));
+        return hash;
+    }
+    
     /**
      * Asks if this Object3D is equal than input value with input tolerance
      * x,y and z must be equals one by one with epsilon tolerance
