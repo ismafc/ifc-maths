@@ -1169,28 +1169,55 @@ Números de Friedman:
         // (x+1,y,z), (x-1,y,z), (x,y+1,z), (x,y-1,z), (x,y,z+1), (x,y,z-1)
         // Descartando los que ya estén
         
-        HashMap<Integer, Integer> C = new HashMap<>();        
-        for (int w = 1; w <= 20; w++) {
-            for (int h = 1; h <= w; h++) {
-                for (int z = 1; z <= h; z++) {
-                    // Cuboide inicial de w.h.z
-                    
-                    // Puntos del cuboide original (x,y,z)
-                    HashMap<Point3D, Boolean> dots = new HashMap<>();
-                    for (int xx = 0; xx < w; xx++) {
-                        for (int yy = 0; yy < h; yy++) {
-                            for (int zz = 0; zz < z; zz++) {
-                                Point3D p = new Point3D(xx, yy, zz);
-                                dots.put(p, Boolean.TRUE);
+        //C tiene cuantas capas (value) tienen x cubos (key) -> C(22)=2; C(46)=4;
+        HashMap<Integer, Integer> C = new HashMap<>();
+
+        // Calcularemos cuboides hasta MAX_CUBOIDE_SIDE x MAX_CUBOIDE_SIDE x MAX_CUBOIDE_SIDE 
+        int MAX_CUBOIDE_SIDE = 20;
+
+        // Si el número de cubos sobrepasa los MAX_CUBES cubos no seguimos
+        int MAX_CUBES = 2000;
+        
+        // Almacenamos para cada cuboide (x,y,z) un hash con todos los cubos calculados hasta el momento
+        HashMap<Point3D, HashMap<Point3D, Boolean>> capas_externas = new HashMap<>();
+        
+        // Calculamos las MAX_CAPAS primeras capas de los cuboides
+        int MAX_CAPAS = 20;
+        int capa = 1;
+        while (capa <= MAX_CAPAS) {
+            
+            for (int w = 1; w <= MAX_CUBOIDE_SIDE; w++) {
+                for (int h = 1; h <= w; h++) {
+                    for (int z = 1; z <= h; z++) {
+                        // Cuboide inicial de w.h.z
+
+                        // Puntos del cuboide original (w,h,z) 
+                        // si es la primera capa hay que añadir
+                        // los puntos del cuboide original
+                        Point3D cuboide = new Point3D(w, h, z);
+                        if (!capas_externas.containsKey(cuboide)) {
+                            HashMap<Point3D, Boolean> dots = new HashMap<>();
+                            for (int xx = 0; xx < w; xx++) {
+                                for (int yy = 0; yy < h; yy++) {
+                                    for (int zz = 0; zz < z; zz++) {
+                                        Point3D p = new Point3D(xx, yy, zz);
+                                        dots.put(p, Boolean.TRUE);
+                                    }
+                                }
                             }
+                            capas_externas.put(cuboide, dots);
                         }
-                    }
-                    
-                    //  Ahora calculamos nuevas capas
-                    int c = dots.size();
-                    while (c < 20*20*20) {
+
+                        // Calculamos la nueva capa 'capa' para el cuboide base (w,h,z)
+                        // Los cubos de la nueva capa van en 'dotsc'
+                        // En 'dots' tenemos los cubos totales para el cuboide base (w,h,z)
                         HashMap<Point3D, Boolean> dotsc = new HashMap<>();
+                        HashMap<Point3D, Boolean> dots = capas_externas.get(cuboide);
                         Point3D pp;
+                        
+                        if (dots.size() > MAX_CUBES)
+                            continue;
+                        
                         for (Point3D p : dots.keySet()) {
                             pp = new Point3D(p.x - 1, p.y, p.z);
                             if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
@@ -1217,12 +1244,51 @@ Números de Friedman:
                                 dotsc.put(pp, Boolean.TRUE);
                             }
                         }
-                        c = dotsc.size();
+                        int cubos = dotsc.size();
                         dots.putAll(dotsc);
-                        C.put(c, !C.containsKey(c) ? 1 : C.get(c) + 1);
+
+                        // Sumamos 1 al número de capas con ese número de cubos
+                        C.put(cubos, !C.containsKey(cubos) ? 1 : C.get(cubos) + 1);
+                        
+                        //  Ahora calculamos nuevas capas
+/*                        int c = dots.size();
+                        while (c < 20*20*20) {
+                            HashMap<Point3D, Boolean> dotsc = new HashMap<>();
+                            Point3D pp;
+                            for (Point3D p : dots.keySet()) {
+                                pp = new Point3D(p.x - 1, p.y, p.z);
+                                if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                    dotsc.put(pp, Boolean.TRUE);
+                                }
+                                pp = new Point3D(p.x + 1, p.y, p.z);
+                                if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                    dotsc.put(pp, Boolean.TRUE);
+                                }
+                                pp = new Point3D(p.x, p.y - 1, p.z);
+                                if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                    dotsc.put(pp, Boolean.TRUE);
+                                }
+                                pp = new Point3D(p.x, p.y + 1, p.z);
+                                if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                    dotsc.put(pp, Boolean.TRUE);
+                                }
+                                pp = new Point3D(p.x, p.y, p.z - 1);
+                                if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                    dotsc.put(pp, Boolean.TRUE);
+                                }
+                                pp = new Point3D(p.x, p.y, p.z + 1);                            
+                                if (!dots.containsKey(pp) && !dotsc.containsKey(pp)) {
+                                    dotsc.put(pp, Boolean.TRUE);
+                                }
+                            }
+                            c = dotsc.size();
+                            dots.putAll(dotsc);
+                            C.put(c, !C.containsKey(c) ? 1 : C.get(c) + 1);
+                        }*/
                     }
                 }
             }
+            capa++;
         }
         for (Integer n : C.keySet()) {
             System.out.println("C(" + n + ")=" + C.get(n));
