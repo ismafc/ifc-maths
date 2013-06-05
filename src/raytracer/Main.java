@@ -9,6 +9,8 @@ package raytracer;
 //import java.io.*;
 import java.math.*;
 import java.util.*;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 
 /**
  * Main test program
@@ -93,7 +95,8 @@ Números de Friedman:
         ArrayList<Long> factors = new ArrayList<Long>();
         for (long i = 2; i <= n; i++) {
           while (n % i == 0) {
-            factors.add(i);
+            if (!factors.contains(i))
+                factors.add(i);
             n /= i;
           }
         }
@@ -1337,14 +1340,52 @@ Números de Friedman:
         for (Integer n : C.keySet()) {
             System.out.println("C(" + n + ")=" + C.get(n));
         }
-}    
+    }
+    
+    public static long rad(long r) {
+        long result = 1;
+        for (Long pf : primeFactors(r)) {
+            result *= pf;
+        }
+        return result;
+    }
+
+    // Es lentísimo (1 semana ejecutándose)
+    static public void ejercicio127() {
+        long MAX_C = 120000;
+        long sc = 0;
+        long a = 1;
+        while (a < MAX_C / 2) {
+            long offsetb = (a % 2 == 0) ? 2 : 1;
+            long b = a + 1;
+            long c = a + b;
+            while (c < MAX_C) {
+                if (MCD(a, b) == 1) {
+                    if (MCD(a, c) == 1) {
+                        if (MCD(b, c) == 1) {
+                            long r = rad(a * b * c);
+                            if (r < c) {
+                                System.out.println("(" + a + "," + b + "," + c + ") = " + r);
+                                sc += c;
+                            }
+                        }         
+                    }
+                }
+                b += offsetb;
+                c = a + b;
+            }
+            a++;
+        }
+        System.out.println("Suma de c = " + sc);
+    }
+    
     /**
      * Entry point funcion
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // Start PE 127
-        
+    public static void main(String[] args) throws Exception {
+        // Start PE 128
+                
         // End PE
 
         // Code application logic here
