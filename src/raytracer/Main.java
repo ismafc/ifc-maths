@@ -9,8 +9,8 @@ package raytracer;
 //import java.io.*;
 import java.math.*;
 import java.util.*;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
+//import javax.script.ScriptEngine;
+//import javax.script.ScriptEngineManager;
 
 /**
  * Main test program
@@ -68,37 +68,30 @@ Números de Friedman:
 */
 
     private static boolean isPrime(long n) {
-        if (n == 1)
+        if (n == 1) {
             return false;
-        if (n % 2 == 0)
+        }
+        if (n % 2 == 0) {
             return n == 2;
+        }
         for (long i = 3; i <= Math.sqrt(Math.abs(n)); i += 2) {
-            if (n % i == 0)
+            if (n % i == 0) {
                 return false;
+            }
         }
         return true;
     }
 
     private static boolean isPrime(Long n) {
-        if (n == 1L)
-            return false;
-        if (n % 2L == 0)
-            return n == 2L;
-        for (long i = 3L; i <= Math.sqrt(n); i += 2L) {
-            if (n % i == 0L)
-                return false;
-        }
-        return true;
+        return isPrime(n.longValue());
     }
 
     public static ArrayList<Long> primeFactors(long n) {
         ArrayList<Long> factors = new ArrayList<Long>();
         for (long i = 2; i <= n; i++) {
-          while (n % i == 0) {
-            if (!factors.contains(i))
+            if (n % i == 0) {
                 factors.add(i);
-            n /= i;
-          }
+            }
         }
         return factors;
     }
@@ -106,11 +99,14 @@ Números de Friedman:
     public static HashMap<Long, Long> primeFactorization(long n) {
         HashMap<Long, Long> factors = new HashMap<Long, Long>();
         for (long i = 2; i <= n; i++) {
-          while (n % i == 0) {
-            // Sumamos 1 al número de capas con ese número de cubos
-            factors.put(i, !factors.containsKey(i) ? 1 : factors.get(i) + 1);
-            n /= i;
-          }
+            long occurrences = 0;
+            while (n % i == 0) {
+                occurrences++;
+                n /= i;
+            }
+            if (occurrences > 0) {
+                factors.put(i, occurrences);
+            }
         }
         return factors;
     }
@@ -1385,7 +1381,61 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE 128
-                
+        // Hexagonal tile differences
+        // Cada número tiene 6 adyacentes "MatrixNxM(1,6)"
+        
+        // Exploramos estas capas
+        int MAX_CAPAS = 10;
+        
+        // Se guardan los valores generales de cada capa (número de valores, valor inicial y valor final)
+        ArrayList<Point3D> valores_capa = new ArrayList<Point3D>();
+
+        // Se guardan los valores adyacentes de cada valor (el indice en el vector + 1 es el valor)
+        ArrayList<MatrixNxM> adyacentes = new ArrayList<MatrixNxM>();
+        
+        // La capa 0 tiene 1 valor, empieza en 1 y acaba en 1
+        // El primer valor (1) tiene como adyacentes a 2,3,4,5,6 y 7
+        valores_capa.add(new Point3D(1, 1, 1));
+        adyacentes.add(new MatrixNxM(new double[][]{{2, 3, 4, 5, 6, 7}}));
+        
+        while (valores_capa.size() < MAX_CAPAS) {
+            int capa = valores_capa.size();
+            int primero = (int)valores_capa.get(capa - 1).z + 1;
+            int ultimo = primero + capa * 6 - 1;
+            valores_capa.add(new Point3D(capa * 6, primero, ultimo));
+            int step = 0;
+            int primeroPrevious = (int)valores_capa.get(capa - 1).y;
+            int ultimoPrevious = (int)valores_capa.get(capa - 1).z;
+            int primeroNext = ultimo + 1;
+            int ultimoNext = primeroNext + (capa + 1) * 6 - 1;
+            int previous = primeroPrevious;
+            int next = primeroNext;
+            for (int valor = primero; valor <= ultimo; valor++) {
+                if (step == 0) {
+                    // Tiene tres "hijos" (sólo un padre)
+                    adyacentes.add(new MatrixNxM(new double[][]{{previous, 
+                                                                 (valor == primero) ? ultimo : valor - 1, 
+                                                                 (valor == ultimo) ? primero : valor + 1, 
+                                                                 (next == primeroNext) ? ultimoNext : next - 1, 
+                                                                 next, 
+                                                                 next + 1}}));
+                    next += 2;
+                }
+                else {
+                    // Tiene dos "hijos" (dos padres)
+                    adyacentes.add(new MatrixNxM(new double[][]{{previous, 
+                                                                 (previous == ultimoPrevious) ? primeroPrevious : previous + 1,
+                                                                 (valor == primero) ? ultimo : valor - 1, 
+                                                                 (valor == ultimo) ? primero : valor + 1, 
+                                                                 (next == primeroNext) ? ultimoNext : next - 1, 
+                                                                 next}}));
+                    next++;
+                    previous++;
+                }
+                step = (step + 1) % capa;
+            }
+        }
+        
         // End PE
 
         // Code application logic here
