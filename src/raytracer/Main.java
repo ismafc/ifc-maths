@@ -1374,32 +1374,66 @@ Números de Friedman:
         }
         System.out.println("Suma de c = " + sc);
     }
+
+    static public long PD3(long center, MatrixNxM m, Hashtable<Long, Boolean> prs) {
+        long primes = 0;
+        for (int v = 0; v < m.values[0].length; v++) {
+            long vtocheck = Math.abs((long)m.values[0][v] - center);
+            if (prs.containsKey(vtocheck))
+                primes += ((prs.get(vtocheck) == true) ? 1 : 0);
+            else {
+                boolean chk = isPrime(vtocheck);
+                prs.put(vtocheck, chk);
+                primes += ((chk == true) ? 1 : 0);
+            }
+            if (primes > 3)
+                return -1;
+            if (m.values[0].length - v + primes < 3)
+                return -1;
+        }
+        return primes;
+    }
     
-    /**
-     * Entry point funcion
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws Exception {
-        // Start PE 128
+    static public void ejercicio128() {
         // Hexagonal tile differences
         // Cada número tiene 6 adyacentes "MatrixNxM(1,6)"
-        
-        // Exploramos estas capas
-        int MAX_CAPAS = 10;
-        
+                
         // Se guardan los valores generales de cada capa (número de valores, valor inicial y valor final)
-        ArrayList<Point3D> valores_capa = new ArrayList<Point3D>();
+        Point3D capa_previous = null;
+        long ncapa = 0;
 
+        // Se guardan valores cuya función PD es 3 (número de primos de las diferencias)
+        ArrayList<Long> treses = new ArrayList<Long>();
+        
         // Se guardan los valores adyacentes de cada valor (el indice en el vector + 1 es el valor)
-        ArrayList<MatrixNxM> adyacentes = new ArrayList<MatrixNxM>();
+        MatrixNxM adyacente = null;
+        long nadyacentes = 0;
         
         // La capa 0 tiene 1 valor, empieza en 1 y acaba en 1
         // El primer valor (1) tiene como adyacentes a 2,3,4,5,6 y 7
-        valores_capa.add(new Point3D(1, 1, 1));
-        adyacentes.add(new MatrixNxM(new double[][]{{2, 3, 4, 5, 6, 7}}));
+        capa_previous = new Point3D(1, 1, 1);
+        ncapa = 1;
         
-        while (valores_capa.size() < MAX_CAPAS) {
-            int capa = valores_capa.size();
+        adyacente = new MatrixNxM(new double[][]{{2, 3, 4, 5, 6, 7}});
+        nadyacentes++;
+
+        Hashtable<Long, Boolean> prs = new Hashtable<Long, Boolean>();
+        long pd = PD3(nadyacentes, adyacente, prs);
+        if (pd == 3)
+            treses.add(nadyacentes);
+        
+        while (treses.size() < 2002) {
+            long primero = (long)capa_previous.z + 1;
+            long ultimo = primero + ncapa * 6 - 1;
+            long step = 0;
+            long primeroPrevious = (long)capa_previous.y;
+            long ultimoPrevious = (long)capa_previous.z;
+            long primeroNext = ultimo + 1;
+            long ultimoNext = primeroNext + (ncapa + 1) * 6 - 1;
+            long previous = primeroPrevious;
+            long next = primeroNext;
+            capa_previous = new Point3D(ncapa * 6, primero, ultimo);
+/*            int capa = valores_capa.size();
             int primero = (int)valores_capa.get(capa - 1).z + 1;
             int ultimo = primero + capa * 6 - 1;
             valores_capa.add(new Point3D(capa * 6, primero, ultimo));
@@ -1409,32 +1443,48 @@ Números de Friedman:
             int primeroNext = ultimo + 1;
             int ultimoNext = primeroNext + (capa + 1) * 6 - 1;
             int previous = primeroPrevious;
-            int next = primeroNext;
-            for (int valor = primero; valor <= ultimo; valor++) {
+            int next = primeroNext;*/
+            for (long valor = primero; valor <= ultimo; valor++) {
                 if (step == 0) {
                     // Tiene tres "hijos" (sólo un padre)
-                    adyacentes.add(new MatrixNxM(new double[][]{{previous, 
+                    adyacente = new MatrixNxM(new double[][]{{previous, 
                                                                  (valor == primero) ? ultimo : valor - 1, 
                                                                  (valor == ultimo) ? primero : valor + 1, 
                                                                  (next == primeroNext) ? ultimoNext : next - 1, 
                                                                  next, 
-                                                                 next + 1}}));
+                                                                 next + 1}});
                     next += 2;
                 }
                 else {
                     // Tiene dos "hijos" (dos padres)
-                    adyacentes.add(new MatrixNxM(new double[][]{{previous, 
+                    adyacente = new MatrixNxM(new double[][]{{previous, 
                                                                  (previous == ultimoPrevious) ? primeroPrevious : previous + 1,
                                                                  (valor == primero) ? ultimo : valor - 1, 
                                                                  (valor == ultimo) ? primero : valor + 1, 
                                                                  (next == primeroNext) ? ultimoNext : next - 1, 
-                                                                 next}}));
+                                                                 next}});
                     next++;
                     previous++;
                 }
-                step = (step + 1) % capa;
+                nadyacentes++;
+                step = (step + 1) % ncapa;
+                
+                pd = PD3(nadyacentes, adyacente, prs);
+                if (pd == 3) {
+                    treses.add(nadyacentes);
+                    System.out.println(treses.size() + ".- " + treses.get(treses.size() - 1));
+                }
             }
+            ncapa++;
         }
+    }
+    
+    /**
+     * Entry point funcion
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws Exception {
+        // Start PE 129
         
         // End PE
 
