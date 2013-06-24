@@ -1479,12 +1479,35 @@ Números de Friedman:
         }
     }
     
+    static public void ejercicio129() {
+        long nn = 1000000;
+        boolean found = false;
+        while (!found) {
+            if (MCD(nn, 10) == 1) {
+                int k = 1;
+                BigInteger i = BigInteger.ONE;
+                BigInteger kk = BigInteger.valueOf(nn);
+                while (k <= 1000000) {
+                    if (i.mod(kk) == BigInteger.ZERO) {
+                        break;
+                    }
+                    i = i.multiply(BigInteger.TEN).add(BigInteger.ONE);
+                    k++;
+                }
+                if (k > 1000000)
+                    found = true;
+                System.out.println("Encontrado A(" + nn + ") = " + k);
+            }
+            nn++;
+        }        
+    }
+    
     /**
      * Entry point funcion
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 129
+        // Start PE 130
         
         // End PE
 
