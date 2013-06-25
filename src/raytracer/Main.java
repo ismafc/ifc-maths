@@ -67,65 +67,6 @@ Números de Friedman:
 3125, 3159, 3281, 3375, 3378, 3685, 3784, 3864, 3972, 4088, 4096, 4106, 4167, 4536, 4624, 4628, 5120, 5776, 5832, 6144, 6145, 6455, 6880, 7928, 8092, 8192, 9025, 9216, 9261
 */
 
-    private static boolean isPrime(long n) {
-        if (n == 1) {
-            return false;
-        }
-        if (n % 2 == 0) {
-            return n == 2;
-        }
-        for (long i = 3; i <= Math.sqrt(Math.abs(n)); i += 2) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean isPrime(Long n) {
-        return isPrime(n.longValue());
-    }
-
-    public static ArrayList<Long> primeFactors(long n) {
-        ArrayList<Long> factors = new ArrayList<Long>();
-        for (long i = 2; i <= n; i++) {
-            if (n % i == 0) {
-                factors.add(i);
-            }
-        }
-        return factors;
-    }
-
-    public static HashMap<Long, Long> primeFactorization(long n) {
-        HashMap<Long, Long> factors = new HashMap<Long, Long>();
-        for (long i = 2; i <= n; i++) {
-            long occurrences = 0;
-            while (n % i == 0) {
-                occurrences++;
-                n /= i;
-            }
-            if (occurrences > 0) {
-                factors.put(i, occurrences);
-            }
-        }
-        return factors;
-    }
-    
-    private static long MCD(long n1, long n2) {
-        long lAux = 0;
-        if (n1 < n2) {
-            lAux = n1;
-            n1 = n2;
-            n2 = lAux;
-        }
-        while (n1 % n2 != 0) {
-            lAux = n1 % n2;
-            n1 = n2;
-            n2 = lAux;
-        }
-        return n2;
-    }
-
     static private boolean isBouncy(int i) {
         int digits = (int)Math.log10(i) + 1;
         int state = 0;
@@ -287,13 +228,6 @@ Números de Friedman:
         return true;
     }
 
-    private static long factorial(long n) {
-        long prod = 1;
-        for (long i = 2; i <= n; i++)
-            prod *= i;
-        return prod;
-    }
-
     // Lista todos los números sin repetir entre los disponibles con 'digitos' digitos
     private static void addNewDigit(int digito, long num, ArrayList<Integer> disponibles) {
         if (digito == 0) {
@@ -313,7 +247,7 @@ Números de Friedman:
     private static long phi(long n, double ratio) {
         long p = 1;
         for (long i = 2; i < n; i++) {
-            if (MCD(n, i) == 1)
+            if (IFCMath.MCD(n, i) == 1)
                 p++;
             if (((double)n / ((double)p + ((double)n - (double)i - 1.0))) > ratio)
                 return 1;
@@ -1081,7 +1015,7 @@ Números de Friedman:
         BigInteger order = new BigInteger("9593"); // Del primo 100003
         BigInteger limit = new BigInteger("10000000000");
         while (true) {
-            if (isPrime(pn.longValue())) {
+            if (IFCMath.isPrime(pn.longValue())) {
                 BigInteger pn_1 = pn.subtract(BigInteger.ONE).pow(order.intValue());
                 BigInteger pn1 = pn.add(BigInteger.ONE).pow(order.intValue());
                 BigInteger pn2 = pn.multiply(pn);
@@ -1175,7 +1109,7 @@ Números de Friedman:
         for (long n = 0; n < ((m % 2 == 0) ? (m / 2) : (m / 2 + 1)); n++) {
             binomial(m, n, "");
         }
-        long f = factorial(m + 1L);
+        long f = IFCMath.factorial(m + 1L);
         double premio = (double)probabilidades / (double)f;
         System.out.println(probabilidades + " Sobre " + f + " = " + premio + " (" + (1.0 / premio) + ")");
     }
@@ -1340,7 +1274,7 @@ Números de Friedman:
     
     public static long rad(long r) {
         long result = 1;
-        for (Long pf : primeFactors(r)) {
+        for (Long pf : IFCMath.primeFactors(r)) {
             result *= pf;
         }
         return result;
@@ -1356,9 +1290,9 @@ Números de Friedman:
             long b = a + 1;
             long c = a + b;
             while (c < MAX_C) {
-                if (MCD(a, b) == 1) {
-                    if (MCD(a, c) == 1) {
-                        if (MCD(b, c) == 1) {
+                if (IFCMath.MCD(a, b) == 1) {
+                    if (IFCMath.MCD(a, c) == 1) {
+                        if (IFCMath.MCD(b, c) == 1) {
                             long r = rad(a * b * c);
                             if (r < c) {
                                 System.out.println("(" + a + "," + b + "," + c + ") = " + r);
@@ -1382,7 +1316,7 @@ Números de Friedman:
             if (prs.containsKey(vtocheck))
                 primes += ((prs.get(vtocheck) == true) ? 1 : 0);
             else {
-                boolean chk = isPrime(vtocheck);
+                boolean chk = IFCMath.isPrime(vtocheck);
                 prs.put(vtocheck, chk);
                 primes += ((chk == true) ? 1 : 0);
             }
@@ -1483,7 +1417,7 @@ Números de Friedman:
         long nn = 1000000;
         boolean found = false;
         while (!found) {
-            if (MCD(nn, 10) == 1) {
+            if (IFCMath.MCD(nn, 10) == 1) {
                 int k = 1;
                 BigInteger i = BigInteger.ONE;
                 BigInteger kk = BigInteger.valueOf(nn);
