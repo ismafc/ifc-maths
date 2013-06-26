@@ -953,7 +953,7 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE 130
-        
+        ProjectEuler.Problem130.problem130();
         // End PE
 
         // Code application logic here
