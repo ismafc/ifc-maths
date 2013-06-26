@@ -124,16 +124,34 @@ public class Object3D {
     public void setX(double nx) { x = nx; }
 
     /**
+     * Returns x value of this Object3D
+     * @return Double with x value
+     */
+    public double getX() { return x; }
+    
+    /**
      * Initializes y value of this Object3D with input value
      * @param ny Double with new y value
      */
     public void setY(double ny) { y = ny; }
 
     /**
+     * Returns y value of this Object3D
+     * @return Double with y value
+     */
+    public double getY() { return y; }
+    
+    /**
      * Initializes z value of this Object3D with input value
      * @param nz Double with new z value
      */
     public void setZ(double nz) { z = nz; }
+    
+    /**
+     * Returns z value of this Object3D
+     * @return Double with z value
+     */
+    public double getZ() { return z; }
     
     /**
      * Obtains values of this Object3D in input parameter 'c'

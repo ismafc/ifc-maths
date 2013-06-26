@@ -10,14 +10,6 @@
 
 package raytracer;
 
-import raytracer.*;
-import raytracer.Box3D;
-import raytracer.Normal3D;
-import raytracer.Object3D;
-import raytracer.Point3D;
-import raytracer.Ray3D;
-import raytracer.Vector3D;
-
 /**
  * Implements a 4 x 4 matrix (of double values)
  * @author Isma
@@ -110,6 +102,18 @@ public class MatrixNxM {
                 values[i][j] = (i == j) ? 1.0 : 0.0;
     }
     
+    /**
+     * Returns the number of rows for this MatrixNxM, that is, N
+     * @return Integer with number of rows
+     */
+    public int getRows() { return rows; }
+
+    /**
+     * Returns the number of columns for this MatrixNxM, that is, M
+     * @return Integer with number of columns
+     */
+    public int getColumns() { return columns; }
+    
     /** 
      * Checks if 'matrix' is equal to this matrix
      * @param m The matrix to compare with
@@ -184,6 +188,20 @@ public class MatrixNxM {
         }
     }
 
+    /** 
+     * Returns value located in (row, column)
+     * if (row, column) is out of range, NaN is returned
+     * @param row Row of target value
+     * @param column Column of target value
+     * @return Double with value in (row, column)
+     */
+    public double get(int row, int column) {
+        if (row >= 0 && row < rows && column >= 0 && column < columns) {
+            return values[row][column];
+        }
+        return Double.NaN;
+    }
+    
     /** 
      * Copies matrix 'm' in this matrix (clonation)
      * @param m Matrix to be copied in

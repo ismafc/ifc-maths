@@ -108,8 +108,9 @@ public class IFCMath {
      */
     public static long factorial(long n) {
         long prod = 1;
-        for (long i = 2; i <= n; i++)
+        for (long i = 2; i <= n; i++) {
             prod *= i;
+        }
         return prod;
     }
 
