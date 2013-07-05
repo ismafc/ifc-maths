@@ -7,6 +7,7 @@
 package raytracer;
 
 //import java.io.*;
+import ProjectEuler.Problem132;
 import java.math.*;
 import java.util.*;
 //import javax.script.ScriptEngine;
@@ -946,14 +947,13 @@ Números de Friedman:
         }
         return true;
     }
-           
+    
     /**
      * Entry point funcion
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 130
-        ProjectEuler.Problem130.problem130();
+        // Start PE 133
         // End PE
 
         // Code application logic here

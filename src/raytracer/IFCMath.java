@@ -4,6 +4,7 @@
  */
 package raytracer;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ import java.util.HashMap;
 public class IFCMath {
     
     /**
-     * Check if 'n' is prime.
+     * Check if 'n' is prime. 'n' must be positive (1 or more)
      * @param n value to test
      * @return TRUE if value is primer and FALSE elsewhere
      */
@@ -26,7 +27,7 @@ public class IFCMath {
         if (n % 2 == 0) {
             return n == 2;
         }
-        for (long i = 3; i <= Math.sqrt(Math.abs(n)); i += 2) {
+        for (long i = 3; i <= Math.sqrt(n); i += 2) {
             if (n % i == 0) {
                 return false;
             }
@@ -50,14 +51,49 @@ public class IFCMath {
      */
     public static ArrayList<Long> primeFactors(long n) {
         ArrayList<Long> factors = new ArrayList<>();
-        for (long i = 2; i <= n; i++) {
+        for (long i = 2; i*i <= n; i++) {
             if (n % i == 0) {
                 factors.add(i);
+                while (n % i == 0) {
+                    n /= i;
+                }
             }
+        }
+        if (n > 1) {
+            factors.add(n);
         }
         return factors;
     }
 
+    /**
+     * Calculates all prime factors for 'n'
+     * @param n value to factorize
+     * @param limit maximum value of a primer factor to return (if 'null' finds all prime factors)
+     * @return Array with all prime factors for 'n'
+     */
+    public static ArrayList<BigInteger> primeFactors(BigInteger n, BigInteger limit) {
+        ArrayList<BigInteger> factors = new ArrayList<>();
+        BigInteger i = BigInteger.ONE.add(BigInteger.ONE);
+        BigInteger i2 = i.multiply(i);
+        while (i2.compareTo(n) <= 0) {
+            if (limit != null && i.compareTo(limit) >= 0)
+                break;
+            if (n.mod(i) == BigInteger.ZERO) {
+                factors.add(i);
+                System.out.println(i);
+                while (n.mod(i) == BigInteger.ZERO) {
+                    n = n.divide(i);
+                }
+            }
+            i = i.add(BigInteger.ONE);
+            i2 = i.multiply(i);
+        }
+        if (n.compareTo(BigInteger.ONE) > 0) {
+            factors.add(n);
+        }
+        return factors;
+    }
+    
     /**
      * Calculates factorization for 'n'
      * @param n value to factorize
@@ -65,7 +101,7 @@ public class IFCMath {
      */
     public static HashMap<Long, Long> primeFactorization(long n) {
         HashMap<Long, Long> factors = new HashMap<>();
-        for (long i = 2; i <= n; i++) {
+        for (long i = 2; i*i <= n; i++) {
             long occurrences = 0;
             while (n % i == 0) {
                 occurrences++;
@@ -74,6 +110,9 @@ public class IFCMath {
             if (occurrences > 0) {
                 factors.put(i, occurrences);
             }
+        }
+        if (n > 1) {
+            factors.put(n, 1L);
         }
         return factors;
     }
