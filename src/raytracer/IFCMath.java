@@ -68,7 +68,7 @@ public class IFCMath {
     /**
      * Calculates all prime factors for 'n'
      * @param n value to factorize
-     * @param limit maximum value of a primer factor to return (if 'null' finds all prime factors)
+     * @param limit maximum value of a prime factor to return (if 'null' finds all prime factors)
      * @return Array with all prime factors for 'n'
      */
     public static ArrayList<BigInteger> primeFactors(BigInteger n, BigInteger limit) {
