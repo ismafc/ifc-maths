@@ -953,8 +953,8 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 133
-        ProjectEuler.Problem133.problem133();
+        // Start PE 134
+        ProjectEuler.Problem134.problem134();
         // End PE
 
         // Code application logic here
