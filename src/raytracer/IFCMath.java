@@ -153,4 +153,17 @@ public class IFCMath {
         return prod;
     }
 
+    /**
+     * Checks if given parameter is a perfect square or not
+     * @param n value for which check if it's a perfect square
+     * @return True if it's a perfect square and False if not
+     */
+    public static boolean isPerfectSquare(long n)
+    {
+        if (n < 0)
+            return false;
+
+        long tst = (long)(Math.sqrt(n) + 0.5);
+        return tst*tst == n;
+    }
 }
