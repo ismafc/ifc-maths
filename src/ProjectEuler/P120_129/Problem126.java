@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProjectEuler;
+package ProjectEuler.P120_129;
 
 import java.util.HashMap;
 import raytracer.Point3D;
