@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProjectEuler;
+package ProjectEuler.P130_139;
 
 import raytracer.IFCMath;
 
