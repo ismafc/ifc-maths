@@ -38,12 +38,35 @@ public class IFCMath {
     /**
      * Check if 'n' is prime.
      * @param n value to test
-     * @return TRUE if value is primer and FALSE elsewhere
+     * @return TRUE if value is prime and FALSE elsewhere
      */
     public static boolean isPrime(Long n) {
         return isPrime(n.longValue());
     }
 
+    /**
+     * Check if 'n' is semiprime (product of two, not necessarily distinct, 
+     * prime numbers).
+     * @param n value to test
+     * @return TRUE if value is semiprime and FALSE elsewhere
+     */
+    public static boolean isSemiprime(long n) {
+        long occurrences = 0;
+        for (long i = 2; i * i <= n; i++) {
+            while (n % i == 0) {
+                occurrences++;
+                if (occurrences > 2)
+                    return false;
+                n /= i;
+            }
+            if (occurrences == 2 && n > 1)
+                return false;
+        }
+        if (n > 1)
+            occurrences++;
+        return occurrences == 2;
+    }
+    
     /**
      * Calculates all divisors for 'n'.
      * @param n value to check divisors
