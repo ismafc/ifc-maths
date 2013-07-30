@@ -952,8 +952,7 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 187
-
+        // Start PE
         // End PE
 
         // Code application logic here
