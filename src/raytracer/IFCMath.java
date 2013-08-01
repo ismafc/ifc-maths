@@ -237,7 +237,7 @@ public class IFCMath {
         BigInteger i = new BigInteger("2");
         while (i.compareTo(n) == -1 || i.compareTo(n) == 0) {
             prod = prod.multiply(i);
-            i.add(BigInteger.ONE);
+            i = i.add(BigInteger.ONE);
         }
         return prod;
     }
