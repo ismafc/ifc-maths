@@ -3,12 +3,12 @@
  * and open the template in the editor.
  */
 
-package raytracer;
+package ProjectEuler;
 
 /**
  *
  * @author ismael.flores
  */
-class Triangle {
+public class Triangle {
     public double coord[] = new double [6];
 }

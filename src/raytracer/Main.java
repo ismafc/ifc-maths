@@ -7,6 +7,7 @@
 package raytracer;
 
 //import java.io.*;
+import ProjectEuler.Triangle;
 import java.math.*;
 import java.util.*;
 //import javax.script.ScriptEngine;
@@ -952,7 +953,8 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE
+        // Start PE 243
+        ProjectEuler.P240_249.Problem243.problem243();
         // End PE
 
         // Code application logic here

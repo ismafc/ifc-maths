@@ -227,6 +227,22 @@ public class IFCMath {
     }
 
     /**
+     * Calculates factorial for given parameter as big as you want
+     * factorial(n) = n * (n - 1) * (n - 2) * ... * 3 * 2
+     * @param n value for which calculate the factorial
+     * @return factorial of 'n'
+     */
+    public static BigInteger factorial(BigInteger n) {
+        BigInteger prod = BigInteger.ONE;
+        BigInteger i = new BigInteger("2");
+        while (i.compareTo(n) == -1 || i.compareTo(n) == 0) {
+            prod = prod.multiply(i);
+            i.add(BigInteger.ONE);
+        }
+        return prod;
+    }
+    
+    /**
      * Checks if given parameter is a perfect square or not
      * @param n value for which check if it's a perfect square
      * @return True if it's a perfect square and False if not
@@ -251,4 +267,35 @@ public class IFCMath {
         tst = tst.multiply(tst);
         return tst.equals(n);
     }
+
+    /**
+     * Calculates binomial coefficient. Also, for a set of 'x' elements, 
+     * number of distinct k-elements subsets of it that can be formed.
+     * binomial(x, k) = x! / (k! * (x - k)!)
+     * @param x biggest long (number of vaules in set)
+     * @param k lowest long (power of polynomial expansion or elements of subsets)
+     * @return long with coeficient of n^k term in the polynomial expansion of (1 + x)^k or,
+     * also, number of distinct k-elements subsets from a x-elements subset that can be formed
+     */
+    public static long binomial(long x, long k) {
+        if (x < k)
+            return Long.MIN_VALUE;
+        return IFCMath.factorial(x) / (IFCMath.factorial(k) * IFCMath.factorial(x - k));
+    }
+
+    /**
+     * Calculates binomial coefficient. Also, for a set of 'x' elements, 
+     * number of distinct k-elements subsets of it that can be formed.
+     * binomial(x, k) = x! / (k! * (x - k)!)
+     * @param x biggest long (number of vaules in set)
+     * @param k lowest long (power of polynomial expansion or elements of subsets)
+     * @return long with coeficient of n^k term in the polynomial expansion of (1 + x)^k or,
+     * also, number of distinct k-elements subsets from a x-elements subset that can be formed
+     */
+    public static BigInteger binomial(BigInteger x, BigInteger k) {
+        if (x.compareTo(k) == -1)
+            return null;
+        return IFCMath.factorial(x).divide(IFCMath.factorial(k).multiply(IFCMath.factorial(x.subtract(k))));
+    }
+    
 }
