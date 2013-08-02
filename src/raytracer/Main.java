@@ -953,25 +953,7 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 204
-        long HTYPE = 100L;
-        long LIMIT = 1000000000L;
-        ArrayList<Long> primes = new ArrayList<Long>();
-        for (long N = 2L; N <= HTYPE; N++) {
-            if (IFCMath.isPrime(N))
-                primes.add(N);
-        }
-        long count = HTYPE;
-        for (long N = HTYPE + 1; N <= LIMIT; N++) {
-            long NN = N;
-            for (long P : primes) {
-                while (NN % P == 0)
-                    NN /= P;
-            }
-            if (NN == 1)
-                count++;
-        }
-        System.out.println(count);
+        // Start PE
         // End PE
 
         // Code application logic here
