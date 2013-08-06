@@ -32,7 +32,6 @@ public class Problem191 {
     
     /*    
     Prize Strings
-    Problem 191
 
     A particular school offers cash rewards to children with good attendance and punctuality. 
     If they are absent for three consecutive days or late on more than one occasion then they forfeit their prize.

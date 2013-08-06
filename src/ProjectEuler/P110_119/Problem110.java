@@ -10,6 +10,18 @@ package ProjectEuler.P110_119;
  */
 public class Problem110 {
 
+    /*
+    Diophantine reciprocals II
+
+    In the following equation x, y, and n are positive integers.
+    1/x + 1/y = 1/n
+
+    It can be verified that when n = 1260 there are 113 distinct solutions and this is the least value of n for which the total number of distinct solutions exceeds one hundred.
+
+    What is the least value of n for which the number of distinct solutions exceeds four million?
+
+    NOTE: This problem is a much more difficult version of problem 108 and as it is well beyond the limitations of a brute force approach it requires a clever implementation.
+    */    
     public static void problem110() {
         // 1/x + 1/y = 1/n
         // Número de soluciones para un 'n' determinado (menor 'n' para el que hay más de 4 millones de solucines
