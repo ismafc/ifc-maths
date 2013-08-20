@@ -211,6 +211,54 @@ public class IFCMath {
         }
         return n2;
     }
+
+    /**
+     * Calculates exponentiation 'n'^'e'
+     * @param n base for exponentiation
+     * @param e exponent (or index or power)
+     * @return Exponentiation 'n'^'e', that is, n x n x ... x n ('e' times)
+     */
+    public static long lpow(long n, long e) {
+        long pow = 1L;
+        while (e > 0) {
+            pow *= n;
+            e--;
+        }
+        return pow;
+    }
+    
+    /**
+     * Calculates Euler's totient funcion (also phi function) for 'n'.
+     * Is an arithmetic function that counts the positive integers 
+     * less than or equal to 'n' that are relatively prime to 'n'.
+     * @param n value to calculate totient
+     * @return Number of positive integers less than or equal to 'n' that are relatively prime to 'n'.'
+     */
+    public static long totient(long n) {
+        long t = 1;
+        HashMap<Long, Long> primeFactorization = IFCMath.primeFactorization(n);
+        if (n <= 0)
+            return Long.MIN_VALUE;
+        for (Long pf : primeFactorization.keySet()) {
+            if (primeFactorization.size() == 1) {
+                return (pf - 1) * IFCMath.lpow(pf, primeFactorization.get(pf) - 1);
+            }
+            t *= totient(IFCMath.lpow(pf, primeFactorization.get(pf)));
+        }
+        return t;
+//        
+//        También podriamos hacerlo aplicando phi(n) = n * Pp|n(1 - 1 / p)
+//
+//        double t = 1.0;
+//        if (n <= 0)
+//            return Long.MIN_VALUE;
+//        ArrayList<Long> primeFactors = IFCMath.primeFactors(n);
+//        for (Long pf : primeFactors) {
+//            t *= (1.0 - 1.0/(double)pf);
+//        }
+//        return (long)(t * n);
+//
+    }
     
     /**
      * Calculates factorial for given parameter.
