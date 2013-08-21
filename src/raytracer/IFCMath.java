@@ -189,6 +189,33 @@ public class IFCMath {
         }
         return factors;
     }
+
+    /**
+     * Calculates factorization for 'n' ('n' could be a big integer)
+     * @param n value to factorize
+     * @return HashMap cotaining factorization. Keys are prime factors and values are exponents.
+     */
+    public static HashMap<BigInteger, BigInteger> primeFactorization(BigInteger n) {
+        HashMap<BigInteger, BigInteger> factors = new HashMap<>();
+        BigInteger i = new BigInteger("2");
+        BigInteger ii = i.multiply(i);
+        while (ii.compareTo(n) <= 0) {
+            BigInteger occurrences = BigInteger.ZERO;
+            while (n.mod(i) == BigInteger.ZERO) {
+                occurrences = occurrences.add(BigInteger.ONE);
+                n = n.divide(i);
+            }
+            if (occurrences.compareTo(BigInteger.ZERO) > 0) {
+                factors.put(i, occurrences);
+            }
+            i = i.add(BigInteger.ONE);
+            ii = i.multiply(i);
+        }
+        if (n.compareTo(BigInteger.ONE) > 0) {
+            factors.put(n, BigInteger.ONE);
+        }
+        return factors;
+    }
     
     /**
      * Calculates greater common divisor between 'n1' and 'n2'.
@@ -335,9 +362,9 @@ public class IFCMath {
      * Calculates binomial coefficient. Also, for a set of 'x' elements, 
      * number of distinct k-elements subsets of it that can be formed.
      * binomial(x, k) = x! / (k! * (x - k)!)
-     * @param x biggest long (number of vaules in set)
-     * @param k lowest long (power of polynomial expansion or elements of subsets)
-     * @return long with coeficient of n^k term in the polynomial expansion of (1 + x)^k or,
+     * @param x biggest BigInteger (number of vaules in set)
+     * @param k lowest BigInteger (power of polynomial expansion or elements of subsets)
+     * @return BigInteger with coeficient of n^k term in the polynomial expansion of (1 + x)^k or,
      * also, number of distinct k-elements subsets from a x-elements subset that can be formed
      */
     public static BigInteger binomial(BigInteger x, BigInteger k) {
@@ -345,5 +372,5 @@ public class IFCMath {
             return null;
         return IFCMath.factorial(x).divide(IFCMath.factorial(k).multiply(IFCMath.factorial(x.subtract(k))));
     }
-    
+
 }
