@@ -4,7 +4,6 @@
  */
 package ProjectEuler.P150_159;
 
-import ProjectEuler.PaperSheets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +13,22 @@ import java.util.HashMap;
  * @author ismael.flores
  */
 public class Problem151 {
+    private static class PaperSheets {
+
+        public long fromOne = 0;
+        public long fromSheet = Long.MIN_VALUE;
+        public long peso = 1L;
+        public ArrayList<Long> sheets = new ArrayList<>();
+
+        public PaperSheets(long fs, long fo, long p, ArrayList<Long> s) {
+            fromSheet = fs;
+            fromOne = fo;
+            peso = p;
+            sheets = s;
+        }
+
+    }
+    
     public static void problem151() {
         long jobs = 1;
         HashMap<Long, ArrayList<Double>> numbersInJobs = new HashMap<>();
