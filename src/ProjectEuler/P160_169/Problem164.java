@@ -23,10 +23,14 @@ public class Problem164 {
 
     }
     
-    static private HashMap<Long, State> expand(State e) {
+    static private HashMap<Long, State> expand(State e, long CONSECUTIVE) {
         HashMap<Long, State> l = new HashMap<>();
-        long i = (e.st * 10) % 1000;
-        long v = i / 100 + (i / 10) % 10 + i % 10;
+        long C = Math.round(Math.pow(10, CONSECUTIVE));
+        long i = (e.st * 10) % C;
+        long v = 0;
+        for (long k = 0; k < CONSECUTIVE; k++) {
+            v += (i / Math.round(Math.pow(10, k))) % 10;
+        }
         for (long k = 0; k <= 9 - v; k++) {
             l.put(k + i, new State(k + i, e.peso));
         }
@@ -37,7 +41,7 @@ public class Problem164 {
     Numbers for which no three consecutive digits have a sum greater than a given value.
     How many 20 digit numbers n (without any leading zero) exist such that no three consecutive digits of n have a sum greater than 9?
     */
-    public static void problem164(long DIGITS) {
+    public static void problem164(long DIGITS, long CONSECUTIVE) {
         // Recorrido en anchura del árbol de casos posibles
         // Cada nivel es un dígito más
         
@@ -74,7 +78,7 @@ public class Problem164 {
         for (int digit = 2; digit <= DIGITS; digit++) {
             HashMap<Long, State> nstates = new HashMap<>();
             for (State e : states.values()) {
-                HashMap<Long, State> exp = expand(e);
+                HashMap<Long, State> exp = expand(e, CONSECUTIVE);
                 for (Long i : exp.keySet()) {
                     if (nstates.containsKey(i)) {
                         nstates.put(i, new State(i, exp.get(i).peso + nstates.get(i).peso));
@@ -90,6 +94,6 @@ public class Problem164 {
         for (State e : states.values()) {
             count += e.peso;
         }
-        System.out.println("Combinantos for " + DIGITS + " digits = " + count);
-    }    
+        System.out.println("Combinations for " + DIGITS + " digits (" + CONSECUTIVE + " consecutive less than 9) = " + count);
+    }
 }
