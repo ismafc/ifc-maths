@@ -14,16 +14,6 @@ import raytracer.IFCMath;
  */
 public class Problem203 {
     
-    public static ArrayList<Long> getNewPascalRow(ArrayList<Long> pascal) {
-        ArrayList<Long> np = new ArrayList<Long>();
-        np.add(1L);
-        for (int i = 0; i < pascal.size() - 1; i++) {
-            np.add(pascal.get(i) + pascal.get(i + 1));
-        }
-        np.add(1L);
-        return np;
-    }    
-    
     /*
     Squarefree Binomial Coefficients
 
@@ -45,8 +35,8 @@ public class Problem203 {
     Find the sum of the distinct squarefree numbers in the first 51 rows of Pascal's triangle.
     */    
     public static void problem203(long ROWS) {
-        ArrayList<Long> pascal = new ArrayList<Long>();
-        HashMap<Long, Boolean> squarefree = new HashMap<Long, Boolean>();
+        ArrayList<Long> pascal = new ArrayList<>();
+        HashMap<Long, Boolean> squarefree = new HashMap<>();
 
         long sum = 1;
         long row = 2;
@@ -54,7 +44,7 @@ public class Problem203 {
         pascal.add(1L);
         pascal.add(1L);
         while (row < ROWS) {
-            ArrayList<Long> npascalrow = getNewPascalRow(pascal);
+            ArrayList<Long> npascalrow = IFCMath.getNewPascalRow(pascal);
             for (long l : npascalrow) {
                 if (!squarefree.containsKey(l)) {
                     HashMap<Long, Long> pf = IFCMath.primeFactorization(l);

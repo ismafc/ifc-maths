@@ -253,6 +253,21 @@ public class IFCMath {
         }
         return pow;
     }
+
+    /**
+     * Calculates a new pascal row in pascal's triangle
+     * @param pascalRow las known pascals's triangle row
+     * @return ArrayList with new pascal row before 'pascalRow'
+     */
+    public static ArrayList<Long> getNewPascalRow(ArrayList<Long> pascalRow) {
+        ArrayList<Long> newPascalRow = new ArrayList<>();
+        newPascalRow.add(1L);
+        for (int i = 0; i < pascalRow.size() - 1; i++) {
+            newPascalRow.add(pascalRow.get(i) + pascalRow.get(i + 1));
+        }
+        newPascalRow.add(1L);
+        return newPascalRow;
+    }    
     
     /**
      * Calculates Euler's totient funcion (also phi function) for 'n'.
