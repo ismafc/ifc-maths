@@ -8,6 +8,7 @@ package raytracer;
 
 //import java.io.*;
 import ProjectEuler.Triangle;
+import java.io.*;
 import java.math.*;
 import java.util.*;
 //import javax.script.ScriptEngine;
@@ -948,6 +949,32 @@ Números de Friedman:
         return true;
     }
     
+    private static String ReadLn (int maxLg)  // utility function to read from stdin
+    {
+        byte lin[] = new byte [maxLg];
+        int lg = 0, car = -1;
+
+        try
+        {
+            while (lg < maxLg)
+            {
+                car = System.in.read();
+                if ((car < 0) || (car == '\n')) break;
+                lin [lg++] += car;
+            }
+        }
+        catch (IOException e)
+        {
+            return (null);
+        }
+
+        if ((car < 0) && (lg == 0)) return (null);  // eof
+        if (lg == 0) 
+            return null;
+        else
+            return new String (lin, 0, lg);
+    }
+    
     /**
      * Entry point funcion
      * @param args the command line arguments
@@ -955,16 +982,8 @@ Números de Friedman:
     public static void main(String[] args) throws Exception {
         // Start PE 151
         //ProjectEuler.P150_159.Problem151.problem151();
-        long T1 = 1L;
-        long T2 = 1L;
-        long T3 = 1L;
-        for (long i = 0L; i < 100L; i++) {
-            long NT = T1 + T2 + T3;
-            System.out.println((i + 4) + " (" + NT + ") = " + IFCMath.primeFactorization(NT));
-            T1 = T2;
-            T2 = T3;
-            T3 = NT;
-        }
+        //OnlineJudge.P0100_0149.Problem0100.problem0100(false);
+        OnlineJudge.P0100_0149.Problem0100.problem0100(false);
         // End PE
 
         // Code application logic here
