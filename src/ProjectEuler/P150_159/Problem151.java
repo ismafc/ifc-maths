@@ -66,25 +66,52 @@ public class Problem151 {
             return nsheets;
         }
         
-        public long[] jumpTimes(long a) {
+        public long[] jump() {
+            long[] ntimes = times.clone();
+            ntimes[(int)numberOfSheets()]++;
+            return ntimes;
+        }
+        
+/*        public long[] jumpTimes(long a) {
             long[] ntimes = times.clone();
             long na = numbersA(a);
             ntimes[(int)numberOfSheets()] += na;
-/*            if (na > 1) {
-                for (int i = 0; i < times.length; i++) {
-                    if (i != numberOfSheets() && ntimes[i] > 0)
-                        ntimes[i] += na;
-                }
-            }*/
+//            if (na > 1) {
+//                for (int i = 0; i < times.length; i++) {
+//                    if (i != numberOfSheets() && ntimes[i] > 0)
+//                        ntimes[i] += na;
+//                }
+//            }
             return ntimes;
-        }
+        }*/
     }
     
     public static void problem151() {
         long jobs = 1;
         HashMap<Long, State> states = new HashMap<>();
         // First state is 1 A2, 1 A3, 1 A4 and 1 A5 in job 0
+        
+        // 1111 (0222, 1022, 1102, 1110) {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0}
+
+        // 0222 (0133, 0133, 0213, 0213, 0221, 0221) {0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0}
+        // 1022 (0133, 1013, 1013, 1021, 1021) {0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0}
+        // 1102 (0213, 1013, 1101, 1101) {0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0}
+        // 1110 (0221, 1221, 1121) {0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0}
+
+        // 1102 -> 0213 (0124, 0124, 0204, 0212, 0212, 0212) {0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0}
+        // 1102 -> 1013 (0124, 1004, 1012, 1012, 1012) {0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0}
+        // 1102 -> 1101 (0212, 1012, 1100) {0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0}
+        // 1102 -> 1101 (0212, 1012, 1100) {0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0}
+        
+        // 0222 -> 0133 (0044, 0124, 0124, 0124, 0132, 0132, 0132) {0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0}
+        // 0222 -> 0133 (0044, 0124, 0124, 0124, 0132, 0132, 0132) {0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0}
+        // 0222 -> 0213 (0124, 0124, 0204, 0212, 0212, 0212) {0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,0}
+        // 0222 -> 0213 (0124, 0124, 0204, 0212, 0212, 0212) {0,0,0,1,0,2,0,0,0,0,0,0,0,0,0,0}
+        // 0222 -> 0221 {0132, 0132, 0212, 0212, 0220) {0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0}
+        // 0222 -> 0221 {0132, 0132, 0212, 0212, 0220) {0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0}
+       
         states.put(1111L, new State(0, 1111L, new long[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}));
+        double sum = 0.0;
         while (jobs < 15) {
             HashMap<Long, State> nstates = new HashMap<>();
             for (State st : states.values()) {
@@ -93,24 +120,38 @@ public class Problem151 {
                     if (an > 0) {
                         // Cogemos un A(a)
                         long nsheet = st.jumpSheets(a);
-                        State nst = new State(jobs, nsheet, st.jumpTimes(a));
                         if (nstates.containsKey(nsheet)) {
                             // Merge!!!
-                            nstates.get(nsheet).addTimes(nst.getTimes());
+                            for (int ia = 0; ia < an - 1; ia++) {
+                                nstates.get(nsheet).addTimes(nstates.get(nsheet).getTimes());
+                            }
+                            nstates.get(nsheet).getTimes()[(int)st.numberOfSheets()] += an;
                         }
-                        else
+                        else {
+                            State nst = new State(jobs, nsheet, st.getTimes().clone());
+                            nst.getTimes()[(int)st.numberOfSheets()] += an;
                             nstates.put(nsheet, nst);
+                        }
                     }
                 }
             }
+            // 
+            // Quizás para cada job habría que calcular el número esperado de veces
+            // que esperamos encontrar 1 hoja
+            //
+            State nst = new State(jobs, 0, new long[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+            for (State st : nstates.values()) {
+                nst.addTimes(st.getTimes());
+            }
+            sum += nst.probabilityOf(1);
             states = nstates;
             jobs++;
         }
-        double sum = 0.0;
+/*        double sum = 0.0;
         for (long i = 1; i < 9; i++) {
             sum += states.get(1L).probabilityOf(i) * 14.0;
             System.out.println(states.get(1L).probabilityOf(i) * 14.0);
-        }
+        }*/
         System.out.println(sum);
     }
 }

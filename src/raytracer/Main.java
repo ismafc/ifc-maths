@@ -953,7 +953,18 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE
+        // Start PE 151
+        //ProjectEuler.P150_159.Problem151.problem151();
+        long T1 = 1L;
+        long T2 = 1L;
+        long T3 = 1L;
+        for (long i = 0L; i < 100L; i++) {
+            long NT = T1 + T2 + T3;
+            System.out.println((i + 4) + " (" + NT + ") = " + IFCMath.primeFactorization(NT));
+            T1 = T2;
+            T2 = T3;
+            T3 = NT;
+        }
         // End PE
 
         // Code application logic here
