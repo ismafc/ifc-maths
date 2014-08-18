@@ -983,7 +983,7 @@ Números de Friedman:
         // Start PE 151
         //ProjectEuler.P150_159.Problem151.problem151();
         //OnlineJudge.P0100_0149.Problem0100.problem0100(false);
-        OnlineJudge.P0100_0149.Problem0100.problem0100(false);
+        OnlineJudge.P0100_0149.Problem0101.problem0101();
         // End PE
 
         // Code application logic here
