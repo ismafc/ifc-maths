@@ -6,13 +6,10 @@
 
 package raytracer;
 
-//import java.io.*;
 import ProjectEuler.Triangle;
 import java.io.*;
 import java.math.*;
 import java.util.*;
-//import javax.script.ScriptEngine;
-//import javax.script.ScriptEngineManager;
 
 /**
  * Main test program
@@ -175,9 +172,9 @@ Números de Friedman:
         return result;
     }
 
-    private static void insertOrdered(ArrayList<String> nl, String n) {
+    private static void insertOrdered(ArrayList<Comparable> nl, Comparable n) {
         int index = 0;
-        for (String name : nl) {
+        for (Comparable name : nl) {
             if (n.compareTo(name) < 0)
                 break;
             index++;
@@ -974,16 +971,14 @@ Números de Friedman:
         else
             return new String (lin, 0, lg);
     }
-    
+
     /**
      * Entry point funcion
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 151
-        //ProjectEuler.P150_159.Problem151.problem151();
-        //OnlineJudge.P0100_0149.Problem0100.problem0100(false);
-        OnlineJudge.P0100_0149.Problem0101.problem0101();
+        // Start PE ???
+        ProjectEuler.P140_149.Problem141.problem141(100000L);
         // End PE
 
         // Code application logic here
