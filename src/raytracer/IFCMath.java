@@ -93,7 +93,8 @@ public class IFCMath {
         l1.addAll(l2);
         
         // Añadimos 'n'
-        l1.add(n);
+        if  (n != 1L)
+            l1.add(n);
         return l1;
     }
     

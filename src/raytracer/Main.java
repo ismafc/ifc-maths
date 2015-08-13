@@ -977,8 +977,10 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE ???
-        ProjectEuler.P140_149.Problem141.problem141(100000L);
+        // Start PE 357
+        //long ms = System.currentTimeMillis();
+        ProjectEuler.P350_359.Problem357.problem357(100000000L);
+        //System.out.println("ms = " + (System.currentTimeMillis() - ms));
         // End PE
 
         // Code application logic here
