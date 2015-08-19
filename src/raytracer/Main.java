@@ -977,10 +977,11 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 357
-        //long ms = System.currentTimeMillis();
-        ProjectEuler.P350_359.Problem357.problem357(100000000L);
-        //System.out.println("ms = " + (System.currentTimeMillis() - ms));
+        // Start PE 169
+        /*
+        x=2^y -> log2(x)=y * log2(2) -> y = log2(x)
+        */
+        System.out.println(IFCMath.log(2, new BigDecimal("10000000000000000000000000"), 0).toString());
         // End PE
 
         // Code application logic here
