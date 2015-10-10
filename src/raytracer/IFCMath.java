@@ -129,45 +129,40 @@ public class IFCMath {
      * @param decimals number of decimals of the returned value
      * @return A BigDecimal with logarithm in base 'base' of 'x' with 'decimals' decimals of precission
      */
-    public static BigDecimal log(int base, BigDecimal x, int decimals) {
+    public static BigDecimal log(int base, BigInteger x, int decimals) {
         BigDecimal result = BigDecimal.ZERO;
 
         BigDecimal input = new BigDecimal(x.toString());
-        int decimalPlaces = decimals + 1;
-        int scale = input.precision() + decimalPlaces;
+        int scale = input.precision() + decimals + 1;
 
         int maxite = 10000;
-        int ite = 0;
-        BigDecimal maxError_BigDecimal = new BigDecimal(BigInteger.ONE,decimalPlaces + 1);
-        RoundingMode a_RoundingMode = RoundingMode.UP;
+        BigDecimal maxError_BigDecimal = new BigDecimal(BigInteger.ONE, decimals + 2);
 
         BigDecimal two_BigDecimal = new BigDecimal("2");
         BigDecimal base_BigDecimal = new BigDecimal(base);
 
         while (input.compareTo(base_BigDecimal) == 1) {
             result = result.add(BigDecimal.ONE);
-            input = input.divide(base_BigDecimal, scale, a_RoundingMode);
+            input = input.divide(base_BigDecimal, scale, RoundingMode.UP);
         }
 
         BigDecimal fraction = new BigDecimal("0.5");
         input = input.multiply(input);
         BigDecimal resultplusfraction = result.add(fraction);
-        while (((resultplusfraction).compareTo(result) == 1) && (input.compareTo(BigDecimal.ONE) == 1)) {
+        while (resultplusfraction.compareTo(result) == 1 && input.compareTo(BigDecimal.ONE) == 1 && maxite > 0) {
             if (input.compareTo(base_BigDecimal) == 1) {
-                input = input.divide(base_BigDecimal, scale, a_RoundingMode);
+                input = input.divide(base_BigDecimal, scale, RoundingMode.UP);
                 result = result.add(fraction);
             }
             input = input.multiply(input);
-            fraction = fraction.divide(two_BigDecimal, scale, a_RoundingMode);
+            fraction = fraction.divide(two_BigDecimal, scale, RoundingMode.UP);
             resultplusfraction = result.add(fraction);
             if (fraction.abs().compareTo(maxError_BigDecimal) == -1)
                 break;
-            if (maxite == ite)
-                break;
-            ite ++;
+            maxite--;
         }
 
-        MathContext a_MathContext = new MathContext(((decimalPlaces - 1) + (result.precision() - result.scale())), RoundingMode.DOWN);
+        MathContext a_MathContext = new MathContext(decimals + result.precision() - result.scale(), RoundingMode.DOWN);
         return result.round(a_MathContext);
     }
 
