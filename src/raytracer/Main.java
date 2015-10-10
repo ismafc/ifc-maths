@@ -978,10 +978,14 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE 169
-        /*
-        x=2^y -> log2(x)=y * log2(2) -> y = log2(x)
-        */
-        System.out.println(IFCMath.log(2, new BigDecimal("10000000000000000000000000"), 0).toString());
+        
+        for (long l = 1; l <= 1000; l++) {
+            ProjectEuler.P160_169.Problem169.problem169(new BigInteger(Long.toString(l)));
+            System.out.println(" - ");
+        }
+        
+        //ProjectEuler.P160_169.Problem169.problem169(new BigInteger("10"));
+        //ProjectEuler.P160_169.Problem169.problem169(new BigInteger("10000000000000000000000000"));
         // End PE
 
         // Code application logic here
