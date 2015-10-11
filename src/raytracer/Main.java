@@ -980,6 +980,25 @@ Números de Friedman:
         // Start PE
         // End PE
 
+        System.out.println("c = -1 -> " + IFCMath.isMandelbrot(new Complex(-1,0), 10));
+        System.out.println("c = 1 -> " + IFCMath.isMandelbrot(new Complex(1,0), 10));
+        System.out.println("c = 0.5 -> " + IFCMath.isMandelbrot(new Complex(0.5,0), 10));
+        System.out.println("c = 0.3 -> " + IFCMath.isMandelbrot(new Complex(0.3,0), 20));
+        System.out.println("c = 0.26 -> " + IFCMath.isMandelbrot(new Complex(0.26,0), 100));
+        System.out.println("c = 0.251 -> " + IFCMath.isMandelbrot(new Complex(0.251,0), 1000));
+        System.out.println("c = 0.2501 -> " + IFCMath.isMandelbrot(new Complex(0.2501,0), 1000));
+        System.out.println("c = 0.25001 -> " + IFCMath.isMandelbrot(new Complex(0.25001,0), 10000));
+        System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(new Complex(0.250001,0), 10000));
+        System.out.println("c = 0.25 -> " + IFCMath.isMandelbrot(new Complex(0.25,0), 10000));
+        
+        double step = 4.0 / 100.0;
+        for (double _yy = -2; _yy <= 2; _yy += step) {
+            for (double _xx = -2; _xx <= 2; _xx += step) {
+                System.out.print(IFCMath.isMandelbrot(new Complex(_xx,_yy), 20) == 20 ? "X" : " ");
+            }
+            System.out.println();
+        }
+                 
         // a = 5.0 + 6.0i
         // b = -3.0 + 4.0i
         // Re(a) = 5.0

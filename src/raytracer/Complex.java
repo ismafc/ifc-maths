@@ -9,7 +9,7 @@ package raytracer;
  *
  * @author ismael.flores
  */
-public class Complex {
+public class Complex extends Object {
     private double re = Double.NaN;   // the real part
     private double im = Double.NaN;   // the imaginary part
 
@@ -22,6 +22,14 @@ public class Complex {
     // create a new object with the given real and imaginary parts
     public Complex(Complex n) {
         this(n.re, n.im);
+    }
+    
+    @Override
+    public boolean equals(Object n) {
+        if (n instanceof Complex)
+            return re == ((Complex)n).re && im == ((Complex)n).im;
+        else 
+            return false;
     }
 
     // return a string representation of the invoking Complex object

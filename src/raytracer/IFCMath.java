@@ -437,4 +437,50 @@ public class IFCMath {
         return IFCMath.factorial(x).divide(IFCMath.factorial(k).multiply(IFCMath.factorial(x.subtract(k))));
     }
 
+    /**
+     * Calculates first 'steps' of Mandelbrot set sequence values 
+     * for a provided Complex 'c' (it doesn't matter if is divergent or 
+     * convergent -really mandelbrot set-). 
+     * returns the last value calculated. Mandelbrot set is:
+     * Z(0) = 0+0i
+     * Z(n+1) = Z(n)^2 + c
+     * @param c Complex value that defines Mandelbrot set
+     * @param steps Number of values to calculate
+     * @return Complex with 'steps' value of mandelbrot set for 'c'
+     */
+    public static Complex mandelbrot(Complex c, long steps) {
+        Complex aux = new Complex(0.0, 0.0);
+        while (steps > 1) {
+            aux = aux.multilpy(aux).add(c);
+            steps--;
+        }
+        return aux;
+    }
+
+    /**
+     * Calculates if provided Complex 'c' allow to Mandelbrot set. 
+     * This function explores first 'maxSteps' values and check if
+     * it tends to infinity (module greater than 2) in these first values or not.
+     * Z(0) = 0+0i
+     * Z(n+1) = Z(n)^2 + c
+     * @param c Complex value that defines Mandelbrot set
+     * @param maxSteps Maximum number of values to check
+     * @return number of values checked. If this value is equal to 'maxSteps', 
+     * 'c' is an element of Mandelbrot set
+     */
+    public static long isMandelbrot(Complex c, long maxSteps) {
+        Complex aux = new Complex(0.0, 0.0);
+        long steps = 1;
+        ArrayList<Complex> values = new ArrayList<Complex>();
+        values.add(aux);
+        while (aux.abs() <= 2.0 && steps < maxSteps) {
+            aux = aux.multilpy(aux).add(c);
+            if (values.contains(aux))
+                return maxSteps;
+            values.add(aux);
+            steps++;
+        }
+        return steps;
+    }
+    
 }
