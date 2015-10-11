@@ -998,10 +998,21 @@ Números de Friedman:
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         myDialog.setPreferredSize(new Dimension(700, 700));
         myDialog.setMinimumSize(new Dimension(700, 700));
+        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
+        GWindow wto = new GWindow(-1.25, -0.75, -0.25, 0.25);
+        for (int s = 0; s <= 50; s++) {
+            GWindow w = new GWindow(wfrom.xMin + (wto.xMin - wfrom.xMin) * (double)s / 50.0,
+                                    wfrom.yMin + (wto.yMin - wfrom.yMin) * (double)s / 50.0,
+                                    wfrom.xMax + (wto.xMax - wfrom.xMax) * (double)s / 50.0,
+                                    wfrom.yMax + (wto.yMax - wfrom.yMax) * (double)s / 50.0);
+            myDialog.setWindow(w);
+            myDialog.createMandelbrot(s+5);
+        }
+        myDialog.GO();
  /*       for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
         myDialog.GO();*/
-        myDialog.createMandelbrot(20);
+//        myDialog.createMandelbrot(20);
         myDialog.setVisible(true);
         
         // a = 5.0 + 6.0i

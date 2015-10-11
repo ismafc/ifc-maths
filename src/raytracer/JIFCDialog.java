@@ -25,6 +25,7 @@ public class JIFCDialog extends JDialog implements ActionListener {
     private Timer timer = new Timer(40, this);
     private int animatedPos = 0;
     private int animatedDir = 1;
+    private GWindow window = new GWindow(-2.0, -2.0, 2.0, 2.0);
     
     public JIFCDialog(JFrame parent, String title, boolean modal) {
         super(parent, title, modal);
@@ -43,18 +44,22 @@ public class JIFCDialog extends JDialog implements ActionListener {
         return new Color(c3r, c3g, c3b);
     }
     
+    public void setWindow(GWindow w) {
+        window = w;
+    }
+    
     public void createMandelbrot(int steps) {
         int w = this.getPreferredSize().width;
         int h = this.getPreferredSize().height;
         BufferedImage ncanvas = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);        
-        double stepx = 4.0 / (double)w;
-        double stepy = 4.0 / (double)h;
+        double stepx = window.getWidth() / (double)w;
+        double stepy = window.getHeight() / (double)h;
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                double xx = (double)x * stepx - 2.0;
-                double yy = (double)y * stepy - 2.0;
+                double xx = (double)x * stepx + window.xMin;
+                double yy = (double)y * stepy + window.yMin;
                 int s = IFCMath.isMandelbrot(new Complex(xx, yy), steps);
-                ncanvas.setRGB(x, y, s == steps ? Color.black.getRGB() : getColor(Color.black, Color.red, s, steps).getRGB());
+                ncanvas.setRGB(x, y, s == steps ? Color.black.getRGB() : getColor(Color.red, Color.white, s, steps).getRGB());
             }
         }
         canvas.add(ncanvas);
