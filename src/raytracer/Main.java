@@ -977,16 +977,31 @@ Números de Friedman:
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        // Start PE 169
-        
-        for (long l = 1; l <= 1000; l++) {
-            ProjectEuler.P160_169.Problem169.problem169(new BigInteger(Long.toString(l)));
-            System.out.println(" - ");
-        }
-        
-        //ProjectEuler.P160_169.Problem169.problem169(new BigInteger("10"));
-        //ProjectEuler.P160_169.Problem169.problem169(new BigInteger("10000000000000000000000000"));
+        // Start PE
         // End PE
+
+        // a = 5.0 + 6.0i
+        // b = -3.0 + 4.0i
+        // Re(a) = 5.0
+        // Im(a) = 6.0
+        // b + a = 2.0 + 10.0i
+        // a - b = 8.0 + 2.0i
+        // a * b = -39.0 + 2.0i
+        // a / b = 0.36 - 1.52i
+        // (a / b) * b  = 5.0 + 6.0i
+        // conj(a) = 5.0 - 6.0i
+        // |a| = 7.810249675906654
+        // phase a = 0.8760580505981934
+        Complex c_a = new Complex(5.0, 6.0);
+        Complex c_b = new Complex(-3.0, 4.0);
+        System.out.println("Re(a) = " + c_a.re() + "; im(a) = " + c_a.im());
+        System.out.println("a + b = " + c_a.add(c_b));
+        System.out.println("a - b = " + c_a.subtract(c_b));
+        System.out.println("a * b = " + c_a.multilpy(c_b));
+        System.out.println("a / b = " + c_a.divide(c_b));
+        System.out.println("Conj(a) = " + c_a.conjugate());
+        System.out.println("Module(a) = " + c_a.abs());
+        System.out.println("Phase(a) = " + c_a.phase());
 
         // Code application logic here
         Object3D o = new Object3D(1.0, 1.0, 0.0);
