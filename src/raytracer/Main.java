@@ -7,9 +7,12 @@
 package raytracer;
 
 import ProjectEuler.Triangle;
+import java.awt.Dimension;
 import java.io.*;
 import java.math.*;
 import java.util.*;
+import javax.swing.JFrame;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  * Main test program
@@ -991,14 +994,16 @@ Números de Friedman:
         System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(new Complex(0.250001,0), 10000));
         System.out.println("c = 0.25 -> " + IFCMath.isMandelbrot(new Complex(0.25,0), 10000));
         
-        double step = 4.0 / 100.0;
-        for (double _yy = -2; _yy <= 2; _yy += step) {
-            for (double _xx = -2; _xx <= 2; _xx += step) {
-                System.out.print(IFCMath.isMandelbrot(new Complex(_xx,_yy), 20) == 20 ? "X" : " ");
-            }
-            System.out.println();
-        }
-                 
+        JIFCDialog myDialog = new JIFCDialog((JFrame)null, "IFCDialog", true);
+        myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        myDialog.setPreferredSize(new Dimension(700, 700));
+        myDialog.setMinimumSize(new Dimension(700, 700));
+ /*       for (int s = 5; s < 50; s++)
+            myDialog.createMandelbrot(s);
+        myDialog.GO();*/
+        myDialog.createMandelbrot(20);
+        myDialog.setVisible(true);
+        
         // a = 5.0 + 6.0i
         // b = -3.0 + 4.0i
         // Re(a) = 5.0

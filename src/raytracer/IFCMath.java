@@ -468,9 +468,9 @@ public class IFCMath {
      * @return number of values checked. If this value is equal to 'maxSteps', 
      * 'c' is an element of Mandelbrot set
      */
-    public static long isMandelbrot(Complex c, long maxSteps) {
+    public static int isMandelbrot(Complex c, int maxSteps) {
         Complex aux = new Complex(0.0, 0.0);
-        long steps = 1;
+        int steps = 1;
         ArrayList<Complex> values = new ArrayList<Complex>();
         values.add(aux);
         while (aux.abs() <= 2.0 && steps < maxSteps) {
