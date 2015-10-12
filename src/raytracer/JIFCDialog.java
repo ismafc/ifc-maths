@@ -6,10 +6,13 @@
 package raytracer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JDialog;
@@ -29,6 +32,7 @@ public class JIFCDialog extends JDialog implements ActionListener {
     private GWindow window = new GWindow(-2.0, -2.0, 2.0, 2.0);
     private Complex initialValue = new Complex(0.0, 0.0);
     private ArrayList<Color> colors = new ArrayList<Color>();
+    private Dimension dimensions = new Dimension(500, 500);
     
     public JIFCDialog(JFrame parent, String title, boolean modal) {
         super(parent, title, modal);
@@ -56,6 +60,10 @@ public class JIFCDialog extends JDialog implements ActionListener {
         window = w;
     }
 
+    public void setDimensions(Dimension d) {
+        dimensions = d;
+    }
+    
     public void setInitialValue(Complex i) {
         initialValue = i;
     }
@@ -78,8 +86,8 @@ public class JIFCDialog extends JDialog implements ActionListener {
             return;
         if (colors.size() < 2)
             return;
-        int w = this.getPreferredSize().width;
-        int h = this.getPreferredSize().height;
+        int w = dimensions.width;
+        int h = dimensions.height;
         BufferedImage ncanvas = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);        
         double stepx = window.getWidth() / (double)w;
         double stepy = window.getHeight() / (double)h;
@@ -101,8 +109,21 @@ public class JIFCDialog extends JDialog implements ActionListener {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
-        if (canvas.size() > 0 && canvas.size() > animatedPos)
-            g2d.drawImage(canvas.get(animatedPos), null, null);
+        if (canvas.size() > 0 && canvas.size() > animatedPos) {
+            double nw = getSize().getWidth();
+            double nh = getSize().getHeight();
+            int w = canvas.get(animatedPos).getWidth();
+            int h = canvas.get(animatedPos).getHeight();
+            if (nw == (double)w && nh == (double)h)
+                g2d.drawImage(canvas.get(animatedPos), null, null);
+            else {
+                AffineTransform at = new AffineTransform();
+                at.scale(nw / (double)w, nh / (double)h);
+                AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+                BufferedImage after = scaleOp.filter(canvas.get(animatedPos), null);
+                g2d.drawImage(after, null, null);
+            }
+        }
     }
 
     @Override

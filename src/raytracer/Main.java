@@ -1001,13 +1001,15 @@ Números de Friedman:
         myDialog.setPreferredSize(new Dimension(500, 500));
         myDialog.setMinimumSize(new Dimension(500, 500));
 
+        myDialog.setDimensions(new Dimension(500, 500));
+        myDialog.clearColors();
         myDialog.addColor(Color.black);
         myDialog.addColor(Color.magenta);
         myDialog.addColor(Color.white);
 
         GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
         GWindow wto = new GWindow(-1.25, -0.75, -0.25, 0.25);
-        for (int s = 0; s <= 50; s++) {
+        for (int s = 0; s <= 24; s++) {
             GWindow w = new GWindow(wfrom.xMin + (wto.xMin - wfrom.xMin) * (double)s / 50.0,
                                     wfrom.yMin + (wto.yMin - wfrom.yMin) * (double)s / 50.0,
                                     wfrom.xMax + (wto.xMax - wfrom.xMax) * (double)s / 50.0,
@@ -1015,7 +1017,7 @@ Números de Friedman:
             myDialog.setWindow(w);
             myDialog.createMandelbrot(s+5);
         }
-        myDialog.setAnimationFrameTime(50);
+        myDialog.setAnimationFrameTime(40);
         myDialog.GO();
  
  /*       
