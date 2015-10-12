@@ -442,14 +442,15 @@ public class IFCMath {
      * for a provided Complex 'c' (it doesn't matter if is divergent or 
      * convergent -really mandelbrot set-). 
      * returns the last value calculated. Mandelbrot set is:
-     * Z(0) = 0+0i
-     * Z(n+1) = Z(n)^2 + c
+     * Z(0) = 'i' (tipically 0+0i)
+     * Z(n+1) = Z(n)^2 + 'c'
+     * @param i Complex value with initial value
      * @param c Complex value that defines Mandelbrot set
      * @param steps Number of values to calculate
      * @return Complex with 'steps' value of mandelbrot set for 'c'
      */
-    public static Complex mandelbrot(Complex c, long steps) {
-        Complex aux = new Complex(0.0, 0.0);
+    public static Complex mandelbrot(Complex i, Complex c, long steps) {
+        Complex aux = i;
         while (steps > 1) {
             aux = aux.multilpy(aux).add(c);
             steps--;
@@ -461,15 +462,16 @@ public class IFCMath {
      * Calculates if provided Complex 'c' allow to Mandelbrot set. 
      * This function explores first 'maxSteps' values and check if
      * it tends to infinity (module greater than 2) in these first values or not.
-     * Z(0) = 0+0i
-     * Z(n+1) = Z(n)^2 + c
+     * Z(0) = 'i' (tipically 0+0i)
+     * Z(n+1) = Z(n)^2 + 'c'
+     * @param i Complex value with initial value
      * @param c Complex value that defines Mandelbrot set
      * @param maxSteps Maximum number of values to check
      * @return number of values checked. If this value is equal to 'maxSteps', 
      * 'c' is an element of Mandelbrot set
      */
-    public static int isMandelbrot(Complex c, int maxSteps) {
-        Complex aux = new Complex(0.0, 0.0);
+    public static int isMandelbrot(Complex i, Complex c, int maxSteps) {
+        Complex aux = i;
         int steps = 1;
         ArrayList<Complex> values = new ArrayList<Complex>();
         values.add(aux);

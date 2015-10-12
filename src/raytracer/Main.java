@@ -7,6 +7,7 @@
 package raytracer;
 
 import ProjectEuler.Triangle;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.*;
 import java.math.*;
@@ -983,22 +984,23 @@ Números de Friedman:
         // Start PE
         // End PE
 
-        System.out.println("c = -1 -> " + IFCMath.isMandelbrot(new Complex(-1,0), 10));
-        System.out.println("c = 1 -> " + IFCMath.isMandelbrot(new Complex(1,0), 10));
-        System.out.println("c = 0.5 -> " + IFCMath.isMandelbrot(new Complex(0.5,0), 10));
-        System.out.println("c = 0.3 -> " + IFCMath.isMandelbrot(new Complex(0.3,0), 20));
-        System.out.println("c = 0.26 -> " + IFCMath.isMandelbrot(new Complex(0.26,0), 100));
-        System.out.println("c = 0.251 -> " + IFCMath.isMandelbrot(new Complex(0.251,0), 1000));
-        System.out.println("c = 0.2501 -> " + IFCMath.isMandelbrot(new Complex(0.2501,0), 1000));
-        System.out.println("c = 0.25001 -> " + IFCMath.isMandelbrot(new Complex(0.25001,0), 10000));
-        System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(new Complex(0.250001,0), 10000));
-        System.out.println("c = 0.25 -> " + IFCMath.isMandelbrot(new Complex(0.25,0), 10000));
+        Complex initialValue = new Complex(0.0, 0.0);
+        System.out.println("c = -1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(-1,0), 10));
+        System.out.println("c = 1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(1,0), 10));
+        System.out.println("c = 0.5 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.5,0), 10));
+        System.out.println("c = 0.3 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.3,0), 20));
+        System.out.println("c = 0.26 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.26,0), 100));
+        System.out.println("c = 0.251 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.251,0), 1000));
+        System.out.println("c = 0.2501 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.2501,0), 1000));
+        System.out.println("c = 0.25001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25001,0), 10000));
+        System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.250001,0), 10000));
+        System.out.println("c = 0.25 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25,0), 10000));
         
         JIFCDialog myDialog = new JIFCDialog((JFrame)null, "IFCDialog", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         myDialog.setPreferredSize(new Dimension(700, 700));
         myDialog.setMinimumSize(new Dimension(700, 700));
-        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
+/*        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
         GWindow wto = new GWindow(-1.25, -0.75, -0.25, 0.25);
         for (int s = 0; s <= 50; s++) {
             GWindow w = new GWindow(wfrom.xMin + (wto.xMin - wfrom.xMin) * (double)s / 50.0,
@@ -1008,11 +1010,14 @@ Números de Friedman:
             myDialog.setWindow(w);
             myDialog.createMandelbrot(s+5);
         }
-        myDialog.GO();
+        myDialog.GO();*/
  /*       for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
         myDialog.GO();*/
-//        myDialog.createMandelbrot(20);
+        myDialog.addColor(Color.black);
+        myDialog.addColor(Color.magenta);
+        myDialog.addColor(Color.white);
+        myDialog.createMandelbrot(40);
         myDialog.setVisible(true);
         
         // a = 5.0 + 6.0i
