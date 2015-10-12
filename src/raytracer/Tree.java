@@ -78,7 +78,7 @@ public class Tree<V>
     
     /**
      * Obtains parent of this node. Null it this is a root node.
-     * @return Parent node (Tree<V> type).
+     * @return Parent node (Tree&lt;V&gt; type).
      */
     public Tree<V> getParent() {
         return parent;
@@ -86,7 +86,7 @@ public class Tree<V>
     
     /**
      * Stores the parent of this node (Node is not root).
-     * @param p Parent for this node (Tree<V> type).
+     * @param p Parent for this node (Tree&lt;V&gt; type).
      */
     public void setParent(Tree<V> p) {
         parent = p;

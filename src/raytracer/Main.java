@@ -979,6 +979,7 @@ Números de Friedman:
     /**
      * Entry point funcion
      * @param args the command line arguments
+     * @throws java.lang.Exception with exception thrown
      */
     public static void main(String[] args) throws Exception {
         // Start PE

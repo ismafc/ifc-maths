@@ -6,7 +6,7 @@ package raytracer;
 
 /**
  * Class to manage a 2D Window (real world)
- * xMin < xMax and yMin < yMax
+ * xMin &lt; xMax and yMin &lt; yMax
  * @author Ismael Flores Campoy
  * @version 1.0
  */
@@ -45,10 +45,7 @@ public class GWindow
      * @param w GWindow to copy to this object
      */
     public GWindow(GWindow w) {
-        xMin = w.xMin;
-        xMax = w.xMax;
-        yMin = w.yMin;
-        yMax = w.yMax;        
+        this(w.xMin, w.yMin, w.xMax, w.yMax);
     }
     
     /** 
@@ -81,7 +78,7 @@ public class GWindow
     }
 
     /** 
-     * Returns with of GWindow. It assumes that xMax > xMin
+     * Returns with of GWindow. It assumes that xMax &gt; xMin
      * @return Double with width
      */
     public double getWidth() {
@@ -89,7 +86,7 @@ public class GWindow
     }
     
     /** 
-     * Returns height of GWindow. It assumes that yMax > yMin
+     * Returns height of GWindow. It assumes that yMax &gt; yMin
      * @return Double with height
      */
     public double getHeight() {

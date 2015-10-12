@@ -1,18 +1,32 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Complex.java
  */
 package raytracer;
 
 /**
- *
+ * Implementation of a Class to manage complex numbers a+bi
  * @author ismael.flores
- */
-public class Complex extends Object {
-    private double re = Double.NaN;   // the real part
-    private double im = Double.NaN;   // the imaginary part
+ * @version 1.0
+*/
+public class Complex
+{
+    
+    /**
+     * Real part of complex number
+     */
+    private double re = Double.NaN;
 
+    /**
+     * Imaginary part of complex number
+     */
+    private double im = Double.NaN;
+
+    /** 
+     * Creates a new instance of Complex
+     */
+    public Complex() {
+    }
+    
     // create a new object with the given real and imaginary parts
     public Complex(double real, double imag) {
         re = real;
