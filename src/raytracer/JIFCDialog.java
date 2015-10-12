@@ -21,8 +21,9 @@ import javax.swing.Timer;
  * @author ismael.flores
  */
 public class JIFCDialog extends JDialog implements ActionListener {
+    private int animationFrameTime = 40;
     private final ArrayList<BufferedImage> canvas = new ArrayList<>();
-    private final Timer timer = new Timer(40, this);
+    private Timer timer = new Timer(animationFrameTime, this);
     private int animatedPos = 0;
     private int animatedDir = 1;
     private GWindow window = new GWindow(-2.0, -2.0, 2.0, 2.0);
@@ -59,8 +60,17 @@ public class JIFCDialog extends JDialog implements ActionListener {
         initialValue = i;
     }
     
+    public void clearColors() {
+        colors.clear();
+    }
+    
     public void addColor(Color c) {
         colors.add(c);
+    }
+    
+    public void setAnimationFrameTime(int milis) {
+        animationFrameTime = milis; 
+        timer = new Timer(animationFrameTime, this);
     }
     
     public void createMandelbrot(int steps) {

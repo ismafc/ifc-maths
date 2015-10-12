@@ -998,9 +998,14 @@ Números de Friedman:
         
         JIFCDialog myDialog = new JIFCDialog((JFrame)null, "IFCDialog", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        myDialog.setPreferredSize(new Dimension(700, 700));
-        myDialog.setMinimumSize(new Dimension(700, 700));
-/*        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
+        myDialog.setPreferredSize(new Dimension(500, 500));
+        myDialog.setMinimumSize(new Dimension(500, 500));
+
+        myDialog.addColor(Color.black);
+        myDialog.addColor(Color.magenta);
+        myDialog.addColor(Color.white);
+
+        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
         GWindow wto = new GWindow(-1.25, -0.75, -0.25, 0.25);
         for (int s = 0; s <= 50; s++) {
             GWindow w = new GWindow(wfrom.xMin + (wto.xMin - wfrom.xMin) * (double)s / 50.0,
@@ -1010,14 +1015,20 @@ Números de Friedman:
             myDialog.setWindow(w);
             myDialog.createMandelbrot(s+5);
         }
-        myDialog.GO();*/
- /*       for (int s = 5; s < 50; s++)
+        myDialog.setAnimationFrameTime(50);
+        myDialog.GO();
+ 
+ /*       
+        for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
-        myDialog.GO();*/
+        myDialog.GO();
+ */
+ /*
         myDialog.addColor(Color.black);
         myDialog.addColor(Color.magenta);
         myDialog.addColor(Color.white);
         myDialog.createMandelbrot(40);
+*/
         myDialog.setVisible(true);
         
         // a = 5.0 + 6.0i
