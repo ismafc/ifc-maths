@@ -16,27 +16,23 @@ public class Object3D {
     /**
      * X value in 3D environment
      */
-    protected double x;
+    protected double x = 0.0;
     
     /**
      * Y value in 3D environment
      */
-    protected double y;
+    protected double y = 0.0;
     
     /**
      * Z value in 3D environment
      */
-    protected double z;
+    protected double z = 0.0;
 
     /**
      * Creates a new instance of Object3D
      * All variables initialized to 0
      */
     public Object3D() {
-        super();
-        x = 0.0;
-        y = 0.0;
-        z = 0.0;
     }
 
     /**
@@ -46,10 +42,7 @@ public class Object3D {
      * @param nz Z value for 3D environment
      */
     public Object3D(double nx, double ny, double nz) {
-        super();
-        x = nx;
-        y = ny;
-        z = nz;
+        set(nx, ny, nz);
     }
 
     /**
@@ -57,11 +50,8 @@ public class Object3D {
      * @param o Object to clone
      */
     public Object3D(Object3D o) {
-        super();
         if (o != null) {
-            x = o.x;
-            y = o.y;
-            z = o.z;
+            set(o.x, o.y, o.z);
         }
     }
 
@@ -70,12 +60,9 @@ public class Object3D {
      * @param c Array of 3 or more values (x, y and z)
      */
     public Object3D(double c[]) {
-        super();
         if (c != null) {
             if (c.length >= 3) {
-                x = c[0];
-                y = c[1];
-                z = c[2];
+                set(c[0], c[1], c[2]);
             }
         }
     }
@@ -95,11 +82,13 @@ public class Object3D {
     /**
      * Initializes this Object3D with input value
      * @param o Object3D to copy in this Object
+     * @return True if given object 'o' is not null, False otherwise
      */
-    public void set(Object3D o) {
-        x = o.x;
-        y = o.y;
-        z = o.z;
+    public boolean set(Object3D o) {
+        if (o == null) 
+            return false;
+        set(o.x, o.y, o.z);
+        return true;
     }
     
     /**
@@ -108,10 +97,8 @@ public class Object3D {
      * @return True if input array 'c' has three values and False if not
      */
     public boolean set(double c[]) {
-        if (c.length >= 3) {
-            x = c[0];
-            y = c[1];
-            z = c[2];
+        if (c != null && c.length >= 3) {
+            set(c[0], c[1], c[2]);
             return true;
         }
         return false;
@@ -172,22 +159,30 @@ public class Object3D {
      * Adds input Object3D 'o' to this object. It consists on add x value to x value,
      * y value to y value and z value to z value
      * @param o Object3D to add to this object
+     * @return True if given object 'o' is not null, False otherwise
      */
-    public void add(Object3D o) {
+    public boolean add(Object3D o) {
+        if (o == null) 
+            return false;
         x += o.x;
         y += o.y;
         z += o.z;
+        return true;
     }
 
     /**
      * Substracts input Object3D 'o' from this object. It consists on substract x value from x value,
      * y value from y value and z value from z value
      * @param o Object3D to substract to this object
+     * @return True if given object 'o' is not null, False otherwise
      */
-    public void sub(Object3D o) {
+    public boolean sub(Object3D o) {
+        if (o == null) 
+            return false;
         x -= o.x;
         y -= o.y;
         z -= o.z;
+        return true;
     }
     
     /**
@@ -210,6 +205,8 @@ public class Object3D {
      * @return True if division can be done and False if not (some division by 0)
      */
     public boolean div(Object3D o) {
+        if (o == null)
+            return false;
         if (o.x == 0.0 || o.y == 0.0 || o.z == 0.0)
             return false;
         x /= o.x;
@@ -231,11 +228,15 @@ public class Object3D {
     /**
      * Multiplies this Object3D by input Object3D 'o'. It consists on multiply x by x, y by y and z by z
      * @param o Object3D with value to multiply
+     * @return True if given object 'o' is not null, False otherwise
      */
-    public void mul(Object3D o) {
+    public boolean mul(Object3D o) {
+        if (o == null) 
+            return false;
         x *= o.x;
         y *= o.y;
         z *= o.z;
+        return true;
     }
     
     /**
@@ -392,6 +393,7 @@ public class Object3D {
      * Asks for a String representation of this Object3D (x,y,z)
      * @return String representing this Object3D 
      */
+    @Override
     public String toString() {
         return "(" + x + ", " + y + ", " + z + ")";
     }
@@ -420,7 +422,7 @@ public class Object3D {
      * @return Double containing o length
      */
     static public double length(Object3D o) {
-        return o.length();
+        return (o != null) ? o.length() : Double.NaN;
     }
     
 }

@@ -92,6 +92,22 @@ public class GWindow
     public double getHeight() {
         return yMax - yMin;
     }
+
+    /** 
+     * Returns x-Minimum value of GWindow
+     * @return Double with x-Minimum value
+     */
+    public double getXMin() {
+        return xMin;
+    }
+    
+    /** 
+     * Returns y-Minimum value of GWindow
+     * @return Double with y-Minimum value
+     */
+    public double getYMin() {
+        return yMin;
+    }
     
     /** 
      * Returns the absolute y value corresponding to the given percentage 'y'.

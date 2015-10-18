@@ -6,6 +6,7 @@
 
 package raytracer;
 
+import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -997,7 +998,7 @@ Números de Friedman:
         System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.250001,0), 10000));
         System.out.println("c = 0.25 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25,0), 10000));
         
-        JIFCDialog myDialog = new JIFCDialog((JFrame)null, "IFCDialog", true);
+        JFractalDialog myDialog = new JFractalDialog((JFrame)null, "IFCDialog", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         myDialog.setPreferredSize(new Dimension(500, 500));
         myDialog.setMinimumSize(new Dimension(500, 500));

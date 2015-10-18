@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package raytracer;
+package dialogs;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,12 +18,15 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import raytracer.Complex;
+import raytracer.GWindow;
+import raytracer.IFCMath;
 
 /**
  *
  * @author ismael.flores
  */
-public class JIFCDialog extends JDialog implements ActionListener {
+public class JFractalDialog extends JDialog implements ActionListener {
     private int animationFrameTime = 40;
     private final ArrayList<BufferedImage> canvas = new ArrayList<>();
     private Timer timer = new Timer(animationFrameTime, this);
@@ -34,7 +37,7 @@ public class JIFCDialog extends JDialog implements ActionListener {
     private ArrayList<Color> colors = new ArrayList<Color>();
     private Dimension dimensions = new Dimension(500, 500);
     
-    public JIFCDialog(JFrame parent, String title, boolean modal) {
+    public JFractalDialog(JFrame parent, String title, boolean modal) {
         super(parent, title, modal);
     }
     
@@ -93,8 +96,8 @@ public class JIFCDialog extends JDialog implements ActionListener {
         double stepy = window.getHeight() / (double)h;
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                double xx = (double)x * stepx + window.xMin;
-                double yy = (double)y * stepy + window.yMin;
+                double xx = (double)x * stepx + window.getXMin();
+                double yy = (double)y * stepy + window.getYMin();
                 int s = IFCMath.isMandelbrot(initialValue, new Complex(xx, yy), steps);
                 ncanvas.setRGB(x, y, s == steps ? Color.black.getRGB() : getColor(colors, s, steps).getRGB());
             }
