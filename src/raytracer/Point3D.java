@@ -167,12 +167,12 @@ public class Point3D extends Object3D {
     }
 
     /** 
-     * Translates this point 'p[0]' units in X axis, 'p[1]' units in Y axis and 'p[2]' units in Z axis
+     * Returns a Point3D with this point translated 'p[0]' units in X axis, 'p[1]' units in Y axis and 'p[2]' units in Z axis
      * @param p Array of doubles indicating X, Y and Z axis translation
-     * @return True of translation has been made successfully and False if not (array is less than 3 values length)
+     * @return Point3D if translation has been made successfully and null if not (array is less than 3 values length)
      */
-    public boolean translate(double p[]) {
-        return add(p);
+    public Point3D translate(double p[]) {
+        return new Point3D(add(p));
     }
     
     /**

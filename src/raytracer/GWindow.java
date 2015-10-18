@@ -108,6 +108,22 @@ public class GWindow
     public double getYMin() {
         return yMin;
     }
+
+    /** 
+     * Returns x-Maximum value of GWindow
+     * @return Double with x-Maximum value
+     */
+    public double getXMax() {
+        return xMax;
+    }
+    
+    /** 
+     * Returns y-Maximum value of GWindow
+     * @return Double with y-Maximum value
+     */
+    public double getYMax() {
+        return yMax;
+    }
     
     /** 
      * Returns the absolute y value corresponding to the given percentage 'y'.

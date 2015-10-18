@@ -992,18 +992,18 @@ Números de Friedman:
         System.out.println("c = 0.5 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.5,0), 10));
         System.out.println("c = 0.3 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.3,0), 20));
         System.out.println("c = 0.26 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.26,0), 100));
-        System.out.println("c = 0.251 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.251,0), 1000));
         System.out.println("c = 0.2501 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.2501,0), 1000));
-        System.out.println("c = 0.25001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25001,0), 10000));
         System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.250001,0), 10000));
-        System.out.println("c = 0.25 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25,0), 10000));
+        System.out.println("c = 0.25000001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25000001,0), 100000));
+        System.out.println("");
         
+        final int MAX_FRACTAL_DIMENSION = 500;
         JFractalDialog myDialog = new JFractalDialog((JFrame)null, "IFCDialog", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        myDialog.setPreferredSize(new Dimension(500, 500));
-        myDialog.setMinimumSize(new Dimension(500, 500));
+        myDialog.setPreferredSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
+        myDialog.setMinimumSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
 
-        myDialog.setDimensions(new Dimension(500, 500));
+        myDialog.setDimensions(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
         myDialog.clearColors();
         myDialog.addColor(Color.black);
         myDialog.addColor(Color.red);
@@ -1022,15 +1022,16 @@ Números de Friedman:
         myDialog.setAnimationFrameTime(40);
         myDialog.GO();*/
  
- /*       
+/*        
         for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
         myDialog.GO();
- */
+*/ 
  
         myDialog.createMandelbrot(30);
 
         myDialog.setVisible(true);
+        myDialog.STOP();
         
         // a = 5.0 + 6.0i
         // b = -3.0 + 4.0i
@@ -1056,7 +1057,8 @@ Números de Friedman:
         System.out.println("Phase(a) = " + c_a.phase());
         System.out.println("Reciprocal(a) = " + c_a.reciprocal());
         System.out.println("Reciprocal(a) * a = " + c_a.reciprocal().multiply(c_a));
-
+        System.out.println("");
+        
         // Code application logic here
         Object3D o = new Object3D(1.0, 1.0, 0.0);
         Vector3D v = new Vector3D(o);

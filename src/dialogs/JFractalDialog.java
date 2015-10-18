@@ -104,6 +104,10 @@ public class JFractalDialog extends JDialog implements ActionListener {
         }
         canvas.add(ncanvas);
     }
+
+    public void STOP() {
+        timer.stop();
+    }
     
     public void GO() {
         timer.start();
@@ -112,7 +116,7 @@ public class JFractalDialog extends JDialog implements ActionListener {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
-        if (canvas.size() > 0 && canvas.size() > animatedPos) {
+        if (canvas.size() > animatedPos) {
             double nw = getSize().getWidth();
             double nh = getSize().getHeight();
             int w = canvas.get(animatedPos).getWidth();
