@@ -176,9 +176,9 @@ Números de Friedman:
         return result;
     }
 
-    private static void insertOrdered(ArrayList<Comparable> nl, Comparable n) {
+    private static <T extends Comparable<T>> void insertOrdered(ArrayList<T> nl, T n) {
         int index = 0;
-        for (Comparable name : nl) {
+        for (T name : nl) {
             if (n.compareTo(name) < 0)
                 break;
             index++;
@@ -1005,10 +1005,10 @@ Números de Friedman:
         myDialog.setDimensions(new Dimension(500, 500));
         myDialog.clearColors();
         myDialog.addColor(Color.black);
-        myDialog.addColor(Color.magenta);
+        myDialog.addColor(Color.red);
         myDialog.addColor(Color.white);
 
-        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
+/*        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
         GWindow wto = new GWindow(-1.25, -0.75, -0.25, 0.25);
         for (int s = 0; s <= 24; s++) {
             GWindow w = new GWindow(wfrom.xMin + (wto.xMin - wfrom.xMin) * (double)s / 50.0,
@@ -1019,19 +1019,16 @@ Números de Friedman:
             myDialog.createMandelbrot(s+5);
         }
         myDialog.setAnimationFrameTime(40);
-        myDialog.GO();
+        myDialog.GO();*/
  
  /*       
         for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
         myDialog.GO();
  */
- /*
-        myDialog.addColor(Color.black);
-        myDialog.addColor(Color.magenta);
-        myDialog.addColor(Color.white);
-        myDialog.createMandelbrot(40);
-*/
+ 
+        myDialog.createMandelbrot(30);
+
         myDialog.setVisible(true);
         
         // a = 5.0 + 6.0i
@@ -1051,11 +1048,13 @@ Números de Friedman:
         System.out.println("Re(a) = " + c_a.re() + "; im(a) = " + c_a.im());
         System.out.println("a + b = " + c_a.add(c_b));
         System.out.println("a - b = " + c_a.subtract(c_b));
-        System.out.println("a * b = " + c_a.multilpy(c_b));
+        System.out.println("a * b = " + c_a.multiply(c_b));
         System.out.println("a / b = " + c_a.divide(c_b));
         System.out.println("Conj(a) = " + c_a.conjugate());
         System.out.println("Module(a) = " + c_a.abs());
         System.out.println("Phase(a) = " + c_a.phase());
+        System.out.println("Reciprocal(a) = " + c_a.reciprocal());
+        System.out.println("Reciprocal(a) * a = " + c_a.reciprocal().multiply(c_a));
 
         // Code application logic here
         Object3D o = new Object3D(1.0, 1.0, 0.0);

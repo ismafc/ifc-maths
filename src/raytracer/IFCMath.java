@@ -452,7 +452,7 @@ public class IFCMath {
     public static Complex mandelbrot(Complex i, Complex c, long steps) {
         Complex aux = i;
         while (steps > 1) {
-            aux = aux.multilpy(aux).add(c);
+            aux = aux.multiply(aux).add(c);
             steps--;
         }
         return aux;
@@ -476,7 +476,7 @@ public class IFCMath {
         ArrayList<Complex> values = new ArrayList<Complex>();
         values.add(aux);
         while (aux.abs() <= 2.0 && steps < maxSteps) {
-            aux = aux.multilpy(aux).add(c);
+            aux = aux.multiply(aux).add(c);
             if (values.contains(aux))
                 return maxSteps;
             values.add(aux);
