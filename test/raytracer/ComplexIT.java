@@ -18,6 +18,9 @@ import static org.junit.Assert.*;
  */
 public class ComplexIT {
     
+    private Complex instance1;
+    private Complex instance2;
+    
     public ComplexIT() {
     }
     
@@ -31,6 +34,8 @@ public class ComplexIT {
     
     @Before
     public void setUp() {
+        instance1 = new Complex(5.0, 6.0);
+        instance2 = new Complex(-1.0, -2.0);
     }
     
     @After
@@ -43,11 +48,8 @@ public class ComplexIT {
     @Test
     public void testSet() {
         System.out.println("set");
-        double real = 5.0;
-        double imag = 6.0;
-        Complex instance = new Complex();
-        instance.set(real, imag);
-        assertTrue(instance.re() == 5.0 && instance.im() == 6.0);
+        instance2.set(3.0, 4.0);
+        assertTrue(instance2.re() == 3.0 && instance2.im() == 4.0);
     }
 
     /**
@@ -57,16 +59,14 @@ public class ComplexIT {
     public void testEquals() {
         System.out.println("equals");
         Object c1 = null;
-        Complex instance = new Complex();
-        boolean result = instance.equals(c1);
+        boolean result = instance1.equals(c1);
         assertFalse(result);
-        result = instance.equals(instance);
+        result = instance1.equals(instance1);
         assertTrue(result);
-        Complex c2 = new Complex(5.0, 6.0);
-        result = instance.equals(c2);
+        result = instance1.equals(instance2);
         assertFalse(result);
-        instance.set(5.0, 6.0);
-        result = instance.equals(c2);
+        instance2.set(5.0, 6.0);
+        result = instance1.equals(instance2);
         assertTrue(result);
     }
 
@@ -76,16 +76,15 @@ public class ComplexIT {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Complex instance = new Complex(5.0, 6.0);
-        Complex instance1 = new Complex(5.0, 6.0);
         int expResult = instance1.hashCode();
-        int result = instance.hashCode();
+        instance2.set(5.0, 6.0);
+        int result = instance2.hashCode();
         assertEquals(expResult, result);
-        instance1.set(5.0, 6.1);
-        expResult = instance1.hashCode();
+        instance2.set(5.0, 6.1);
+        expResult = instance2.hashCode();
         assertTrue(expResult != result);
-        instance1.set(4.9, 6.0);
-        expResult = instance1.hashCode();
+        instance2.set(4.9, 6.0);
+        expResult = instance2.hashCode();
         assertTrue(expResult != result);
     }
 
@@ -95,17 +94,16 @@ public class ComplexIT {
     @Test
     public void testToString() {
         System.out.println("toString");
-        Complex instance = new Complex(5.0, 6.0);
-        String result = instance.toString();
+        String result = instance1.toString();
         assertEquals("5.0 + 6.0i", result);
-        instance.set(0.0, 2.1);
-        result = instance.toString();
+        instance1.set(0.0, 2.1);
+        result = instance1.toString();
         assertEquals("2.1i", result);
-        instance.set(5, 0.0);
-        result = instance.toString();
+        instance1.set(5, 0.0);
+        result = instance1.toString();
         assertEquals("5.0", result);
-        instance.set(3.1, -2);
-        result = instance.toString();
+        instance1.set(3.1, -2);
+        result = instance1.toString();
         assertEquals("3.1 - 2.0i", result);
     }
 
@@ -115,12 +113,12 @@ public class ComplexIT {
     @Test
     public void testAbs() {
         System.out.println("abs");
-        Complex instance = new Complex();
-        double expResult = 0.0;
-        double result = instance.abs();
+        double expResult = 7.810249675906654;
+        double result = instance1.abs();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = instance2.abs();
+        expResult = 2.23606797749979;
+        assertEquals(expResult, result, 0.0);
     }
 
     /**
@@ -129,12 +127,12 @@ public class ComplexIT {
     @Test
     public void testPhase() {
         System.out.println("phase");
-        Complex instance = new Complex();
-        double expResult = 0.0;
-        double result = instance.phase();
+        double expResult = 0.8760580505981934;
+        double result = instance1.phase();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = instance2.phase();
+        expResult = -2.0344439357957027;
+        assertEquals(expResult, result, 0.0);
     }
 
     /**
@@ -143,13 +141,11 @@ public class ComplexIT {
     @Test
     public void testAdd_Complex() {
         System.out.println("add");
-        Complex b = null;
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.add(b);
+        Complex expResult = new Complex(4.0, 4.0);
+        Complex result = instance1.add(instance2);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = instance2.add(instance1);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -158,13 +154,12 @@ public class ComplexIT {
     @Test
     public void testSubtract_Complex() {
         System.out.println("subtract");
-        Complex b = null;
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.subtract(b);
+        Complex expResult = new Complex(6.0, 8.0);
+        Complex result = instance1.subtract(instance2);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        expResult = new Complex(-6.0, -8.0);
+        result = instance2.subtract(instance1);
+        assertEquals(expResult, result);
     }
 
     /**
