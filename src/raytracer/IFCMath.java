@@ -439,7 +439,7 @@ public class IFCMath {
 
     /**
      * Calculates first 'steps' of Mandelbrot set sequence values 
-     * for a provided Complex 'c' (it doesn't matter if is divergent or 
+     * for a provided Complex 'c' (it doesn't matter if it is divergent or 
      * convergent -really mandelbrot set-). 
      * returns the last value calculated. Mandelbrot set is:
      * Z(0) = 'i' (tipically 0+0i)

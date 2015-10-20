@@ -14,12 +14,12 @@ public class Complex
     /**
      * Real part of complex number
      */
-    private double re = Double.NaN;
+    private double re = 0.0;
 
     /**
      * Imaginary part of complex number
      */
-    private double im = Double.NaN;
+    private double im = 0.0;
 
     /** 
      * Creates a new instance of Complex
@@ -63,8 +63,11 @@ public class Complex
      */
     @Override
     public boolean equals(Object c) {
-        if (c instanceof Complex)
+        if (c == this)
+            return true;
+        if (c instanceof Complex) {
             return re == ((Complex)c).re && im == ((Complex)c).im;
+        }
         else 
             return false;
     }

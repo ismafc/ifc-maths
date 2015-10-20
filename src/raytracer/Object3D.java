@@ -73,7 +73,7 @@ public class Object3D {
      * @param ny Double for y field
      * @param nz Double for z field
      */
-    public void set(double nx, double ny, double nz) {
+    public final void set(double nx, double ny, double nz) {
         x = nx;
         y = ny;
         z = nz;
@@ -156,158 +156,137 @@ public class Object3D {
     }
 
     /**
-     * Adds input Object3D 'o' to this object. It consists on add x value to x value,
-     * y value to y value and z value to z value
+     * Returns an Object3D with the sum of Object3D 'o' to this object. 
+     * It consists on add x value to x value, y value to y value and z value to z value
      * @param o Object3D to add to this object
-     * @return True if given object 'o' is not null, False otherwise
+     * @return Object3D with (this + 'o') if given object 'o' is not null, null otherwise
      */
-    public boolean add(Object3D o) {
-        if (o == null) 
-            return false;
-        x += o.x;
-        y += o.y;
-        z += o.z;
-        return true;
-    }
-
-    /**
-     * Substracts input Object3D 'o' from this object. It consists on substract x value from x value,
-     * y value from y value and z value from z value
-     * @param o Object3D to substract to this object
-     * @return True if given object 'o' is not null, False otherwise
-     */
-    public boolean sub(Object3D o) {
-        if (o == null) 
-            return false;
-        x -= o.x;
-        y -= o.y;
-        z -= o.z;
-        return true;
-    }
-    
-    /**
-     * Divides this Object3D by input value 'd'. It consists on divide x, y and z by this value
-     * @param d Double with value to divide
-     * @return True if division can be done and False if not (division by 0)
-     */
-    public boolean div(double d) {
-        if (d == 0.0)
-            return false;
-        x /= d;
-        y /= d;
-        z /= d;
-        return true;
-    }
-
-    /**
-     * Divides this Object3D by input Object3D 'o'. It consists on divide x by x, y by y and z by z
-     * @param o Object3D with value to divide
-     * @return True if division can be done and False if not (some division by 0)
-     */
-    public boolean div(Object3D o) {
+    public Object3D add(Object3D o) {
         if (o == null)
-            return false;
-        if (o.x == 0.0 || o.y == 0.0 || o.z == 0.0)
-            return false;
-        x /= o.x;
-        y /= o.y;
-        z /= o.z;
-        return true;
+            return null;
+        return new Object3D(x + o.x, y + o.y, z + o.z);
     }
-    
+
     /**
-     * Multiplies this Object3D by input value 'd'. It consists on multiply x, y and z by this value
-     * @param d Double with value to multiply
+     * Returns an Object3D with subtraction between input Object3D 'o' and this object. 
+     * It consists on substract x value from x value, y value from y value and z value from z value
+     * @param o Object3D to substract to this object
+     * @return Object3D with (this - 'o') if given object 'o' is not null, null otherwise
      */
-    public void mul(double d) {
-        x *= d;
-        y *= d;
-        z *= d;
-    }
-    
-    /**
-     * Multiplies this Object3D by input Object3D 'o'. It consists on multiply x by x, y by y and z by z
-     * @param o Object3D with value to multiply
-     * @return True if given object 'o' is not null, False otherwise
-     */
-    public boolean mul(Object3D o) {
+    public Object3D sub(Object3D o) {
         if (o == null) 
-            return false;
-        x *= o.x;
-        y *= o.y;
-        z *= o.z;
-        return true;
+            return null;
+        return new Object3D(x - o.x, y - o.y, z - o.z);
     }
     
     /**
-     * Adds input values to this object. It consists on add nx value to x value,
-     * ny value to y value and nz value to z value
+     * Returns an Object3D with division between this Object3D and input value 'd'. 
+     * It consists on divide x, y and z by 'd' value
+     * @param d Double with value to divide
+     * @return Object3D with this división if division can be done and null if not (division by 0)
+     */
+    public Object3D div(double d) {
+        if (d == 0.0)
+            return null;
+        return new Object3D(x / d, y / d, z / d);
+    }
+
+    /**
+     * Returns an Object3D with division between this Object3D and input Object3D 'o'. 
+     * It consists on divide x by x, y by y and z by z
+     * @param o Object3D with value to divide
+     * @return Object3D with división ('this' / 'o') if division can be done and null if not (some division by 0)
+     */
+    public Object3D div(Object3D o) {
+        if (o == null)
+            return null;
+        if (o.x == 0.0 || o.y == 0.0 || o.z == 0.0)
+            return null;
+        return new Object3D(x / o.x, y / o.y, z / o.z);
+    }
+    
+    /**
+     * Multiplies this Object3D by input value 'd' and returns an Object3D woth the result.
+     * It consists on multiply x, y and z by 'd' value
+     * @param d Double with value to multiply
+     * @return Object3D with the result of this multiplication
+     */
+    public Object3D mul(double d) {
+        return new Object3D(x * d, y * d, z * d);
+    }
+    
+    /**
+     * Multiplies this Object3D by input Object3D 'o' and returns an Object3D with the result.
+     * It consists on multiply x by x, y by y and z by z
+     * @param o Object3D with value to multiply
+     * @return Multiplications ('this' * 'o') if given object 'o' is not null, null otherwise
+     */
+    public Object3D mul(Object3D o) {
+        if (o == null) 
+            return null;
+        return new Object3D(x * o.x, y * o.y, z * o.z);
+    }
+    
+    /**
+     * Adds input values to this object and returns an Object3D with the result. 
+     * It consists on add nx value to x value, ny value to y value and nz value to z value
      * @param nx Double fo add to x value of this object
      * @param ny Double fo add to y value of this object
      * @param nz Double fo add to z value of this object
+     * @return Object3D with the result of the operation
      */
-    public void add(double nx, double ny, double nz) {
-        x += nx;
-        y += ny;
-        z += nz;
+    public Object3D add(double nx, double ny, double nz) {
+        return new Object3D(x + nx, y + ny, z + nz);
     }
 
     /**
-     * Substracts input values from this object. It consists on substracy nx from x value,
-     * ny value from y value and nz value from z value
+     * Substracts input values from this object and returns an Object3D with the result.
+     * It consists on substracy nx from x value, ny value from y value and nz value from z value
      * @param nx Double fo substract to x value of this object
      * @param ny Double fo substract to y value of this object
      * @param nz Double fo substract to z value of this object
+     * @return Object3D with the result of the operation
      */
-    public void sub(double nx, double ny, double nz) {
-        x -= nx;
-        y -= ny;
-        z -= nz;
+    public Object3D sub(double nx, double ny, double nz) {
+        return new Object3D(x - nx, y - ny, z - nz);
     }
 
     /**
-     * Multiplies input values by this object. It consists on multipliy nx by x value,
-     * ny value by y value and nz value by z value
+     * Multiplies input values by this object and returns the result in an Object3D.
+     * It consists on multipliy nx by x value, ny value by y value and nz value by z value
      * @param nx Double fo multiply by x value of this object
      * @param ny Double fo multiply by y value of this object
      * @param nz Double fo multiply by z value of this object
+     * @return Object3D with the result of the operation
      */
-    public void mul(double nx, double ny, double nz) {
-        x *= nx;
-        y *= ny;
-        z *= nz;
+    public Object3D mul(double nx, double ny, double nz) {
+        return new Object3D(x * nx, y * ny, z * nz);
     }
 
     /**
-     * Divides input values by this object. It consists on divide nx by x value,
-     * ny value by y value and nz value by z value
+     * Divides input values by this object and returns an Object3D with the result. 
+     * It consists on divide nx by x value, ny value by y value and nz value by z value
      * @param nx Double fo divide by x value of this object
      * @param ny Double fo divide by y value of this object
      * @param nz Double fo divide by z value of this object
-     * @return True if division can be done and False if not (division by 0)
+     * @return Object3D with the result of the operation if it is posible, null otherwise (division by 0)
      */
-    public boolean div(double nx, double ny, double nz) {
+    public Object3D div(double nx, double ny, double nz) {
         if (nx == 0.0 || ny == 0.0 || nz == 0.0)
-            return false;
-        x /= nx;
-        y /= ny;
-        z /= nz;
-        return true;
+            return null;
+        return new Object3D(x / nx, y / ny, z / nz);
     }
 
     /**
-     * Adds input array 'c' to this object. It consists on add x value to x[0] value,
-     * y value to c[1] value and z value to c[2] value
+     * Adds input array 'c' to this object and returns an Object3D with the result. 
+     * It consists on add x value to x[0] value, y value to c[1] value and z value to c[2] value
      * @param c Array of double to add to this object
-     * @return True if array length is more than three and False if not
+     * @return Object3D with operation if array length is more than three and null if not
      */
-    public boolean add(double c[]) {
+    public Object3D add(double c[]) {
         if (c.length < 3)
-            return false;
-        x += c[0];
-        y += c[1];
-        z += c[2];
-        return true;
+            return null;
+        return new Object3D(x + c [0], y + c[1], z + c[2]);
     }
     
     /**
@@ -379,7 +358,7 @@ public class Object3D {
      * Asks if this Object3D is equal than input value with input tolerance
      * x,y and z must be equals one by one with epsilon tolerance
      * @param o Object to compare to this Object3D
-     * @param epsilon Tolerance value
+     * @param epsilon Tolerance value (have to be positive)
      * @return True if both objects are equals and False if not. 
      */
     public boolean equals(Object3D o, double epsilon) {

@@ -16,22 +16,22 @@ public class GWindow
     /**
      * Minimum x value of window (x-axis)
      */
-    protected double xMin = Double.NaN;
+    protected double xMin = 0.0;
 
     /**
      * Maximum x value of window (x-axis)
      */
-    protected double xMax = Double.NaN;
+    protected double xMax = 100.0;
     
     /**
      * Minimum y value of window (y-axis)
      */
-    protected double yMin = Double.NaN;
+    protected double yMin = 0.0;
 
     /**
      * Maximum y value of window (y-axis)
      */
-    protected double yMax = Double.NaN;
+    protected double yMax = 100.0;
     
     /** 
      * Creates a new instance of GWindow 
@@ -107,6 +107,22 @@ public class GWindow
      */
     public double getYMin() {
         return yMin;
+    }
+
+    /** 
+     * Returns x-Maximum value of GWindow
+     * @return Double with x-Maximum value
+     */
+    public double getXMax() {
+        return xMax;
+    }
+    
+    /** 
+     * Returns y-Maximum value of GWindow
+     * @return Double with y-Maximum value
+     */
+    public double getYMax() {
+        return yMax;
     }
     
     /** 

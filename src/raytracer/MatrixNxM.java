@@ -64,8 +64,7 @@ public class MatrixNxM {
                 columns = nvalues[0].length;
                 values = new double[rows][columns];
                 for (int i = 0; i < rows; i++)
-                    for (int j = 0; j < columns; j++)
-                        values[i][j] = nvalues[i][j];
+                    System.arraycopy(nvalues[i], 0, values[i], 0, columns);
             }
         }
     }
@@ -81,8 +80,7 @@ public class MatrixNxM {
         columns = m.columns;
         values = new double[rows][columns];
         for (int i = 0; i < rows; i++)
-            for (int j = 0; j < columns; j++)
-                values[i][j] = m.values[i][j];
+            System.arraycopy(m.values[i], 0, values[i], 0, columns);
     }
 
     /**
@@ -219,9 +217,11 @@ public class MatrixNxM {
      */
     public void mul(double v) {
         if (v != 1.0) {
-            for (int i = 0; i < values.length; i++)
-                for (int j = 0; j < values[i].length; j++)
-                    values[i][j] *= v;
+            for (double[] value : values) {
+                for (int j = 0; j < value.length; j++) {
+                    value[j] *= v;
+                }
+            }
             inverseMatrix = null;
         }
     }
@@ -642,8 +642,9 @@ public class MatrixNxM {
      * Returns a String representation for this object
      * @return String representing this object
      */
+    @Override
     public String toString() {
-        String str = new String("");
+        String str = "";
         for (int i = 0; i < rows; i++) {
             str += "(";
             for (int j = 0; j < columns; j++)
