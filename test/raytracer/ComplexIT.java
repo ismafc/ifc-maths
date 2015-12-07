@@ -20,6 +20,9 @@ public class ComplexIT {
     
     private Complex instance1;
     private Complex instance2;
+    private Complex zero;
+    private Complex one;
+    private Complex i;
     
     public ComplexIT() {
     }
@@ -36,6 +39,9 @@ public class ComplexIT {
     public void setUp() {
         instance1 = new Complex(5.0, 6.0);
         instance2 = new Complex(-1.0, -2.0);
+        zero = new Complex(0.0, 0.0);
+        one = new Complex(1.0, 0.0);
+        i = new Complex(0.0, 1.0);
     }
     
     @After
@@ -47,7 +53,7 @@ public class ComplexIT {
      */
     @Test
     public void testSet() {
-        System.out.println("set");
+        System.out.println("set(double, double)");
         instance2.set(3.0, 4.0);
         assertTrue(instance2.re() == 3.0 && instance2.im() == 4.0);
     }
@@ -57,7 +63,7 @@ public class ComplexIT {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
+        System.out.println("equals(Complex)");
         Object c1 = null;
         boolean result = instance1.equals(c1);
         assertFalse(result);
@@ -140,7 +146,7 @@ public class ComplexIT {
      */
     @Test
     public void testAdd_Complex() {
-        System.out.println("add");
+        System.out.println("add(Complex)");
         Complex expResult = new Complex(4.0, 4.0);
         Complex result = instance1.add(instance2);
         assertEquals(expResult, result);
@@ -153,7 +159,7 @@ public class ComplexIT {
      */
     @Test
     public void testSubtract_Complex() {
-        System.out.println("subtract");
+        System.out.println("subtract(Complex)");
         Complex expResult = new Complex(6.0, 8.0);
         Complex result = instance1.subtract(instance2);
         assertEquals(expResult, result);
@@ -167,14 +173,14 @@ public class ComplexIT {
      */
     @Test
     public void testMultiply_Complex() {
-        System.out.println("multiply");
-        Complex b = null;
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.multiply(b);
+        System.out.println("multiply(Complex)");
+        Complex expResult = new Complex(7.0, -16.0);
+        Complex result = instance1.multiply(instance2);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = instance2.multiply(instance1);
+        assertEquals(expResult, result);
+        assertEquals(one, instance1.multiply(instance1.reciprocal()));
+        assertEquals(one, instance2.multiply(instance2.reciprocal()));
     }
 
     /**
@@ -182,14 +188,12 @@ public class ComplexIT {
      */
     @Test
     public void testMultiply_double() {
-        System.out.println("multiply");
-        double alpha = 0.0;
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.multiply(alpha);
+        System.out.println("multiply(double)");
+        Complex result = instance1.multiply(-1.0);
+        Complex expResult = new Complex(-5.0, -6.0);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = instance2.multiply(0.0);
+        assertEquals(zero, result);
     }
 
     /**
@@ -198,12 +202,18 @@ public class ComplexIT {
     @Test
     public void testConjugate() {
         System.out.println("conjugate");
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.conjugate();
+        Complex expResult = new Complex(5.0, -6.0);
+        Complex result = instance1.conjugate();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        expResult = new Complex(61.0, 0.0);
+        result = instance1.multiply(result);
+        assertEquals(expResult, result);
+        expResult = new Complex(-1.0, 2.0);
+        result = instance2.conjugate();
+        assertEquals(expResult, result);
+        expResult = new Complex(5.0, 0.0);
+        result = instance2.multiply(result);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -212,12 +222,17 @@ public class ComplexIT {
     @Test
     public void testReciprocal_0args() {
         System.out.println("reciprocal");
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.reciprocal();
+        Complex expResult = new Complex(5.0 / (5.0 * 5.0 + 6.0 * 6.0), - 6.0 / (5.0 * 5.0 + 6.0 * 6.0));
+        Complex result = instance1.reciprocal();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = instance1.multiply(result);
+        assertEquals(one, result);
+        expResult = new Complex(-1.0 / (-1.0 * -1.0 + -2.0 * -2.0), - (-2.0) / (-1.0 * -1.0 + -2.0 * -2.0));
+        result = instance2.reciprocal();
+        assertEquals(expResult, result);
+        result = instance2.multiply(result);
+        assertEquals(one, result);
+        assertNull(zero.reciprocal());
     }
 
     /**
@@ -226,12 +241,8 @@ public class ComplexIT {
     @Test
     public void testRe() {
         System.out.println("re");
-        Complex instance = new Complex();
-        double expResult = 0.0;
-        double result = instance.re();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(5.0, instance1.re(), 0.0);
+        assertEquals(-1.0, instance2.re(), 0.0);
     }
 
     /**
@@ -240,12 +251,8 @@ public class ComplexIT {
     @Test
     public void testIm() {
         System.out.println("im");
-        Complex instance = new Complex();
-        double expResult = 0.0;
-        double result = instance.im();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(6.0, instance1.im(), 0.0);
+        assertEquals(-2.0, instance2.im(), 0.0);
     }
 
     /**
@@ -253,14 +260,14 @@ public class ComplexIT {
      */
     @Test
     public void testDivide_Complex() {
-        System.out.println("divide");
-        Complex b = null;
-        Complex instance = new Complex();
-        Complex expResult = null;
-        Complex result = instance.divide(b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("divide(Complex)");
+        Complex result = instance1.divide(instance2);
+        assertEquals(-17.0 / 5.0, result.re(), 0.0000001);
+        assertEquals(4.0 / 5.0, result.im(), 0.0000001);
+        result = instance2.divide(instance1);
+        assertEquals(-17.0 / 61.0, result.re(), 0.0000001);
+        assertEquals(-4.0 / 61.0, result.im(), 0.0000001);
+        assertNull(instance1.divide(zero));
     }
 
     /**
@@ -268,14 +275,11 @@ public class ComplexIT {
      */
     @Test
     public void testAdd_Complex_Complex() {
-        System.out.println("add");
-        Complex a = null;
-        Complex b = null;
-        Complex expResult = null;
-        Complex result = Complex.add(a, b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("add(Complex,Complex)");
+        Complex expResult = new Complex(4.0, 4.0);
+        assertEquals(expResult, Complex.add(instance1, instance2));
+        assertEquals(expResult, Complex.add(instance2, instance1));
+        assertEquals(instance1, Complex.add(instance1, zero));
     }
 
     /**
@@ -283,14 +287,12 @@ public class ComplexIT {
      */
     @Test
     public void testSubtract_Complex_Complex() {
-        System.out.println("subtract");
-        Complex a = null;
-        Complex b = null;
-        Complex expResult = null;
-        Complex result = Complex.subtract(a, b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("subtract(Complex,Complex)");
+        Complex expResult = new Complex(6.0, 8.0);
+        assertEquals(expResult, Complex.subtract(instance1, instance2));
+        expResult = new Complex(-6.0, -8.0);
+        assertEquals(expResult, Complex.subtract(instance2, instance1));
+        assertEquals(instance1, Complex.subtract(instance1, zero));
     }
 
     /**
@@ -298,14 +300,12 @@ public class ComplexIT {
      */
     @Test
     public void testMultiply_Complex_Complex() {
-        System.out.println("multiply");
-        Complex a = null;
-        Complex b = null;
-        Complex expResult = null;
-        Complex result = Complex.multiply(a, b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("multiply(Complex,Complex)");
+        Complex expResult = new Complex(7.0, -16.0);
+        assertEquals(expResult, Complex.multiply(instance1, instance2));
+        assertEquals(expResult, Complex.multiply(instance2, instance1));
+        assertEquals(one, Complex.multiply(instance1, instance1.reciprocal()));
+        assertEquals(one, Complex.multiply(instance2, instance2.reciprocal()));
     }
 
     /**
@@ -313,14 +313,12 @@ public class ComplexIT {
      */
     @Test
     public void testMultiply_Complex_double() {
-        System.out.println("multiply");
-        Complex a = null;
-        double alpha = 0.0;
-        Complex expResult = null;
-        Complex result = Complex.multiply(a, alpha);
+        System.out.println("multiply(Complex,double)");
+        Complex result = Complex.multiply(instance1, -1.0);
+        Complex expResult = new Complex(-5.0, -6.0);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = Complex.multiply(instance2, 0.0);
+        assertEquals(zero, result);
     }
 
     /**
@@ -328,13 +326,14 @@ public class ComplexIT {
      */
     @Test
     public void testReciprocal_Complex() {
-        System.out.println("reciprocal");
-        Complex a = null;
-        Complex expResult = null;
-        Complex result = Complex.reciprocal(a);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("reciprocal(Complex)");
+        Complex expResult = new Complex(5.0 / (5.0 * 5.0 + 6.0 * 6.0), - 6.0 / (5.0 * 5.0 + 6.0 * 6.0));
+        assertEquals(expResult, Complex.reciprocal(instance1));
+        assertEquals(one, Complex.multiply(instance1, Complex.reciprocal(instance1)));
+        expResult = new Complex(-1.0 / (-1.0 * -1.0 + -2.0 * -2.0), - (-2.0) / (-1.0 * -1.0 + -2.0 * -2.0));
+        assertEquals(expResult, Complex.reciprocal(instance2));
+        assertEquals(one, Complex.multiply(instance2, Complex.reciprocal(instance2)));
+        assertNull(zero.reciprocal());
     }
 
     /**
@@ -342,14 +341,14 @@ public class ComplexIT {
      */
     @Test
     public void testDivide_Complex_Complex() {
-        System.out.println("divide");
-        Complex a = null;
-        Complex b = null;
-        Complex expResult = null;
-        Complex result = Complex.divide(a, b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("divide(Complex,Complex)");
+        Complex result = Complex.divide(instance1, instance2);
+        assertEquals(-17.0 / 5.0, result.re(), 0.0000001);
+        assertEquals(4.0 / 5.0, result.im(), 0.0000001);
+        result = Complex.divide(instance2, instance1);
+        assertEquals(-17.0 / 61.0, result.re(), 0.0000001);
+        assertEquals(-4.0 / 61.0, result.im(), 0.0000001);
+        assertNull(Complex.divide(instance1, zero));
     }
     
 }

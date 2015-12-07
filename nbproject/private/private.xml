@@ -10,12 +10,19 @@
             <file>file:/C:/master/ifc-maths/src/raytracer/Box3D.java</file>
             <file>file:/C:/master/ifc-maths/src/raytracer/GWindow.java</file>
             <file>file:/C:/master/ifc-maths/src/raytracer/Complex.java</file>
-            <file>file:/C:/master/ifc-maths/src/raytracer/Tree.java</file>
             <file>file:/C:/master/ifc-maths/src/raytracer/Point3D.java</file>
-            <file>file:/C:/master/ifc-maths/src/raytracer/JIFCDialog.java</file>
             <file>file:/C:/master/ifc-maths/src/raytracer/IFCMath.java</file>
             <file>file:/C:/master/ifc-maths/src/raytracer/Main.java</file>
+            <file>file:/C:/master/ifc-maths/src/raytracer/Ray3D.java</file>
             <file>file:/C:/master/ifc-maths/src/raytracer/Object3D.java</file>
+            <file>file:/C:/master/ifc-maths/src/raytracer/MatrixNxM.java</file>
+            <file>file:/C:/master/ifc-maths/src/dialogs/JFractalDialog.java</file>
+        </group>
+        <group>
+            <file>file:/D:/master/ifc-maths/src/raytracer/Main.java</file>
+            <file>file:/D:/master/ifc-maths/src/raytracer/IFCMath.java</file>
+            <file>file:/D:/master/ifc-maths/src/dialogs/JFractalDialog.java</file>
+            <file>file:/D:/master/ifc-maths/test/raytracer/ComplexIT.java</file>
         </group>
     </open-files>
 </project-private>

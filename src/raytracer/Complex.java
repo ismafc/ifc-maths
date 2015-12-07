@@ -179,7 +179,7 @@ public class Complex
      */
     public Complex reciprocal() {
         double scale = re * re + im * im;
-        return new Complex(re / scale, -im / scale);
+        return (scale == 0.0) ? null : new Complex(re / scale, -im / scale);
     }
 
     /**
@@ -275,7 +275,7 @@ public class Complex
         if (a == null)
             return null;
         double scale = a.re * a.re + a.im * a.im;
-        return new Complex(a.re / scale, -a.im / scale);
+        return (scale == 0.0) ? null : new Complex(a.re / scale, -a.im / scale);
     }
     
     /**

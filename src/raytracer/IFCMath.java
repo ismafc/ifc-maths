@@ -473,7 +473,7 @@ public class IFCMath {
     public static int isMandelbrot(Complex i, Complex c, int maxSteps) {
         Complex aux = i;
         int steps = 1;
-        ArrayList<Complex> values = new ArrayList<Complex>();
+        ArrayList<Complex> values = new ArrayList<>();
         values.add(aux);
         while (aux.abs() <= 2.0 && steps < maxSteps) {
             aux = aux.multiply(aux).add(c);

@@ -34,7 +34,7 @@ public class JFractalDialog extends JDialog implements ActionListener {
     private int animatedDir = 1;
     private GWindow window = new GWindow(-2.0, -2.0, 2.0, 2.0);
     private Complex initialValue = new Complex(0.0, 0.0);
-    private ArrayList<Color> colors = new ArrayList<Color>();
+    private final ArrayList<Color> colors = new ArrayList<>();
     private Dimension dimensions = new Dimension(500, 500);
     
     public JFractalDialog(JFrame parent, String title, boolean modal) {
