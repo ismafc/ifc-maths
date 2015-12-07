@@ -997,7 +997,7 @@ Números de Friedman:
         System.out.println("c = 0.25000001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25000001,0), 100000));
         System.out.println("");
         
-        final int MAX_FRACTAL_DIMENSION = 500;
+        final int MAX_FRACTAL_DIMENSION = 800;
         JFractalDialog myDialog = new JFractalDialog((JFrame)null, "IFCDialog", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         myDialog.setPreferredSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
@@ -1006,7 +1006,7 @@ Números de Friedman:
         myDialog.setDimensions(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
         myDialog.clearColors();
         myDialog.addColor(Color.black);
-        myDialog.addColor(Color.red);
+        myDialog.addColor(Color.blue);
         myDialog.addColor(Color.white);
 
 /*        GWindow wfrom = new GWindow(-2.0, -2.0, 2.0, 2.0);
@@ -1028,7 +1028,7 @@ Números de Friedman:
         myDialog.GO();
 */ 
  
-        myDialog.createMandelbrot(30);
+        myDialog.createMandelbrot(40);
 
         myDialog.setVisible(true);
         myDialog.STOP();

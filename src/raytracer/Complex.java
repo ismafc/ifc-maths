@@ -183,6 +183,23 @@ public class Complex
     }
 
     /**
+     * Returns if this complex value is a real number
+     * @return True if this complex value is a real number, False otherwise
+     */
+    public boolean isReal() { 
+        return im == 0.0;
+    }
+
+    /**
+     * Returns if this complex value is a puer imaginary number. This complex
+     * must be over Y-Axis (0+xi)
+     * @return True if this complex value is a pure imaginary number, False otherwise
+     */
+    public boolean isImaginary() { 
+        return re == 0.0;
+    }
+    
+    /**
      * Returns the real part of complex
      * @return Double with real part of complex
      */

@@ -236,6 +236,34 @@ public class ComplexIT {
     }
 
     /**
+     * Test of isReal method, of class Complex.
+     */
+    @Test
+    public void testIsReal() {
+        System.out.println("isReal");
+        assertEquals(false, instance1.isReal());
+        assertEquals(false, instance2.isReal());
+        assertEquals(true, one.isReal());
+        assertEquals(true, zero.isReal());
+        assertEquals(false, i.isReal());
+        assertEquals(true, instance1.reciprocal().multiply(instance1).isReal());
+        assertEquals(true, instance2.reciprocal().multiply(instance2).isReal());
+    }
+
+    /**
+     * Test of isImaginary method, of class Complex.
+     */
+    @Test
+    public void testIsImaginary() {
+        System.out.println("isImaginary");
+        assertEquals(false, instance1.isImaginary());
+        assertEquals(false, instance2.isImaginary());
+        assertEquals(false, one.isImaginary());
+        assertEquals(true, zero.isImaginary());
+        assertEquals(true, i.isImaginary());
+    }
+    
+    /**
      * Test of re method, of class Complex.
      */
     @Test

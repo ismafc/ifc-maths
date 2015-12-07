@@ -602,21 +602,21 @@ public class MatrixNxM {
      * @return Double with determinant for 'v' matrix (or NaN if is not possible to calculate it)
      */
     static public double determinant(double v[][]) {
-        // If number of rows is 0 the returns NaN
-        if (v.length == 0)
-            return Double.NaN;
         // If 'v' is not and squared matrix returns NaN
         if (v.length != v[0].length)
             return Double.NaN;
-        if (v.length == 1)
-            return v[0][0];
-        else if (v.length == 2)
-            return v[0][0] * v[1][1] - v[0][1] * v[1][0];
-        else {
-            double d = 0.0;
-            for (int i = 0; i < v.length; i++)
-                d += v[i][0] * cofactor(v, i, 0);
-            return d;
+        switch (v.length) {
+            case 0: // If number of rows is 0 the returns NaN
+                return Double.NaN;
+            case 1:
+                return v[0][0];
+            case 2:
+                return v[0][0] * v[1][1] - v[0][1] * v[1][0];
+            default:
+                double d = 0.0;
+                for (int i = 0; i < v.length; i++)
+                    d += v[i][0] * cofactor(v, i, 0);
+                return d;
         }
     }
     
