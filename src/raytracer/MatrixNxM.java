@@ -12,6 +12,7 @@ package raytracer;
 
 /**
  * Implements a 4 x 4 matrix (of double values)
+ * This Matrix has at least 1x1 dimension
  * @author Isma
  */
 public class MatrixNxM {
@@ -53,7 +54,8 @@ public class MatrixNxM {
     
     /**
      * 
-     * Creates a new instance of MatrixNxM initialized with parameter
+     * Creates a new instance of MatrixNxM initialized with parameter 'nvalues'.
+     * Parameter must be at least a 1x1 matrix array.
      * @param nvalues array of N x M double used to initialized matrix
      */
     public MatrixNxM(double[][] nvalues) {
@@ -586,6 +588,32 @@ public class MatrixNxM {
         inverseMatrix = null;
         return true;
     }
+
+    /** 
+     * Check if this MatrixNxM is Square (same number of rows and columns)
+     * @return True if this matrix is square, False otherwise
+     */
+    public boolean isSquare() {
+        return (values != null && values.length > 0 && values.length == values[0].length);
+    }
+
+    /** 
+     * Check if given MatrixNxM 'm' is Square (same number of rows and columns)
+     * @param m matrix to check
+     * @return True if given matrix 'm' is square, False otherwise
+     */
+    static public boolean isSquare(MatrixNxM m) {
+        return m.isSquare();
+    }
+
+    /** 
+     * Check if given matrix of doubles 'v' is Square (same number of rows and columns)
+     * @param v matrix to check
+     * @return True if given matrix of doubles 'v' is square, False otherwise
+     */
+    static public boolean isSquare(double[][] v) {
+        return (v != null && v.length > 0 && v.length == v[0].length);
+    }
     
     /** 
      * Calculates the determinant for this 4 x 4 matrix
@@ -594,7 +622,7 @@ public class MatrixNxM {
     public double determinant() {
         return determinant(values);
     }
-    
+
     /** 
      * Calculates the determinant for a N x N matrix stored in 'v'.
      * If v is not squared or null then returns NaN
@@ -603,7 +631,7 @@ public class MatrixNxM {
      */
     static public double determinant(double v[][]) {
         // If 'v' is not and squared matrix returns NaN
-        if (v.length != v[0].length)
+        if (!isSquare(v))
             return Double.NaN;
         switch (v.length) {
             case 0: // If number of rows is 0 the returns NaN

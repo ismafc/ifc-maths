@@ -101,7 +101,7 @@ Números de Friedman:
         else {
             long nnum = num;
             for (Integer d : posibles) {
-                ArrayList<Integer> np = new ArrayList<Integer>(posibles);
+                ArrayList<Integer> np = new ArrayList<>(posibles);
                 np.remove(d);
                 num = nnum + (long)d * (long)Math.pow(10, i);
                 combinacion(i - 1, num, np);
@@ -158,8 +158,8 @@ Números de Friedman:
         int mellevo = 0;
         for (int j = 0; j < rLength; j++) {
             int sum = 0;
-            for (int i = 0; i < results.length; i++) {
-                sum += (int)results[i].charAt(rLength - j - 1) - 48;
+            for (String result1 : results) {
+                sum += (int) result1.charAt(rLength - j - 1) - 48;
             }
             sum += mellevo;
             mellevo = sum / 10;
@@ -228,13 +228,12 @@ Números de Friedman:
             return;
         }
         for (Integer d : disponibles) {
-            ArrayList<Integer> newdisponibles = new ArrayList<Integer>();
+            ArrayList<Integer> newdisponibles = new ArrayList<>();
             newdisponibles.addAll(disponibles);
             newdisponibles.remove(d);
             long nnum = num + (long)d * (long)Math.pow(10, digito - 1);
             addNewDigit(digito - 1, nnum, newdisponibles);
         }
-        return;
     }
 
     private static long phi(long n, double ratio) {
@@ -986,6 +985,10 @@ Números de Friedman:
         // Start PE
         // End PE
 
+        System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
+        System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 
+                                                           Runtime.getRuntime().totalMemory() + "/" + 
+                                                           Runtime.getRuntime().maxMemory() + ")");
         Complex initialValue = new Complex(0.0, 0.0);
         System.out.println("c = -1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(-1,0), 10));
         System.out.println("c = 1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(1,0), 10));

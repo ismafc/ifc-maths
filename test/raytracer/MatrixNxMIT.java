@@ -17,6 +17,12 @@ import static org.junit.Assert.*;
  * @author ismael.flores
  */
 public class MatrixNxMIT {
+
+    private MatrixNxM matrix1;
+    private MatrixNxM matrix2;
+    private MatrixNxM matrix3;
+    private MatrixNxM matrix4;
+    private MatrixNxM matrix23;
     
     public MatrixNxMIT() {
     }
@@ -31,6 +37,23 @@ public class MatrixNxMIT {
     
     @Before
     public void setUp() {
+        double[][] m1 = { {1} }; 
+        matrix1 = new MatrixNxM(m1);
+        double[][] m2 = { {-1, 0},
+                          {-2, 5 } }; 
+        matrix2 = new MatrixNxM(m2);
+        double[][] m3 = { {6,-1, 2}, 
+                          {3, 1, 2},
+                          {0, 1, 3} };
+        matrix3 = new MatrixNxM(m3);
+        double[][] m4 = { {1, 0, 1, 2}, 
+                         {0, 1, 2, 1},
+                         {3, 1, 1, 0},
+                         {1, 1, 2, 4} };
+        matrix4 = new MatrixNxM(m4);
+        double[][] m23 = { {-1, -1, 2}, 
+                          {3, 0, -2} };
+        matrix23 = new MatrixNxM(m23);
     }
     
     @After
@@ -455,6 +478,45 @@ public class MatrixNxMIT {
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of isSquare method, of class MatrixNxM.
+     */
+    @Test
+    public void testIsSquare_0args() {
+        System.out.println("isSquare");
+        assertEquals(true, matrix1.isSquare());
+        assertEquals(true, matrix2.isSquare());
+        assertEquals(true, matrix3.isSquare());
+        assertEquals(true, matrix4.isSquare());
+        assertEquals(false, matrix23.isSquare());
+    }
+
+    /**
+     * Test of isSquare method, of class MatrixNxM.
+     */
+    @Test
+    public void testIsSquare_MatrixNxM() {
+        System.out.println("isSquare(MatrixNxM)");
+        assertEquals(true, MatrixNxM.isSquare(matrix1));
+        assertEquals(true, MatrixNxM.isSquare(matrix2));
+        assertEquals(true, MatrixNxM.isSquare(matrix3));
+        assertEquals(true, MatrixNxM.isSquare(matrix4));
+        assertEquals(false, MatrixNxM.isSquare(matrix23));
+    }
+
+    /**
+     * Test of isSquare method, of class MatrixNxM.
+     */
+    @Test
+    public void testIsSquare_doubleArrArr() {
+        System.out.println("isSquare(double[][] v)");
+        assertEquals(true, MatrixNxM.isSquare(matrix1.values));
+        assertEquals(true, MatrixNxM.isSquare(matrix2.values));
+        assertEquals(true, MatrixNxM.isSquare(matrix3.values));
+        assertEquals(true, MatrixNxM.isSquare(matrix4.values));
+        assertEquals(false, MatrixNxM.isSquare(matrix23.values));
+    }
+    
     /**
      * Test of determinant method, of class MatrixNxM.
      */

@@ -252,6 +252,7 @@ public class Ray3D {
      * Returns a String representation for this object
      * @return String representing this object
      */
+    @Override
     public String toString() {
         return o + " + t" + d;
     }    
