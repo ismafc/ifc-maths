@@ -5,6 +5,7 @@
  */
 package OnlineJudge;
 
+import OnlineJudge.P0100_0149.P0100_0149ITSuite;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,7 +18,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({OnlineJudge.P0100_0149.P0100_0149ITSuite.class, OnlineJudge.StdInOutIT.class})
+@Suite.SuiteClasses({StdInOutIT.class, P0100_0149ITSuite.class})
 public class OnlineJudgeITSuite {
 
     @BeforeClass

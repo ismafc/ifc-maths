@@ -170,5 +170,30 @@ public class JFractalDialogIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of setMandelbrotColor method, of class JFractalDialog.
+     */
+    @Test
+    public void testSetMandelbrotColor() {
+        System.out.println("setMandelbrotColor");
+        Color c = null;
+        JFractalDialog instance = null;
+        instance.setMandelbrotColor(c);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of STOP method, of class JFractalDialog.
+     */
+    @Test
+    public void testSTOP() {
+        System.out.println("STOP");
+        JFractalDialog instance = null;
+        instance.STOP();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ProjectEuler.P180_189.Problem183IT.class, ProjectEuler.P180_189.Problem188IT.class, ProjectEuler.P180_189.Problem187IT.class})
+@Suite.SuiteClasses({Problem187IT.class, Problem183IT.class, Problem188IT.class})
 public class P180_189ITSuite {
 
     @BeforeClass

@@ -4,19 +4,23 @@
  * and open the template in the editor.
  */
 
+import OnlineJudge.OnlineJudgeITSuite;
+import ProjectEuler.ProjectEulerITSuite;
+import dialogs.DialogsITSuite;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import raytracer.RaytracerITSuite;
 
 /**
  *
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ProjectEuler.ProjectEulerITSuite.class, OnlineJudge.OnlineJudgeITSuite.class, dialogs.DialogsITSuite.class, raytracer.RaytracerITSuite.class})
+@Suite.SuiteClasses({RaytracerITSuite.class, OnlineJudgeITSuite.class, DialogsITSuite.class, ProjectEulerITSuite.class})
 public class RootSuite {
 
     @BeforeClass

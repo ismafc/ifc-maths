@@ -225,5 +225,33 @@ public class GWindowIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getXMax method, of class GWindow.
+     */
+    @Test
+    public void testGetXMax() {
+        System.out.println("getXMax");
+        GWindow instance = new GWindow();
+        double expResult = 0.0;
+        double result = instance.getXMax();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getYMax method, of class GWindow.
+     */
+    @Test
+    public void testGetYMax() {
+        System.out.println("getYMax");
+        GWindow instance = new GWindow();
+        double expResult = 0.0;
+        double result = instance.getYMax();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
