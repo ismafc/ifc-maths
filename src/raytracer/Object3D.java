@@ -29,6 +29,11 @@ public class Object3D {
     protected double z = 0.0;
 
     /**
+     * Object3D with all components to zero
+     */
+    static final public Object3D ZERO = new Object3D(0.0, 0.0, 0.0);
+    
+    /**
      * Creates a new instance of Object3D
      * All variables initialized to 0
      */
@@ -146,7 +151,7 @@ public class Object3D {
      * @return True if input array 'c' has three values and False if not
      */
     public boolean get(double c[]) {
-        if (c.length >= 3) {
+        if (c != null && c.length >= 3) {
             c[0] = x;
             c[1] = y;
             c[2] = z;
@@ -300,13 +305,13 @@ public class Object3D {
     /**
      * Asks if this Object3D is near null (0.0 +/- some defined value)
      * @param epsilon Tolerance value
-     * @return True if all values are between 0.0 and epsilon, and False if not
+     * @return True if all values are between 0.0 and epsilon (included), and False if not
      */
     public boolean isNull(double epsilon) {
         epsilon = (epsilon >= 0) ? epsilon : -epsilon;
-        return x < epsilon && x > -epsilon && 
-               y < epsilon && y > -epsilon &&
-               z < epsilon && z > -epsilon;
+        return x <= epsilon && x >= -epsilon && 
+               y <= epsilon && y >= -epsilon &&
+               z <= epsilon && z >= -epsilon;
     }
     
     /**
@@ -314,7 +319,7 @@ public class Object3D {
      * @return True if all values are NaN and False if not
      */
     public boolean isInvalid() {
-        return x == Double.NaN || y == Double.NaN || z == Double.NaN;
+        return Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z);
     }
     
     /**
@@ -333,7 +338,7 @@ public class Object3D {
      */
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Object3D) {
+        if (o != null || o instanceof Object3D) {
             return ((Object3D)o).x == x && 
                    ((Object3D)o).y == y &&
                    ((Object3D)o).z == z;
@@ -359,13 +364,13 @@ public class Object3D {
      * x,y and z must be equals one by one with epsilon tolerance
      * @param o Object to compare to this Object3D
      * @param epsilon Tolerance value (have to be positive)
-     * @return True if both objects are equals and False if not. 
+     * @return True if both objects are equals with given tolerance and False if not. 
      */
     public boolean equals(Object3D o, double epsilon) {
         epsilon = (epsilon >= 0) ? epsilon : -epsilon;
-        return x > o.x - epsilon && x < o.x + epsilon && 
-               y > o.y - epsilon && y < o.y + epsilon && 
-               z > o.z - epsilon && z < o.z + epsilon;
+        return x >= o.x - epsilon && x <= o.x + epsilon && 
+               y >= o.y - epsilon && y <= o.y + epsilon && 
+               z >= o.z - epsilon && z <= o.z + epsilon;
     }   
     
     /**

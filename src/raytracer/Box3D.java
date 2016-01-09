@@ -6,6 +6,8 @@
 
 package raytracer;
 
+import java.util.Objects;
+
 /**
  * Implements a 3D Box class
  * @author Isma
@@ -15,12 +17,12 @@ public class Box3D {
     /** 
      * First corner of box (minimum values for x, y and z)
      */
-    protected Point3D pMin;
+    protected Point3D pMin = null;
     
     /** 
      * Second corner of box (maximum values for x, y and z)
      */
-    protected Point3D pMax;
+    protected Point3D pMax = null;
     
     /** 
      * Creates a new instance of Box3D 
@@ -239,16 +241,34 @@ public class Box3D {
      * @param b Box to compare with
      * @return True if this both and 'b' are equals and False if not
      */
-    public boolean equals(Box3D b) {
+    @Override
+    public boolean equals(Object b) {
         if (b == null)
             return false;
-        return pMin.equals(b.pMin) && pMax.equals(b.pMax);
+        if (!(b instanceof Box3D))
+            return false;
+        Box3D b3d = (Box3D)b;
+        return pMin.equals(b3d.pMin) && pMax.equals(b3d.pMax);
+    }
+
+    /** 
+     * Calculates and returns a hash code. Tipically used to store object in 
+     * Hash Tables and other structures
+     * @return Integer with hash code calculated
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.pMin);
+        hash = 97 * hash + Objects.hashCode(this.pMax);
+        return hash;
     }
     
     /** 
      * Returns a String representation for this object
      * @return String representing this object
      */
+    @Override
     public String toString() {
         return "[" + pMin + ", " + pMax + "]";
     }    
