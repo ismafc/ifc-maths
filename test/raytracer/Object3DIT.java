@@ -303,6 +303,7 @@ public class Object3DIT {
         assertEquals(new Object3D(1.0, 1.0, 3.0), o1.add(new double[] {o3.x, o3.y, o3.z}));
         assertEquals(new Object3D(-1.0, -1.0, -1.0), o2.add(new double[] {o3.x, o3.y, o3.z}));
         assertEquals(o1, o1.add(new double[] {0.0, 0.0, 0.0}));
+        assertTrue(o1.add(new double[] {0.0, 0.0}) == null);
     }
 
     /**

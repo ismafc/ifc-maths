@@ -272,21 +272,6 @@ public class MatrixNxMIT {
     }
 
     /**
-     * Test of toScale method, of class MatrixNxM.
-     */
-    @Test
-    public void testToScale() {
-        System.out.println("toScale");
-        Object3D o = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toScale(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of toRotationX method, of class MatrixNxM.
      */
     @Test
@@ -540,6 +525,38 @@ public class MatrixNxMIT {
         MatrixNxM instance = new MatrixNxM();
         String expResult = "";
         String result = instance.toString();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of toScale method, of class MatrixNxM.
+     */
+    @Test
+    public void testToScale_3args() {
+        System.out.println("toScale");
+        double sx = 0.0;
+        double sy = 0.0;
+        double sz = 0.0;
+        MatrixNxM instance = new MatrixNxM();
+        boolean expResult = false;
+        boolean result = instance.toScale(sx, sy, sz);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of toScale method, of class MatrixNxM.
+     */
+    @Test
+    public void testToScale_Object3D() {
+        System.out.println("toScale");
+        Object3D o = null;
+        MatrixNxM instance = new MatrixNxM();
+        boolean expResult = false;
+        boolean result = instance.toScale(o);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

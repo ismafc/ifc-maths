@@ -306,11 +306,29 @@ public class MatrixNxM {
 
     /** 
      * Makes this matrix a scaling defined by 'o'
+     * @param sx X axis scale
+     * @param sy Y axis scale
+     * @param sz Z axis scale
+     * @return True if this is a 4 x 4 matrix and False otherwise
+     */
+    public boolean toScale(double sx, double sy, double sz) {
+        if (rows != 4 || columns != 4)
+            return false;
+        toIdentity();
+        values[0][0] = sx;
+        values[1][1] = sy;
+        values[2][2] = sz;
+        inverseMatrix = null;
+        return true;
+    }
+    
+    /** 
+     * Makes this matrix a scaling defined by 'o'
      * @param o 3D Object defining the scaling in each axe
-     * @return True if this is a 4 x 4 matrix and False if not
+     * @return True if this is a 4 x 4 matrix or Object3D is not null and False otherwise
      */
     public boolean toScale(Object3D o) {
-        if (rows != 4 || columns != 4)
+        if (rows != 4 || columns != 4 || o == null)
             return false;
         toIdentity();
         values[0][0] = o.x;

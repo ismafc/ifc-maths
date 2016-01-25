@@ -12,6 +12,11 @@ package raytracer;
  */
 public class Point3D extends Object3D {
     
+    /**
+     * Point3D with all components to zero
+     */
+    static final public Point3D ZERO = new Point3D(0.0, 0.0, 0.0);
+    
     /** Creates a new instance of Point3D */
     public Point3D() {
         super();
@@ -99,7 +104,7 @@ public class Point3D extends Object3D {
      */
     public double planeDistance(double a, double b, double c, double d) {
         double den = Vector3D.length(new Vector3D(a, b, c));
-        return (den == 0.0 ? Double.NaN : (x * a + y * b + z * c + d) / den);
+        return (den == 0.0 ? Double.NaN : Math.abs((x * a + y * b + z * c + d) / den));
     }
 
     /** 
@@ -116,44 +121,52 @@ public class Point3D extends Object3D {
     }
 
     /** 
-     * Rotates this point 'r' radiants respect X axis
+     * Calculates the point resulting in rotating 'r' radiants respect X-Axis
      * @param r X rotation angle in radiants
+     * @return Point3D with this point rotated 'r' radiants respect X-Axis
      */
-    public void rotateX(double r) {
-        double ny = y * Math.cos(r) - z * Math.sin(r);
-        double nz = y * Math.sin(r) + z * Math.cos(r);
-        y = ny;
-        z = nz;
+    public Point3D rotateX(double r) {
+        Point3D p = new Point3D(this);
+        MatrixNxM m = new MatrixNxM(4, 4);
+        m.toRotationX(r);
+        m.transform(p);
+        return p;
     }
 
     /** 
-     * Rotates this point 'r' radiants respect Y axis
+     * Calculates the point resulting in rotating 'r' radiants respect Y-Axis
      * @param r Y rotation angle in radiants
+     * @return Point3D with this point rotated 'r' radiants respect Y-Axis
      */
-    public void rotateY(double r) {
-        double nx = x * Math.cos(r) + z * Math.sin(r);
-        double nz = z * Math.cos(r) - x * Math.sin(r);
-        x = nx;
-        z = nz;
+    public Point3D rotateY(double r) {
+        Point3D p = new Point3D(this);
+        MatrixNxM m = new MatrixNxM(4, 4);
+        m.toRotationY(r);
+        m.transform(p);
+        return p;
     }
 
     /** 
-     * Rotates this point 'r' radiants respect Z axis
+     * Calculates the point resulting in rotating 'r' radiants respect Z-Axis
      * @param r Z rotation angle in radiants
+     * @return Point3D with this point rotated 'r' radiants respect Z-Axis
      */
-    public void rotateZ(double r) {
-        double nx = x * Math.cos(r) - y * Math.sin(r);
-        double ny = x * Math.sin(r) + y * Math.cos(r);
-        x = nx;
-        y = ny;
+    public Point3D rotateZ(double r) {
+        MatrixNxM m = new MatrixNxM(4, 4);
+        m.toRotationZ(r);
+        m.mul(new MatrixNxM(new double[][] {{x},{y},{z},{0}}));
+        return new Point3D(m.get(0, 0), m.get(1, 0), m.get(2, 0));
     }
     
     /** 
      * Translates this point 'o' units (each component translates in one axis)
      * @param o Point3D with storing translation
+     * @return Point3D with this point translated in the giving direction
      */
-    public void translate(Object3D o) {
-        add(o);
+    public Point3D translate(Object3D o) {
+        if (o == null)
+            return null;
+        return new Point3D(add(o));
     }
 
     /** 
@@ -161,18 +174,22 @@ public class Point3D extends Object3D {
      * @param nx Double indicating X axis translation
      * @param ny Double indicating Y axis translation
      * @param nz Double indicating Z axis translation
+     * @return Point3D with this point translated in the giving direction
      */
-    public void translate(double nx, double ny, double nz) {
-        add(nx, ny, nz);
+    public Point3D translate(double nx, double ny, double nz) {
+        return new Point3D(add(nx, ny, nz));
     }
 
     /** 
      * Returns a Point3D with this point translated 'p[0]' units in X axis, 'p[1]' units in Y axis and 'p[2]' units in Z axis
      * @param p Array of doubles indicating X, Y and Z axis translation
-     * @return Point3D if translation has been made successfully and null if not (array is less than 3 values length)
+     * @return Point3D with this point translated in the giving direction
      */
     public Point3D translate(double p[]) {
-        return new Point3D(add(p));
+        Object3D o = add(p);
+        if (o == null)
+            return null;
+        return new Point3D(o);
     }
     
     /**
@@ -180,29 +197,17 @@ public class Point3D extends Object3D {
      * @param r Angle in radiants for rotation
      * @param p1 First point defining rotation axis
      * @param p2 last point defining rotation axis
-     * @return True if 'p1' and 'p2' are equals (not axis defined) and False if they are equals
+     * @return Point3D with this point rotated arround axis defined by two giving points
      */
-    public boolean rotate(double r, Point3D p1, Point3D p2) {
-        if (p1.equals(p2))
-            return false;
-        Vector3D v = new Vector3D(p1, p2);
-        double beta = Math.atan2(v.y, v.z);
-        double gamma = Math.atan2(v.x, Math.sqrt(v.y * v.y + v.z * v.z));
-        
-        v.set(p1);
-        v.mul(-1.0);
-        translate(v);
-        
-        rotateX(beta);
-        rotateY(-gamma);
-        rotateZ(r);
-        rotateY(gamma);
-        rotateX(-beta);
-        
-        v.mul(-1.0);
-        translate(v);
-        
-        return true;
+    public Point3D rotate(double r, Point3D p1, Point3D p2) {
+        if (p1 == null || p2 == null || p1.equals(p2))
+            return null;
+        Point3D p = translate(p1.mul(-1));
+        MatrixNxM m = new MatrixNxM(4, 4);
+        m.toRotation(r, new Vector3D(p1, p2));
+        m.transform(p);
+        p = p.translate(p1);
+        return p;
     }
     
     /** 
@@ -212,18 +217,17 @@ public class Point3D extends Object3D {
      * @param ey Double indicating Y axis scale
      * @param ez Double indicating Z axis scale
      * @param p Point3D indicating base point for this scale tranformation
+     * @return Point3D with this point scaled by giving parameters
      */
-    public void scale(double ex, double ey, double ez, Point3D p) {
-        Vector3D v = new Vector3D(p);
-        v.mul(-1.0);
-        translate(v);
-        
-        x *= ex;
-        y *= ey;
-        z *= ez;
-        
-        v.mul(-1.0);
-        translate(v);
+    public Point3D scale(double ex, double ey, double ez, Point3D p) {
+        if (p == null)
+            return null;
+        Point3D np = translate(p.mul(-1));
+        MatrixNxM m = new MatrixNxM(4, 4);
+        m.toScale(ex, ey, ez);
+        m.transform(np);
+        np = np.translate(p);
+        return np;
     }
     
     /** 
