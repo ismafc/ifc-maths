@@ -231,26 +231,23 @@ public class Point3D extends Object3D {
     }
     
     /** 
-     * Makes this point symetric respect plane ax+by+cz+d=0
+     * Returns the symetric of this point respect plane ax + by + cz + d = 0
      * @param a first parameter of plane equation
      * @param b second parameter of plane equation
      * @param c third parameter of plane equation
      * @param d last parameter of plane equation
-     * @return True if plane is correct and False if not
+     * @return Point3D with symetric of this point respecte given plane
      */
-    public boolean symmetry(double a, double b, double c, double d) {
+    public Point3D symmetry(double a, double b, double c, double d) {
         Vector3D v = new Vector3D(a, b, c);
         if (v.isNull())
-            return false;
-        double l2 = v.length() * v.length();
-        double dot = Vector3D.dot(v, new Vector3D(this));
-        double nx = (x - 2.0 * a * dot + d) / l2;
-        double ny = (y - 2.0 * b * dot + d) / l2;
-        double nz = (z - 2.0 * c * dot + d) / l2;
-        x = nx;
-        y = ny;
-        z = nz;
-        return true;
+            return null;
+        double distance = Math.abs((a * x + b * y + c * z + d) / Math.sqrt(a * a + b * b + c * c));
+        v.normalize();
+        Point3D p1 = new Point3D(add(v.mul(distance)));
+        if (!p1.isInPlane(a, b, c, d, 0.0000001))
+            distance = -distance;
+        return new Point3D(add(v.mul(distance * 2.0)));
     }
 
     /** 
@@ -263,6 +260,20 @@ public class Point3D extends Object3D {
      */
     public boolean isInPlane(double a, double b, double c, double d) {
         return (a * x + b * y + c * z + d == 0.0);
+    }
+
+    /** 
+     * Returns if this point is included in plane defined by ax + by + cz + d = 0
+     * @param a first parameter of plane equation
+     * @param b second parameter of plane equation
+     * @param c third parameter of plane equation
+     * @param d last parameter of plane equation
+     * @param epsilon tolerance value
+     * @return True if point is in plane and False if not
+     */
+    public boolean isInPlane(double a, double b, double c, double d, double epsilon) {
+        epsilon = (epsilon >= 0) ? epsilon : -epsilon;
+        return (Math.abs(a * x + b * y + c * z + d) <= epsilon);
     }
     
     /** 

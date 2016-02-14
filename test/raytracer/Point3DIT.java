@@ -21,6 +21,7 @@ public class Point3DIT {
     private Point3D p1;
     private Point3D p2;
     private Point3D p3;
+    private double epsilon = 0.0000001;
     
     public Point3DIT() {
     }
@@ -89,11 +90,11 @@ public class Point3DIT {
     @Test
     public void testPlaneDistance() {
         System.out.println("planeDistance(double, double, double, double)");
-        assertEquals(Math.sqrt(3.0 / 2.0), p1.planeDistance(1.0, -1.0, 2.0, -2.0), 0.00000001);
-        assertEquals(5.0 / Math.sqrt(6.0), p2.planeDistance(1.0, -1.0, 2.0, -2.0), 0.00000001);
-        assertEquals(1.0 / Math.sqrt(6.0), p3.planeDistance(1.0, -1.0, 2.0, -2.0), 0.00000001);
-        assertEquals(Math.sqrt(2.0 / 3.0), Point3D.ZERO.planeDistance(1.0, -1.0, 2.0, -2.0), 0.00000001);
-        assertEquals(0.0, new Point3D(0.0, 0.0, 1.0).planeDistance(1.0, -1.0, 2.0, -2.0), 0.00000001);
+        assertEquals(Math.sqrt(3.0 / 2.0), p1.planeDistance(1.0, -1.0, 2.0, -2.0), epsilon);
+        assertEquals(5.0 / Math.sqrt(6.0), p2.planeDistance(1.0, -1.0, 2.0, -2.0), epsilon);
+        assertEquals(1.0 / Math.sqrt(6.0), p3.planeDistance(1.0, -1.0, 2.0, -2.0), epsilon);
+        assertEquals(Math.sqrt(2.0 / 3.0), Point3D.ZERO.planeDistance(1.0, -1.0, 2.0, -2.0), epsilon);
+        assertEquals(0.0, new Point3D(0.0, 0.0, 1.0).planeDistance(1.0, -1.0, 2.0, -2.0), epsilon);
         assertTrue(Double.isNaN(p1.planeDistance(0.0, 0.0, 0.0, -2.0)));
     }
 
@@ -105,10 +106,10 @@ public class Point3DIT {
         System.out.println("lineDistance(Vector3D, Point3D)");
         Vector3D v = new Vector3D(1.0, 2.0, 1.0);
         Point3D a = new Point3D(1.0, -1.0, 0.0);
-        assertEquals(3.0 / Math.sqrt(2), p1.lineDistance(v, a), 0.00000001);
-        assertEquals(Math.sqrt(35.0 / 6.0), p2.lineDistance(v, a), 0.00000001);
-        assertEquals(Math.sqrt(5.0 / 6.0), p3.lineDistance(v, a), 0.00000001);
-        assertEquals(Math.sqrt(11.0 / 6.0), Point3D.ZERO.lineDistance(v, a), 0.00000001);
+        assertEquals(3.0 / Math.sqrt(2), p1.lineDistance(v, a), epsilon);
+        assertEquals(Math.sqrt(35.0 / 6.0), p2.lineDistance(v, a), epsilon);
+        assertEquals(Math.sqrt(5.0 / 6.0), p3.lineDistance(v, a), epsilon);
+        assertEquals(Math.sqrt(11.0 / 6.0), Point3D.ZERO.lineDistance(v, a), epsilon);
     }
 
     /**
@@ -117,12 +118,12 @@ public class Point3DIT {
     @Test
     public void testRotateX() {
         System.out.println("rotateX(double)");
-        assertTrue(new Point3D(1.0, -2.0, -3.0).equals(p1.rotateX(Math.PI), 0.00000001));
-        assertTrue(new Point3D(1.0, -2.0, -3.0).equals(p1.rotateX(-Math.PI), 0.00000001));
-        assertTrue(new Point3D(-1.0, 0.0, 1.0).equals(p2.rotateX(Math.PI), 0.00000001));
-        assertTrue(new Point3D(0.0, 0.0, -1.0).equals(p3.rotateX(Math.PI / 2.0), 0.00000001));
-        assertTrue(new Point3D(0.0, 0.0, 1.0).equals(p3.rotateX(-Math.PI / 2.0), 0.00000001));
-        assertTrue(Point3D.ZERO.equals(Point3D.ZERO.rotateX(Math.PI), 0.00000001));
+        assertTrue(new Point3D(1.0, -2.0, -3.0).equals(p1.rotateX(Math.PI), epsilon));
+        assertTrue(new Point3D(1.0, -2.0, -3.0).equals(p1.rotateX(-Math.PI), epsilon));
+        assertTrue(new Point3D(-1.0, 0.0, 1.0).equals(p2.rotateX(Math.PI), epsilon));
+        assertTrue(new Point3D(0.0, 0.0, -1.0).equals(p3.rotateX(Math.PI / 2.0), epsilon));
+        assertTrue(new Point3D(0.0, 0.0, 1.0).equals(p3.rotateX(-Math.PI / 2.0), epsilon));
+        assertTrue(Point3D.ZERO.equals(Point3D.ZERO.rotateX(Math.PI), epsilon));
     }
 
     /**
@@ -131,12 +132,12 @@ public class Point3DIT {
     @Test
     public void testRotateY() {
         System.out.println("rotateY(double)");
-        assertTrue(new Point3D(-1.0, 2.0, -3.0).equals(p1.rotateY(Math.PI), 0.00000001));
-        assertTrue(new Point3D(-1.0, 2.0, -3.0).equals(p1.rotateY(-Math.PI), 0.00000001));
-        assertTrue(new Point3D(1.0, 0.0, 1.0).equals(p2.rotateY(Math.PI), 0.00000001));
-        assertTrue(new Point3D(0.0, -1.0, 0.0).equals(p3.rotateY(Math.PI / 2.0), 0.00000001));
-        assertTrue(new Point3D(0.0, -1.0, 0.0).equals(p3.rotateY(-Math.PI / 2.0), 0.00000001));
-        assertTrue(Point3D.ZERO.equals(Point3D.ZERO.rotateY(Math.PI), 0.00000001));
+        assertTrue(new Point3D(-1.0, 2.0, -3.0).equals(p1.rotateY(Math.PI), epsilon));
+        assertTrue(new Point3D(-1.0, 2.0, -3.0).equals(p1.rotateY(-Math.PI), epsilon));
+        assertTrue(new Point3D(1.0, 0.0, 1.0).equals(p2.rotateY(Math.PI), epsilon));
+        assertTrue(new Point3D(0.0, -1.0, 0.0).equals(p3.rotateY(Math.PI / 2.0), epsilon));
+        assertTrue(new Point3D(0.0, -1.0, 0.0).equals(p3.rotateY(-Math.PI / 2.0), epsilon));
+        assertTrue(Point3D.ZERO.equals(Point3D.ZERO.rotateY(Math.PI), epsilon));
     }
 
     /**
@@ -145,12 +146,12 @@ public class Point3DIT {
     @Test
     public void testRotateZ() {
         System.out.println("rotateZ(double)");
-        assertTrue(new Point3D(-1.0, -2.0, 3.0).equals(p1.rotateZ(Math.PI), 0.00000001));
-        assertTrue(new Point3D(-1.0, -2.0, 3.0).equals(p1.rotateZ(-Math.PI), 0.00000001));
-        assertTrue(new Point3D(1.0, 0.0, -1.0).equals(p2.rotateZ(Math.PI), 0.00000001));
-        assertTrue(new Point3D(1.0, 0.0, 0.0).equals(p3.rotateZ(Math.PI / 2.0), 0.00000001));
-        assertTrue(new Point3D(-1.0, 0.0, 0.0).equals(p3.rotateZ(-Math.PI / 2.0), 0.00000001));
-        assertTrue(Point3D.ZERO.equals(Point3D.ZERO.rotateZ(Math.PI), 0.00000001));
+        assertTrue(new Point3D(-1.0, -2.0, 3.0).equals(p1.rotateZ(Math.PI), epsilon));
+        assertTrue(new Point3D(-1.0, -2.0, 3.0).equals(p1.rotateZ(-Math.PI), epsilon));
+        assertTrue(new Point3D(1.0, 0.0, -1.0).equals(p2.rotateZ(Math.PI), epsilon));
+        assertTrue(new Point3D(1.0, 0.0, 0.0).equals(p3.rotateZ(Math.PI / 2.0), epsilon));
+        assertTrue(new Point3D(-1.0, 0.0, 0.0).equals(p3.rotateZ(-Math.PI / 2.0), epsilon));
+        assertTrue(Point3D.ZERO.equals(Point3D.ZERO.rotateZ(Math.PI), epsilon));
     }
 
     /**
@@ -200,11 +201,11 @@ public class Point3DIT {
     @Test
     public void testRotate() {
         System.out.println("rotate(double, Point3D, Point3D)");
-        assertTrue(new Point3D(-0.3333, -4.6667, -2.3333).equals(p1.rotate(Math.PI, p2, p3), 0.0001));
-        assertTrue(new Point3D(0.8947, -2.3158, 0.6842).equals(p2.rotate(Math.PI, p1, p3), 0.0001));
-        assertTrue(new Point3D(-1.3333, 1.6667, -0.6667).equals(p3.rotate(Math.PI, p1, p2), 0.0001));
-        assertTrue(new Point3D(-1, 1, 0).equals(Point3D.ZERO.rotate(Math.PI, p1, p2), 0.000001));
-        assertTrue(p1.equals(p1.rotate(Math.PI, p1, p2), 0.0001));
+        assertTrue(new Point3D(-1.0 / 3.0, -14.0 / 3.0, -7.0 / 3.0).equals(p1.rotate(Math.PI, p2, p3), epsilon));
+        assertTrue(new Point3D(0.8947368421052639, -2.315789473684208, 0.6842105263157916).equals(p2.rotate(Math.PI, p1, p3), epsilon));
+        assertTrue(new Point3D(-4.0 / 3.0, 5.0 / 3.0, -2.0 / 3.0).equals(p3.rotate(Math.PI, p1, p2), epsilon));
+        assertTrue(new Point3D(-1, 1, 0).equals(Point3D.ZERO.rotate(Math.PI, p1, p2), epsilon));
+        assertTrue(p1.equals(p1.rotate(Math.PI, p1, p2), epsilon));
     }
 
     /**
@@ -213,11 +214,11 @@ public class Point3DIT {
     @Test
     public void testScale() {
         System.out.println("scale(double, double, double, Point3D)");
-        assertTrue(new Point3D(0.5, 1.0, 1.5).equals(p1.scale(0.5, 0.5, 0.5, Point3D.ZERO), 0.000001));
-        assertTrue(p1.equals(p1.scale(0.5, 0.5, 0.5, p1), 0.000001));
-        assertTrue(new Point3D(1.25, 2.0, 3.0).equals(p1.scale(0.5, 0.5, 0.5, new Point3D(1.5, 2.0, 3.0)), 0.000001));
-        assertTrue(p1.equals(p1.scale(1.0, 1.0, 1.0, p2), 0.000001));
-        assertTrue(p1.equals(p1.scale(1.0, 1.0, 1.0, p3), 0.000001));
+        assertTrue(new Point3D(0.5, 1.0, 1.5).equals(p1.scale(0.5, 0.5, 0.5, Point3D.ZERO), epsilon));
+        assertTrue(p1.equals(p1.scale(0.5, 0.5, 0.5, p1), epsilon));
+        assertTrue(new Point3D(1.25, 2.0, 3.0).equals(p1.scale(0.5, 0.5, 0.5, new Point3D(1.5, 2.0, 3.0)), epsilon));
+        assertTrue(p1.equals(p1.scale(1.0, 1.0, 1.0, p2), epsilon));
+        assertTrue(p1.equals(p1.scale(1.0, 1.0, 1.0, p3), epsilon));
         assertTrue(p1.scale(0.5, 0.5, 0.5, null) == null);
     }
 
@@ -226,17 +227,11 @@ public class Point3DIT {
      */
     @Test
     public void testSymmetry() {
-        System.out.println("symmetry");
-        double a = 0.0;
-        double b = 0.0;
-        double c = 0.0;
-        double d = 0.0;
-        Point3D instance = new Point3D();
-        boolean expResult = false;
-        boolean result = instance.symmetry(a, b, c, d);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("symmetry(double, double, double, double)");
+        assertTrue(new Point3D(2.0, -1.0, 1.0).equals(p1.symmetry(1.0, -3.0, -2.0, 4.0), 0.0000001));
+        assertTrue(new Point3D(-3.0, -2.0, 0.0).equals(new Point3D(1.0, 2.0, 4.0).symmetry(1.0, 1.0, 1.0, -1.0), 0.0000001));
+        assertTrue(new Point3D(4.0 / 3.0, 2.0 / 3.0, -1.0 / 3.0).equals(new Point3D(2.0, 0.0, 1.0).symmetry(-1.0, 1.0, -2.0, 2.0), 0.0000001));
+        assertTrue(new Point3D(13.0 / 7.0, 4.0 / 7.0, 9.0 / 7.0).equals(new Point3D(1.0, -2.0, 3.0).symmetry(1.0, 3.0, -2.0, 5.0), 0.0000001));
     }
 
     /**
@@ -383,6 +378,43 @@ public class Point3DIT {
         double d = 0.0;
         Point3D expResult = null;
         Point3D result = Point3D.mul(o, d);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isInPlane method, of class Point3D.
+     */
+    @Test
+    public void testIsInPlane_4args() {
+        System.out.println("isInPlane");
+        double a = 0.0;
+        double b = 0.0;
+        double c = 0.0;
+        double d = 0.0;
+        Point3D instance = new Point3D();
+        boolean expResult = false;
+        boolean result = instance.isInPlane(a, b, c, d);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isInPlane method, of class Point3D.
+     */
+    @Test
+    public void testIsInPlane_5args() {
+        System.out.println("isInPlane");
+        double a = 0.0;
+        double b = 0.0;
+        double c = 0.0;
+        double d = 0.0;
+        double epsilon = 0.0;
+        Point3D instance = new Point3D();
+        boolean expResult = false;
+        boolean result = instance.isInPlane(a, b, c, d, epsilon);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
