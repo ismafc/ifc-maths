@@ -21,7 +21,7 @@ public class Point3DIT {
     private Point3D p1;
     private Point3D p2;
     private Point3D p3;
-    private double epsilon = 0.0000001;
+    final private double epsilon = 0.0000001;
     
     public Point3DIT() {
     }
@@ -228,10 +228,10 @@ public class Point3DIT {
     @Test
     public void testSymmetry() {
         System.out.println("symmetry(double, double, double, double)");
-        assertTrue(new Point3D(2.0, -1.0, 1.0).equals(p1.symmetry(1.0, -3.0, -2.0, 4.0), 0.0000001));
-        assertTrue(new Point3D(-3.0, -2.0, 0.0).equals(new Point3D(1.0, 2.0, 4.0).symmetry(1.0, 1.0, 1.0, -1.0), 0.0000001));
-        assertTrue(new Point3D(4.0 / 3.0, 2.0 / 3.0, -1.0 / 3.0).equals(new Point3D(2.0, 0.0, 1.0).symmetry(-1.0, 1.0, -2.0, 2.0), 0.0000001));
-        assertTrue(new Point3D(13.0 / 7.0, 4.0 / 7.0, 9.0 / 7.0).equals(new Point3D(1.0, -2.0, 3.0).symmetry(1.0, 3.0, -2.0, 5.0), 0.0000001));
+        assertTrue(new Point3D(2.0, -1.0, 1.0).equals(p1.symmetry(1.0, -3.0, -2.0, 4.0), epsilon));
+        assertTrue(new Point3D(-3.0, -2.0, 0.0).equals(new Point3D(1.0, 2.0, 4.0).symmetry(1.0, 1.0, 1.0, -1.0), epsilon));
+        assertTrue(new Point3D(4.0 / 3.0, 2.0 / 3.0, -1.0 / 3.0).equals(new Point3D(2.0, 0.0, 1.0).symmetry(-1.0, 1.0, -2.0, 2.0), epsilon));
+        assertTrue(new Point3D(13.0 / 7.0, 4.0 / 7.0, 9.0 / 7.0).equals(new Point3D(1.0, -2.0, 3.0).symmetry(1.0, 3.0, -2.0, 5.0), epsilon));
     }
 
     /**
@@ -273,15 +273,12 @@ public class Point3DIT {
      */
     @Test
     public void testBarycenter() {
-        System.out.println("barycenter");
-        Point3D p1 = null;
-        Point3D p2 = null;
-        Point3D p3 = null;
-        Point3D expResult = null;
-        Point3D result = Point3D.barycenter(p1, p2, p3);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("barycenter(Point3D, Point3D, Point3D)");
+        assertTrue(new Point3D(0, 1.0 / 3.0, 2.0 / 3.0).equals(Point3D.barycenter(p1, p2, p3)));
+        assertTrue(new Point3D(0, 1.0 / 3.0, 2.0 / 3.0).equals(Point3D.barycenter(p3, p1, p2)));
+        assertTrue(new Point3D(0, 2.0 / 3.0, 2.0 / 3.0).equals(Point3D.barycenter(p1, p2, Point3D.ZERO)));
+        assertTrue(new Point3D(1.0 / 3.0, 1.0 / 3.0, 1.0).equals(Point3D.barycenter(p1, Point3D.ZERO, p3)));
+        assertTrue(new Point3D(-1.0 / 3.0, -1.0 / 3.0, -1.0 / 3.0).equals(Point3D.barycenter(Point3D.ZERO, p2, p3)));
     }
 
     /**
@@ -328,14 +325,11 @@ public class Point3DIT {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        Object3D p1 = null;
-        Object3D p2 = null;
-        Point3D expResult = null;
-        Point3D result = Point3D.add(p1, p2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("add(Object3D, Object3D)");
+        assertEquals(new Point3D(0.0, 2.0, 2.0), Point3D.add(p1, p2));
+        assertEquals(new Point3D(1.0, 1.0, 3.0), Point3D.add(p1, p3));
+        assertEquals(new Point3D(-1.0, -1.0, -1.0), Point3D.add(p2, p3));
+        assertEquals(p1, Point3D.add(p1, Point3D.ZERO));
     }
 
     /**
