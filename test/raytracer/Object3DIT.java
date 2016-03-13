@@ -228,7 +228,7 @@ public class Object3DIT {
         assertEquals(o1, o1.mul(1.0));
         assertEquals(new Object3D(-3.0, 0.0, -3.0), o2.mul(3.0));
         assertEquals(new Object3D(0.0, -4.0, 0.0), o3.mul(4.0));
-        assertEquals(Object3D.ZERO, o1.mul(Object3D.ZERO));
+        assertEquals(Object3D.ZERO, o1.mul(0.0));
     }
 
     /**

@@ -277,12 +277,12 @@ public class Point3D extends Object3D {
     }
     
     /** 
-     * Transforms this point to a new frame dsefined by vectors 'e1', 'e2' and 'e3'
-     * and origin point 'w'
-     * @param e1 First director vector of target frame
-     * @param e2 Second director vector of target frame
-     * @param e3 Third director vector of target frame
-     * @param w Origin point of target frame
+     * Transforms this point, given in the coordinates system defined by vectors 'e1', 'e2' and 'e3'
+     * and origin point 'w', to the canonic coordinates system
+     * @param e1 First director vector of origin coordinates system
+     * @param e2 Second director vector of origin coordinates system
+     * @param e3 Third director vector of origin coordinates system
+     * @param w Origin point of origin coordinates system
      */
     public void freeBaseChange(Vector3D e1, Vector3D e2, Vector3D e3, Point3D w) {
         double nx = e1.x * x + e2.x * y + e3.x * z + w.x;
@@ -290,7 +290,7 @@ public class Point3D extends Object3D {
         double nz = e1.z * x + e2.z * y + e3.z * z + w.z;
         x = nx;
         y = ny;
-        z = nz;        
+        z = nz;
     }
     
     /**
@@ -362,11 +362,11 @@ public class Point3D extends Object3D {
      * Returns a new point with 'o' / 'd'. If d = 0.0 returns a point initialized to (NAN,NAN,NAN)
      * @param o Three components object that will be divided by double 'd'
      * @param d Value to divide to 'o'
-     * @return Vector with result of the division
+     * @return Vector with result of the division or null if given object is null or a division by zero is found
      */
     static public Point3D div(Object3D o, double d) {
-        if (d == 0)
-            return new Point3D(Double.NaN, Double.NaN, Double.NaN);
+        if (o == null || d == 0)
+            return null;
         return new Point3D(o.x / d, o.y / d, o.z / d);
     }
     

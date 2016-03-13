@@ -235,37 +235,26 @@ public class Point3DIT {
     }
 
     /**
-     * Test of isInPlane method, of class Point3D.
-     */
-    @Test
-    public void testIsInPlane() {
-        System.out.println("isInPlane");
-        double a = 0.0;
-        double b = 0.0;
-        double c = 0.0;
-        double d = 0.0;
-        Point3D instance = new Point3D();
-        boolean expResult = false;
-        boolean result = instance.isInPlane(a, b, c, d);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of freeBaseChange method, of class Point3D.
      */
     @Test
     public void testFreeBaseChange() {
-        System.out.println("freeBaseChange");
-        Vector3D e1 = null;
-        Vector3D e2 = null;
-        Vector3D e3 = null;
-        Point3D w = null;
-        Point3D instance = new Point3D();
-        instance.freeBaseChange(e1, e2, e3, w);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("freeBaseChange(Vector3D, Vector3D, Vector3D, Point3D)");
+        Vector3D e1 = new Vector3D(1.0, 1.0, 4.0);
+        Vector3D e2 = new Vector3D(-1.0, 5.0, 0.0);
+        Vector3D e3 = new Vector3D(2.0, 3.0, 0.0);
+        Point3D w = new Point3D(2.0, 2.0, 0.0);
+        Point3D p = new Point3D(1.0 / 2.0, 1.0 / 4.0, 1.0 / 4.0);
+        p.freeBaseChange(e1, e2, e3, w);
+        assertTrue(new Point3D(11.0 / 4.0, 9.0 / 2.0, 2.0).equals(p, epsilon));
+        
+        e1 = new Vector3D(-2.0, 4.0, -4.0);
+        e2 = new Vector3D(1.0, 2.0, -4.0);
+        e3 = new Vector3D(-1.0, -1.0, -4.0);
+        w = new Point3D(3.0, 3.0, 4.0);
+        p = new Point3D(1.0 / 4.0, 1.0 / 4.0, 0.0);
+        p.freeBaseChange(e1, e2, e3, w);
+        assertTrue(new Point3D(11.0 / 4.0, 9.0 / 2.0, 2.0).equals(p, epsilon));
     }
 
     /**
@@ -337,14 +326,13 @@ public class Point3DIT {
      */
     @Test
     public void testSub() {
-        System.out.println("sub");
-        Object3D o1 = null;
-        Object3D o2 = null;
-        Point3D expResult = null;
-        Point3D result = Point3D.sub(o1, o2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("sub(Object3D, Object3D)");
+        assertEquals(new Point3D(2.0, 2.0, 4.0), Point3D.sub(p1, p2));
+        assertEquals(new Point3D(1.0, 3.0, 3.0), Point3D.sub(p1, p3));
+        assertEquals(p1, Point3D.sub(p1, Point3D.ZERO));
+        assertEquals(new Point3D(-1.0, 1.0, -1.0), Point3D.sub(p2, p3));
+        assertEquals(p1.mul(-1.0), Point3D.sub(Point3D.ZERO, p1));
+        assertFalse(Point3D.sub(p1, p2).equals(Point3D.sub(p2, p1)));
     }
 
     /**
@@ -352,14 +340,12 @@ public class Point3DIT {
      */
     @Test
     public void testDiv() {
-        System.out.println("div");
-        Object3D o = null;
-        double d = 0.0;
-        Point3D expResult = null;
-        Point3D result = Point3D.div(o, d);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("div(Object3D, double)");
+        assertEquals(new Point3D(0.5, 1.0, 1.5), Point3D.div(p1, 2.0));
+        assertEquals(null, Point3D.div(p1, 0.0));
+        assertEquals(p1, Point3D.div(p1, 1.0));
+        assertEquals(new Object3D(-1.0 / 3.0, 0.0, -1.0 / 3.0), Point3D.div(p2, 3.0));
+        assertEquals(new Object3D(0.0, -1.0 / 4.0, 0.0), Point3D.div(p3, 4.0));
     }
 
     /**
@@ -367,14 +353,12 @@ public class Point3DIT {
      */
     @Test
     public void testMul() {
-        System.out.println("mul");
-        Object3D o = null;
-        double d = 0.0;
-        Point3D expResult = null;
-        Point3D result = Point3D.mul(o, d);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("mul(Object3D, double)");
+        assertEquals(new Object3D(2.0, 4.0, 6.0), Point3D.mul(p1, 2.0));
+        assertEquals(p1, Point3D.mul(p1, 1.0));
+        assertEquals(new Object3D(-3.0, 0.0, -3.0), Point3D.mul(p2, 3.0));
+        assertEquals(new Object3D(0.0, -4.0, 0.0), Point3D.mul(p3, 4.0));
+        assertEquals(Object3D.ZERO, Point3D.mul(p1, 0.0));
     }
 
     /**
@@ -382,17 +366,20 @@ public class Point3DIT {
      */
     @Test
     public void testIsInPlane_4args() {
-        System.out.println("isInPlane");
-        double a = 0.0;
-        double b = 0.0;
-        double c = 0.0;
-        double d = 0.0;
-        Point3D instance = new Point3D();
-        boolean expResult = false;
-        boolean result = instance.isInPlane(a, b, c, d);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("isInPlane(double, double, double, double)");
+        double a = -3.0;
+        double b = -1.0;
+        double c = 2.0;
+        double d = -1.0;
+        assertTrue(p1.isInPlane(a, b, c, d));
+        assertTrue(p2.isInPlane(a, b, c, d));
+        assertTrue(p3.isInPlane(a, b, c, d));
+        assertFalse(Point3D.ZERO.isInPlane(a, b, c, d));
+        d = 0.0;
+        assertFalse(p1.isInPlane(a, b, c, d));
+        assertFalse(p2.isInPlane(a, b, c, d));
+        assertFalse(p3.isInPlane(a, b, c, d));
+        assertTrue(Point3D.ZERO.isInPlane(a, b, c, d));
     }
 
     /**
@@ -400,18 +387,20 @@ public class Point3DIT {
      */
     @Test
     public void testIsInPlane_5args() {
-        System.out.println("isInPlane");
-        double a = 0.0;
-        double b = 0.0;
-        double c = 0.0;
-        double d = 0.0;
-        double epsilon = 0.0;
-        Point3D instance = new Point3D();
-        boolean expResult = false;
-        boolean result = instance.isInPlane(a, b, c, d, epsilon);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("isInPlane(double, double, double, double, double)");
+        double a = -3.0;
+        double b = -1.0;
+        double c = 2.0;
+        double d = -1.0;
+        assertTrue(p1.isInPlane(a, b, c, d, epsilon));
+        assertTrue(p2.isInPlane(a, b, c, d, epsilon));
+        assertTrue(p3.isInPlane(a, b, c, d, epsilon));
+        assertFalse(Point3D.ZERO.isInPlane(a, b, c, d, epsilon));
+        d = 0.0;
+        assertFalse(p1.isInPlane(a, b, c, d, epsilon));
+        assertFalse(p2.isInPlane(a, b, c, d, epsilon));
+        assertFalse(p3.isInPlane(a, b, c, d, epsilon));
+        assertTrue(Point3D.ZERO.isInPlane(a, b, c, d, epsilon));
     }
     
 }
