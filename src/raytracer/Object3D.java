@@ -338,7 +338,7 @@ public class Object3D {
      */
     @Override
     public boolean equals(Object o) {
-        if (o != null || o instanceof Object3D) {
+        if (o != null && o instanceof Object3D) {
             return ((Object3D)o).x == x && 
                    ((Object3D)o).y == y &&
                    ((Object3D)o).z == z;

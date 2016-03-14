@@ -18,6 +18,11 @@ import static org.junit.Assert.*;
  */
 public class MatrixNxMIT {
 
+    private double[][] m1; 
+    private double[][] m2; 
+    private double[][] m3;
+    private double[][] m4;
+    private double[][] m23;
     private MatrixNxM matrix1;
     private MatrixNxM matrix2;
     private MatrixNxM matrix3;
@@ -37,22 +42,22 @@ public class MatrixNxMIT {
     
     @Before
     public void setUp() {
-        double[][] m1 = { {1} }; 
+        m1 = new double[][] { {1} }; 
+        m2 = new double[][] { {-1, 0},
+                              {-2, 5 } }; 
+        m3 = new double[][] { {6,-1, 2}, 
+                              {3, 1, 2},
+                              {0, 1, 3} };
+        m4 = new double[][] { {1, 0, 1, 2}, 
+                              {0, 1, 2, 1},
+                              {3, 1, 1, 0},
+                              {1, 1, 2, 4} };
+        m23 = new double[][] { {-1, -1, 2}, 
+                               {3, 0, -2} };
         matrix1 = new MatrixNxM(m1);
-        double[][] m2 = { {-1, 0},
-                          {-2, 5 } }; 
         matrix2 = new MatrixNxM(m2);
-        double[][] m3 = { {6,-1, 2}, 
-                          {3, 1, 2},
-                          {0, 1, 3} };
         matrix3 = new MatrixNxM(m3);
-        double[][] m4 = { {1, 0, 1, 2}, 
-                         {0, 1, 2, 1},
-                         {3, 1, 1, 0},
-                         {1, 1, 2, 4} };
         matrix4 = new MatrixNxM(m4);
-        double[][] m23 = { {-1, -1, 2}, 
-                          {3, 0, -2} };
         matrix23 = new MatrixNxM(m23);
     }
     
@@ -66,12 +71,11 @@ public class MatrixNxMIT {
     @Test
     public void testGetRows() {
         System.out.println("getRows");
-        MatrixNxM instance = new MatrixNxM();
-        int expResult = 0;
-        int result = instance.getRows();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(1, matrix1.getRows());
+        assertEquals(2, matrix2.getRows());
+        assertEquals(3, matrix3.getRows());
+        assertEquals(4, matrix4.getRows());
+        assertEquals(2, matrix23.getRows());
     }
 
     /**
@@ -80,12 +84,11 @@ public class MatrixNxMIT {
     @Test
     public void testGetColumns() {
         System.out.println("getColumns");
-        MatrixNxM instance = new MatrixNxM();
-        int expResult = 0;
-        int result = instance.getColumns();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(1, matrix1.getColumns());
+        assertEquals(2, matrix2.getColumns());
+        assertEquals(3, matrix3.getColumns());
+        assertEquals(4, matrix4.getColumns());
+        assertEquals(3, matrix23.getColumns());
     }
 
     /**
@@ -94,13 +97,50 @@ public class MatrixNxMIT {
     @Test
     public void testEquals() {
         System.out.println("equals");
-        MatrixNxM m = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.equals(m);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(matrix1.equals(new MatrixNxM(m1)));
+        m1[0][0] = -1;
+        assertFalse(matrix1.equals(new MatrixNxM(m1)));
+
+        assertTrue(matrix2.equals(new MatrixNxM(m2)));
+        m2[1][1] = 0;
+        assertFalse(matrix2.equals(new MatrixNxM(m2)));
+        
+        assertTrue(matrix3.equals(new MatrixNxM(m3)));
+        m3[2][2] = 0;
+        assertFalse(matrix3.equals(new MatrixNxM(m3)));
+
+        assertTrue(matrix4.equals(new MatrixNxM(m4)));
+        m4[3][3] = 0;
+        assertFalse(matrix4.equals(new MatrixNxM(m4)));
+        
+        assertTrue(matrix23.equals(new MatrixNxM(m23)));
+        m23[1][1] = 1;
+        assertFalse(matrix23.equals(new MatrixNxM(m23)));
+        
+        assertFalse(matrix1.equals(matrix2));
+        assertFalse(matrix1.equals(matrix3));
+        assertFalse(matrix1.equals(matrix4));
+        assertFalse(matrix1.equals(matrix23));
+        
+        assertFalse(matrix2.equals(matrix1));
+        assertFalse(matrix2.equals(matrix3));
+        assertFalse(matrix2.equals(matrix4));
+        assertFalse(matrix2.equals(matrix23));
+        
+        assertFalse(matrix3.equals(matrix1));
+        assertFalse(matrix3.equals(matrix2));
+        assertFalse(matrix3.equals(matrix4));
+        assertFalse(matrix3.equals(matrix23));
+
+        assertFalse(matrix4.equals(matrix1));
+        assertFalse(matrix4.equals(matrix2));
+        assertFalse(matrix4.equals(matrix3));
+        assertFalse(matrix4.equals(matrix23));
+
+        assertFalse(matrix23.equals(matrix1));
+        assertFalse(matrix23.equals(matrix2));
+        assertFalse(matrix23.equals(matrix3));
+        assertFalse(matrix23.equals(matrix4));
     }
 
     /**
@@ -109,10 +149,11 @@ public class MatrixNxMIT {
     @Test
     public void testTranspose() {
         System.out.println("transpose");
-        MatrixNxM instance = new MatrixNxM();
-        instance.transpose();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(matrix1.transpose(), new MatrixNxM(new double[][] {{1}}));
+        assertEquals(matrix2.transpose(), new MatrixNxM(new double[][] {{-1, -2}, {0, 5}}));
+        assertEquals(matrix3.transpose(), new MatrixNxM(new double[][] {{6, 3, 0}, {-1, 1, 1}, {2, 2, 3}}));
+        assertEquals(matrix4.transpose(), new MatrixNxM(new double[][] {{1, 0, 3, 1}, {0, 1, 1, 1}, {1, 2, 1, 2}, {2, 1, 0, 4}}));
+        assertEquals(matrix23.transpose(), new MatrixNxM(new double[][] {{-1, 3}, {-1, 0}, {2, -2}}));
     }
 
     /**
@@ -121,12 +162,16 @@ public class MatrixNxMIT {
     @Test
     public void testGetInverse() {
         System.out.println("getInverse");
-        MatrixNxM instance = new MatrixNxM();
-        MatrixNxM expResult = null;
-        MatrixNxM result = instance.getInverse();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(matrix1.getInverse(), new MatrixNxM(new double[][] {{1}}));
+        assertEquals(matrix2.getInverse(), new MatrixNxM(new double[][] {{-1, 0}, {-2.0 / 5.0, 1.0 / 5.0}}));
+        assertEquals(matrix3.getInverse(), new MatrixNxM(new double[][] {{1.0 / 21.0, 5.0 / 21.0, -4.0 / 21.0}, 
+                                                                         {-3.0 / 7.0, 6.0 / 7.0, -2.0 / 7.0}, 
+                                                                         {1.0 / 7.0, -2.0 / 7.0, 3.0 / 7.0}}));
+        assertEquals(matrix4.getInverse(), new MatrixNxM(new double[][] {{3.0 / 11.0, -2.0 / 11.0, 3.0 / 11.0, -1.0 / 11.0}, 
+                                                                         {-19.0 / 11.0, -2.0 / 11.0, 3.0 / 11.0, 10.0 / 11.0}, 
+                                                                         {10.0 / 11.0, 8.0 / 11.0, -1.0 / 11.0, -7.0 / 11.0}, 
+                                                                         {-1.0 / 11.0, -3.0 / 11.0, -1.0 / 11.0, 4.0 / 11.0}}));
+        assertNull(matrix23.getInverse());
     }
 
     /**
@@ -557,6 +602,20 @@ public class MatrixNxMIT {
         MatrixNxM instance = new MatrixNxM();
         boolean expResult = false;
         boolean result = instance.toScale(o);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of hashCode method, of class MatrixNxM.
+     */
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        MatrixNxM instance = new MatrixNxM();
+        int expResult = 0;
+        int result = instance.hashCode();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

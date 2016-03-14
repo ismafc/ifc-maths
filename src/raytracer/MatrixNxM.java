@@ -10,6 +10,8 @@
 
 package raytracer;
 
+import java.util.Arrays;
+
 /**
  * Implements a 4 x 4 matrix (of double values)
  * This Matrix has at least 1x1 dimension
@@ -116,29 +118,47 @@ public class MatrixNxM {
     
     /** 
      * Checks if 'matrix' is equal to this matrix
-     * @param m The matrix to compare with
+     * @param o The matrix to compare with
      * @return True if both matrix are equals and False if not
      */
-    public boolean equals(MatrixNxM m) {
-        if (rows != m.rows || columns != m.columns)
-            return false;
-        for (int i = 0; i < m.rows; i++)
-            for (int j = 0; j < m.columns; j++)
-                if (values[i][j] != m.values[i][j])
-                    return false;
-        return true;
+    @Override
+    public boolean equals(Object o) {
+        if (o != null && o instanceof MatrixNxM) {
+            MatrixNxM m = (MatrixNxM)o;
+            if (rows != m.rows || columns != m.columns)
+                return false;
+            for (int i = 0; i < m.rows; i++)
+                for (int j = 0; j < m.columns; j++)
+                    if (values[i][j] != m.values[i][j])
+                        return false;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Generates hash code for this MatrixNxM
+     * @return integer with hash code based on 'rows', 'columns' and 'values'
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + this.rows;
+        hash = 59 * hash + this.columns;
+        hash = 59 * hash + Arrays.deepHashCode(this.values);
+        return hash;
     }
     
     /** 
-     * Transpose this matrix
+     * Transpose this matrix 
+     * @return MatrixNxM with this matrix transposed
      */
-    public void transpose() {
+    public MatrixNxM transpose() {
         double[][] v = new double [columns][rows];
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < columns; j++)
                 v[j][i] = values[i][j];
-        values = v;
-        inverseMatrix = null;
+        return new MatrixNxM(v);
     }
     
     /** 
@@ -150,7 +170,7 @@ public class MatrixNxM {
         if (inverseMatrix != null)
             return inverseMatrix;
         double d = determinant(values);
-        if (d == 0.0 || d == Double.NaN)
+        if (d == 0.0 || Double.isNaN(d))
             return null;
         inverseMatrix = new MatrixNxM(rows, columns);
         // Transposed adjunts matrix divided by determinant
@@ -681,7 +701,7 @@ public class MatrixNxM {
                     subv[(ni < i) ? ni : ni - 1][(nj < j) ? nj : nj - 1] = v[ni][nj];
             }
         }
-        return ((((i + j) % 2) == 0) ? 1.0 : -1.0) * determinant(subv);
+        return ((((i + j) % 2) == 0) ? 1.0 : -1.0) * ((subv.length == 0) ? 1.0 : determinant(subv));
     }
     
     /** 
