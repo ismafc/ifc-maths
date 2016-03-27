@@ -200,12 +200,15 @@ public class MatrixNxM {
      * @param i Row of target value
      * @param j Column of target value
      * @param v New value in (i, j)
+     * @return True if value has been asigned to required position, False otherwise
      */
-    public void set(int i, int j, double v) {
+    public boolean set(int i, int j, double v) {
         if (i >= 0 && i < rows && j >= 0 && j < columns) {
             values[i][j] = v;
             inverseMatrix = null;
+            return true;
         }
+        return false;
     }
 
     /** 
@@ -213,7 +216,7 @@ public class MatrixNxM {
      * if (row, column) is out of range, NaN is returned
      * @param row Row of target value
      * @param column Column of target value
-     * @return Double with value in (row, column)
+     * @return Double with value in (row, column), NaN otherwise
      */
     public double get(int row, int column) {
         if (row >= 0 && row < rows && column >= 0 && column < columns) {

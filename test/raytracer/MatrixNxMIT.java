@@ -180,12 +180,23 @@ public class MatrixNxMIT {
     @Test
     public void testInvert() {
         System.out.println("invert");
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.invert();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(matrix1.invert());
+        assertEquals(matrix1, new MatrixNxM(new double[][] {{1}}));
+        
+        assertTrue(matrix2.invert());
+        assertEquals(matrix2, new MatrixNxM(new double[][] {{-1, 0}, {-2.0 / 5.0, 1.0 / 5.0}}));
+        
+        assertTrue(matrix3.invert());
+        assertEquals(matrix3, new MatrixNxM(new double[][] {{1.0 / 21.0, 5.0 / 21.0, -4.0 / 21.0}, 
+                                                            {-3.0 / 7.0, 6.0 / 7.0, -2.0 / 7.0}, 
+                                                            {1.0 / 7.0, -2.0 / 7.0, 3.0 / 7.0}}));
+        
+        assertTrue(matrix4.invert());
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{3.0 / 11.0, -2.0 / 11.0, 3.0 / 11.0, -1.0 / 11.0}, 
+                                                            {-19.0 / 11.0, -2.0 / 11.0, 3.0 / 11.0, 10.0 / 11.0}, 
+                                                            {10.0 / 11.0, 8.0 / 11.0, -1.0 / 11.0, -7.0 / 11.0}, 
+                                                            {-1.0 / 11.0, -3.0 / 11.0, -1.0 / 11.0, 4.0 / 11.0}}));
+        assertFalse(matrix23.invert());
     }
 
     /**
@@ -193,14 +204,18 @@ public class MatrixNxMIT {
      */
     @Test
     public void testSet_3args() {
-        System.out.println("set");
-        int i = 0;
-        int j = 0;
-        double v = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        instance.set(i, j, v);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("set(int, int, double)");
+        assertFalse(matrix1.set(0, 1, 0.0));
+        assertFalse(matrix1.set(1, 0, 0.0));
+        assertFalse(matrix1.set(-1, -1, 0.0));
+        assertTrue(matrix1.set(0, 0, -1.0));
+        assertTrue(matrix1.get(0, 0) == -1.0);
+
+        assertFalse(matrix23.set(2, 0, 0.0));
+        assertFalse(matrix23.set(0, 3, 0.0));
+        assertFalse(matrix23.set(-1, -1, 0.0));
+        assertTrue(matrix23.set(1, 2, -1.0));
+        assertTrue(matrix23.get(1, 2) == -1.0);
     }
 
     /**
@@ -208,15 +223,21 @@ public class MatrixNxMIT {
      */
     @Test
     public void testGet() {
-        System.out.println("get");
-        int row = 0;
-        int column = 0;
-        MatrixNxM instance = new MatrixNxM();
-        double expResult = 0.0;
-        double result = instance.get(row, column);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("get(int, int)");
+        assertTrue(Double.isNaN(matrix1.get(0, 1)));
+        assertTrue(Double.isNaN(matrix1.get(1, 0)));
+        assertTrue(Double.isNaN(matrix1.get(-1, -1)));
+        assertTrue(matrix1.get(0, 0) == 1);
+
+        assertTrue(Double.isNaN(matrix23.get(2, 0)));
+        assertTrue(Double.isNaN(matrix23.get(0, 3)));
+        assertTrue(Double.isNaN(matrix23.get(-1, -1)));
+        assertTrue(matrix23.get(1, 2) == -2);
+    
+        assertTrue(matrix2.get(0, 0) == -1);
+        assertTrue(matrix2.get(1, 0) == -2);
+        assertTrue(matrix2.get(0, 1) == 0);
+        assertTrue(matrix2.get(1, 1) == 5);
     }
 
     /**
@@ -224,12 +245,18 @@ public class MatrixNxMIT {
      */
     @Test
     public void testSet_MatrixNxM() {
-        System.out.println("set");
-        MatrixNxM m = null;
-        MatrixNxM instance = new MatrixNxM();
-        instance.set(m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("set(MatrixNxM)");
+        MatrixNxM maux = new MatrixNxM();
+        maux.set(matrix1);
+        assertEquals(maux, matrix1);
+        maux.set(matrix2);
+        assertEquals(maux, matrix2);
+        maux.set(matrix3);
+        assertEquals(maux, matrix3);
+        maux.set(matrix4);
+        assertEquals(maux, matrix4);
+        maux.set(matrix23);
+        assertEquals(maux, matrix23);
     }
 
     /**
@@ -237,12 +264,17 @@ public class MatrixNxMIT {
      */
     @Test
     public void testMul_double() {
-        System.out.println("mul");
-        double v = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        instance.mul(v);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("mul(double)");
+        matrix1.mul(4);
+        assertEquals(matrix1, new MatrixNxM(new double[][] {{4}}));
+        matrix2.mul(2);
+        assertEquals(matrix2, new MatrixNxM(new double[][] {{-2, 0}, {-4, 10 }}));
+        matrix23.mul(-3);
+        assertEquals(matrix23, new MatrixNxM(new double[][] {{3, 3, -6}, {-9, 0, 6}}));
+        matrix3.mul(-1);
+        assertEquals(matrix3, new MatrixNxM(new double[][] {{-6, 1, -2}, {-3, -1, -2}, {0, -1, -3}}));
+        matrix4.mul(1);
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{1, 0, 1, 2}, {0, 1, 2, 1}, {3, 1, 1, 0}, {1, 1, 2, 4}}));
     }
 
     /**
