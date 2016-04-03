@@ -118,29 +118,43 @@ public class Box3D {
     }
     
     /** 
-     * Makes this box greater to contain this box and provided object 'o' (ussually a point)
+     * Returns minimum Box3D containing this box and provided object 'o' (usually a point)
      * @param o Object to contain
+     * @return Minimum Box3D that includes this Box3D a given Object3D
      */
-    public void union(Object3D o) {
-        pMin.x = (o.x < pMin.x) ? o.x : pMin.x;
-        pMin.y = (o.y < pMin.y) ? o.y : pMin.y;
-        pMin.z = (o.z < pMin.z) ? o.z : pMin.z;
-        pMax.x = (o.x > pMax.x) ? o.x : pMax.x;
-        pMax.y = (o.y > pMax.y) ? o.y : pMax.y;
-        pMax.z = (o.z > pMax.z) ? o.z : pMax.z;
+    public Box3D union(Object3D o) {
+        return new Box3D(
+                    new Point3D(
+                        (o.x < pMin.x) ? o.x : pMin.x,
+                        (o.y < pMin.y) ? o.y : pMin.y,
+                        (o.z < pMin.z) ? o.z : pMin.z
+                    ),
+                    new Point3D(
+                        (o.x > pMax.x) ? o.x : pMax.x,
+                        (o.y > pMax.y) ? o.y : pMax.y,
+                        (o.z > pMax.z) ? o.z : pMax.z
+                    )
+        );
     }
 
     /** 
-     * Makes this box greater to contain this box and provided box 'b'
+     * MReturns minimum Box3D containing this box and provided Box3D 'b'
      * @param b Box to contain
+     * @return Minimum Box3D that includes this Box3D a given Box3D
      */
-    public void union(Box3D b) {
-        pMin.x = (b.pMin.x < pMin.x) ? b.pMin.x : pMin.x;
-        pMin.y = (b.pMin.y < pMin.y) ? b.pMin.y : pMin.y;
-        pMin.z = (b.pMin.x < pMin.z) ? b.pMin.z : pMin.z;
-        pMax.x = (b.pMax.x > pMax.x) ? b.pMax.x : pMax.x;
-        pMax.y = (b.pMax.y > pMax.y) ? b.pMax.y : pMax.y;
-        pMax.z = (b.pMax.x > pMax.z) ? b.pMax.z : pMax.z;
+    public Box3D union(Box3D b) {
+        return new Box3D(
+                    new Point3D(
+                        (b.pMin.x < pMin.x) ? b.pMin.x : pMin.x,
+                        (b.pMin.y < pMin.y) ? b.pMin.y : pMin.y,
+                        (b.pMin.z < pMin.z) ? b.pMin.z : pMin.z
+                    ),
+                    new Point3D(
+                        (b.pMax.x > pMax.x) ? b.pMax.x : pMax.x,
+                        (b.pMax.y > pMax.y) ? b.pMax.y : pMax.y,
+                        (b.pMax.z > pMax.z) ? b.pMax.z : pMax.z
+                    )
+        );
     }
     
     /** 
@@ -171,6 +185,7 @@ public class Box3D {
      * @param delta value to expand
      */
     public void expand(double delta) {
+        delta = Math.abs(delta);
         pMin.sub(delta, delta, delta);
         pMin.add(delta, delta, delta);
     }
@@ -191,13 +206,7 @@ public class Box3D {
      * @return The minimum box containing 'b' and 'o'
      */
     static public Box3D union(Box3D b, Object3D o) {
-        Point3D pMin = new Point3D((o.x < b.pMin.x) ? o.x : b.pMin.x,
-                                   (o.y < b.pMin.y) ? o.y : b.pMin.y,
-                                   (o.x < b.pMin.z) ? o.z : b.pMin.z);
-        Point3D pMax = new Point3D((o.x > b.pMax.x) ? o.x : b.pMax.x,
-                                   (o.y > b.pMax.y) ? o.y : b.pMax.y,
-                                   (o.x > b.pMax.z) ? o.z : b.pMax.z);
-        return new Box3D(pMin, pMax);
+        return b.union(o);
     }    
     
     /** 
@@ -207,13 +216,7 @@ public class Box3D {
      * @return The minimum box containing 'b1' and 'b2'
      */
     static public Box3D union(Box3D b1, Box3D b2) {
-        Point3D pMin = new Point3D((b1.pMin.x < b2.pMin.x) ? b1.pMin.x : b2.pMin.x,
-                                   (b1.pMin.y < b2.pMin.y) ? b1.pMin.y : b2.pMin.y,
-                                   (b1.pMin.x < b2.pMin.z) ? b1.pMin.z : b2.pMin.z);
-        Point3D pMax = new Point3D((b1.pMax.x > b2.pMax.x) ? b1.pMax.x : b2.pMax.x,
-                                   (b1.pMax.y > b2.pMax.y) ? b1.pMax.y : b2.pMax.y,
-                                   (b1.pMax.x > b2.pMax.z) ? b1.pMax.z : b2.pMax.z);
-        return new Box3D(pMin, pMax);
+        return b1.union(b2);
     }
     
     /** 

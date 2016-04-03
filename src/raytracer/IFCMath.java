@@ -289,6 +289,17 @@ public class IFCMath {
     }
 
     /**
+     * Calculates Least common multiple between 'n1' and 'n2'.
+     * If returned value is n1 * n2, both values are prime between theirs
+     * @param n1 first value to check
+     * @param n2 second value to check
+     * @return Least common multiple found
+     */
+    public static long MCM(long n1, long n2) {
+        return (n1 * n2) / MCD(n1, n2);
+    }
+    
+    /**
      * Calculates exponentiation 'n'^'e'
      * @param n base for exponentiation
      * @param e exponent (or index or power)

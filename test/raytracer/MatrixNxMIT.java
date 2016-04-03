@@ -209,13 +209,13 @@ public class MatrixNxMIT {
         assertFalse(matrix1.set(1, 0, 0.0));
         assertFalse(matrix1.set(-1, -1, 0.0));
         assertTrue(matrix1.set(0, 0, -1.0));
-        assertTrue(matrix1.get(0, 0) == -1.0);
+        assertEquals(-1.0, matrix1.get(0, 0), 0.0);
 
         assertFalse(matrix23.set(2, 0, 0.0));
         assertFalse(matrix23.set(0, 3, 0.0));
         assertFalse(matrix23.set(-1, -1, 0.0));
         assertTrue(matrix23.set(1, 2, -1.0));
-        assertTrue(matrix23.get(1, 2) == -1.0);
+        assertEquals(-1.0, matrix23.get(1, 2), 0.0);
     }
 
     /**
@@ -227,17 +227,17 @@ public class MatrixNxMIT {
         assertTrue(Double.isNaN(matrix1.get(0, 1)));
         assertTrue(Double.isNaN(matrix1.get(1, 0)));
         assertTrue(Double.isNaN(matrix1.get(-1, -1)));
-        assertTrue(matrix1.get(0, 0) == 1);
+        assertEquals(1.0, matrix1.get(0, 0), 0.0);
 
         assertTrue(Double.isNaN(matrix23.get(2, 0)));
         assertTrue(Double.isNaN(matrix23.get(0, 3)));
         assertTrue(Double.isNaN(matrix23.get(-1, -1)));
-        assertTrue(matrix23.get(1, 2) == -2);
+        assertEquals(-2.0, matrix23.get(1, 2), 0.0);
     
-        assertTrue(matrix2.get(0, 0) == -1);
-        assertTrue(matrix2.get(1, 0) == -2);
-        assertTrue(matrix2.get(0, 1) == 0);
-        assertTrue(matrix2.get(1, 1) == 5);
+        assertEquals(-1.0, matrix2.get(0, 0), 0.0);
+        assertEquals(-2.0, matrix2.get(1, 0), 0.0);
+        assertEquals(0.0, matrix2.get(0, 1), 0.0);
+        assertEquals(5.0, matrix2.get(1, 1), 5.0);
     }
 
     /**

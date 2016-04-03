@@ -359,5 +359,20 @@ public class IFCMathIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of MCM method, of class IFCMath.
+     */
+    @Test
+    public void testMCM() {
+        System.out.println("MCM");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCM(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
