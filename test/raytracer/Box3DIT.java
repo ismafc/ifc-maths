@@ -176,12 +176,22 @@ public class Box3DIT {
      */
     @Test
     public void testExpand() {
-        System.out.println("expand");
-        double delta = 0.0;
-        Box3D instance = new Box3D();
-        instance.expand(delta);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("expand(double)");
+        double delta = 1.0;
+        Box3D b1 = big.expand(delta);
+        Box3D b2 = big.expand(-delta);
+        assertEquals(b1, b2);
+        assertEquals(b1, new Box3D(new Point3D(-2, -2, -2), new Point3D(2, 3, 4)));
+        
+        b1 = small.expand(delta);
+        b2 = small.expand(-delta);
+        assertEquals(b1, b2);
+        assertEquals(b1, new Box3D(new Point3D(-1.5, -1, 0), new Point3D(1.5, 2, 3)));
+        
+        b1 = external.expand(delta);
+        b2 = external.expand(-delta);
+        assertEquals(b1, b2);
+        assertEquals(b1, new Box3D(new Point3D(-6, -5, -6), new Point3D(-3, -2, -2)));
     }
 
     /**
@@ -301,14 +311,15 @@ public class Box3DIT {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
-        Box3D b = null;
-        Box3D instance = new Box3D();
-        boolean expResult = false;
-        boolean result = instance.equals(b);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("equals(Object)");
+        assertFalse(big.equals(small));
+        assertFalse(small.equals(big));
+        assertFalse(big.equals(external));
+        assertFalse(external.equals(big));
+        assertFalse(small.equals(external));
+        assertFalse(external.equals(small));
+        assertTrue(big.equals(small.union(big)));
+        assertTrue(big.union(small).equals(big));
     }
 
     /**
@@ -317,12 +328,9 @@ public class Box3DIT {
     @Test
     public void testToString() {
         System.out.println("toString");
-        Box3D instance = new Box3D();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(big.toString(), "[(-1.0, -1.0, -1.0), (1.0, 2.0, 3.0)]");
+        assertEquals(small.toString(), "[(-0.5, 0.0, 1.0), (0.5, 1.0, 2.0)]");
+        assertEquals(external.toString(), "[(-5.0, -4.0, -5.0), (-4.0, -3.0, -3.0)]");
     }
 
     /**
@@ -331,12 +339,9 @@ public class Box3DIT {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Box3D instance = new Box3D();
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(big.hashCode(), -1609395485);
+        assertEquals(small.hashCode(), -1561685277);
+        assertEquals(external.hashCode(), -501050653);
     }
     
 }

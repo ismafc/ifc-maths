@@ -58,11 +58,11 @@ public class Box3D {
     }
 
     /** 
-     * Creates a new instance of Box3D defined by two points
+     * Creates a new instance of Box3D defined by two Object3D (points)
      * @param p1 First corner point
      * @param p2 Second corner point
      */
-    public Box3D(Point3D p1, Point3D p2) {
+    public Box3D(Object3D p1, Object3D p2) {
         super();
         if (p1 == null || p2 == null) {
             pMin = new Point3D(Double.NEGATIVE_INFINITY, 
@@ -183,11 +183,14 @@ public class Box3D {
     /** 
      * Expand this box 'delta' value in all directions
      * @param delta value to expand
+     * @return Box3D with expanded Box3D in absolute value of 'delta' units
      */
-    public void expand(double delta) {
+    public Box3D expand(double delta) {
         delta = Math.abs(delta);
-        pMin.sub(delta, delta, delta);
-        pMin.add(delta, delta, delta);
+        return new Box3D(
+                    pMin.sub(delta, delta, delta),
+                    pMax.add(delta, delta, delta)
+        );
     }
     
     /** 
