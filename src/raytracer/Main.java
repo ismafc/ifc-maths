@@ -6,6 +6,7 @@
 
 package raytracer;
 
+import ProjectEuler.P140_149.Problem147;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;
@@ -989,6 +990,7 @@ Números de Friedman:
         System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 
                                                            Runtime.getRuntime().totalMemory() + "/" + 
                                                            Runtime.getRuntime().maxMemory() + ")");
+        
         Complex initialValue = new Complex(0.0, 0.0);
         System.out.println("c = -1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(-1,0), 10));
         System.out.println("c = 1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(1,0), 10));
