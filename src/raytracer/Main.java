@@ -984,6 +984,7 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
+        ProjectEuler.P140_149.Problem149.problem149();
         // End PE
 
         System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
@@ -1001,9 +1002,8 @@ Números de Friedman:
         System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.250001,0), 10000));
         System.out.println("c = 0.25000001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25000001,0), 100000));
         System.out.println("");
-
-        
-        final int MAX_FRACTAL_DIMENSION = 600;
+  
+        final int MAX_FRACTAL_DIMENSION = 800;
         JFractalDialog myDialog = new JFractalDialog((JFrame)null, "Mandelbrot set", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         myDialog.setPreferredSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
@@ -1011,12 +1011,11 @@ Números de Friedman:
 
         myDialog.setDimensions(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
         myDialog.clearColors();
-        myDialog.addColor(Color.black);
-        myDialog.addColor(Color.blue);
+        myDialog.addColor(Color.PINK);
+        myDialog.addColor(Color.red);
         myDialog.addColor(Color.white);
-        myDialog.setMandelbrotColor(Color.white);
+        myDialog.setMandelbrotColor(Color.yellow);
         myDialog.createMandelbrot(40);
-
 
 /*
         final int MAX_FRACTAL_DIMENSION = 300;
@@ -1039,13 +1038,20 @@ Números de Friedman:
         }
         myDialog.setAnimationFrameTime(40);
         myDialog.GO();
- */
-
-/*        
+*/
+/*  
+        final int MAX_FRACTAL_DIMENSION = 300;
+        JFractalDialog myDialog = new JFractalDialog((JFrame)null, "Mandelbrot set", true);
+        myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        myDialog.setPreferredSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
+        myDialog.setMinimumSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
+        myDialog.addColor(Color.black);
+        myDialog.addColor(Color.red);
+        myDialog.addColor(Color.white);
         for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
         myDialog.GO();
-*/ 
+*/
 
         myDialog.setVisible(true);
         myDialog.STOP();

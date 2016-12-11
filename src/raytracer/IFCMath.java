@@ -495,5 +495,32 @@ public class IFCMath {
         }
         return steps;
     }
+
+    /**
+     * Calculates the maximum sum of adjacent numbers in the provided array of longs
+     * @param numbers array of longs where we will find
+     * @return maximum sum of adjacent numbers found
+     */
+    public static long max_sum_adjacent_numbers(long[] numbers) {
+        int i = 0;
+        long max_sum = Long.MIN_VALUE;
+        while (i < numbers.length) {
+            // Find next value > 0
+            while (i < numbers.length && numbers[i] < 0) {
+                if (numbers[i] > max_sum)
+                    max_sum = numbers[i];
+                i++;
+            }
+            // Calculate next sums until it is less than 0
+            long act_sum = 0;
+            while (i < numbers.length && act_sum >= 0) {
+                act_sum += numbers[i];
+                if (act_sum > max_sum)
+                    max_sum = act_sum;
+                i++;
+            }
+        }
+        return max_sum;
+    }
     
 }
