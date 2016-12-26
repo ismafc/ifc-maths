@@ -984,7 +984,6 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
-        ProjectEuler.P140_149.Problem149.problem149();
         // End PE
 
         System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
