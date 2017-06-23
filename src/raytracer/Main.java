@@ -6,6 +6,7 @@
 
 package raytracer;
 
+import Library.Sudoku;
 import ProjectEuler.P140_149.Problem147;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
@@ -984,8 +985,18 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
+        //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
 
+        Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,5,0,3,0,0,0,0,0,8,0,0,0,0,0,1,0,0,0,6,0,0,0,4,7,3,0,0,0,0,0,3,0,0,9,0,0,1,2,4,7,5,0,0,7,0,0,6,0,0,0,0,0,4,3,9,0,0,0,8,0,0,0,1,0,0,0,0,0,9,0,0,0,0,0,1,0,2,0,0)));
+        ArrayList<Sudoku> solutions = sudoku.solve(false);
+        if (solutions.size() > 1)
+            System.out.println("Más de una solución posible");
+        else if (solutions.isEmpty())
+            System.out.println("No hay soluciones posibles");
+        else
+            System.out.println(solutions.get(0).toString());
+        
         System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
         System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 
                                                            Runtime.getRuntime().totalMemory() + "/" + 
@@ -1165,10 +1176,10 @@ Números de Friedman:
         mat.invert();
         System.out.println("Inverse = " + mat);
         
-        Box3D b = new Box3D(new Point3D(-1,-1,-1), new Point3D(1,1,1));
+        Box3D bb = new Box3D(new Point3D(-1,-1,-1), new Point3D(1,1,1));
         mat.toRotationZ(Math.PI/4);
-        mat.transform(b);
-        System.out.println(b);
+        mat.transform(bb);
+        System.out.println(bb);
     }
 
 }
