@@ -988,8 +988,8 @@ Números de Friedman:
         //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
 
-        Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,5,0,3,0,0,0,0,0,8,0,0,0,0,0,1,0,0,0,6,0,0,0,4,7,3,0,0,0,0,0,3,0,0,9,0,0,1,2,4,7,5,0,0,7,0,0,6,0,0,0,0,0,4,3,9,0,0,0,8,0,0,0,1,0,0,0,0,0,9,0,0,0,0,0,1,0,2,0,0)));
-        ArrayList<Sudoku> solutions = sudoku.solve(false);
+        Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,7,1,0,2,0,8,0,0,0,0,0,0,0,0,5,0,3,0,0,0,7,0,9,0,6,0,0,0,0,0,0,0,2,0,0,8,0,0,1,0,0,0,0,0,0,0,0,0,3,0,0,0,2,5,0,0,6,0,0,0,1,0,0,4,0,0,0,0,0,0,0,0,0,0)));
+        ArrayList<Sudoku> solutions = sudoku.solve();
         if (solutions.size() > 1)
             System.out.println("Más de una solución posible");
         else if (solutions.isEmpty())

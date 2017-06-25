@@ -6,6 +6,7 @@
 package Library;
 
 import java.util.ArrayList;
+import raytracer.IFCMath;
 
 /**
  *
@@ -13,11 +14,12 @@ import java.util.ArrayList;
  */
 public class Sudoku {
     final private ArrayList<SudokuCell> cells = new ArrayList<>();
+    private int dimension = 9;
     
     public Sudoku() {
         super();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 cells.add(new SudokuCell());
             } 
         }
@@ -30,11 +32,33 @@ public class Sudoku {
 
     public Sudoku(Sudoku s) {
         super();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        dimension = s.dimension;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 cells.add(new SudokuCell(s.get(i, j)));
             } 
         }
+    }
+
+    private void initialize(ArrayList<Integer> values) {
+        if (IFCMath.isPerfectSquare(values.size())) {
+            dimension = (int)Math.round(Math.sqrt(values.size()));
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    cells.add(new SudokuCell());
+                    if (values.get(i * dimension + j) != 0)
+                        set(i, j, values.get(i * dimension + j));
+                }
+            }
+        }
+    }    
+    
+    private int super_cell() {
+        return (int)Math.round(Math.sqrt(dimension));
+    }
+    
+    public ArrayList<Sudoku> solve() {
+        return solve(false);
     }
     
     public ArrayList<Sudoku> solve(boolean debug) {
@@ -56,21 +80,9 @@ public class Sudoku {
         return solutions;
     }
     
-    private void initialize(ArrayList<Integer> values) {
-        if (values.size() == 9 * 9) {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    cells.add(new SudokuCell());
-                    if (values.get(i * 9 + j) != 0)
-                        set(i, j, values.get(i * 9 + j));
-                }
-            }
-        }
-    }
-
     public boolean isDone() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 if (get(i, j).size() != 1)
                     return false;
             }
@@ -83,15 +95,15 @@ public class Sudoku {
     }
     
     public SudokuCell get(int i, int j) {
-        return cells.get(i * 9 + j);
+        return cells.get(i * dimension + j);
     }
 
     // Dividimos el Sudoku en n a partir de la celda que tiene menos posibles
     // valores (idealmente 2)
     private ArrayList<Sudoku> split() {
         int min_pos = 10, min_i = 0, min_j = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 if (get(i, j).size() > 1) {
                     if (get(i, j).size() < min_pos) {
                         min_i = i;
@@ -102,8 +114,8 @@ public class Sudoku {
             }
         }
         ArrayList<Sudoku> sudokus = new ArrayList<>();
-        if (min_pos > 1 && min_pos < 10) {
-            for (int p : get(min_i, min_j).posibles) {
+        if (min_pos > 1 && min_pos < dimension + 1) {
+            for (int p : get(min_i, min_j)) {
                 Sudoku s = new Sudoku(this);
                 s.set(min_i, min_j, p);
                 sudokus.add(s);
@@ -134,8 +146,8 @@ public class Sudoku {
     // Reducimos las posibilidades de las celdas en función de las ya fijadas
     private boolean scan() {
         boolean changed = false;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 changed |= processCell(i, j);
             }
         }
@@ -146,8 +158,8 @@ public class Sudoku {
     // porque no pueden ponerse en otro lugar de la fila, columna o bloque
     private boolean check() {
         boolean changed = false;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 changed |= checkCell(i, j);
             }
         }
@@ -157,8 +169,8 @@ public class Sudoku {
     @Override
     public String toString() {
         String str = "";
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 str = str + get(i, j).toString() + " ";
             }
             str += "\n";
@@ -171,7 +183,7 @@ public class Sudoku {
         boolean changed = false;
         SudokuCell cell = get(i, j);
         // Recorro columna j
-        for (int i1 = 0; i1 < 9; i1++) {
+        for (int i1 = 0; i1 < dimension; i1++) {
             if (i1 != i) {
                 SudokuCell sc = get(i1, j);
                 if (sc.size() == 1 && cell.contains(sc.get(0))) {
@@ -181,7 +193,7 @@ public class Sudoku {
             }
         }
         // Recorro fila i
-        for (int j1 = 0; j1 < 9; j1++) {
+        for (int j1 = 0; j1 < dimension; j1++) {
             if (j1 != j) {
                 SudokuCell sc = get(i, j1);
                 if (sc.size() == 1 && cell.contains(sc.get(0))) {
@@ -191,12 +203,12 @@ public class Sudoku {
             }
         }
         
-        // Recorro bloque 3x3 donde esta (i,j)
-        int i1 = (i / 3) * 3;
-        int i2 = i1 + 3;
+        // Recorro bloque super_cell x super_cell donde esta (i,j)
+        int i1 = (i / super_cell()) * super_cell();
+        int i2 = i1 + super_cell();
         while (i1 < i2) {
-            int j1 = (j / 3) * 3;
-            int j2 = j1 + 3;
+            int j1 = (j / super_cell()) * super_cell();
+            int j2 = j1 + super_cell();
             while (j1 < j2) {
                 if (j1 != j || i1 != i) {
                     SudokuCell sc = get(i1, j1);
@@ -224,7 +236,7 @@ public class Sudoku {
             int value = cell.get(posibility);
             // Recorro columna j para ver si value puede estar en algun otro sitio
             boolean found = false;
-            for (int i1 = 0; i1 < 9 && !found; i1++) {
+            for (int i1 = 0; i1 < dimension && !found; i1++) {
                 if (i1 != i) {
                     SudokuCell sc = get(i1, j);
                     if (sc.contains(value)) {
@@ -240,7 +252,7 @@ public class Sudoku {
             
             // Recorro fila i para ver si value puede estar en algun otro sitio
             found = false;
-            for (int j1 = 0; j1 < 9 && !found; j1++) {
+            for (int j1 = 0; j1 < dimension && !found; j1++) {
                 if (j1 != j) {
                     SudokuCell sc = get(i, j1);
                     if (sc.contains(value)) {
@@ -254,14 +266,14 @@ public class Sudoku {
                 break;
             }
 
-            // Recorro bloque 3x3 donde esta (i,j)
+            // Recorro bloque super_cell x super_cell donde esta (i,j)
             // para ver si value puede estar en algun otro sitio
             found = false;
-            int i1 = (i / 3) * 3;
-            int i2 = i1 + 3;
+            int i1 = (i / super_cell()) * super_cell();
+            int i2 = i1 + super_cell();
             while (i1 < i2 && !found) {
-                int j1 = (j / 3) * 3;
-                int j2 = j1 + 3;
+                int j1 = (j / super_cell()) * super_cell();
+                int j2 = j1 + super_cell();
                 while (j1 < j2 && !found) {
                     if (j1 != j || i1 != i) {
                         SudokuCell sc = get(i1, j1);

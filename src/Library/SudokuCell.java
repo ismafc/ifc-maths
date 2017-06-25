@@ -7,13 +7,14 @@ package Library;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  *
  * @author iflores
  */
-public class SudokuCell {
-    public ArrayList<Integer> posibles = new ArrayList<>();
+public class SudokuCell implements Iterable<Integer> {
+    private final ArrayList<Integer> posibles = new ArrayList<>();
     
     public SudokuCell() {
         super();
@@ -52,10 +53,21 @@ public class SudokuCell {
     }
     
     public boolean contains(Object value) {
-        return posibles.contains(value);
+        if (value instanceof Integer)
+            return posibles.contains((Integer)value);
+        else
+            return false;
     }
     
     public boolean remove(Object value) {
-        return posibles.remove(value);
+        if (value instanceof Integer)
+            return posibles.remove((Integer)value);
+        else
+            return false;
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return posibles.iterator();
     }
 }
