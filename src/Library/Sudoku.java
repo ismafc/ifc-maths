@@ -6,6 +6,7 @@
 package Library;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import raytracer.IFCMath;
 
 /**
@@ -20,8 +21,8 @@ public class Sudoku {
         super();
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                cells.add(new SudokuCell());
-            } 
+                cells.add(new SudokuCell(dimension));
+            }
         }
     }
     
@@ -45,7 +46,7 @@ public class Sudoku {
             dimension = (int)Math.round(Math.sqrt(values.size()));
             for (int i = 0; i < dimension; i++) {
                 for (int j = 0; j < dimension; j++) {
-                    cells.add(new SudokuCell());
+                    cells.add(new SudokuCell(dimension));
                     if (values.get(i * dimension + j) != 0)
                         set(i, j, values.get(i * dimension + j));
                 }
@@ -60,7 +61,7 @@ public class Sudoku {
     public ArrayList<Sudoku> solve() {
         return solve(false);
     }
-    
+
     public ArrayList<Sudoku> solve(boolean debug) {
         ArrayList<Sudoku> solutions = new ArrayList<>();
         ArrayList<Sudoku> sudokus = new ArrayList<>();
@@ -83,7 +84,7 @@ public class Sudoku {
     public boolean isDone() {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if (get(i, j).size() != 1)
+                if (get(i, j).numberOfPosibilities() != 1)
                     return false;
             }
         }
@@ -91,24 +92,104 @@ public class Sudoku {
     }
     
     public void set(int i, int j, int value) {
-        get(i, j).set(value);
+        if (value > 0)
+            get(i, j).fixTo(value);
+        else
+            get(i, j).setPosibles(dimension);
     }
     
     public SudokuCell get(int i, int j) {
         return cells.get(i * dimension + j);
     }
 
+    public int getFixedCells() {
+        int fixedCells = 0;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (get(i, j).isFixed())
+                    fixedCells++;
+            }
+        }
+        return fixedCells;
+    }
+    
+    private ArrayList<Sudoku> nextLevel() {
+        ArrayList<Sudoku> moreSudokus = new ArrayList<>();
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (get(i, j).numberOfPosibilities() == 1) {
+                    Sudoku s = new Sudoku(this);
+                    s.set(i, j, 0);
+                    Sudoku sAux = new Sudoku(s);
+                    ArrayList<Sudoku> solutions = s.solve();
+                    if (solutions.size() == 1)
+                        moreSudokus.add(sAux);
+                }
+            }
+        }
+        return moreSudokus;
+    }    
+    
+    public ArrayList<Sudoku> increaseLevel(int level, int max) {
+        ArrayList<Sudoku> moreSudokus = new ArrayList<>();
+        moreSudokus.add(this);
+        while (moreSudokus.size() > 0 && level > 0) {
+            ArrayList<Sudoku> evenMoreSudokus = new ArrayList<>();
+            for (Sudoku s : moreSudokus) {
+                ArrayList<Sudoku> sNewLevel = s.nextLevel();
+                for (Sudoku sn : sNewLevel) {
+                    if (!evenMoreSudokus.contains(sn))
+                        evenMoreSudokus.add(sn);
+                    if (evenMoreSudokus.size() > max)
+                        break;                    
+                }
+                if (evenMoreSudokus.size() > max)
+                    break;
+            }
+            if (evenMoreSudokus.isEmpty())
+                break;
+            else
+                moreSudokus = evenMoreSudokus;
+            level--;
+        }
+        return moreSudokus;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Sudoku))
+            return false;
+        Sudoku s = (Sudoku)o;
+        if (dimension != s.dimension)
+            return false;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (!get(i, j).equals(s.get(i, j)))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.cells);
+        hash = 71 * hash + this.dimension;
+        return hash;
+    }
+    
     // Dividimos el Sudoku en n a partir de la celda que tiene menos posibles
     // valores (idealmente 2)
     private ArrayList<Sudoku> split() {
         int min_pos = 10, min_i = 0, min_j = 0;
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if (get(i, j).size() > 1) {
-                    if (get(i, j).size() < min_pos) {
+                if (get(i, j).numberOfPosibilities() > 1) {
+                    if (get(i, j).numberOfPosibilities() < min_pos) {
                         min_i = i;
                         min_j = j;
-                        min_pos = get(i, j).size();
+                        min_pos = get(i, j).numberOfPosibilities();
                     }
                 }
             }
@@ -186,8 +267,8 @@ public class Sudoku {
         for (int i1 = 0; i1 < dimension; i1++) {
             if (i1 != i) {
                 SudokuCell sc = get(i1, j);
-                if (sc.size() == 1 && cell.contains(sc.get(0))) {
-                    cell.remove(sc.get(0));
+                if (sc.numberOfPosibilities() == 1 && cell.isPosible(sc.getPosibility(0))) {
+                    cell.removePosibility(sc.getPosibility(0));
                     changed = true;
                 }
             }
@@ -196,8 +277,8 @@ public class Sudoku {
         for (int j1 = 0; j1 < dimension; j1++) {
             if (j1 != j) {
                 SudokuCell sc = get(i, j1);
-                if (sc.size() == 1 && cell.contains(sc.get(0))) {
-                    cell.remove(sc.get(0));
+                if (sc.numberOfPosibilities() == 1 && cell.isPosible(sc.getPosibility(0))) {
+                    cell.removePosibility(sc.getPosibility(0));
                     changed = true;
                 }
             }
@@ -212,8 +293,8 @@ public class Sudoku {
             while (j1 < j2) {
                 if (j1 != j || i1 != i) {
                     SudokuCell sc = get(i1, j1);
-                    if (sc.size() == 1 && cell.contains(sc.get(0))) {
-                        cell.remove(sc.get(0));
+                    if (sc.numberOfPosibilities() == 1 && cell.isPosible(sc.getPosibility(0))) {
+                        cell.removePosibility(sc.getPosibility(0));
                         changed = true;
                     }
                 }
@@ -230,22 +311,22 @@ public class Sudoku {
     private boolean checkCell(int i, int j) {
         boolean changed = false;
         SudokuCell cell = get(i, j);
-        if (cell.size() == 1)
+        if (cell.numberOfPosibilities() == 1)
             return changed;
-        for (int posibility = 0; posibility < cell.size() && !changed; posibility++) {
-            int value = cell.get(posibility);
+        for (int posibility = 0; posibility < cell.numberOfPosibilities() && !changed; posibility++) {
+            int value = cell.getPosibility(posibility);
             // Recorro columna j para ver si value puede estar en algun otro sitio
             boolean found = false;
             for (int i1 = 0; i1 < dimension && !found; i1++) {
                 if (i1 != i) {
                     SudokuCell sc = get(i1, j);
-                    if (sc.contains(value)) {
+                    if (sc.isPosible(value)) {
                         found = true;
                     }
                 }
             }
             if (!found) {
-                cell.set(value);
+                cell.fixTo(value);
                 changed = true;
                 break;
             }
@@ -255,13 +336,13 @@ public class Sudoku {
             for (int j1 = 0; j1 < dimension && !found; j1++) {
                 if (j1 != j) {
                     SudokuCell sc = get(i, j1);
-                    if (sc.contains(value)) {
+                    if (sc.isPosible(value)) {
                         found = true;
                     }
                 }
             }
             if (!found) {
-                cell.set(value);
+                cell.fixTo(value);
                 changed = true;
                 break;
             }
@@ -277,7 +358,7 @@ public class Sudoku {
                 while (j1 < j2 && !found) {
                     if (j1 != j || i1 != i) {
                         SudokuCell sc = get(i1, j1);
-                        if (sc.contains(value)) {
+                        if (sc.isPosible(value)) {
                             found = true;
                         }
                     }
@@ -286,7 +367,7 @@ public class Sudoku {
                 i1++;
             }
             if (!found) {
-                cell.set(value);
+                cell.fixTo(value);
                 changed = true;
                 break;
             }

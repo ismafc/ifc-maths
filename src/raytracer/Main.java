@@ -988,14 +988,36 @@ Números de Friedman:
         //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
 
-        Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,7,1,0,2,0,8,0,0,0,0,0,0,0,0,5,0,3,0,0,0,7,0,9,0,6,0,0,0,0,0,0,0,2,0,0,8,0,0,1,0,0,0,0,0,0,0,0,0,3,0,0,0,2,5,0,0,6,0,0,0,1,0,0,4,0,0,0,0,0,0,0,0,0,0)));
-        ArrayList<Sudoku> solutions = sudoku.solve();
+Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(1,0,3,0,9,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,3,0,9,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,9,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,0,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,0,0,0,0,0,0,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,0,0,0,0,0,0,0,1,2,0,8,0,7,0,0,0,0,0,0,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,0,0,0,0,0,0,0,1,2,0,8,0,7,0,0,0,0,0,0,0,6,0,3,0,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,0,0,0,0,0,0,0,1,2,0,8,0,7,0,0,0,0,0,0,0,6,0,3,0,0,4,0,4,7,5,8,0,0,0,0,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+//Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,4,9,0,0,8,0,3,0,0,0,0,0,0,0,0,1,2,0,8,0,7,0,0,0,0,0,0,0,6,0,3,0,0,4,0,4,7,5,8,0,0,0,0,0,0,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
+        Sudoku sudokuAux = new Sudoku(sudoku);
+        ArrayList<Sudoku> solutions = sudoku.solve(true);
         if (solutions.size() > 1)
             System.out.println("Más de una solución posible");
         else if (solutions.isEmpty())
             System.out.println("No hay soluciones posibles");
-        else
+        else {
+            int level = 16;
+            int max = 210;
             System.out.println(solutions.get(0).toString());
+            ArrayList<Sudoku> moreSudokus = sudokuAux.increaseLevel(level, max);
+            System.out.println("Level : " + level);
+            System.out.println("#Sudokus : " + moreSudokus.size());
+            for (Sudoku s : moreSudokus) {
+                System.out.println(s.toString());
+            }
+        }
         
         System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
         System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 

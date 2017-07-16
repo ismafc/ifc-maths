@@ -19,18 +19,13 @@
             <file>file:/C:/master/ifc-maths/src/dialogs/JFractalDialog.java</file>
         </group>
         <group>
-            <file>file:/D:/master/ifc-maths/src/raytracer/Box3D.java</file>
-            <file>file:/D:/master/ifc-maths/test/raytracer/Box3DIT.java</file>
-            <file>file:/D:/master/ifc-maths/src/raytracer/Main.java</file>
-            <file>file:/D:/master/ifc-maths/src/raytracer/IFCMath.java</file>
-            <file>file:/D:/master/ifc-maths/src/raytracer/Object3D.java</file>
-            <file>file:/D:/master/ifc-maths/test/raytracer/MatrixNxMIT.java</file>
-            <file>file:/D:/master/ifc-maths/src/raytracer/Point3D.java</file>
-            <file>file:/D:/master/ifc-maths/test/raytracer/ComplexIT.java</file>
-            <file>file:/D:/master/ifc-maths/test/raytracer/Object3DIT.java</file>
-            <file>file:/D:/master/ifc-maths/src/raytracer/MatrixNxM.java</file>
-            <file>file:/D:/master/ifc-maths/src/raytracer/Complex.java</file>
-            <file>file:/D:/master/ifc-maths/test/raytracer/Point3DIT.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/ProjectEuler/P140_149/Problem143.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/ProjectEuler/P150_159/Problem150.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/dialogs/JFractalDialog.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/raytracer/IFCMath.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/Library/Sudoku.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/raytracer/Main.java</file>
+            <file>file:/C:/Users/iflores/Documents/NetBeansProjects/ifc-maths/src/Library/SudokuCell.java</file>
         </group>
     </open-files>
 </project-private>
