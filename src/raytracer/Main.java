@@ -650,6 +650,7 @@ Números de Friedman:
     }
 
     // Commit 1
+    // Commit 2
     public static Triangle chooseMinimumEdge(ArrayList<Integer> network, ArrayList<Integer> vnodes) {
         Triangle min = new Triangle();
         min.coord[2] = Double.MAX_VALUE;
