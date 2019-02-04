@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package raytracer;
+package Library;
 
-import Library.Tree;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -142,7 +141,7 @@ public class TreeIT {
     public void testMove() {
         System.out.println("move");
         Tree instance = new Tree();
-        instance.move(null, null);
+        //instance.move(null);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

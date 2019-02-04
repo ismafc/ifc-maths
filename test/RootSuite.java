@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Library.LibraryITSuite;
 import OnlineJudge.OnlineJudgeITSuite;
 import ProjectEuler.ProjectEulerITSuite;
 import dialogs.DialogsITSuite;
@@ -20,7 +21,7 @@ import raytracer.RaytracerITSuite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({RaytracerITSuite.class, OnlineJudgeITSuite.class, DialogsITSuite.class, ProjectEulerITSuite.class})
+@Suite.SuiteClasses({DialogsITSuite.class, ProjectEulerITSuite.class, LibraryITSuite.class, RaytracerITSuite.class, OnlineJudgeITSuite.class})
 public class RootSuite {
 
     @BeforeClass

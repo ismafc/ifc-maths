@@ -374,5 +374,19 @@ public class IFCMathIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of max_sum_adjacent_numbers method, of class IFCMath.
+     */
+    @Test
+    public void testMax_sum_adjacent_numbers() {
+        System.out.println("max_sum_adjacent_numbers");
+        long[] numbers = null;
+        long expResult = 0L;
+        long result = IFCMath.max_sum_adjacent_numbers(numbers);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({Problem141IT.class, Problem142IT.class, Problem146IT.class, Problem140IT.class, Problem144IT.class, Problem148IT.class})
+@Suite.SuiteClasses({Problem143IT.class, Problem141IT.class, Problem149IT.class, Problem144IT.class, Problem148IT.class, Problem140IT.class, Problem147IT.class, Problem142IT.class, Problem146IT.class})
 public class P140_149ITSuite {
 
     @BeforeClass

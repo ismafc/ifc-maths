@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package OnlineJudge.P0100_0149;
+package Library;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,8 +17,8 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({Problem0100IT.class, Problem0101IT.class})
-public class P0100_0149ITSuite {
+@Suite.SuiteClasses({Library.TreeIT.class, Library.SudokuCellIT.class, Library.SudokuIT.class})
+public class LibraryITSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
