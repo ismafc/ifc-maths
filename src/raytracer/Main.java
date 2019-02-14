@@ -7,7 +7,6 @@
 package raytracer;
 
 import Library.Sudoku;
-import ProjectEuler.P140_149.Problem147;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;
@@ -94,7 +93,7 @@ Números de Friedman:
         }
         return false;
     }
-
+/*
     static private void combinacion(int i, long num, ArrayList<Integer> posibles) {
         if (i == 0) {
             num += (long)posibles.get(posibles.size() - 1);
@@ -110,7 +109,7 @@ Números de Friedman:
             }
         }
     }
-
+*/
     private static String sum(String s1, String s2) {
         int rLength = Math.max(s1.length(), s2.length());
 
@@ -421,9 +420,9 @@ Números de Friedman:
 //
 //
 
-    private static BigDecimal ZERO = new BigDecimal ("0");
-    private static BigDecimal ONE = new BigDecimal ("1");
-    private static BigDecimal TWO = new BigDecimal ("2");
+    private static final BigDecimal ZERO = new BigDecimal ("0");
+    private static final BigDecimal ONE = new BigDecimal ("1");
+    private static final BigDecimal TWO = new BigDecimal ("2");
     public static final int DEFAULT_MAX_ITERATIONS = 50;
     public static final int DEFAULT_SCALE = 10;
 
@@ -438,10 +437,10 @@ Números de Friedman:
         return guess;
     }
 
-    static private int scale = DEFAULT_SCALE;
+    static private final int SCALE = DEFAULT_SCALE;
     static private int iterations = 0;
     static private BigDecimal error;
-    static private int maxIterations = DEFAULT_MAX_ITERATIONS;
+    static private final int MAX_ITERATIONS = DEFAULT_MAX_ITERATIONS;
     static public int comprobado = 0;
 
     public static BigDecimal get (BigDecimal n)
@@ -454,11 +453,11 @@ Números de Friedman:
         boolean more = true;
         while (more) {
             lastGuess = guess;
-            guess = n.divide(guess, scale, BigDecimal.ROUND_HALF_UP);
+            guess = n.divide(guess, SCALE, BigDecimal.ROUND_HALF_UP);
             guess = guess.add(lastGuess);
-            guess = guess.divide (TWO, scale, BigDecimal.ROUND_HALF_UP);
+            guess = guess.divide (TWO, SCALE, BigDecimal.ROUND_HALF_UP);
             error = n.subtract (guess.multiply (guess));
-            if (++iterations >= maxIterations) {
+            if (++iterations >= MAX_ITERATIONS) {
                 more = false;
             }
             else if (lastGuess.equals (guess)) {
@@ -649,9 +648,6 @@ Números de Friedman:
         return false;
     }
 
-    // Commit 1
-    // Commit 2
-    // Commit 3
     public static Triangle chooseMinimumEdge(ArrayList<Integer> network, ArrayList<Integer> vnodes) {
         Triangle min = new Triangle();
         min.coord[2] = Double.MAX_VALUE;
