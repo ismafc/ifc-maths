@@ -606,7 +606,7 @@ Números de Friedman:
     }
 */
     public static ArrayList<Integer> ObtenerAdyacencias(ArrayList<Integer> network, int a) {
-        ArrayList<Integer> adyacencias = new ArrayList<Integer>();
+        ArrayList<Integer> adyacencias = new ArrayList<>();
         int ancho = (int)Math.sqrt((double)network.size());
         for (int index = 0; index < ancho; index++) {
             if (network.get(a * ancho + index) > 0)
@@ -627,8 +627,8 @@ Números de Friedman:
     }
 
     public static boolean sonAdyacentes(ArrayList<Integer> network, int a, int b) {
-        ArrayList<Integer> adyacencias = new ArrayList<Integer>();
-        ArrayList<Integer> done = new ArrayList<Integer>();
+        ArrayList<Integer> adyacencias = new ArrayList<>();
+        ArrayList<Integer> done = new ArrayList<>();
         adyacencias.add(a);
         while (adyacencias.size() > 0) {
             ArrayList<Integer> nadd = ObtenerAdyacencias(network, adyacencias.get(0));
@@ -636,9 +636,7 @@ Números de Friedman:
             for (Integer i : nadd) {
                 if (i == b)
                     return true;
-                if (done.contains(i))
-                    continue;
-                else
+                if (!done.contains(i))
                     adyacencias.add(i);
             }
             adyacencias.remove(0);
