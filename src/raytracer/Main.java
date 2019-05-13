@@ -6,7 +6,7 @@
 
 package raytracer;
 
-import Library.Sudoku;
+// import Library.Sudoku;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;
@@ -982,8 +982,8 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
+        ProjectEuler.P001_009.Problem001.problem001();
         //ProjectEuler.P140_149.Problem143.problem143(120000);
-        //ProjectEuler.P160_169.Problem166.problem166();
         // End PE
 
 //Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(1,0,3,0,9,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));

@@ -268,7 +268,7 @@ public class IFCMath {
     
     /**
      * Calculates greater common divisor between 'n1' and 'n2'.
-     * If returned value is 1, both values are prime between theirs
+     * If returned value is 1, both values are prime among them
      * @param n1 first value to check
      * @param n2 second value to check
      * @return greater common divisor found
@@ -290,7 +290,7 @@ public class IFCMath {
 
     /**
      * Calculates Least common multiple between 'n1' and 'n2'.
-     * If returned value is n1 * n2, both values are prime between theirs
+     * If returned value is n1 * n2, both values are prime among them
      * @param n1 first value to check
      * @param n2 second value to check
      * @return Least common multiple found
