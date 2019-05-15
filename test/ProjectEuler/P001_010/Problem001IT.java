@@ -5,6 +5,7 @@
  */
 package ProjectEuler.P001_010;
 
+import ProjectEuler.P001_009.Problem001;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
