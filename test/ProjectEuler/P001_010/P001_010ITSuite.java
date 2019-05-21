@@ -22,6 +22,8 @@ public class P001_010ITSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        Problem001IT p001 = new Problem001IT();
+        p001.testProblem001();
     }
 
     @AfterClass

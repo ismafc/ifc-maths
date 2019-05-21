@@ -44,9 +44,9 @@ public class Problem001IT {
     @Test
     public void testProblem001() {
         System.out.println("problem001");
-        Problem001.problem001();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(Problem001.problem001(3, 5, 1, 1000) == 233168);
+        assertTrue(Problem001.problem001(10, 14, 1, 100) == 772);
+        assertTrue(Problem001.problem001(10, 14, 71, 100) == 352);
     }
     
 }
