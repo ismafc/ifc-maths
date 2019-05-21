@@ -265,6 +265,20 @@ public class IFCMath {
         }
         return factors;
     }
+
+    /**
+     * Calculates greater common divisor between 'n1' and 'n2'. Recursive.
+     * If returned value is 1, both values are prime among them
+     * n1 >= n2
+     * @param n1 first value to check
+     * @param n2 second value to check
+     * @return greater common divisor found
+     */
+    public static long MCD1(long n1, long n2) {
+        if (n2 == 0)
+            return n1;
+        return MCD1(n2, n1 % n2);
+    }
     
     /**
      * Calculates greater common divisor between 'n1' and 'n2'.
@@ -297,6 +311,17 @@ public class IFCMath {
      */
     public static long MCM(long n1, long n2) {
         return (n1 * n2) / MCD(n1, n2);
+    }
+
+    /**
+     * Calculates Least common multiple between 'n1' and 'n2'.
+     * If returned value is n1 * n2, both values are prime among them
+     * @param n1 first value to check
+     * @param n2 second value to check
+     * @return Least common multiple found
+     */
+    public static long MCM1(long n1, long n2) {
+        return (n1 * n2) / MCD1(Math.max(n1, n2), Math.min(n1, n2));
     }
     
     /**
