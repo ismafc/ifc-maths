@@ -975,6 +975,24 @@ Números de Friedman:
             return new String (lin, 0, lg);
     }
 
+    public static BigInteger getArgument(String[] args, int index, BigInteger default_value, String name) {
+        BigInteger value = default_value;
+        if (args.length >= index + 1) {
+            try {
+                value = new BigInteger(args[index]);
+                if (value.compareTo(BigInteger.ONE) == -1) {
+                    System.out.println(name + " < 1: Assuming " + default_value);
+                    value = default_value;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(name + " is not a number: Assuming " + default_value);
+            }
+        }
+        else 
+            System.out.println(name + " not found: Assuming " + default_value);
+        return value;
+    }
+    
     public static long getArgument(String[] args, int index, long default_value, String name) {
         long value = default_value;
         if (args.length >= index + 1) {
@@ -1000,12 +1018,22 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
-        System.out.println("Parameters: A B M N");
-        long A = getArgument(args, 0, 3, "A");
+/*        long A = getArgument(args, 0, 3, "A");
         long B = getArgument(args, 1, 5, "B");
         long M = getArgument(args, 2, 1, "M");
         long N = getArgument(args, 3, 1000, "N");
-        ProjectEuler.P001_009.Problem001.problem001(A, B, M, N);
+        long S = ProjectEuler.P001_009.Problem001.problem001(A, B, M, N);
+        System.out.println("Resultado = " + S);
+        if (S > 1 || S < 0)
+            return;*/
+        BigInteger A = getArgument(args, 0, new BigInteger("3"), "A");
+        BigInteger B = getArgument(args, 1, new BigInteger("5"), "B");
+        BigInteger M = getArgument(args, 2, new BigInteger("1"), "M");
+        BigInteger N = getArgument(args, 3, new BigInteger("1000"), "N");
+        BigInteger S = ProjectEuler.P001_009.Problem001.problem001(A, B, M, N);
+        System.out.println("Resultado = " + S);
+        if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
+            return;
         //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
 

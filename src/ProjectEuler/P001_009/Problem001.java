@@ -4,6 +4,7 @@
  */
 package ProjectEuler.P001_009;
 
+import java.math.BigInteger;
 import raytracer.IFCMath;
 
 /**
@@ -29,6 +30,15 @@ public class Problem001 {
         return sum;
     }
 
+    private static BigInteger solution1(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger i = M; i.compareTo(N) == -1; i = i.add(BigInteger.ONE)) {
+            if (i.mod(A).equals(BigInteger.ZERO) || i.mod(B).equals(BigInteger.ZERO))
+                sum = sum.add(i);
+        }
+        return sum;
+    }
+
     private static long solution2(long A, long B, long M, long N) {
         long sum = 0;
         long M1 = (M % A == 0) ? M : M + A - M % A;
@@ -43,6 +53,37 @@ public class Problem001 {
         return sum;
     }
 
+    private static BigInteger solution2(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+        BigInteger sum = BigInteger.ZERO;
+        BigInteger M1 = (M.mod(A).equals(BigInteger.ZERO)) ? M : M.add(A).subtract(M.mod(A));
+        for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(A)) {
+            sum = sum.add(i);
+        }
+        M1 = (M.mod(B).equals(BigInteger.ZERO)) ? M : M.add(B).subtract(M.mod(B));
+        for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(B)) {
+            if (i.mod(A).compareTo(BigInteger.ZERO) != 0)
+                sum = sum.add(i);
+        }
+        return sum;
+    }
+    
+    private static BigInteger solution3(BigInteger A, BigInteger B, BigInteger N) {
+        BigInteger TWO = BigInteger.ONE.add(BigInteger.ONE);
+        BigInteger E = N.subtract(BigInteger.ONE);
+        BigInteger AB = IFCMath.MCM(A , B);
+        BigInteger A1 = E.divide(A);
+        BigInteger B1 = E.divide(B);
+        BigInteger AB1 = E.divide(AB);
+        BigInteger AF = A1.add(BigInteger.ONE).multiply(A1).multiply(A).divide(TWO);
+        BigInteger BF = B1.add(BigInteger.ONE).multiply(B1).multiply(B).divide(TWO);
+        BigInteger ABF = AB1.add(BigInteger.ONE).multiply(AB1).multiply(AB).divide(TWO);
+        return AF.add(BF).subtract(ABF);
+    }
+
+    private static BigInteger solution3(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+        return solution3(A, B, N).subtract(solution3(A, B, M));
+    }
+    
     private static long solution3(long A, long B, long N) {
         long E = N - 1;
         long AB = IFCMath.MCM(A , B);
@@ -57,10 +98,25 @@ public class Problem001 {
     private static long solution3(long A, long B, long M, long N) {
         return solution3(A, B, N) - solution3(A, B, M);
     }
+
+    public static BigInteger problem001(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+        //long t = System.currentTimeMillis();
+        //BigInteger s1 = solution1(A, B, M, N);
+        //System.out.println("Result1 = " + s1);
+        //System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
+        //long t = System.currentTimeMillis();
+        //BigInteger s2 = solution2(A, B, M, N);
+        //System.out.println("Result2 = " + s2);
+        //long t = System.currentTimeMillis();
+        BigInteger s3 = solution3(A, B, M, N);
+        //System.out.println("Result3 = " + s3);
+        //System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
+        return s3;
+    }
     
     public static long problem001(long A, long B, long M, long N) {
         long t = System.currentTimeMillis();
-        long s1 = solution1(A, B, M, N);
+/*        long s1 = solution1(A, B, M, N);
         System.out.println("Result1 = " + s1);
         System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
 
@@ -69,12 +125,21 @@ public class Problem001 {
         System.out.println("Result2 = " + s2);
         System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
         
-        t = System.currentTimeMillis();
+        t = System.currentTimeMillis();*/
         long s3 = solution3(A, B, M, N);
         System.out.println("Result3 = " + s3);
         System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
 
         return s3;
+/*        
+        BigInteger s3b = solution3(BigInteger.valueOf(A), 
+                                   BigInteger.valueOf(B), 
+                                   BigInteger.valueOf(M), 
+                                   BigInteger.valueOf(N));
+        System.out.println("Result3b = " + s3b);
+        System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
+*/
     }
     
 }
+
