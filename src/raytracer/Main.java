@@ -1052,7 +1052,7 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
-        ArrayList<Long> V = new ArrayList<>();
+/*        ArrayList<Long> V = new ArrayList<>();
         long i = 1;
         long va;
         while ((va = getArgument(args, -1, "V" + i++)) > 0)
@@ -1062,7 +1062,7 @@ Números de Friedman:
         long S = ProjectEuler.P001_009.Problem001.problem001(V, FROM, TO);
         System.out.println("Resultado = " + S);
         if (S > 1 || S < 0)
-            return;
+            return;*/
 /*        long A = getArgument(args, 0, 3, "A");
         long B = getArgument(args, 1, 5, "B");
         long M = getArgument(args, 2, 1, "M");
@@ -1079,7 +1079,7 @@ Números de Friedman:
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
             return;*/
-/*        ArrayList<BigInteger> V = new ArrayList<>();
+        ArrayList<BigInteger> V = new ArrayList<>();
         BigInteger MONE = new BigInteger("-1");
         long i = 1;
         BigInteger va;
@@ -1090,7 +1090,7 @@ Números de Friedman:
         BigInteger S = ProjectEuler.P001_009.Problem001.problem001(V, FROM, BELOW);
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
-            return;*/
+            return;
         //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
 

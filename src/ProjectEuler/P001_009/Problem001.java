@@ -65,7 +65,7 @@ public class Problem001 {
         }
         return sum;
     }
-/*
+
     private static long solution2(ArrayList<Long> V, long M, long N) {
         long sum = 0;
         ArrayList<Long> nV = new ArrayList<>();
@@ -80,7 +80,21 @@ public class Problem001 {
         }
         return sum;
     }
-*/    
+
+    private static BigInteger solution2(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
+        BigInteger sum = BigInteger.ZERO;
+        ArrayList<BigInteger> nV = new ArrayList<>();
+        for (BigInteger v : V) {
+            BigInteger M1 = (M.mod(v).equals(BigInteger.ZERO)) ? M : M.add(v).subtract(M.mod(v));
+            for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(v)) {
+                if (!mod(i, nV))
+                    sum = sum.add(i);
+            }
+            nV.add(v);
+        }
+        return sum;
+    }
+    
     private static long solution2(long A, long B, long M, long N) {
         long sum = 0;
         long M1 = (M % A == 0) ? M : M + A - M % A;
@@ -157,14 +171,14 @@ public class Problem001 {
     }
 
     public static BigInteger problem001(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
-        BigInteger s = solution1(V, FROM, BELOW);
-        //long s = solution2(V, FROM, BELOW);
+        //BigInteger s = solution1(V, FROM, BELOW);
+        BigInteger s = solution2(V, FROM, BELOW);
         return s;
     }
     
     public static long problem001(ArrayList<Long> V, long FROM, long BELOW) {
-        long s = solution1(V, FROM, BELOW);
-        //long s = solution2(V, FROM, BELOW);
+        //long s = solution1(V, FROM, BELOW);
+        long s = solution2(V, FROM, BELOW);
         return s;
     }
     
