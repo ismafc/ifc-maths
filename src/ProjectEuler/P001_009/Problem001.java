@@ -5,6 +5,7 @@
 package ProjectEuler.P001_009;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import raytracer.IFCMath;
 
 /**
@@ -20,7 +21,33 @@ public class Problem001 {
     we get 3, 5, 6 and 9. The sum of these multiples is 23.
     Find the sum of all the multiples of 3 or 5 below 1000.
     */
+    
+    private static boolean mod(long i, ArrayList<Long> V) {
+        return V.stream().anyMatch(v -> i % v == 0);
+    }
+    
+    private static long solution1(ArrayList<Long> V, long M, long N) {
+        long sum = 0;
+        for (long i = M; i < N; i++) {
+            if (mod(i, V))
+                sum += i;
+        }
+        return sum;
+    }
 
+    private static boolean mod(BigInteger i, ArrayList<BigInteger> V) {
+        return V.stream().anyMatch(v -> i.mod(v).compareTo(BigInteger.ZERO) == 0);
+    }
+    
+    private static BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger i = FROM; i.compareTo(BELOW) == -1; i = i.add(BigInteger.ONE)) {
+            if (mod(i, V))
+                sum = sum.add(i);
+        }
+        return sum;
+    }
+    
     private static long solution1(long A, long B, long M, long N) {
         long sum = 0;
         for (long i = M; i < N; i++) {
@@ -38,7 +65,22 @@ public class Problem001 {
         }
         return sum;
     }
-
+/*
+    private static long solution2(ArrayList<Long> V, long M, long N) {
+        long sum = 0;
+        ArrayList<Long> nV = new ArrayList<>();
+        for (long v : V) {
+            long M1 = (M % v == 0) ? M : M + v - M % v;
+            for (long i = M1; i < N; i += v) {
+                if (!mod(i, nV)) {
+                    sum += i;
+                }
+            }
+            nV.add(v);
+        }
+        return sum;
+    }
+*/    
     private static long solution2(long A, long B, long M, long N) {
         long sum = 0;
         long M1 = (M % A == 0) ? M : M + A - M % A;
@@ -112,6 +154,18 @@ public class Problem001 {
         //System.out.println("Result3 = " + s3);
         //System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
         return s3;
+    }
+
+    public static BigInteger problem001(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+        BigInteger s = solution1(V, FROM, BELOW);
+        //long s = solution2(V, FROM, BELOW);
+        return s;
+    }
+    
+    public static long problem001(ArrayList<Long> V, long FROM, long BELOW) {
+        long s = solution1(V, FROM, BELOW);
+        //long s = solution2(V, FROM, BELOW);
+        return s;
     }
     
     public static long problem001(long A, long B, long M, long N) {

@@ -974,43 +974,77 @@ Números de Friedman:
         else
             return new String (lin, 0, lg);
     }
-
-    public static BigInteger getArgument(String[] args, int index, BigInteger default_value, String name) {
-        BigInteger value = default_value;
-        if (args.length >= index + 1) {
-            try {
-                value = new BigInteger(args[index]);
-                if (value.compareTo(BigInteger.ONE) == -1) {
-                    System.out.println(name + " < 1: Assuming " + default_value);
-                    value = default_value;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(name + " is not a number: Assuming " + default_value);
+   
+    public static long getValue(String v, long default_value, String name) {
+        long value = default_value;
+        try {
+            value = Long.parseLong(v);
+            if (value < 1) {
+                System.out.println(name + " < 1: Assuming " + default_value);
+                value = default_value;
             }
+        } catch (NumberFormatException e) {
+            System.out.println(name + " is not a number: Assuming " + default_value);
         }
-        else 
-            System.out.println(name + " not found: Assuming " + default_value);
+        return value;
+    }
+
+    public static BigInteger getValue(String v, BigInteger default_value, String name) {
+        BigInteger value = default_value;
+        try {
+            value = new BigInteger(v);
+            if (value.compareTo(BigInteger.ONE) == -1) {
+                System.out.println(name + " < 1: Assuming " + default_value);
+                value = default_value;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(name + " is not a number: Assuming " + default_value);
+        }
         return value;
     }
     
     public static long getArgument(String[] args, int index, long default_value, String name) {
         long value = default_value;
-        if (args.length >= index + 1) {
-            try {
-                value = Long.parseLong(args[index]);
-                if (value < 1) {
-                    System.out.println(name + " < 1: Assuming " + default_value);
-                    value = default_value;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(name + " is not a number: Assuming " + default_value);
+        if (args.length >= index + 1)
+            value = getValue(args[index], default_value, name);
+        else 
+            System.out.println(name + " not found: Assuming " + default_value);
+        return value;
+    }
+
+    public static long getArgument(String[] args, long default_value, String name) {
+        long value = default_value;
+        for (String param : args) {
+            if (param.startsWith(name + ":")) {
+                String v = param.substring(name.length() + 1);
+                value = getValue(v, default_value, name);
+                return value;
             }
         }
+        return value;
+    }
+    
+    public static BigInteger getArgument(String[] args, int index, BigInteger default_value, String name) {
+        BigInteger value = default_value;
+        if (args.length >= index + 1)
+            value = getValue(args[index], default_value, name);
         else 
             System.out.println(name + " not found: Assuming " + default_value);
         return value;
     }
     
+    public static BigInteger getArgument(String[] args, BigInteger default_value, String name) {
+        BigInteger value = default_value;
+        for (String param : args) {
+            if (param.startsWith(name + ":")) {
+                String v = param.substring(name.length() + 1);
+                value = getValue(v, default_value, name);
+                return value;
+            }
+        }
+        return value;
+    }
+
     /**
      * Entry point funcion
      * @param args the command line arguments
@@ -1018,6 +1052,17 @@ Números de Friedman:
      */
     public static void main(String[] args) throws Exception {
         // Start PE
+        ArrayList<Long> V = new ArrayList<>();
+        long i = 1;
+        long va;
+        while ((va = getArgument(args, -1, "V" + i++)) > 0)
+            V.add(va);
+        long FROM = getArgument(args, 1, "FROM");
+        long TO = getArgument(args, 1000, "BELOW");
+        long S = ProjectEuler.P001_009.Problem001.problem001(V, FROM, TO);
+        System.out.println("Resultado = " + S);
+        if (S > 1 || S < 0)
+            return;
 /*        long A = getArgument(args, 0, 3, "A");
         long B = getArgument(args, 1, 5, "B");
         long M = getArgument(args, 2, 1, "M");
@@ -1026,14 +1071,26 @@ Números de Friedman:
         System.out.println("Resultado = " + S);
         if (S > 1 || S < 0)
             return;*/
-        BigInteger A = getArgument(args, 0, new BigInteger("3"), "A");
+/*        BigInteger A = getArgument(args, 0, new BigInteger("3"), "A");
         BigInteger B = getArgument(args, 1, new BigInteger("5"), "B");
         BigInteger M = getArgument(args, 2, new BigInteger("1"), "M");
         BigInteger N = getArgument(args, 3, new BigInteger("1000"), "N");
         BigInteger S = ProjectEuler.P001_009.Problem001.problem001(A, B, M, N);
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
-            return;
+            return;*/
+/*        ArrayList<BigInteger> V = new ArrayList<>();
+        BigInteger MONE = new BigInteger("-1");
+        long i = 1;
+        BigInteger va;
+        while ((va = getArgument(args, MONE, "V" + i++)).compareTo(BigInteger.ZERO) == 1)
+            V.add(va);
+        BigInteger FROM = getArgument(args, new BigInteger("1"), "FROM");
+        BigInteger BELOW = getArgument(args, new BigInteger("1000"), "BELOW");
+        BigInteger S = ProjectEuler.P001_009.Problem001.problem001(V, FROM, BELOW);
+        System.out.println("Resultado = " + S);
+        if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
+            return;*/
         //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
 
