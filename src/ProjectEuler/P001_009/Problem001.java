@@ -124,7 +124,7 @@ public class Problem001 {
     }
     
     private static BigInteger solution3(BigInteger A, BigInteger B, BigInteger N) {
-        BigInteger TWO = BigInteger.ONE.add(BigInteger.ONE);
+        BigInteger TWO = new BigInteger("2");
         BigInteger E = N.subtract(BigInteger.ONE);
         BigInteger AB = IFCMath.MCM(A , B);
         BigInteger A1 = E.divide(A);
@@ -155,6 +155,45 @@ public class Problem001 {
         return solution3(A, B, N) - solution3(A, B, M);
     }
 
+    private static long solution3(ArrayList<Long> V, long M, long N) {
+        ArrayList<Long> nV = new ArrayList<>();
+        long total = 0;
+        for (long v : V) {
+            long E1 = N - 1;
+            long A1 = E1 / v;
+            long R1 = v * (A1 * (A1 + 1)) / 2;
+            long E2 = M - 1;
+            long A2 = E2 / v;
+            long R2 = v * (A2 * (A2 + 1)) / 2;
+            long R = R1 - R2;
+            ArrayList<Long> repeated = new ArrayList<>(); 
+            nV.forEach(p -> repeated.add(IFCMath.MCM(v, p)));
+            total = total + R - solution3(repeated, M, N);
+            nV.add(v);
+        }
+        return total;
+    }
+
+    private static BigInteger solution3(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
+        ArrayList<BigInteger> nV = new ArrayList<>();
+        BigInteger TWO = new BigInteger("2");
+        BigInteger total = BigInteger.ZERO;
+        for (BigInteger v : V) {
+            BigInteger E1 = N.subtract(BigInteger.ONE);
+            BigInteger A1 = E1.divide(v);
+            BigInteger R1 = A1.add(BigInteger.ONE).multiply(A1).multiply(v).divide(TWO);
+            BigInteger E2 = M.subtract(BigInteger.ONE);
+            BigInteger A2 = E2.divide(v);
+            BigInteger R2 = A2.add(BigInteger.ONE).multiply(A2).multiply(v).divide(TWO);
+            BigInteger R = R1.subtract(R2);
+            ArrayList<BigInteger> repeated = new ArrayList<>(); 
+            nV.forEach(p -> repeated.add(IFCMath.MCM(v, p)));
+            total = total.add(R).subtract(solution3(repeated, M, N));
+            nV.add(v);
+        }
+        return total;
+    }
+    
     public static BigInteger problem001(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
         //long t = System.currentTimeMillis();
         //BigInteger s1 = solution1(A, B, M, N);
@@ -171,15 +210,21 @@ public class Problem001 {
     }
 
     public static BigInteger problem001(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
-        //BigInteger s = solution1(V, FROM, BELOW);
-        BigInteger s = solution2(V, FROM, BELOW);
-        return s;
+        BigInteger s1 = solution1(V, FROM, BELOW);
+        System.out.println("Result 1 = " + s1);
+        BigInteger s2 = solution2(V, FROM, BELOW);
+        System.out.println("Result 2 = " + s2);
+        BigInteger s3 = solution3(V, FROM, BELOW);
+        return s3;
     }
     
     public static long problem001(ArrayList<Long> V, long FROM, long BELOW) {
-        //long s = solution1(V, FROM, BELOW);
-        long s = solution2(V, FROM, BELOW);
-        return s;
+        long s1 = solution1(V, FROM, BELOW);
+        System.out.println("Result 1 = " + s1);
+        long s2 = solution2(V, FROM, BELOW);
+        System.out.println("Result 2 = " + s2);
+        long s3 = solution3(V, FROM, BELOW);
+        return s3;
     }
     
     public static long problem001(long A, long B, long M, long N) {
