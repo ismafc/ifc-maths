@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GWindowIT.class, IFCMathIT.class, Object3DIT.class, Point3DIT.class, Ray3DIT.class, MainIT.class, Vector3DIT.class, ComplexIT.class, MatrixNxMIT.class, Box3DIT.class, Normal3DIT.class})
+@Suite.SuiteClasses({IFCMathIT.class, GWindowIT.class, Object3DIT.class, Point3DIT.class, Ray3DIT.class, MainIT.class, Vector3DIT.class, ComplexIT.class, MatrixNxMIT.class, Box3DIT.class, Normal3DIT.class})
 public class RaytracerITSuite {
 
     @BeforeClass

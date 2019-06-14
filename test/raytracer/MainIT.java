@@ -7,6 +7,7 @@ package raytracer;
 
 import ProjectEuler.Triangle;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -153,6 +154,104 @@ public class MainIT {
         System.out.println("main");
         String[] args = null;
         Main.main(args);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getValue method, of class Main.
+     */
+    @Test
+    public void testGetValue_3args_1() {
+        System.out.println("getValue");
+        String v = "";
+        long default_value = 0L;
+        String name = "";
+        long expResult = 0L;
+        long result = Main.getValue(v, default_value, name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getValue method, of class Main.
+     */
+    @Test
+    public void testGetValue_3args_2() {
+        System.out.println("getValue");
+        String v = "";
+        BigInteger default_value = null;
+        String name = "";
+        BigInteger expResult = null;
+        BigInteger result = Main.getValue(v, default_value, name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getArgument method, of class Main.
+     */
+    @Test
+    public void testGetArgument_4args_1() {
+        System.out.println("getArgument");
+        String[] args = null;
+        int index = 0;
+        long default_value = 0L;
+        String name = "";
+        long expResult = 0L;
+        long result = Main.getArgument(args, index, default_value, name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getArgument method, of class Main.
+     */
+    @Test
+    public void testGetArgument_3args_1() {
+        System.out.println("getArgument");
+        String[] args = null;
+        long default_value = 0L;
+        String name = "";
+        long expResult = 0L;
+        long result = Main.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getArgument method, of class Main.
+     */
+    @Test
+    public void testGetArgument_4args_2() {
+        System.out.println("getArgument");
+        String[] args = null;
+        int index = 0;
+        BigInteger default_value = null;
+        String name = "";
+        BigInteger expResult = null;
+        BigInteger result = Main.getArgument(args, index, default_value, name);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getArgument method, of class Main.
+     */
+    @Test
+    public void testGetArgument_3args_2() {
+        System.out.println("getArgument");
+        String[] args = null;
+        BigInteger default_value = null;
+        String name = "";
+        BigInteger expResult = null;
+        BigInteger result = Main.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

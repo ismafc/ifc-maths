@@ -5,7 +5,7 @@
  */
 package ProjectEuler;
 
-import ProjectEuler.P001_010.P001_010ITSuite;
+import ProjectEuler.P001_009.P001_009ITSuite;
 import ProjectEuler.P110_119.P110_119ITSuite;
 import ProjectEuler.P120_129.P120_129ITSuite;
 import ProjectEuler.P130_139.P130_139ITSuite;
@@ -32,7 +32,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TriangleIT.class, P160_169ITSuite.class, P230_239ITSuite.class, P240_249ITSuite.class, P180_189ITSuite.class, P130_139ITSuite.class, P110_119ITSuite.class, P150_159ITSuite.class, P350_359ITSuite.class, P001_010ITSuite.class, P140_149ITSuite.class, P210_219ITSuite.class, P190_199ITSuite.class, P170_179ITSuite.class, P120_129ITSuite.class, P200_209ITSuite.class})
+@Suite.SuiteClasses({TriangleIT.class, P160_169ITSuite.class, P230_239ITSuite.class, P240_249ITSuite.class, P180_189ITSuite.class, P130_139ITSuite.class, P110_119ITSuite.class, P150_159ITSuite.class, P350_359ITSuite.class, P001_009ITSuite.class, P140_149ITSuite.class, P210_219ITSuite.class, P190_199ITSuite.class, P170_179ITSuite.class, P120_129ITSuite.class, P200_209ITSuite.class})
 public class ProjectEulerITSuite {
 
     @BeforeClass

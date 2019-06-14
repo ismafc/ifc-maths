@@ -96,6 +96,7 @@ public class JFractalDialog extends JDialog implements ActionListener {
      * @param c Array of colors to choose the gradient
      * @param pos Steps needed to determine if current value allows to Mandelbrot set or not
      * @param steps Number máximum of steps used to determine if a value allows or not to a Mandelbrot set
+     * @return Calculated color
      */
     private static Color getColor(ArrayList<Color> c, int pos, int steps) {
         // Obtaining two colors to interpolate (c1r, c1g, c1b) and (c2r, c2g, c2b)
@@ -270,7 +271,7 @@ public class JFractalDialog extends JDialog implements ActionListener {
     /**
      * Each timer event we have to actualize frame to be displayed changing
      * animation's direction 'animatedDir' if it's necessary. Animation is:
-     * '0' -> 'canvas.size()-1' -> '0'
+     * '0' -&gt; 'canvas.size()-1' -&gt; '0'
      * @param e Event to callback
      */
     @Override

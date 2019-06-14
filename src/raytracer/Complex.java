@@ -296,7 +296,7 @@ public class Complex
     }
     
     /**
-     * Returns a new Complex object whose value is (a / b)
+     * Returns a new Complex object whose value is \(\frac{a}{b}\) (a / b)
      * @param a Complex to be divided
      * @param b Complex to divide to
      * @return Complex with division between 'a' and 'b'

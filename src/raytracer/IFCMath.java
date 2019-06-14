@@ -21,7 +21,7 @@ public class IFCMath {
     /**
      * Check if 'n' is prime. 'n' must be positive (1 or more)
      * @param n value to test
-     * @return TRUE if value is primer and FALSE elsewhere
+     * @return TRUE if value is primer and FALSE otherwise
      */
     public static boolean isPrime(long n) {
         if (n == 1) {
@@ -41,7 +41,7 @@ public class IFCMath {
     /**
      * Check if 'n' is prime.
      * @param n value to test
-     * @return TRUE if value is prime and FALSE elsewhere
+     * @return TRUE if value is prime and FALSE otherwise
      */
     public static boolean isPrime(Long n) {
         return isPrime(n.longValue());
@@ -51,7 +51,7 @@ public class IFCMath {
      * Check if 'n' is semiprime (product of two, not necessarily distinct, 
      * prime numbers).
      * @param n value to test
-     * @return TRUE if value is semiprime and FALSE elsewhere
+     * @return TRUE if value is semiprime and FALSE otherwise
      */
     public static boolean isSemiprime(long n) {
         long occurrences = 0;
@@ -269,7 +269,7 @@ public class IFCMath {
     /**
      * Calculates greater common divisor between 'n1' and 'n2'. Recursive.
      * If returned value is 1, both values are prime among them
-     * n1 >= n2
+     * n1 &gt;= n2
      * @param n1 first value to check
      * @param n2 second value to check
      * @return greater common divisor found
@@ -283,7 +283,7 @@ public class IFCMath {
     /**
      * Calculates greater common divisor between 'n1' and 'n2'. Recursive.
      * If returned value is 1, both values are prime among them
-     * n1 >= n2
+     * n1 &gt;= n2
      * @param n1 first value to check
      * @param n2 second value to check
      * @return greater common divisor found
@@ -571,6 +571,26 @@ public class IFCMath {
             }
         }
         return max_sum;
+    }
+
+    /**
+     * Check if any value in 'V' divides 'i'
+     * @param i Number to check
+     * @param V List of values we want to check if any of them divides 'i'
+     * @return TRUE if there is at least one value in 'V' that divides 'i' and FALSE otherwise
+     */
+    public static boolean mod(long i, ArrayList<Long> V) {
+        return V.stream().anyMatch(v -> i % v == 0);
+    }
+    
+    /**
+     * Check if any value in 'V' divides 'i'
+     * @param i Number to check
+     * @param V List of values we want to check if any of them divides 'i'
+     * @return TRUE if there is at least one value in 'V' that divides 'i' and FALSE otherwise
+     */
+    public static boolean mod(BigInteger i, ArrayList<BigInteger> V) {
+        return V.stream().anyMatch(v -> i.mod(v).compareTo(BigInteger.ZERO) == 0);
     }
     
 }

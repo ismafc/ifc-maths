@@ -20,6 +20,8 @@
         </group>
         <group>
             <file>file:/C:/isma/gitlab/ifc-maths/src/raytracer/Main.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/test/raytracer/IFCMathIT.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/test/raytracer/Point3DIT.java</file>
             <file>file:/C:/isma/gitlab/ifc-maths/src/ProjectEuler/P001_009/Problem001.java</file>
             <file>file:/C:/isma/gitlab/ifc-maths/src/raytracer/IFCMath.java</file>
         </group>

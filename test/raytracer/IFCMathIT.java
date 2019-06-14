@@ -388,5 +388,125 @@ public class IFCMathIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of MCD method, of class IFCMath.
+     */
+    @Test
+    public void testMCD_BigInteger_BigInteger() {
+        System.out.println("MCD");
+        BigInteger n1 = null;
+        BigInteger n2 = null;
+        BigInteger expResult = null;
+        BigInteger result = IFCMath.MCD(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCD1 method, of class IFCMath.
+     */
+    @Test
+    public void testMCD1() {
+        System.out.println("MCD1");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCD1(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCD method, of class IFCMath.
+     */
+    @Test
+    public void testMCD_long_long() {
+        System.out.println("MCD");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCD(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCM method, of class IFCMath.
+     */
+    @Test
+    public void testMCM_long_long() {
+        System.out.println("MCM");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCM(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCM1 method, of class IFCMath.
+     */
+    @Test
+    public void testMCM1() {
+        System.out.println("MCM1");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCM1(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCM method, of class IFCMath.
+     */
+    @Test
+    public void testMCM_BigInteger_BigInteger() {
+        System.out.println("MCM");
+        BigInteger n1 = null;
+        BigInteger n2 = null;
+        BigInteger expResult = null;
+        BigInteger result = IFCMath.MCM(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of mod method, of class IFCMath.
+     */
+    @Test
+    public void testMod_long_ArrayList() {
+        System.out.println("mod");
+        long i = 0L;
+        ArrayList<Long> V = null;
+        boolean expResult = false;
+        boolean result = IFCMath.mod(i, V);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of mod method, of class IFCMath.
+     */
+    @Test
+    public void testMod_BigInteger_ArrayList() {
+        System.out.println("mod");
+        BigInteger i = null;
+        ArrayList<BigInteger> V = null;
+        boolean expResult = false;
+        boolean result = IFCMath.mod(i, V);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

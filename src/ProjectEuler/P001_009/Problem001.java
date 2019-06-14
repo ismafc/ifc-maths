@@ -21,34 +21,8 @@ public class Problem001 {
     we get 3, 5, 6 and 9. The sum of these multiples is 23.
     Find the sum of all the multiples of 3 or 5 below 1000.
     */
-    
-    private static boolean mod(long i, ArrayList<Long> V) {
-        return V.stream().anyMatch(v -> i % v == 0);
-    }
-    
-    private static long solution1(ArrayList<Long> V, long M, long N) {
-        long sum = 0;
-        for (long i = M; i < N; i++) {
-            if (mod(i, V))
-                sum += i;
-        }
-        return sum;
-    }
-
-    private static boolean mod(BigInteger i, ArrayList<BigInteger> V) {
-        return V.stream().anyMatch(v -> i.mod(v).compareTo(BigInteger.ZERO) == 0);
-    }
-    
-    private static BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
-        BigInteger sum = BigInteger.ZERO;
-        for (BigInteger i = FROM; i.compareTo(BELOW) == -1; i = i.add(BigInteger.ONE)) {
-            if (mod(i, V))
-                sum = sum.add(i);
-        }
-        return sum;
-    }
-    
-    private static long solution1(long A, long B, long M, long N) {
+           
+    public static long solution1(long A, long B, long M, long N) {
         long sum = 0;
         for (long i = M; i < N; i++) {
             if (i % A == 0 || i % B == 0)
@@ -57,7 +31,7 @@ public class Problem001 {
         return sum;
     }
 
-    private static BigInteger solution1(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+    public static BigInteger solution1(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
         BigInteger sum = BigInteger.ZERO;
         for (BigInteger i = M; i.compareTo(N) == -1; i = i.add(BigInteger.ONE)) {
             if (i.mod(A).equals(BigInteger.ZERO) || i.mod(B).equals(BigInteger.ZERO))
@@ -66,13 +40,31 @@ public class Problem001 {
         return sum;
     }
 
-    private static long solution2(ArrayList<Long> V, long M, long N) {
+    public static BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger i = FROM; i.compareTo(BELOW) == -1; i = i.add(BigInteger.ONE)) {
+            if (IFCMath.mod(i, V))
+                sum = sum.add(i);
+        }
+        return sum;
+    }
+    
+    public static long solution1(ArrayList<Long> V, long M, long N) {
+        long sum = 0;
+        for (long i = M; i < N; i++) {
+            if (IFCMath.mod(i, V))
+                sum += i;
+        }
+        return sum;
+    }
+    
+    public static long solution2(ArrayList<Long> V, long M, long N) {
         long sum = 0;
         ArrayList<Long> nV = new ArrayList<>();
         for (long v : V) {
             long M1 = (M % v == 0) ? M : M + v - M % v;
             for (long i = M1; i < N; i += v) {
-                if (!mod(i, nV)) {
+                if (!IFCMath.mod(i, nV)) {
                     sum += i;
                 }
             }
@@ -81,13 +73,13 @@ public class Problem001 {
         return sum;
     }
 
-    private static BigInteger solution2(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
+    public static BigInteger solution2(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
         BigInteger sum = BigInteger.ZERO;
         ArrayList<BigInteger> nV = new ArrayList<>();
         for (BigInteger v : V) {
             BigInteger M1 = (M.mod(v).equals(BigInteger.ZERO)) ? M : M.add(v).subtract(M.mod(v));
             for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(v)) {
-                if (!mod(i, nV))
+                if (!IFCMath.mod(i, nV))
                     sum = sum.add(i);
             }
             nV.add(v);
@@ -95,7 +87,7 @@ public class Problem001 {
         return sum;
     }
     
-    private static long solution2(long A, long B, long M, long N) {
+    public static long solution2(long A, long B, long M, long N) {
         long sum = 0;
         long M1 = (M % A == 0) ? M : M + A - M % A;
         for (long i = M1; i < N; i += A) {
@@ -109,7 +101,7 @@ public class Problem001 {
         return sum;
     }
 
-    private static BigInteger solution2(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+    public static BigInteger solution2(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
         BigInteger sum = BigInteger.ZERO;
         BigInteger M1 = (M.mod(A).equals(BigInteger.ZERO)) ? M : M.add(A).subtract(M.mod(A));
         for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(A)) {
@@ -123,7 +115,7 @@ public class Problem001 {
         return sum;
     }
     
-    private static BigInteger solution3(BigInteger A, BigInteger B, BigInteger N) {
+    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger N) {
         BigInteger TWO = new BigInteger("2");
         BigInteger E = N.subtract(BigInteger.ONE);
         BigInteger AB = IFCMath.MCM(A , B);
@@ -136,11 +128,11 @@ public class Problem001 {
         return AF.add(BF).subtract(ABF);
     }
 
-    private static BigInteger solution3(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
+    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
         return solution3(A, B, N).subtract(solution3(A, B, M));
     }
     
-    private static long solution3(long A, long B, long N) {
+    public static long solution3(long A, long B, long N) {
         long E = N - 1;
         long AB = IFCMath.MCM(A , B);
         long A1 = E / A;
@@ -151,11 +143,11 @@ public class Problem001 {
                AB * (AB1 * (AB1 + 1)) / 2;
     }
     
-    private static long solution3(long A, long B, long M, long N) {
+    public static long solution3(long A, long B, long M, long N) {
         return solution3(A, B, N) - solution3(A, B, M);
     }
 
-    private static long solution3(ArrayList<Long> V, long M, long N) {
+    public static long solution3(ArrayList<Long> V, long M, long N) {
         ArrayList<Long> nV = new ArrayList<>();
         long total = 0;
         for (long v : V) {
@@ -174,7 +166,7 @@ public class Problem001 {
         return total;
     }
 
-    private static BigInteger solution3(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
+    public static BigInteger solution3(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
         ArrayList<BigInteger> nV = new ArrayList<>();
         BigInteger TWO = new BigInteger("2");
         BigInteger total = BigInteger.ZERO;
@@ -195,26 +187,40 @@ public class Problem001 {
     }
     
     public static BigInteger problem001(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
-        //long t = System.currentTimeMillis();
-        //BigInteger s1 = solution1(A, B, M, N);
-        //System.out.println("Result1 = " + s1);
-        //System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
-        //long t = System.currentTimeMillis();
-        //BigInteger s2 = solution2(A, B, M, N);
-        //System.out.println("Result2 = " + s2);
-        //long t = System.currentTimeMillis();
+        BigInteger s1 = solution1(A, B, M, N);
+        System.out.println("Result 1 = " + s1);
+        BigInteger s2 = solution2(A, B, M, N);
+        System.out.println("Result 2 = " + s2);
         BigInteger s3 = solution3(A, B, M, N);
-        //System.out.println("Result3 = " + s3);
-        //System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
+        System.out.println("Result 3 = " + s3);
         return s3;
     }
 
     public static BigInteger problem001(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+/*        for (int i = 0; i < 22; i++) {
+            long t = System.currentTimeMillis();
+            solution1(V, FROM, BELOW);
+            System.out.print((System.currentTimeMillis() - t) + ", ");            
+        }
+        System.out.println("");
+        for (int i = 0; i < 22; i++) {
+            long t = System.currentTimeMillis();
+            solution2(V, FROM, BELOW);
+            System.out.print((System.currentTimeMillis() - t) + ", ");
+        }
+        System.out.println("");
+        for (int i = 0; i < 22; i++) {
+            long t = System.currentTimeMillis();
+            solution3(V, FROM, BELOW);
+            System.out.print((System.currentTimeMillis() - t) + ", ");
+        }
+        System.out.println("");*/
         BigInteger s1 = solution1(V, FROM, BELOW);
         System.out.println("Result 1 = " + s1);
         BigInteger s2 = solution2(V, FROM, BELOW);
         System.out.println("Result 2 = " + s2);
         BigInteger s3 = solution3(V, FROM, BELOW);
+        System.out.println("Result 3 = " + s3);
         return s3;
     }
     
@@ -224,34 +230,18 @@ public class Problem001 {
         long s2 = solution2(V, FROM, BELOW);
         System.out.println("Result 2 = " + s2);
         long s3 = solution3(V, FROM, BELOW);
+        System.out.println("Result 3 = " + s3);
         return s3;
     }
     
     public static long problem001(long A, long B, long M, long N) {
-        long t = System.currentTimeMillis();
-/*        long s1 = solution1(A, B, M, N);
-        System.out.println("Result1 = " + s1);
-        System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
-
-        t = System.currentTimeMillis();
+        long s1 = solution1(A, B, M, N);
+        System.out.println("Result 1 = " + s1);
         long s2 = solution2(A, B, M, N);
-        System.out.println("Result2 = " + s2);
-        System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
-        
-        t = System.currentTimeMillis();*/
+        System.out.println("Result 2 = " + s2);
         long s3 = solution3(A, B, M, N);
-        System.out.println("Result3 = " + s3);
-        System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
-
+        System.out.println("Result 3 = " + s3);
         return s3;
-/*        
-        BigInteger s3b = solution3(BigInteger.valueOf(A), 
-                                   BigInteger.valueOf(B), 
-                                   BigInteger.valueOf(M), 
-                                   BigInteger.valueOf(N));
-        System.out.println("Result3b = " + s3b);
-        System.out.println("Time (ms) = " + (System.currentTimeMillis() - t));
-*/
     }
     
 }
