@@ -1059,7 +1059,7 @@ Números de Friedman:
             V.add(va);
         long FROM = getArgument(args, 1, "FROM");
         long TO = getArgument(args, 1000, "BELOW");
-        long S = ProjectEuler.P001_009.Problem001.problem001(V, FROM, TO);
+        long S = ProjectEuler.P001_009.Problem001.solve(V, FROM, TO);
         System.out.println("Resultado = " + S);
         if (S > 1 || S < 0)
             return;*/
@@ -1067,7 +1067,7 @@ Números de Friedman:
         long B = getArgument(args, 1, 5, "B");
         long M = getArgument(args, 2, 1, "M");
         long N = getArgument(args, 3, 1000, "N");
-        long S = ProjectEuler.P001_009.Problem001.problem001(A, B, M, N);
+        long S = ProjectEuler.P001_009.Problem001.solve(A, B, M, N);
         System.out.println("Resultado = " + S);
         if (S > 1 || S < 0)
             return;*/
@@ -1075,7 +1075,7 @@ Números de Friedman:
         BigInteger B = getArgument(args, 1, new BigInteger("5"), "B");
         BigInteger M = getArgument(args, 2, new BigInteger("1"), "M");
         BigInteger N = getArgument(args, 3, new BigInteger("1000"), "N");
-        BigInteger S = ProjectEuler.P001_009.Problem001.problem001(A, B, M, N);
+        BigInteger S = ProjectEuler.P001_009.Problem001.solve(A, B, M, N);
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
             return;*/
@@ -1087,8 +1087,12 @@ Números de Friedman:
             V.add(va);
         BigInteger FROM = getArgument(args, new BigInteger("1"), "FROM");
         BigInteger BELOW = getArgument(args, new BigInteger("1000"), "BELOW");
-        BigInteger S = ProjectEuler.P001_009.Problem001.problem001(V, FROM, BELOW);
-        System.out.println("Resultado = " + S);
+        BigInteger S = ProjectEuler.P001_009.Problem001.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION1);
+        System.out.println("Resultado 1 = " + S);
+        S = ProjectEuler.P001_009.Problem001.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION2);
+        System.out.println("Resultado 2 = " + S);
+        S = ProjectEuler.P001_009.Problem001.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION3);
+        System.out.println("Resultado 3 = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
             return;
         //ProjectEuler.P140_149.Problem143.problem143(120000);

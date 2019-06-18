@@ -6,41 +6,120 @@ package ProjectEuler.P001_009;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import raytracer.IFCMath;
 
 /**
+ * 
+ * Class to solve problem 1 in <a href="https://www.projecteuler.net" target="_blank">Project Euler</a>:
+ * 
+ * <p style="font-size:20px; color:#C83819">Multiples of 3 and 5</p>
+ * 
+ * <p style="font-size:14px; color:#000000">If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. 
+ * The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000.</p>
  *
- * @author ismael.flores
+ * @author Ismael Flores &lt;ismafc@gmail.com&gt;
+ * @version 1.0
+ * 
  */
 public class Problem001 {
 
-    /*
-    Multiples of 3 and 5
+    /**
+     * Constant related to first algorithm:<br>
+     * One loop and compare each value in range with all provided values
+     */
+    public final static int SOLUTION1 = 1;
+    
+    /**
+     * Constant related to second algorithm:<br>
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     */
+    public final static int SOLUTION2 = 2;
+    
+    /**
+     * Constant related to third algorithm:<br>
+     * All first 'n' multiples of one number 'k' has a formule:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * We need to substract multiples of Least Common Multiples added before recursvely
+     */
+    public final static int SOLUTION3 = 3;
 
-    If we list all the natural numbers below 10 that are multiples of 3 or 5, 
-    we get 3, 5, 6 and 9. The sum of these multiples is 23.
-    Find the sum of all the multiples of 3 or 5 below 1000.
-    */
-           
-    public static long solution1(long A, long B, long M, long N) {
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop and compare each value in range with all provided values
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solution1(long A, long B, long BELOW) {
+        return solution1(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop and compare each value in range with all provided values
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solution1(BigInteger A, BigInteger B, BigInteger BELOW) {
+        return solution1(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW);
+    }
+    
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop and compare each value in range with all provided values
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solution1(long A, long B, long FROM, long BELOW) {
+        return solution1(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop and compare each value in range with all provided values
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solution1(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+        return solution1(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
+    }
+   
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * Using algorithm based on one loop and compare each value in range with all provided values
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    private static long solution1(ArrayList<Long> V, long FROM, long BELOW) {
         long sum = 0;
-        for (long i = M; i < N; i++) {
-            if (i % A == 0 || i % B == 0)
+        for (long i = FROM; i < BELOW; i++) {
+            if (IFCMath.mod(i, V))
                 sum += i;
         }
         return sum;
     }
 
-    public static BigInteger solution1(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
-        BigInteger sum = BigInteger.ZERO;
-        for (BigInteger i = M; i.compareTo(N) == -1; i = i.add(BigInteger.ONE)) {
-            if (i.mod(A).equals(BigInteger.ZERO) || i.mod(B).equals(BigInteger.ZERO))
-                sum = sum.add(i);
-        }
-        return sum;
-    }
-
-    public static BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * Using algorithm based on one loop and compare each value in range with all provided values
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    private static BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         BigInteger sum = BigInteger.ZERO;
         for (BigInteger i = FROM; i.compareTo(BELOW) == -1; i = i.add(BigInteger.ONE)) {
             if (IFCMath.mod(i, V))
@@ -49,21 +128,70 @@ public class Problem001 {
         return sum;
     }
     
-    public static long solution1(ArrayList<Long> V, long M, long N) {
-        long sum = 0;
-        for (long i = M; i < N; i++) {
-            if (IFCMath.mod(i, V))
-                sum += i;
-        }
-        return sum;
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solution2(long A, long B, long BELOW) {
+        return solution2(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solution2(BigInteger A, BigInteger B, BigInteger BELOW) {
+        return solution2(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW);
     }
     
-    public static long solution2(ArrayList<Long> V, long M, long N) {
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solution2(long A, long B, long FROM, long BELOW) {
+        return solution2(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solution2(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+        return solution2(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
+    }
+    
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    private static long solution2(ArrayList<Long> V, long FROM, long BELOW) {
         long sum = 0;
         ArrayList<Long> nV = new ArrayList<>();
         for (long v : V) {
-            long M1 = (M % v == 0) ? M : M + v - M % v;
-            for (long i = M1; i < N; i += v) {
+            long M1 = (FROM % v == 0) ? FROM : FROM + v - FROM % v;
+            for (long i = M1; i < BELOW; i += v) {
                 if (!IFCMath.mod(i, nV)) {
                     sum += i;
                 }
@@ -73,176 +201,326 @@ public class Problem001 {
         return sum;
     }
 
-    public static BigInteger solution2(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    private static BigInteger solution2(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         BigInteger sum = BigInteger.ZERO;
         ArrayList<BigInteger> nV = new ArrayList<>();
         for (BigInteger v : V) {
-            BigInteger M1 = (M.mod(v).equals(BigInteger.ZERO)) ? M : M.add(v).subtract(M.mod(v));
-            for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(v)) {
+            BigInteger M1 = (FROM.mod(v).equals(BigInteger.ZERO)) ? FROM : FROM.add(v).subtract(FROM.mod(v));
+            for (BigInteger i = M1; i.compareTo(BELOW) == -1; i = i.add(v)) {
                 if (!IFCMath.mod(i, nV))
                     sum = sum.add(i);
             }
             nV.add(v);
         }
         return sum;
+    }    
+    
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * Using algorithm based on sum of <b>n</b> first multiples of <b>k</b>:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * And recursively substraction of least common multiple
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solution3(long A, long B, long BELOW) {
+        return solution3(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW);
     }
     
-    public static long solution2(long A, long B, long M, long N) {
-        long sum = 0;
-        long M1 = (M % A == 0) ? M : M + A - M % A;
-        for (long i = M1; i < N; i += A) {
-            sum += i;
-        }
-        M1 = (M % B == 0) ? M : M + B - M % B;
-        for (long i = M1; i < N; i += B) {
-            if (i % A != 0)
-                sum += i;
-        }
-        return sum;
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on sum of <b>n</b> first multiples of <b>k</b>:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * And recursively substraction of least common multiple
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solution3(long A, long B, long FROM, long BELOW) {
+        return solution3(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
 
-    public static BigInteger solution2(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
-        BigInteger sum = BigInteger.ZERO;
-        BigInteger M1 = (M.mod(A).equals(BigInteger.ZERO)) ? M : M.add(A).subtract(M.mod(A));
-        for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(A)) {
-            sum = sum.add(i);
-        }
-        M1 = (M.mod(B).equals(BigInteger.ZERO)) ? M : M.add(B).subtract(M.mod(B));
-        for (BigInteger i = M1; i.compareTo(N) == -1; i = i.add(B)) {
-            if (i.mod(A).compareTo(BigInteger.ZERO) != 0)
-                sum = sum.add(i);
-        }
-        return sum;
-    }
-    
-    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger N) {
-        BigInteger TWO = new BigInteger("2");
-        BigInteger E = N.subtract(BigInteger.ONE);
-        BigInteger AB = IFCMath.MCM(A , B);
-        BigInteger A1 = E.divide(A);
-        BigInteger B1 = E.divide(B);
-        BigInteger AB1 = E.divide(AB);
-        BigInteger AF = A1.add(BigInteger.ONE).multiply(A1).multiply(A).divide(TWO);
-        BigInteger BF = B1.add(BigInteger.ONE).multiply(B1).multiply(B).divide(TWO);
-        BigInteger ABF = AB1.add(BigInteger.ONE).multiply(AB1).multiply(AB).divide(TWO);
-        return AF.add(BF).subtract(ABF);
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * Using algorithm based on sum of <b>n</b> first multiples of <b>k</b>:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * And recursively substraction of least common multiple
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger BELOW) {
+        return solution3(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW);
     }
 
-    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
-        return solution3(A, B, N).subtract(solution3(A, B, M));
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on sum of <b>n</b> first multiples of <b>k</b>:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * And recursively substraction of least common multiple
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+        return solution3(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
     
-    public static long solution3(long A, long B, long N) {
-        long E = N - 1;
-        long AB = IFCMath.MCM(A , B);
-        long A1 = E / A;
-        long B1 = E / B;
-        long AB1 = E / AB;
-        return A * (A1 * (A1 + 1)) / 2 + 
-               B * (B1 * (B1 + 1)) / 2 - 
-               AB * (AB1 * (AB1 + 1)) / 2;
-    }
-    
-    public static long solution3(long A, long B, long M, long N) {
-        return solution3(A, B, N) - solution3(A, B, M);
-    }
-
-    public static long solution3(ArrayList<Long> V, long M, long N) {
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) 
+     * from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * Using algorithm based on sum of <b>n</b> first multiples of <b>k</b>:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * And recursively substraction of least common multiple
+     * 
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    private static long solution3(ArrayList<Long> V, long FROM, long BELOW) {
         ArrayList<Long> nV = new ArrayList<>();
         long total = 0;
         for (long v : V) {
-            long E1 = N - 1;
+            long E1 = BELOW - 1;
             long A1 = E1 / v;
             long R1 = v * (A1 * (A1 + 1)) / 2;
-            long E2 = M - 1;
+            long E2 = FROM - 1;
             long A2 = E2 / v;
             long R2 = v * (A2 * (A2 + 1)) / 2;
             long R = R1 - R2;
             ArrayList<Long> repeated = new ArrayList<>(); 
             nV.forEach(p -> repeated.add(IFCMath.MCM(v, p)));
-            total = total + R - solution3(repeated, M, N);
+            total = total + R - solution3(repeated, FROM, BELOW);
             nV.add(v);
         }
         return total;
     }
 
-    public static BigInteger solution3(ArrayList<BigInteger> V, BigInteger M, BigInteger N) {
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) 
+     * from <b><i>FROM</i></b> and below <b><i>BELOW</i></b> using <b>BigInteger</b> class to allow big numbers<br>
+     * Using algorithm based on sum of <b>n</b> first multiples of <b>k</b>:<br>
+     * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
+     * And recursively substraction of least common multiple
+     * 
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    private static BigInteger solution3(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         ArrayList<BigInteger> nV = new ArrayList<>();
         BigInteger TWO = new BigInteger("2");
         BigInteger total = BigInteger.ZERO;
         for (BigInteger v : V) {
-            BigInteger E1 = N.subtract(BigInteger.ONE);
+            BigInteger E1 = BELOW.subtract(BigInteger.ONE);
             BigInteger A1 = E1.divide(v);
             BigInteger R1 = A1.add(BigInteger.ONE).multiply(A1).multiply(v).divide(TWO);
-            BigInteger E2 = M.subtract(BigInteger.ONE);
+            BigInteger E2 = FROM.subtract(BigInteger.ONE);
             BigInteger A2 = E2.divide(v);
             BigInteger R2 = A2.add(BigInteger.ONE).multiply(A2).multiply(v).divide(TWO);
             BigInteger R = R1.subtract(R2);
             ArrayList<BigInteger> repeated = new ArrayList<>(); 
             nV.forEach(p -> repeated.add(IFCMath.MCM(v, p)));
-            total = total.add(R).subtract(solution3(repeated, M, N));
+            total = total.add(R).subtract(solution3(repeated, FROM, BELOW));
             nV.add(v);
         }
         return total;
     }
-    
-    public static BigInteger problem001(BigInteger A, BigInteger B, BigInteger M, BigInteger N) {
-        BigInteger s1 = solution1(A, B, M, N);
-        System.out.println("Result 1 = " + s1);
-        BigInteger s2 = solution2(A, B, M, N);
-        System.out.println("Result 2 = " + s2);
-        BigInteger s3 = solution3(A, B, M, N);
-        System.out.println("Result 3 = " + s3);
-        return s3;
+
+    /** 
+     * Find the sum of all the multiples of 3 or 5 below 1000
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solve() {
+        return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, SOLUTION3);
     }
 
-    public static BigInteger problem001(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
-/*        for (int i = 0; i < 22; i++) {
-            long t = System.currentTimeMillis();
-            solution1(V, FROM, BELOW);
-            System.out.print((System.currentTimeMillis() - t) + ", ");            
-        }
-        System.out.println("");
-        for (int i = 0; i < 22; i++) {
-            long t = System.currentTimeMillis();
-            solution2(V, FROM, BELOW);
-            System.out.print((System.currentTimeMillis() - t) + ", ");
-        }
-        System.out.println("");
-        for (int i = 0; i < 22; i++) {
-            long t = System.currentTimeMillis();
-            solution3(V, FROM, BELOW);
-            System.out.print((System.currentTimeMillis() - t) + ", ");
-        }
-        System.out.println("");*/
-        BigInteger s1 = solution1(V, FROM, BELOW);
-        System.out.println("Result 1 = " + s1);
-        BigInteger s2 = solution2(V, FROM, BELOW);
-        System.out.println("Result 2 = " + s2);
-        BigInteger s3 = solution3(V, FROM, BELOW);
-        System.out.println("Result 3 = " + s3);
-        return s3;
+    /** 
+     * Find the sum of all the multiples of 3 or 5 below 1000
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
+     */
+    public static long solve(int solution) {
+        return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, solution);
     }
     
-    public static long problem001(ArrayList<Long> V, long FROM, long BELOW) {
-        long s1 = solution1(V, FROM, BELOW);
-        System.out.println("Result 1 = " + s1);
-        long s2 = solution2(V, FROM, BELOW);
-        System.out.println("Result 2 = " + s2);
-        long s3 = solution3(V, FROM, BELOW);
-        System.out.println("Result 3 = " + s3);
-        return s3;
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solve(long A, long B, long BELOW) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, SOLUTION3);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b> with
+     * provided algorithm through <b><i>solution</i></b>
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
+     */
+    public static long solve(long A, long B, long BELOW, int solution) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, solution);
     }
     
-    public static long problem001(long A, long B, long M, long N) {
-        long s1 = solution1(A, B, M, N);
-        System.out.println("Result 1 = " + s1);
-        long s2 = solution2(A, B, M, N);
-        System.out.println("Result 2 = " + s2);
-        long s3 = solution3(A, B, M, N);
-        System.out.println("Result 3 = " + s3);
-        return s3;
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solve(long A, long B, long FROM, long BELOW) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, SOLUTION3);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * using provided algorithm through <b><i>solution</i></b>
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
+     */
+    public static long solve(long A, long B, long FROM, long BELOW, int solution) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, solution);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, SOLUTION3);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b> using
+     * provided algorithm through <b><i>solution</i></b>
+     * @param A First value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[1, <i>BELOW</i>)</b>
+     * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
+     */
+    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW, int solution) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, solution);
     }
     
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, SOLUTION3);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>
+     * using provided algorithm through <b><i>solution</i></b>
+     * @param A First value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param B Second value to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
+     */
+    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW, int solution) {
+        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, solution);
+    }
+    
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
+     */
+    public static long solve(ArrayList<Long> V, long FROM, long BELOW) {
+        return solve(V, FROM, BELOW, SOLUTION3);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
+     */
+    public static long solve(ArrayList<Long> V, long FROM, long BELOW, int solution) {
+        switch (solution) {
+            case SOLUTION1:
+                return solution1(V, FROM, BELOW);
+            case SOLUTION2:
+                return solution2(V, FROM, BELOW);
+            case SOLUTION3:
+                return solution3(V, FROM, BELOW);
+        }
+        return solution3(V, FROM, BELOW);
+    }
+    
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
+     */
+    public static BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+        return solve(V, FROM, BELOW, SOLUTION3);
+    }
+
+    /** 
+     * Finds the sum of all the multiples of any number in <b><i>V</i></b> (V[0], V[1], ..., V[n-1] or V[n]) from <b><i>FROM</i></b> and below <b><i>BELOW</i></b>.
+     * @param V List of values to check with all numbers in range <b>[<i>FROM</i>, <i>BELOW</i>)</b>
+     * @param FROM Lower bound (included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
+     * @param solution Algorithm we want to use to calculate the desired value
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
+     */
+    public static BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW, int solution) {
+        switch (solution) {
+            case SOLUTION1:
+                return solution1(V, FROM, BELOW);
+            case SOLUTION2:
+                return solution2(V, FROM, BELOW);
+            case SOLUTION3:
+                return solution3(V, FROM, BELOW);
+        }
+        return solution3(V, FROM, BELOW);
+    }
 }
 
