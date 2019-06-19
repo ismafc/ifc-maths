@@ -52,7 +52,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solution1(long A, long B, long BELOW) {
+    public long solution1(long A, long B, long BELOW) {
         return solution1(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW);
     }
 
@@ -64,7 +64,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solution1(BigInteger A, BigInteger B, BigInteger BELOW) {
+    public BigInteger solution1(BigInteger A, BigInteger B, BigInteger BELOW) {
         return solution1(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW);
     }
     
@@ -77,7 +77,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solution1(long A, long B, long FROM, long BELOW) {
+    public long solution1(long A, long B, long FROM, long BELOW) {
         return solution1(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
 
@@ -90,7 +90,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solution1(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+    public BigInteger solution1(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
         return solution1(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
    
@@ -102,7 +102,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    private static long solution1(ArrayList<Long> V, long FROM, long BELOW) {
+    private long solution1(ArrayList<Long> V, long FROM, long BELOW) {
         long sum = 0;
         for (long i = FROM; i < BELOW; i++) {
             if (IFCMath.mod(i, V))
@@ -119,7 +119,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    private static BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+    private BigInteger solution1(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         BigInteger sum = BigInteger.ZERO;
         for (BigInteger i = FROM; i.compareTo(BELOW) == -1; i = i.add(BigInteger.ONE)) {
             if (IFCMath.mod(i, V))
@@ -136,7 +136,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solution2(long A, long B, long BELOW) {
+    public long solution2(long A, long B, long BELOW) {
         return solution2(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW);
     }
 
@@ -148,7 +148,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solution2(BigInteger A, BigInteger B, BigInteger BELOW) {
+    public BigInteger solution2(BigInteger A, BigInteger B, BigInteger BELOW) {
         return solution2(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW);
     }
     
@@ -161,7 +161,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solution2(long A, long B, long FROM, long BELOW) {
+    public long solution2(long A, long B, long FROM, long BELOW) {
         return solution2(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
 
@@ -174,7 +174,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solution2(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+    public BigInteger solution2(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
         return solution2(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
     
@@ -186,7 +186,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    private static long solution2(ArrayList<Long> V, long FROM, long BELOW) {
+    private long solution2(ArrayList<Long> V, long FROM, long BELOW) {
         long sum = 0;
         ArrayList<Long> nV = new ArrayList<>();
         for (long v : V) {
@@ -209,7 +209,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    private static BigInteger solution2(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+    private BigInteger solution2(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         BigInteger sum = BigInteger.ZERO;
         ArrayList<BigInteger> nV = new ArrayList<>();
         for (BigInteger v : V) {
@@ -233,7 +233,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solution3(long A, long B, long BELOW) {
+    public long solution3(long A, long B, long BELOW) {
         return solution3(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW);
     }
     
@@ -248,7 +248,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solution3(long A, long B, long FROM, long BELOW) {
+    public long solution3(long A, long B, long FROM, long BELOW) {
         return solution3(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
 
@@ -262,7 +262,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger BELOW) {
+    public BigInteger solution3(BigInteger A, BigInteger B, BigInteger BELOW) {
         return solution3(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW);
     }
 
@@ -277,7 +277,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solution3(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+    public BigInteger solution3(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
         return solution3(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW);
     }
     
@@ -293,7 +293,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    private static long solution3(ArrayList<Long> V, long FROM, long BELOW) {
+    private long solution3(ArrayList<Long> V, long FROM, long BELOW) {
         ArrayList<Long> nV = new ArrayList<>();
         long total = 0;
         for (long v : V) {
@@ -324,7 +324,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    private static BigInteger solution3(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+    private BigInteger solution3(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         ArrayList<BigInteger> nV = new ArrayList<>();
         BigInteger TWO = new BigInteger("2");
         BigInteger total = BigInteger.ZERO;
@@ -348,7 +348,7 @@ public class Problem001 {
      * Find the sum of all the multiples of 3 or 5 below 1000
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solve() {
+    public long solve() {
         return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, SOLUTION3);
     }
 
@@ -357,7 +357,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public static long solve(int solution) {
+    public long solve(int solution) {
         return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, solution);
     }
     
@@ -368,7 +368,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solve(long A, long B, long BELOW) {
+    public long solve(long A, long B, long BELOW) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, SOLUTION3);
     }
 
@@ -381,7 +381,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public static long solve(long A, long B, long BELOW, int solution) {
+    public long solve(long A, long B, long BELOW, int solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, solution);
     }
     
@@ -393,7 +393,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solve(long A, long B, long FROM, long BELOW) {
+    public long solve(long A, long B, long FROM, long BELOW) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, SOLUTION3);
     }
 
@@ -407,7 +407,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public static long solve(long A, long B, long FROM, long BELOW, int solution) {
+    public long solve(long A, long B, long FROM, long BELOW, int solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, solution);
     }
 
@@ -418,7 +418,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[1, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW) {
+    public BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, SOLUTION3);
     }
 
@@ -431,7 +431,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
      */
-    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW, int solution) {
+    public BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW, int solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, solution);
     }
     
@@ -443,7 +443,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with <b><i>A</i></b> and <b><i>B</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
+    public BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, SOLUTION3);
     }
 
@@ -457,7 +457,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
      */
-    public static BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW, int solution) {
+    public BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW, int solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, solution);
     }
     
@@ -468,7 +468,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
-    public static long solve(ArrayList<Long> V, long FROM, long BELOW) {
+    public long solve(ArrayList<Long> V, long FROM, long BELOW) {
         return solve(V, FROM, BELOW, SOLUTION3);
     }
 
@@ -480,7 +480,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public static long solve(ArrayList<Long> V, long FROM, long BELOW, int solution) {
+    public long solve(ArrayList<Long> V, long FROM, long BELOW, int solution) {
         switch (solution) {
             case SOLUTION1:
                 return solution1(V, FROM, BELOW);
@@ -499,7 +499,7 @@ public class Problem001 {
      * @param BELOW Upper bound (not included). It defines range <b>[<i>FROM</i>, <i>BELOW</i>)</b> to check with all values in <b><i>V</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
-    public static BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
+    public BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
         return solve(V, FROM, BELOW, SOLUTION3);
     }
 
@@ -511,7 +511,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
      */
-    public static BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW, int solution) {
+    public BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW, int solution) {
         switch (solution) {
             case SOLUTION1:
                 return solution1(V, FROM, BELOW);

@@ -1079,6 +1079,7 @@ Números de Friedman:
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
             return;*/
+        ProjectEuler.P001_009.Problem001 P1 = new ProjectEuler.P001_009.Problem001(); 
         ArrayList<BigInteger> V = new ArrayList<>();
         BigInteger MONE = new BigInteger("-1");
         long i = 1;
@@ -1087,11 +1088,11 @@ Números de Friedman:
             V.add(va);
         BigInteger FROM = getArgument(args, new BigInteger("1"), "FROM");
         BigInteger BELOW = getArgument(args, new BigInteger("1000"), "BELOW");
-        BigInteger S = ProjectEuler.P001_009.Problem001.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION1);
+        BigInteger S = P1.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION1);
         System.out.println("Resultado 1 = " + S);
-        S = ProjectEuler.P001_009.Problem001.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION2);
+        S = P1.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION2);
         System.out.println("Resultado 2 = " + S);
-        S = ProjectEuler.P001_009.Problem001.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION3);
+        S = P1.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.SOLUTION3);
         System.out.println("Resultado 3 = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
             return;
