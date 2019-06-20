@@ -25,25 +25,17 @@ import raytracer.IFCMath;
 public class Problem001 {
 
     /**
-     * Constant related to first algorithm:<br>
-     * One loop and compare each value in range with all provided values
-     */
-    public final static int SOLUTION1 = 1;
-    
-    /**
-     * Constant related to second algorithm:<br>
-     * Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before
-     */
-    public final static int SOLUTION2 = 2;
-    
-    /**
-     * Constant related to third algorithm:<br>
-     * All first 'n' multiples of one number 'k' has a formule:<br>
+     * Enum containing implemented algorithms:<br>
+     * <b>SOLUTION1:</b> One loop and compare each value in range with all provided values<br>
+     * <b>SOLUTION2:</b> Using algorithm based on one loop for each multiple -step by this multiple- and in each loop don't add if added in some loop before<br>
+     * <b>SOLUTION3:</b> All first 'n' multiples of one number 'k' has a formule:<br>
      * \(k \cdot \frac{n \cdot (n + 1)}{2}\)<br>
      * We need to substract multiples of Least Common Multiples added before recursvely
      */
-    public final static int SOLUTION3 = 3;
-
+    public enum Algorithm {
+        SOLUTION1, SOLUTION2, SOLUTION3
+    }
+    
     /** 
      * Finds the sum of all the multiples of <b><i>A</i></b> or <b><i>B</i></b> from 1 and below <b><i>BELOW</i></b>
      * Using algorithm based on one loop and compare each value in range with all provided values
@@ -349,7 +341,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
     public long solve() {
-        return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, SOLUTION3);
+        return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -357,7 +349,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public long solve(int solution) {
+    public long solve(Algorithm solution) {
         return solve(new ArrayList<>(Arrays.asList(3L, 5L)), 1, 1000, solution);
     }
     
@@ -369,7 +361,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
     public long solve(long A, long B, long BELOW) {
-        return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, SOLUTION3);
+        return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -381,7 +373,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public long solve(long A, long B, long BELOW, int solution) {
+    public long solve(long A, long B, long BELOW, Algorithm solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), 1, BELOW, solution);
     }
     
@@ -394,7 +386,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
     public long solve(long A, long B, long FROM, long BELOW) {
-        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, SOLUTION3);
+        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -407,7 +399,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public long solve(long A, long B, long FROM, long BELOW, int solution) {
+    public long solve(long A, long B, long FROM, long BELOW, Algorithm solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, solution);
     }
 
@@ -419,7 +411,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
     public BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW) {
-        return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, SOLUTION3);
+        return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -431,7 +423,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
      */
-    public BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW, int solution) {
+    public BigInteger solve(BigInteger A, BigInteger B, BigInteger BELOW, Algorithm solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), BigInteger.ONE, BELOW, solution);
     }
     
@@ -444,7 +436,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
     public BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW) {
-        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, SOLUTION3);
+        return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -457,7 +449,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
      */
-    public BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW, int solution) {
+    public BigInteger solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW, Algorithm solution) {
         return solve(new ArrayList<>(Arrays.asList(A, B)), FROM, BELOW, solution);
     }
     
@@ -469,7 +461,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum
      */
     public long solve(ArrayList<Long> V, long FROM, long BELOW) {
-        return solve(V, FROM, BELOW, SOLUTION3);
+        return solve(V, FROM, BELOW, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -480,7 +472,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with desired sum calculated using provided algorithm
      */
-    public long solve(ArrayList<Long> V, long FROM, long BELOW, int solution) {
+    public long solve(ArrayList<Long> V, long FROM, long BELOW, Algorithm solution) {
         switch (solution) {
             case SOLUTION1:
                 return solution1(V, FROM, BELOW);
@@ -500,7 +492,7 @@ public class Problem001 {
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum
      */
     public BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW) {
-        return solve(V, FROM, BELOW, SOLUTION3);
+        return solve(V, FROM, BELOW, Algorithm.SOLUTION3);
     }
 
     /** 
@@ -511,7 +503,7 @@ public class Problem001 {
      * @param solution Algorithm we want to use to calculate the desired value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with desired sum calculated using provided algorithm
      */
-    public BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW, int solution) {
+    public BigInteger solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW, Algorithm solution) {
         switch (solution) {
             case SOLUTION1:
                 return solution1(V, FROM, BELOW);

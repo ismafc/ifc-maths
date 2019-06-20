@@ -21,6 +21,16 @@ import static org.junit.Assert.*;
  */
 public class Problem001IT {
 
+    private long A = 3L;
+    BigInteger A_ = new BigInteger("3");
+    private long B = 5L;
+    BigInteger B_ = new BigInteger("5");
+    long FROM = 1L;
+    BigInteger FROM_ = new BigInteger("1");
+    long BELOW = 1000L;
+    BigInteger BELOW_ = new BigInteger("1000");
+    long expResult = 233168L;
+    BigInteger expResult_ = new BigInteger("233168");
     private final Problem001 instance = new Problem001();
     
     public Problem001IT() {
@@ -36,6 +46,16 @@ public class Problem001IT {
     
     @Before
     public void setUp() {
+        A = 3L;
+        A_ = new BigInteger("3");
+        B = 5L;
+        B_ = new BigInteger("5");
+        FROM = 1L;
+        FROM_ = new BigInteger("1");
+        BELOW = 1000L;
+        BELOW_ = new BigInteger("1000");
+        expResult = 233168L;
+        expResult_ = new BigInteger("233168");
     }
     
     @After
@@ -48,10 +68,6 @@ public class Problem001IT {
     @Test
     public void testSolution1_3args_1() {
         System.out.println("solution1(long A, long B, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solution1(A, B, BELOW);
         assertEquals(expResult, result);
     }
@@ -62,12 +78,8 @@ public class Problem001IT {
     @Test
     public void testSolution1_3args_2() {
         System.out.println("solution1(BigInteger A, BigInteger B, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solution1(A, B, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solution1(A_, B_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -76,11 +88,6 @@ public class Problem001IT {
     @Test
     public void testSolution1_4args_1() {
         System.out.println("solution1(long A, long B, long FROM, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long FROM = 1L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solution1(A, B, FROM, BELOW);
         assertEquals(expResult, result);
     }
@@ -91,13 +98,8 @@ public class Problem001IT {
     @Test
     public void testSolution1_4args_2() {
         System.out.println("solution1(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solution1(A, B, FROM, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solution1(A_, B_, FROM_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -106,10 +108,6 @@ public class Problem001IT {
     @Test
     public void testSolution2_3args_1() {
         System.out.println("solution2(long A, long B, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solution2(A, B, BELOW);
         assertEquals(expResult, result);
     }
@@ -120,12 +118,8 @@ public class Problem001IT {
     @Test
     public void testSolution2_3args_2() {
         System.out.println("solution2(BigInteger A, BigInteger B, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solution2(A, B, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solution2(A_, B_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -134,11 +128,6 @@ public class Problem001IT {
     @Test
     public void testSolution2_4args_1() {
         System.out.println("solution2(long A, long B, long FROM, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long FROM = 1L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solution2(A, B, FROM, BELOW);
         assertEquals(expResult, result);
     }
@@ -149,13 +138,8 @@ public class Problem001IT {
     @Test
     public void testSolution2_4args_2() {
         System.out.println("solution2(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solution2(A, B, FROM, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solution2(A_, B_, FROM_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -164,10 +148,6 @@ public class Problem001IT {
     @Test
     public void testSolution3_3args_1() {
         System.out.println("solution3(long A, long B, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solution3(A, B, BELOW);
         assertEquals(expResult, result);
     }
@@ -178,11 +158,6 @@ public class Problem001IT {
     @Test
     public void testSolution3_4args_1() {
         System.out.println("solution3(long A, long B, long FROM, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long FROM = 1L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solution3(A, B, FROM, BELOW);
         assertEquals(expResult, result);
     }
@@ -193,12 +168,8 @@ public class Problem001IT {
     @Test
     public void testSolution3_3args_2() {
         System.out.println("solution3(BigInteger A, BigInteger B, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solution3(A, B, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solution3(A_, B_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -207,13 +178,8 @@ public class Problem001IT {
     @Test
     public void testSolution3_4args_2() {
         System.out.println("solution3(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solution3(A, B, FROM, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solution3(A_, B_, FROM_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -222,7 +188,6 @@ public class Problem001IT {
     @Test
     public void testSolve() {
         System.out.println("solve()");
-        long expResult = 233168L;
         long result = instance.solve();
         assertEquals(expResult, result);
     }
@@ -233,17 +198,13 @@ public class Problem001IT {
     @Test
     public void testSolve_int() {
         System.out.println("solve(int solution)");
-        int solution = Problem001.SOLUTION1;
-        long expResult = 233168L;
-        long result = instance.solve(solution);
+        long result = instance.solve(Problem001.Algorithm.SOLUTION1);
         assertEquals(expResult, result);
 
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(solution);
+        result = instance.solve(Problem001.Algorithm.SOLUTION2);
         assertEquals(expResult, result);
 
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(solution);
+        result = instance.solve(Problem001.Algorithm.SOLUTION3);
         assertEquals(expResult, result);
     }
 
@@ -253,10 +214,6 @@ public class Problem001IT {
     @Test
     public void testSolve_3args_1() {
         System.out.println("solve(long A, long B, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solve(A, B, BELOW);
         assertEquals(expResult, result);
     }
@@ -267,20 +224,13 @@ public class Problem001IT {
     @Test
     public void testSolve_4args_1() {
         System.out.println("solve(long A, long B, long BELOW, int solution)");
-        long A = 3L;
-        long B = 5L;
-        long BELOW = 1000L;
-        int solution = Problem001.SOLUTION1;
-        long expResult = 233168L;
-        long result = instance.solve(A, B, BELOW, solution);
+        long result = instance.solve(A, B, BELOW, Problem001.Algorithm.SOLUTION1);
         assertEquals(expResult, result);
 
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(A, B, BELOW, solution);
+        result = instance.solve(A, B, BELOW, Problem001.Algorithm.SOLUTION2);
         assertEquals(expResult, result);
  
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(A, B, BELOW, solution);
+        result = instance.solve(A, B, BELOW, Problem001.Algorithm.SOLUTION3);
         assertEquals(expResult, result);
     }
 
@@ -290,11 +240,6 @@ public class Problem001IT {
     @Test
     public void testSolve_4args_2() {
         System.out.println("solve(long A, long B, long FROM, long BELOW)");
-        long A = 3L;
-        long B = 5L;
-        long FROM = 1L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
         long result = instance.solve(A, B, FROM, BELOW);
         assertEquals(expResult, result);
     }
@@ -305,21 +250,13 @@ public class Problem001IT {
     @Test
     public void testSolve_5args_1() {
         System.out.println("solve(long A, long B, long FROM, long BELOW, int solution)");
-        long A = 3L;
-        long B = 5L;
-        long FROM = 1L;
-        long BELOW = 1000L;
-        int solution = Problem001.SOLUTION1;
-        long expResult = 233168L;
-        long result = instance.solve(A, B, FROM, BELOW, solution);
+        long result = instance.solve(A, B, FROM, BELOW, Problem001.Algorithm.SOLUTION1);
         assertEquals(expResult, result);
 
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(A, B, FROM, BELOW, solution);
+        result = instance.solve(A, B, FROM, BELOW, Problem001.Algorithm.SOLUTION2);
         assertEquals(expResult, result);
 
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(A, B, FROM, BELOW, solution);
+        result = instance.solve(A, B, FROM, BELOW, Problem001.Algorithm.SOLUTION3);
         assertEquals(expResult, result);
     }
 
@@ -329,12 +266,8 @@ public class Problem001IT {
     @Test
     public void testSolve_3args_2() {
         System.out.println("solve(BigInteger A, BigInteger B, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solve(A, B, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solve(A_, B_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -343,21 +276,14 @@ public class Problem001IT {
     @Test
     public void testSolve_4args_3() {
         System.out.println("solve(BigInteger A, BigInteger B, BigInteger BELOW, int solution)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger BELOW = new BigInteger("1000");
-        int solution = Problem001.SOLUTION1;
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solve(A, B, BELOW, solution);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solve(A_, B_, BELOW_, Problem001.Algorithm.SOLUTION1);
+        assertEquals(expResult_, result);
 
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(A, B, BELOW, solution);
-        assertEquals(expResult, result);
+        result = instance.solve(A_, B_, BELOW_, Problem001.Algorithm.SOLUTION2);
+        assertEquals(expResult_, result);
 
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(A, B, BELOW, solution);
-        assertEquals(expResult, result);
+        result = instance.solve(A_, B_, BELOW_, Problem001.Algorithm.SOLUTION3);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -366,13 +292,8 @@ public class Problem001IT {
     @Test
     public void testSolve_4args_4() {
         System.out.println("solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solve(A, B, FROM, BELOW);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solve(A_, B_, FROM_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -381,22 +302,14 @@ public class Problem001IT {
     @Test
     public void testSolve_5args_2() {
         System.out.println("solve(BigInteger A, BigInteger B, BigInteger FROM, BigInteger BELOW, int solution)");
-        BigInteger A = new BigInteger("3");
-        BigInteger B = new BigInteger("5");
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        int solution = Problem001.SOLUTION1;
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solve(A, B, FROM, BELOW, solution);
-        assertEquals(expResult, result);
+        BigInteger result = instance.solve(A_, B_, FROM_, BELOW_, Problem001.Algorithm.SOLUTION1);
+        assertEquals(expResult_, result);
 
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(A, B, FROM, BELOW, solution);
-        assertEquals(expResult, result);
+        result = instance.solve(A_, B_, FROM_, BELOW_, Problem001.Algorithm.SOLUTION2);
+        assertEquals(expResult_, result);
 
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(A, B, FROM, BELOW, solution);
-        assertEquals(expResult, result);
+        result = instance.solve(A_, B_, FROM_, BELOW_, Problem001.Algorithm.SOLUTION3);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -405,10 +318,7 @@ public class Problem001IT {
     @Test
     public void testSolve_3args_3() {
         System.out.println("solve(ArrayList<Long> V, long FROM, long BELOW)");
-        ArrayList<Long> V = new ArrayList<>(Arrays.asList(3L, 5L));
-        long FROM = 1L;
-        long BELOW = 1000L;
-        long expResult = 233168L;
+        ArrayList<Long> V = new ArrayList<>(Arrays.asList(A, B));
         long result = instance.solve(V, FROM, BELOW);
         assertEquals(expResult, result);
     }
@@ -419,20 +329,14 @@ public class Problem001IT {
     @Test
     public void testSolve_4args_5() {
         System.out.println("solve(ArrayList<Long> V, long FROM, long BELOW, int solution)");
-        ArrayList<Long> V = new ArrayList<>(Arrays.asList(3L, 5L));
-        long FROM = 1L;
-        long BELOW = 1000L;
-        int solution = Problem001.SOLUTION1;
-        long expResult = 233168L;
-        long result = instance.solve(V, FROM, BELOW, solution);
+        ArrayList<Long> V = new ArrayList<>(Arrays.asList(A, B));
+        long result = instance.solve(V, FROM, BELOW, Problem001.Algorithm.SOLUTION1);
         assertEquals(expResult, result);
         
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(V, FROM, BELOW, solution);
+        result = instance.solve(V, FROM, BELOW, Problem001.Algorithm.SOLUTION2);
         assertEquals(expResult, result);
 
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(V, FROM, BELOW, solution);
+        result = instance.solve(V, FROM, BELOW, Problem001.Algorithm.SOLUTION3);
         assertEquals(expResult, result);
     }
 
@@ -442,12 +346,9 @@ public class Problem001IT {
     @Test
     public void testSolve_3args_4() {
         System.out.println("solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW)");
-        ArrayList<BigInteger> V = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solve(V, FROM, BELOW);
-        assertEquals(expResult, result);
+        ArrayList<BigInteger> V = new ArrayList<>(Arrays.asList(A_, B_));
+        BigInteger result = instance.solve(V, FROM_, BELOW_);
+        assertEquals(expResult_, result);
     }
 
     /**
@@ -456,21 +357,15 @@ public class Problem001IT {
     @Test
     public void testSolve_4args_6() {
         System.out.println("solve(ArrayList<BigInteger> V, BigInteger FROM, BigInteger BELOW, int solution)");
-        ArrayList<BigInteger> V = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
-        BigInteger FROM = new BigInteger("1");
-        BigInteger BELOW = new BigInteger("1000");
-        int solution = Problem001.SOLUTION1;
-        BigInteger expResult = new BigInteger("233168");
-        BigInteger result = instance.solve(V, FROM, BELOW, solution);
-        assertEquals(expResult, result);
+        ArrayList<BigInteger> V = new ArrayList<>(Arrays.asList(A_, B_));
+        BigInteger result = instance.solve(V, FROM_, BELOW_, Problem001.Algorithm.SOLUTION1);
+        assertEquals(expResult_, result);
         
-        solution = Problem001.SOLUTION2;
-        result = instance.solve(V, FROM, BELOW, solution);
-        assertEquals(expResult, result);
+        result = instance.solve(V, FROM_, BELOW_, Problem001.Algorithm.SOLUTION2);
+        assertEquals(expResult_, result);
         
-        solution = Problem001.SOLUTION3;
-        result = instance.solve(V, FROM, BELOW, solution);
-        assertEquals(expResult, result);
+        result = instance.solve(V, FROM_, BELOW_, Problem001.Algorithm.SOLUTION3);
+        assertEquals(expResult_, result);
     }
     
 }
