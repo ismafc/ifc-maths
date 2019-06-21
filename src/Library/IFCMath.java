@@ -274,10 +274,10 @@ public class IFCMath {
      * @param n2 second value to check
      * @return greater common divisor found
      */
-    public static BigInteger MCD(BigInteger n1, BigInteger n2) {
+    public static BigInteger MCD1(BigInteger n1, BigInteger n2) {
         if (n2.equals(BigInteger.ZERO))
             return n1;
-        return MCD(n2, n1.mod(n2));
+        return MCD1(n2, n1.mod(n2));
     }
 
     /**
@@ -317,6 +317,28 @@ public class IFCMath {
     }
 
     /**
+     * Calculates greater common divisor between 'n1' and 'n2'. Iterative.
+     * If returned value is 1, both values are prime among them
+     * @param n1 first value to check
+     * @param n2 second value to check
+     * @return greater common divisor found
+     */
+    public static BigInteger MCD(BigInteger n1, BigInteger n2) {
+        BigInteger biAux;
+        if (n1.compareTo(n2) == 0) {
+            biAux = n1;
+            n1 = n2;
+            n2 = biAux;
+        }
+        while (!n1.mod(n2).equals(BigInteger.ZERO)) {
+            biAux = n1.mod(n2);
+            n1 = n2;
+            n2 = biAux;
+        }
+        return n2;
+    }
+    
+    /**
      * Calculates Least common multiple between 'n1' and 'n2'.
      * If returned value is n1 * n2, both values are prime among them
      * @param n1 first value to check
@@ -346,7 +368,7 @@ public class IFCMath {
      * @return Least common multiple found
      */
     public static BigInteger MCM(BigInteger n1, BigInteger n2) {
-        return n1.multiply(n2).divide(MCD(n1.max(n2), n1.min(n2)));
+        return n1.multiply(n2).divide(MCD1(n1.max(n2), n1.min(n2)));
     }
     
     /**

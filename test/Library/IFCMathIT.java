@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package raytracer;
+package Library;
 
-import Library.Complex;
-import Library.IFCMath;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -506,6 +504,36 @@ public class IFCMathIT {
         ArrayList<BigInteger> V = null;
         boolean expResult = false;
         boolean result = IFCMath.mod(i, V);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCD1 method, of class IFCMath.
+     */
+    @Test
+    public void testMCD1_BigInteger_BigInteger() {
+        System.out.println("MCD1");
+        BigInteger n1 = null;
+        BigInteger n2 = null;
+        BigInteger expResult = null;
+        BigInteger result = IFCMath.MCD1(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCD1 method, of class IFCMath.
+     */
+    @Test
+    public void testMCD1_long_long() {
+        System.out.println("MCD1");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCD1(n1, n2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
