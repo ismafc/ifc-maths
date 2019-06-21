@@ -21,7 +21,7 @@ import raytracer.RaytracerITSuite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({DialogsITSuite.class, DialogsITSuite.class, ProjectEulerITSuite.class, LibraryITSuite.class, RaytracerITSuite.class, OnlineJudgeITSuite.class})
+@Suite.SuiteClasses({DialogsITSuite.class, ProjectEulerITSuite.class, LibraryITSuite.class, RaytracerITSuite.class, OnlineJudgeITSuite.class})
 public class RootSuite {
 
     @BeforeClass

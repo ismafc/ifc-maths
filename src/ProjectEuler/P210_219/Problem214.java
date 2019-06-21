@@ -6,7 +6,7 @@ package ProjectEuler.P210_219;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *

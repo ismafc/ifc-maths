@@ -6,7 +6,7 @@ package ProjectEuler.P120_129;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import raytracer.IFCMath;
+import Library.IFCMath;
 import raytracer.MatrixNxM;
 import raytracer.Point3D;
 

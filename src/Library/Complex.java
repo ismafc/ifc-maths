@@ -1,7 +1,7 @@
 /*
  * Complex.java
  */
-package raytracer;
+package Library;
 
 /**
  * Implementation of a Class to manage complex numbers a + bi

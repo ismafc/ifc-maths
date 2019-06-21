@@ -5,7 +5,7 @@
 package ProjectEuler.P200_209;
 
 import java.util.ArrayList;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *

@@ -7,7 +7,7 @@ package ProjectEuler.P140_149;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *

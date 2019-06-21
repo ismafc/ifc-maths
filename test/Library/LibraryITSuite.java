@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({Library.TreeIT.class, Library.SudokuCellIT.class, Library.SudokuIT.class})
+@Suite.SuiteClasses({IFCMathIT.class, TreeIT.class, SudokuCellIT.class, ComplexIT.class, SudokuIT.class})
 public class LibraryITSuite {
 
     @BeforeClass

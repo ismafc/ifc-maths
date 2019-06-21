@@ -5,7 +5,7 @@
 package ProjectEuler.P130_139;
 
 import java.math.BigInteger;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *

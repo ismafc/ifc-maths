@@ -7,7 +7,6 @@ package Library;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import raytracer.IFCMath;
 
 /**
  *

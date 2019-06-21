@@ -7,6 +7,8 @@
 package raytracer;
 
 // import Library.Sudoku;
+import Library.Complex;
+import Library.IFCMath;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;

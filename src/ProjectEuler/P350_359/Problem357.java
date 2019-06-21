@@ -5,7 +5,7 @@
 package ProjectEuler.P350_359;
 
 import java.util.*;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *

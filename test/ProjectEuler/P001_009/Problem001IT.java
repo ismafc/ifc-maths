@@ -543,5 +543,20 @@ public class Problem001IT {
             assertEquals(new BigInteger("588"), result);
         }
     }
+
+    /**
+     * Test of solve method, of class Problem001.
+     */
+    @Test
+    public void testSolve_Problem001Algorithm() {
+        System.out.println("solve");
+        Problem001.Algorithm solution = null;
+        Problem001 instance = new Problem001();
+        long expResult = 0L;
+        long result = instance.solve(solution);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import raytracer.Complex;
+import Library.Complex;
 import raytracer.GWindow;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  * Implementation of a Dialog showing a Mandelbrot set or an animation of

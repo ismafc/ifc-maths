@@ -4,7 +4,7 @@
  */
 package ProjectEuler.P180_189;
 
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *

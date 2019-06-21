@@ -6,7 +6,7 @@ package ProjectEuler.P130_139;
 
 import java.math.BigInteger;
 import java.util.HashMap;
-import raytracer.IFCMath;
+import Library.IFCMath;
 
 /**
  *
