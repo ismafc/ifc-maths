@@ -279,17 +279,6 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(int solution) method, of class Problem001.
-     */
-    @Test
-    public void testSolve_int() {
-        System.out.println("solve(int solution)");
-        for (Problem001.Algorithm a : Problem001.Algorithm.values()) {
-            assertEquals(expResult, instance.solve(a));
-        }
-    }
-
-    /**
      * Test of solve(long A, long B, long BELOW) method, of class Problem001.
      */
     @Test
@@ -545,18 +534,14 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve method, of class Problem001.
+     * Test of solve(Algorithm solution) method, of class Problem001.
      */
     @Test
     public void testSolve_Problem001Algorithm() {
-        System.out.println("solve");
-        Problem001.Algorithm solution = null;
-        Problem001 instance = new Problem001();
-        long expResult = 0L;
-        long result = instance.solve(solution);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("solve(int solution)");
+        for (Problem001.Algorithm a : Problem001.Algorithm.values()) {
+            assertEquals(expResult, instance.solve(a));
+        }
     }
     
 }
