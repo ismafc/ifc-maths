@@ -361,21 +361,6 @@ public class IFCMathIT {
     }
 
     /**
-     * Test of MCM method, of class IFCMath.
-     */
-    @Test
-    public void testMCM() {
-        System.out.println("MCM");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCM(n1, n2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of max_sum_adjacent_numbers method, of class IFCMath.
      */
     @Test
@@ -399,21 +384,6 @@ public class IFCMathIT {
         BigInteger n2 = null;
         BigInteger expResult = null;
         BigInteger result = IFCMath.MCD(n1, n2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of MCD1 method, of class IFCMath.
-     */
-    @Test
-    public void testMCD1() {
-        System.out.println("MCD1");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCD1(n1, n2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -444,21 +414,6 @@ public class IFCMathIT {
         long n2 = 0L;
         long expResult = 0L;
         long result = IFCMath.MCM(n1, n2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of MCM1 method, of class IFCMath.
-     */
-    @Test
-    public void testMCM1() {
-        System.out.println("MCM1");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCM1(n1, n2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -510,30 +465,60 @@ public class IFCMathIT {
     }
 
     /**
-     * Test of MCD1 method, of class IFCMath.
+     * Test of MCD_recursive method, of class IFCMath.
      */
     @Test
-    public void testMCD1_BigInteger_BigInteger() {
-        System.out.println("MCD1");
+    public void testMCD_recursive_BigInteger_BigInteger() {
+        System.out.println("MCD_recursive");
         BigInteger n1 = null;
         BigInteger n2 = null;
         BigInteger expResult = null;
-        BigInteger result = IFCMath.MCD1(n1, n2);
+        BigInteger result = IFCMath.MCD_recursive(n1, n2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of MCD1 method, of class IFCMath.
+     * Test of MCD_recursive method, of class IFCMath.
      */
     @Test
-    public void testMCD1_long_long() {
-        System.out.println("MCD1");
+    public void testMCD_recursive_long_long() {
+        System.out.println("MCD_recursive");
         long n1 = 0L;
         long n2 = 0L;
         long expResult = 0L;
-        long result = IFCMath.MCD1(n1, n2);
+        long result = IFCMath.MCD_recursive(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCM_recursive method, of class IFCMath.
+     */
+    @Test
+    public void testMCM_recursive_long_long() {
+        System.out.println("MCM_recursive");
+        long n1 = 0L;
+        long n2 = 0L;
+        long expResult = 0L;
+        long result = IFCMath.MCM_recursive(n1, n2);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of MCM_recursive method, of class IFCMath.
+     */
+    @Test
+    public void testMCM_recursive_BigInteger_BigInteger() {
+        System.out.println("MCM_recursive");
+        BigInteger n1 = null;
+        BigInteger n2 = null;
+        BigInteger expResult = null;
+        BigInteger result = IFCMath.MCM_recursive(n1, n2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

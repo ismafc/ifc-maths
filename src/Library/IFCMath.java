@@ -267,108 +267,119 @@ public class IFCMath {
     }
 
     /**
-     * Calculates greater common divisor between 'n1' and 'n2'. Recursive.
+     * Calculates greater common divisor between <b><i>a</i></b> and <b><i>b</i></b>. Recursive.
      * If returned value is 1, both values are prime among them
-     * n1 &gt;= n2
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * <b><i>a</i></b> &gt;= <b><i>b</i></b>
+     * @param a first value to check
+     * @param b second value to check
      * @return greater common divisor found
      */
-    public static BigInteger MCD1(BigInteger n1, BigInteger n2) {
-        if (n2.equals(BigInteger.ZERO))
-            return n1;
-        return MCD1(n2, n1.mod(n2));
+    public static BigInteger MCD_recursive(BigInteger a, BigInteger b) {
+        if (b.equals(BigInteger.ZERO))
+            return a;
+        return MCD_recursive(b, a.mod(b));
     }
 
     /**
-     * Calculates greater common divisor between 'n1' and 'n2'. Recursive.
+     * Calculates greater common divisor between <b><i>a</i></b> and <b><i>b</i></b>. Recursive.
      * If returned value is 1, both values are prime among them
-     * n1 &gt;= n2
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * <b><i>a</i></b> &gt;= <b><i>b</i></b>
+     * @param a first value to check
+     * @param b second value to check
      * @return greater common divisor found
      */
-    public static long MCD1(long n1, long n2) {
-        if (n2 == 0)
-            return n1;
-        return MCD1(n2, n1 % n2);
+    public static long MCD_recursive(long a, long b) {
+        if (b == 0)
+            return a;
+        return MCD_recursive(b, a % b);
     }
     
     /**
-     * Calculates greater common divisor between 'n1' and 'n2'.
+     * Calculates greater common divisor between <b><i>a</i></b> and <b><i>b</i></b>.
      * If returned value is 1, both values are prime among them
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * @param a first value to check
+     * @param b second value to check
      * @return greater common divisor found
      */
-    public static long MCD(long n1, long n2) {
+    public static long MCD(long a, long b) {
         long lAux;
-        if (n1 < n2) {
-            lAux = n1;
-            n1 = n2;
-            n2 = lAux;
+        if (a < b) {
+            lAux = a;
+            a = b;
+            b = lAux;
         }
-        while (n1 % n2 != 0) {
-            lAux = n1 % n2;
-            n1 = n2;
-            n2 = lAux;
+        while (a % b != 0) {
+            lAux = a % b;
+            a = b;
+            b = lAux;
         }
-        return n2;
+        return b;
     }
 
     /**
-     * Calculates greater common divisor between 'n1' and 'n2'. Iterative.
+     * Calculates greater common divisor between <b><i>a</i></b> and <b><i>b</i></b>. Iterative.
      * If returned value is 1, both values are prime among them
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * @param a first value to check
+     * @param b second value to check
      * @return greater common divisor found
      */
-    public static BigInteger MCD(BigInteger n1, BigInteger n2) {
+    public static BigInteger MCD(BigInteger a, BigInteger b) {
         BigInteger biAux;
-        if (n1.compareTo(n2) == 0) {
-            biAux = n1;
-            n1 = n2;
-            n2 = biAux;
+        if (a.compareTo(b) == 0) {
+            biAux = a;
+            a = b;
+            b = biAux;
         }
-        while (!n1.mod(n2).equals(BigInteger.ZERO)) {
-            biAux = n1.mod(n2);
-            n1 = n2;
-            n2 = biAux;
+        while (!a.mod(b).equals(BigInteger.ZERO)) {
+            biAux = a.mod(b);
+            a = b;
+            b = biAux;
         }
-        return n2;
+        return b;
     }
     
     /**
-     * Calculates Least common multiple between 'n1' and 'n2'.
-     * If returned value is n1 * n2, both values are prime among them
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * Calculates Least common multiple between <b><i>a</i></b> and <b><i>b</i></b>.
+     * If returned value is <b><i>a</i></b> * <b><i>b</i></b>, both values are prime among them
+     * @param a first value to check
+     * @param b second value to check
      * @return Least common multiple found
      */
-    public static long MCM(long n1, long n2) {
-        return (n1 * n2) / MCD(n1, n2);
+    public static long MCM(long a, long b) {
+        return (a * b) / MCD(a, b);
     }
 
     /**
-     * Calculates Least common multiple between 'n1' and 'n2'.
-     * If returned value is n1 * n2, both values are prime among them
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * Calculates Least common multiple between <b><i>a</i></b> and <b><i>b</i></b>.
+     * If returned value is <b><i>a</i></b> * <b><i>b</i></b>, both values are prime among them
+     * @param a first value to check
+     * @param b second value to check
      * @return Least common multiple found
      */
-    public static long MCM1(long n1, long n2) {
-        return (n1 * n2) / MCD1(Math.max(n1, n2), Math.min(n1, n2));
+    public static long MCM_recursive(long a, long b) {
+        return (a * b) / MCD_recursive(Math.max(a, b), Math.min(a, b));
     }
 
     /**
-     * Calculates Least common multiple between 'n1' and 'n2'.
-     * If returned value is n1 * n2, both values are prime among them
-     * @param n1 first value to check
-     * @param n2 second value to check
+     * Calculates Least common multiple between <b><i>a</i></b> and <b><i>b</i></b>.
+     * If returned value is <b><i>a</i></b> * <b><i>b</i></b>, both values are prime among them
+     * @param a first value to check
+     * @param b second value to check
      * @return Least common multiple found
      */
-    public static BigInteger MCM(BigInteger n1, BigInteger n2) {
-        return n1.multiply(n2).divide(MCD1(n1.max(n2), n1.min(n2)));
+    public static BigInteger MCM(BigInteger a, BigInteger b) {
+        return a.multiply(b).divide(MCD(a, b));
+    }
+    
+    /**
+     * Calculates Least common multiple between <b><i>a</i></b> and <b><i>b</i></b>.
+     * If returned value is <b><i>a</i></b> * <b><i>b</i></b>, both values are prime among them
+     * @param a first value to check
+     * @param b second value to check
+     * @return Least common multiple found
+     */
+    public static BigInteger MCM_recursive(BigInteger a, BigInteger b) {
+        return a.multiply(b).divide(MCD_recursive(a.max(b), a.min(b)));
     }
     
     /**
@@ -596,23 +607,23 @@ public class IFCMath {
     }
 
     /**
-     * Check if any value in 'V' divides 'i'
+     * Check if any value in <b><i>values</i></b> divides <b><i>i</i></b>
      * @param i Number to check
-     * @param V List of values we want to check if any of them divides 'i'
-     * @return TRUE if there is at least one value in 'V' that divides 'i' and FALSE otherwise
+     * @param values List of values we want to check if any of them divides <b><i>i</i></b>
+     * @return TRUE if there is at least one value in <b><i>values</i></b> that divides <b><i>i</i></b> and FALSE otherwise
      */
-    public static boolean mod(long i, ArrayList<Long> V) {
-        return V.stream().anyMatch(v -> i % v == 0);
+    public static boolean mod(long i, ArrayList<Long> values) {
+        return values.stream().anyMatch(v -> i % v == 0);
     }
     
     /**
-     * Check if any value in 'V' divides 'i'
+     * Check if any value in <b><i>values</i></b> divides <b><i>i</i></b>
      * @param i Number to check
-     * @param V List of values we want to check if any of them divides 'i'
-     * @return TRUE if there is at least one value in 'V' that divides 'i' and FALSE otherwise
+     * @param values List of values we want to check if any of them divides <b><i>i</i></b>
+     * @return TRUE if there is at least one value in <b><i>values</i></b> that divides <b><i>i</i></b> and FALSE otherwise
      */
-    public static boolean mod(BigInteger i, ArrayList<BigInteger> V) {
-        return V.stream().anyMatch(v -> i.mod(v).compareTo(BigInteger.ZERO) == 0);
+    public static boolean mod(BigInteger i, ArrayList<BigInteger> values) {
+        return values.stream().anyMatch(v -> i.mod(v).compareTo(BigInteger.ZERO) == 0);
     }
     
 }
