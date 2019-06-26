@@ -455,9 +455,9 @@ Números de Friedman:
         boolean more = true;
         while (more) {
             lastGuess = guess;
-            guess = n.divide(guess, SCALE, BigDecimal.ROUND_HALF_UP);
+            guess = n.divide(guess, SCALE, RoundingMode.HALF_UP);
             guess = guess.add(lastGuess);
-            guess = guess.divide (TWO, SCALE, BigDecimal.ROUND_HALF_UP);
+            guess = guess.divide (TWO, SCALE, RoundingMode.HALF_UP);
             error = n.subtract (guess.multiply (guess));
             if (++iterations >= MAX_ITERATIONS) {
                 more = false;

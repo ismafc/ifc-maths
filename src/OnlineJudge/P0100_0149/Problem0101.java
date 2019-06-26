@@ -191,11 +191,11 @@ public class Problem0101 {
     /* Mueve el bloque p1 y los que estén encima, sobre la pila en la que está el bloque p2 */
     private static void moveTo(int p1, int p2, HashMap<Integer, ArrayList<Integer>> blocks, HashMap<Integer, Integer> pile) {
         ArrayList<Integer> l = blocks.get(pile.get(p1));
-        int iP1 = l.indexOf(new Integer(p1));
+        int iP1 = l.indexOf(p1);
         ArrayList<Integer> blocksToMove = new ArrayList<Integer>(l.subList(iP1, l.size()));
         for (Integer p : blocksToMove) {
             blocks.get(pile.get(p2)).add(p);
-            blocks.get(pile.get(p)).remove(new Integer(p));
+            blocks.get(pile.get(p)).remove(p);
             pile.put(p, pile.get(p2));
         }
     }
