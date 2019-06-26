@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 /**
  *
@@ -179,21 +180,6 @@ public class IFCMathIT {
         BigInteger n = null;
         HashMap<BigInteger, BigInteger> expResult = null;
         HashMap<BigInteger, BigInteger> result = IFCMath.primeFactorization(n);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of MCD method, of class IFCMath.
-     */
-    @Test
-    public void testMCD() {
-        System.out.println("MCD");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCD(n1, n2);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -375,153 +361,184 @@ public class IFCMathIT {
     }
 
     /**
-     * Test of MCD method, of class IFCMath.
+     * Test of mcd(BigInteger a, BigInteger b) method, of class IFCMath.
      */
     @Test
-    public void testMCD_BigInteger_BigInteger() {
-        System.out.println("MCD");
-        BigInteger n1 = null;
-        BigInteger n2 = null;
-        BigInteger expResult = null;
-        BigInteger result = IFCMath.MCD(n1, n2);
+    public void testMcd_BigInteger_BigInteger() {
+        System.out.println("mcd(BigInteger a, BigInteger b)");
+        BigInteger a = new BigInteger("10");
+        BigInteger b = new BigInteger("14");
+        BigInteger expResult = new BigInteger("2");
+        BigInteger result = IFCMath.mcd(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = IFCMath.mcd(b, a);
+        assertEquals(expResult, result);
+        
+        a = new BigInteger("14334219929839828974721");
+        b = new BigInteger("10837403928334113411");
+        expResult = new BigInteger("17");
+        result = IFCMath.mcd(a, b);
+        assertEquals(expResult, result);
+        result = IFCMath.mcd(b, a);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of MCD method, of class IFCMath.
+     * Test of mcd(long a, long b) method, of class IFCMath.
      */
     @Test
-    public void testMCD_long_long() {
-        System.out.println("MCD");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCD(n1, n2);
+    public void testMcd_long_long() {
+        System.out.println("mcd(long a, long b)");
+        long a = 10L;
+        long b = 14L;
+        long expResult = 2L;
+        long result = IFCMath.mcd(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = IFCMath.mcd(b, a);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of MCM method, of class IFCMath.
+     * Test of mcm(long a, long b) method, of class IFCMath.
      */
     @Test
-    public void testMCM_long_long() {
-        System.out.println("MCM");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCM(n1, n2);
+    public void testMcm_long_long() {
+        System.out.println("mcm(long a, long b)");
+        long a = 10L;
+        long b = 14L;
+        long expResult = 70L;
+        long result = IFCMath.mcm(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = IFCMath.mcm(b, a);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of MCM method, of class IFCMath.
+     * Test of mcm(BigInteger a, BigInteger b) method, of class IFCMath.
      */
     @Test
-    public void testMCM_BigInteger_BigInteger() {
-        System.out.println("MCM");
-        BigInteger n1 = null;
-        BigInteger n2 = null;
-        BigInteger expResult = null;
-        BigInteger result = IFCMath.MCM(n1, n2);
+    public void testMcm_BigInteger_BigInteger() {
+        System.out.println("mcm(BigInteger a, BigInteger b)");
+        BigInteger a = new BigInteger("10");
+        BigInteger b = new BigInteger("14");
+        BigInteger expResult = new BigInteger("70");
+        BigInteger result = IFCMath.mcm(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = IFCMath.mcm(b, a);
+        assertEquals(expResult, result);
+        
+        a = new BigInteger("143342199298398289747");
+        b = new BigInteger("10837403928334");
+        expResult = new BigInteger("1553457313772496763978284954991498");
+        result = IFCMath.mcm(a, b);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of mod method, of class IFCMath.
+     * Test of mod(long i, ArrayList<Long> values) method, of class IFCMath.
      */
     @Test
     public void testMod_long_ArrayList() {
-        System.out.println("mod");
-        long i = 0L;
-        ArrayList<Long> V = null;
+        System.out.println("mod(long i, ArrayList<Long> values)");
+        long i = 162921213L; // 3^4 * 7 * 13 * 23 * 31^2
+        ArrayList<Long> V = new ArrayList<>(Arrays.asList(2L, 5L, 11L, 17L));
         boolean expResult = false;
         boolean result = IFCMath.mod(i, V);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        V = new ArrayList<>(Arrays.asList(2L, 5L, 7L, 11L, 17L, 31L));
+        expResult = true;
+        result = IFCMath.mod(i, V);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of mod method, of class IFCMath.
+     * Test of mod(BigInteger i, ArrayList<BigInteger> values) method, of class IFCMath.
      */
     @Test
     public void testMod_BigInteger_ArrayList() {
-        System.out.println("mod");
-        BigInteger i = null;
-        ArrayList<BigInteger> V = null;
+        System.out.println("mod(BigInteger i, ArrayList<BigInteger> values)");
+        BigInteger i = new BigInteger("162921213"); // 3^4 * 7 * 13 * 23 * 31^2
+        ArrayList<BigInteger> V = new ArrayList<>(Arrays.asList(new BigInteger("2"), 
+                new BigInteger("5"), new BigInteger("11"), new BigInteger("17")));
         boolean expResult = false;
         boolean result = IFCMath.mod(i, V);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        V = new ArrayList<>(Arrays.asList(new BigInteger("2"), new BigInteger("5"), 
+                new BigInteger("7"), new BigInteger("11"), 
+                new BigInteger("17"), new BigInteger("31")));
+        expResult = true;
+        result = IFCMath.mod(i, V);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of MCD_recursive method, of class IFCMath.
+     * Test of mcd_recursive(BigInteger a, BigInteger b) method, of class IFCMath.
      */
     @Test
-    public void testMCD_recursive_BigInteger_BigInteger() {
-        System.out.println("MCD_recursive");
-        BigInteger n1 = null;
-        BigInteger n2 = null;
-        BigInteger expResult = null;
-        BigInteger result = IFCMath.MCD_recursive(n1, n2);
+    public void testMcd_recursive_BigInteger_BigInteger() {
+        System.out.println("mcd_recursive(BigInteger a, BigInteger b)");
+        BigInteger a = new BigInteger("10");
+        BigInteger b = new BigInteger("14");
+        BigInteger expResult = new BigInteger("2");
+        BigInteger result = IFCMath.mcd_recursive(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        a = new BigInteger("14334219929839828974721");
+        b = new BigInteger("10837403928334113411");
+        expResult = new BigInteger("17");
+        result = IFCMath.mcd(a, b);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of MCD_recursive method, of class IFCMath.
+     * Test of mcd_recursive(long a, long b) method, of class IFCMath.
      */
     @Test
-    public void testMCD_recursive_long_long() {
-        System.out.println("MCD_recursive");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCD_recursive(n1, n2);
+    public void testMcd_recursive_long_long() {
+        System.out.println("mcd_recursive(long a, long b)");
+        long a = 10L;
+        long b = 14L;
+        long expResult = 2L;
+        long result = IFCMath.mcd_recursive(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of MCM_recursive method, of class IFCMath.
+     * Test of mcm_recursive(long a, long b) method, of class IFCMath.
      */
     @Test
-    public void testMCM_recursive_long_long() {
-        System.out.println("MCM_recursive");
-        long n1 = 0L;
-        long n2 = 0L;
-        long expResult = 0L;
-        long result = IFCMath.MCM_recursive(n1, n2);
+    public void testMcm_recursive_long_long() {
+        System.out.println("mcm_recursive(long a, long b)");
+        long a = 10L;
+        long b = 14L;
+        long expResult = 70L;
+        long result = IFCMath.mcm_recursive(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = IFCMath.mcm_recursive(b, a);
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of MCM_recursive method, of class IFCMath.
+     * Test of mcm_recursive(BigInteger a, BigInteger b) method, of class IFCMath.
      */
     @Test
-    public void testMCM_recursive_BigInteger_BigInteger() {
-        System.out.println("MCM_recursive");
-        BigInteger n1 = null;
-        BigInteger n2 = null;
-        BigInteger expResult = null;
-        BigInteger result = IFCMath.MCM_recursive(n1, n2);
+    public void testMcm_recursive_BigInteger_BigInteger() {
+        System.out.println("mcm_recursive(BigInteger a, BigInteger b)");
+        BigInteger a = new BigInteger("10");
+        BigInteger b = new BigInteger("14");
+        BigInteger expResult = new BigInteger("70");
+        BigInteger result = IFCMath.mcm_recursive(a, b);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        result = IFCMath.mcm_recursive(b, a);
+        assertEquals(expResult, result);
+
+        a = new BigInteger("143342199298398289747");
+        b = new BigInteger("10837403928334");
+        expResult = new BigInteger("1553457313772496763978284954991498");
+        result = IFCMath.mcm(a, b);
+        assertEquals(expResult, result);
     }
     
 }

@@ -274,10 +274,10 @@ public class IFCMath {
      * @param b second value to check
      * @return greater common divisor found
      */
-    public static BigInteger MCD_recursive(BigInteger a, BigInteger b) {
+    public static BigInteger mcd_recursive(BigInteger a, BigInteger b) {
         if (b.equals(BigInteger.ZERO))
             return a;
-        return MCD_recursive(b, a.mod(b));
+        return IFCMath.mcd_recursive(b, a.mod(b));
     }
 
     /**
@@ -288,10 +288,10 @@ public class IFCMath {
      * @param b second value to check
      * @return greater common divisor found
      */
-    public static long MCD_recursive(long a, long b) {
+    public static long mcd_recursive(long a, long b) {
         if (b == 0)
             return a;
-        return MCD_recursive(b, a % b);
+        return mcd_recursive(b, a % b);
     }
     
     /**
@@ -301,7 +301,7 @@ public class IFCMath {
      * @param b second value to check
      * @return greater common divisor found
      */
-    public static long MCD(long a, long b) {
+    public static long mcd(long a, long b) {
         long lAux;
         if (a < b) {
             lAux = a;
@@ -323,7 +323,7 @@ public class IFCMath {
      * @param b second value to check
      * @return greater common divisor found
      */
-    public static BigInteger MCD(BigInteger a, BigInteger b) {
+    public static BigInteger mcd(BigInteger a, BigInteger b) {
         BigInteger biAux;
         if (a.compareTo(b) == 0) {
             biAux = a;
@@ -345,8 +345,8 @@ public class IFCMath {
      * @param b second value to check
      * @return Least common multiple found
      */
-    public static long MCM(long a, long b) {
-        return (a * b) / MCD(a, b);
+    public static long mcm(long a, long b) {
+        return (a * b) / IFCMath.mcd(a, b);
     }
 
     /**
@@ -356,8 +356,8 @@ public class IFCMath {
      * @param b second value to check
      * @return Least common multiple found
      */
-    public static long MCM_recursive(long a, long b) {
-        return (a * b) / MCD_recursive(Math.max(a, b), Math.min(a, b));
+    public static long mcm_recursive(long a, long b) {
+        return (a * b) / mcd_recursive(Math.max(a, b), Math.min(a, b));
     }
 
     /**
@@ -367,8 +367,8 @@ public class IFCMath {
      * @param b second value to check
      * @return Least common multiple found
      */
-    public static BigInteger MCM(BigInteger a, BigInteger b) {
-        return a.multiply(b).divide(MCD(a, b));
+    public static BigInteger mcm(BigInteger a, BigInteger b) {
+        return a.multiply(b).divide(mcd(a, b));
     }
     
     /**
@@ -378,8 +378,8 @@ public class IFCMath {
      * @param b second value to check
      * @return Least common multiple found
      */
-    public static BigInteger MCM_recursive(BigInteger a, BigInteger b) {
-        return a.multiply(b).divide(MCD_recursive(a.max(b), a.min(b)));
+    public static BigInteger mcm_recursive(BigInteger a, BigInteger b) {
+        return a.multiply(b).divide(IFCMath.mcd_recursive(a.max(b), a.min(b)));
     }
     
     /**

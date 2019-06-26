@@ -53,9 +53,9 @@ public class Problem127 {
             long b = a + 1;
             long c = a + b;
             while (c < MAX_C) {
-                if (IFCMath.MCD(a, b) == 1) {
-                    if (IFCMath.MCD(a, c) == 1) {
-                        if (IFCMath.MCD(b, c) == 1) {
+                if (IFCMath.mcd(a, b) == 1) {
+                    if (IFCMath.mcd(a, c) == 1) {
+                        if (IFCMath.mcd(b, c) == 1) {
                             long r = rad(a * b * c);
                             if (r < c) {
                                 System.out.println("(" + a + "," + b + "," + c + ") = " + r);

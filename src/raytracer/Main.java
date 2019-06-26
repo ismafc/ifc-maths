@@ -242,7 +242,7 @@ Números de Friedman:
     private static long phi(long n, double ratio) {
         long p = 1;
         for (long i = 2; i < n; i++) {
-            if (IFCMath.MCD(n, i) == 1)
+            if (IFCMath.mcd(n, i) == 1)
                 p++;
             if (((double)n / ((double)p + ((double)n - (double)i - 1.0))) > ratio)
                 return 1;

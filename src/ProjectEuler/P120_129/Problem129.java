@@ -27,7 +27,7 @@ public class Problem129 {
         long nn = 1000000;
         boolean found = false;
         while (!found) {
-            if (IFCMath.MCD(nn, 10) == 1) {
+            if (IFCMath.mcd(nn, 10) == 1) {
                 int k = 1;
                 BigInteger i = BigInteger.ONE;
                 BigInteger kk = BigInteger.valueOf(nn);

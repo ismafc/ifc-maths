@@ -32,7 +32,7 @@ public class Problem130 {
         long sum = 0;
         long found = 0;
         while (found < 25) {
-            if (!IFCMath.isPrime(n) && IFCMath.MCD(n, 10) == 1) {
+            if (!IFCMath.isPrime(n) && IFCMath.mcd(n, 10) == 1) {
                 int k = 1;
                 BigInteger i = BigInteger.ONE;
                 BigInteger kk = BigInteger.valueOf(n);
