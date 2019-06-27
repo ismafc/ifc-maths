@@ -1005,6 +1005,7 @@ Números de Friedman:
         return value;
     }
     
+/*    
     public static long getArgument(String[] args, int index, long default_value, String name) {
         long value = default_value;
         if (args.length >= index + 1)
@@ -1013,6 +1014,7 @@ Números de Friedman:
             System.out.println(name + " not found: Assuming " + default_value);
         return value;
     }
+*/
 
     public static long getArgument(String[] args, long default_value, String name) {
         long value = default_value;
@@ -1026,6 +1028,7 @@ Números de Friedman:
         return value;
     }
     
+/*    
     public static BigInteger getArgument(String[] args, int index, BigInteger default_value, String name) {
         BigInteger value = default_value;
         if (args.length >= index + 1)
@@ -1034,6 +1037,7 @@ Números de Friedman:
             System.out.println(name + " not found: Assuming " + default_value);
         return value;
     }
+*/
     
     public static BigInteger getArgument(String[] args, BigInteger default_value, String name) {
         BigInteger value = default_value;
@@ -1046,7 +1050,7 @@ Números de Friedman:
         }
         return value;
     }
-
+    
     /**
      * Entry point funcion
      * @param args the command line arguments

@@ -22,15 +22,15 @@ import static org.junit.Assert.*;
 public class Problem001IT {
 
     private long a = 3L;
-    BigInteger a_ = new BigInteger("3");
+    private BigInteger a_ = new BigInteger("3");
     private long b = 5L;
-    BigInteger b_ = new BigInteger("5");
-    long from = 1L;
-    BigInteger from_ = new BigInteger("1");
-    long below = 1000L;
-    BigInteger below_ = new BigInteger("1000");
-    long expResult = 233168L;
-    BigInteger expResult_ = new BigInteger("233168");
+    private BigInteger b_ = new BigInteger("5");
+    private long from = 1L;
+    private BigInteger from_ = new BigInteger("1");
+    private long below = 1000L;
+    private BigInteger below_ = new BigInteger("1000");
+    private long expResult = 233168L;
+    private BigInteger expResult_ = new BigInteger("233168");
     private final Problem001 instance = new Problem001();
     
     public Problem001IT() {
@@ -293,13 +293,13 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(long a, long b, long below, int solution) method, of class Problem001.
+     * Test of solve(long a, long b, long below, Algorithm algorithm) method, of class Problem001.
      */
     @Test
     public void testSolve_4args_1() {
-        System.out.println("solve(long a, long b, long below, int solution)");
+        System.out.println("solve(long a, long b, long below, Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
-            long result = instance.solve(this.a, b, below, algorithm);
+            long result = instance.solve(a, b, below, algorithm);
             assertEquals(expResult, result);
 
             // Check MCM
@@ -327,13 +327,13 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(long a, long b, long from, long below, int solution) method, of class Problem001.
+     * Test of solve(long a, long b, long from, long below, Algorithm algorithm) method, of class Problem001.
      */
     @Test
     public void testSolve_5args_1() {
-        System.out.println("solve(long a, long b, long from, long below, int solution)");
+        System.out.println("solve(long a, long b, long from, long below, Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
-            long result = instance.solve(this.a, b, from, below, algorithm);
+            long result = instance.solve(a, b, from, below, algorithm);
             assertEquals(expResult, result);
 
             // Check MCM
@@ -365,11 +365,11 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(BigInteger a, BigInteger b, BigInteger below, int solution) method, of class Problem001.
+     * Test of solve(BigInteger a, BigInteger b, BigInteger below, Algorithm algorithm) method, of class Problem001.
      */
     @Test
     public void testSolve_4args_3() {
-        System.out.println("solve(BigInteger a, BigInteger b, BigInteger below, int solution)");
+        System.out.println("solve(BigInteger a, BigInteger b, BigInteger below, Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
             BigInteger result = instance.solve(a_, b_, below_, algorithm);
             assertEquals(expResult_, result);
@@ -412,11 +412,11 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(BigInteger a, BigInteger b, BigInteger from, BigInteger below, int solution) method, of class Problem001.
+     * Test of solve(BigInteger a, BigInteger b, BigInteger from, BigInteger below, Algorithm algorithm) method, of class Problem001.
      */
     @Test
     public void testSolve_5args_2() {
-        System.out.println("solve(BigInteger a, BigInteger b, BigInteger from, BigInteger below, int solution)");
+        System.out.println("solve(BigInteger a, BigInteger b, BigInteger from, BigInteger below, Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
             BigInteger result = instance.solve(a_, b_, from_, below_, algorithm);
             assertEquals(expResult_, result);
@@ -460,13 +460,13 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(ArrayList&lt;Long&ht; values, long from, long below, int solution) method, of class Problem001.
+     * Test of solve(ArrayList&lt;Long&ht; values, long from, long below, Algorithm algorithm) method, of class Problem001.
      */
     @Test
     public void testSolve_4args_5() {
-        System.out.println("solve(ArrayList<Long> values, long from, long below, int solution)");
+        System.out.println("solve(ArrayList<Long> values, long from, long below, Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
-            ArrayList<Long> v = new ArrayList<>(Arrays.asList(this.a, b));
+            ArrayList<Long> v = new ArrayList<>(Arrays.asList(a, b));
             long result = instance.solve(v, from, below, algorithm);
             assertEquals(expResult, result);
             
@@ -506,11 +506,11 @@ public class Problem001IT {
     }
 
     /**
-     * Test of solve(ArrayList&lt;BigInteger&gt; values, BigInteger from, BigInteger below, int solution) method, of class Problem001.
+     * Test of solve(ArrayList&lt;BigInteger&gt; values, BigInteger from, BigInteger below, Algorithm algorithm) method, of class Problem001.
      */
     @Test
     public void testSolve_4args_6() {
-        System.out.println("solve(ArrayList<BigInteger> values, BigInteger from, BigInteger below, int solution)");
+        System.out.println("solve(ArrayList<BigInteger> values, BigInteger from, BigInteger below, Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
             ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
             BigInteger result = instance.solve(v, from_, below_, algorithm);
@@ -538,7 +538,7 @@ public class Problem001IT {
      */
     @Test
     public void testSolve_Problem001Algorithm() {
-        System.out.println("solve(int algorithm)");
+        System.out.println("solve(Algorithm algorithm)");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
             assertEquals(expResult, instance.solve(algorithm));
         }
