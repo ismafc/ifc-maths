@@ -9,6 +9,7 @@ package raytracer;
 // import Library.Sudoku;
 import Library.Complex;
 import Library.IFCMath;
+import Library.InOut;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;
@@ -976,35 +977,7 @@ Números de Friedman:
         else
             return new String (lin, 0, lg);
     }
-   
-    public static long getValue(String v, long default_value, String name) {
-        long value = default_value;
-        try {
-            value = Long.parseLong(v);
-            if (value < 1) {
-                System.out.println(name + " < 1: Assuming " + default_value);
-                value = default_value;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println(name + " is not a number: Assuming " + default_value);
-        }
-        return value;
-    }
-
-    public static BigInteger getValue(String v, BigInteger default_value, String name) {
-        BigInteger value = default_value;
-        try {
-            value = new BigInteger(v);
-            if (value.compareTo(BigInteger.ONE) == -1) {
-                System.out.println(name + " < 1: Assuming " + default_value);
-                value = default_value;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println(name + " is not a number: Assuming " + default_value);
-        }
-        return value;
-    }
-    
+      
 /*    
     public static long getArgument(String[] args, int index, long default_value, String name) {
         long value = default_value;
@@ -1015,19 +988,7 @@ Números de Friedman:
         return value;
     }
 */
-
-    public static long getArgument(String[] args, long default_value, String name) {
-        long value = default_value;
-        for (String param : args) {
-            if (param.startsWith(name + ":")) {
-                String v = param.substring(name.length() + 1);
-                value = getValue(v, default_value, name);
-                return value;
-            }
-        }
-        return value;
-    }
-    
+   
 /*    
     public static BigInteger getArgument(String[] args, int index, BigInteger default_value, String name) {
         BigInteger value = default_value;
@@ -1038,19 +999,7 @@ Números de Friedman:
         return value;
     }
 */
-    
-    public static BigInteger getArgument(String[] args, BigInteger default_value, String name) {
-        BigInteger value = default_value;
-        for (String param : args) {
-            if (param.startsWith(name + ":")) {
-                String v = param.substring(name.length() + 1);
-                value = getValue(v, default_value, name);
-                return value;
-            }
-        }
-        return value;
-    }
-    
+       
     /**
      * Entry point funcion
      * @param args the command line arguments
@@ -1061,26 +1010,26 @@ Números de Friedman:
 /*        ArrayList<Long> V = new ArrayList<>();
         long i = 1;
         long va;
-        while ((va = getArgument(args, -1, "V" + i++)) > 0)
+        while ((va = InOut.getArgument(args, -1, "V" + i++)) > 0)
             V.add(va);
-        long FROM = getArgument(args, 1, "FROM");
-        long TO = getArgument(args, 1000, "BELOW");
+        long FROM = InOut.getArgument(args, 1, "FROM");
+        long TO = InOut.getArgument(args, 1000, "BELOW");
         long S = ProjectEuler.P001_009.Problem001.solve(V, FROM, TO);
         System.out.println("Resultado = " + S);
         if (S > 1 || S < 0)
             return;*/
-/*        long A = getArgument(args, 0, 3, "A");
-        long B = getArgument(args, 1, 5, "B");
-        long M = getArgument(args, 2, 1, "M");
-        long N = getArgument(args, 3, 1000, "N");
+/*        long A = InOut.getArgument(args, 0, 3, "A");
+        long B = InOut.getArgument(args, 1, 5, "B");
+        long M = InOut.getArgument(args, 2, 1, "M");
+        long N = InOut.getArgument(args, 3, 1000, "N");
         long S = ProjectEuler.P001_009.Problem001.solve(A, B, M, N);
         System.out.println("Resultado = " + S);
         if (S > 1 || S < 0)
             return;*/
-/*        BigInteger A = getArgument(args, 0, new BigInteger("3"), "A");
-        BigInteger B = getArgument(args, 1, new BigInteger("5"), "B");
-        BigInteger M = getArgument(args, 2, new BigInteger("1"), "M");
-        BigInteger N = getArgument(args, 3, new BigInteger("1000"), "N");
+/*        BigInteger A = InOut.getArgument(args, 0, new BigInteger("3"), "A");
+        BigInteger B = InOut.getArgument(args, 1, new BigInteger("5"), "B");
+        BigInteger M = InOut.getArgument(args, 2, new BigInteger("1"), "M");
+        BigInteger N = InOut.getArgument(args, 3, new BigInteger("1000"), "N");
         BigInteger S = ProjectEuler.P001_009.Problem001.solve(A, B, M, N);
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
@@ -1090,10 +1039,10 @@ Números de Friedman:
         BigInteger MONE = new BigInteger("-1");
         long i = 1;
         BigInteger va;
-        while ((va = getArgument(args, MONE, "V" + i++)).compareTo(BigInteger.ZERO) == 1)
+        while ((va = InOut.getArgument(args, MONE, "V" + i++)).compareTo(BigInteger.ZERO) == 1)
             V.add(va);
-        BigInteger FROM = getArgument(args, new BigInteger("1"), "FROM");
-        BigInteger BELOW = getArgument(args, new BigInteger("1000"), "BELOW");
+        BigInteger FROM = InOut.getArgument(args, new BigInteger("1"), "FROM");
+        BigInteger BELOW = InOut.getArgument(args, new BigInteger("1000"), "BELOW");
         BigInteger S = P1.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.Algorithm.SOLUTION1);
         System.out.println("Resultado 1 = " + S);
         S = P1.solve(V, FROM, BELOW, ProjectEuler.P001_009.Problem001.Algorithm.SOLUTION2);
