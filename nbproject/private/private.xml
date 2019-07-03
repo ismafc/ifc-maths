@@ -18,6 +18,14 @@
             <file>file:/C:/master/ifc-maths/src/raytracer/MatrixNxM.java</file>
             <file>file:/C:/master/ifc-maths/src/dialogs/JFractalDialog.java</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/C:/isma/gitlab/ifc-maths/test/raytracer/MainIT.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/src/raytracer/Main.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/src/Library/IFCMath.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/src/Library/InOut.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/test/ProjectEuler/P001_009/Problem001IT.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/test/Library/InOutIT.java</file>
+            <file>file:/C:/isma/gitlab/ifc-maths/src/ProjectEuler/P001_009/Problem001.java</file>
+        </group>
     </open-files>
 </project-private>
