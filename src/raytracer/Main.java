@@ -17,6 +17,8 @@ import java.awt.Dimension;
 import java.io.*;
 import java.math.*;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
@@ -24,7 +26,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * Main test program
  * @author Isma
  */
-public class Main {
+public class Main extends Application {
 
 /*
 Números de Friedman:
@@ -1100,7 +1102,8 @@ Números de Friedman:
         System.out.println("c = 0.250001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.250001,0), 10000));
         System.out.println("c = 0.25000001 -> " + IFCMath.isMandelbrot(initialValue, new Complex(0.25000001,0), 100000));
         System.out.println("");
-  
+
+/*        
         final int MAX_FRACTAL_DIMENSION = 800;
         JFractalDialog myDialog = new JFractalDialog((JFrame)null, "Mandelbrot set", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -1114,7 +1117,8 @@ Números de Friedman:
         myDialog.addColor(Color.white);
         myDialog.setMandelbrotColor(Color.yellow);
         myDialog.createMandelbrot(40);
-
+*/
+        
 /*
         final int MAX_FRACTAL_DIMENSION = 300;
         JFractalDialog myDialog = new JFractalDialog((JFrame)null, "Mandelbrot set", true);
@@ -1151,8 +1155,8 @@ Números de Friedman:
         myDialog.GO();
 */
 
-        myDialog.setVisible(true);
-        myDialog.STOP();
+//        myDialog.setVisible(true);
+//        myDialog.STOP();
         
         // a = 5.0 + 6.0i
         // b = -3.0 + 4.0i
@@ -1268,6 +1272,14 @@ Números de Friedman:
         mat.toRotationZ(Math.PI/4);
         mat.transform(bb);
         System.out.println(bb);
+        
+        Application.launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.setTitle("Sum of multiples of");
+        stage.show();
     }
 
 }
