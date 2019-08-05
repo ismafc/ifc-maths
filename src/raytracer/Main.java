@@ -10,6 +10,7 @@ package raytracer;
 import Library.Complex;
 import Library.IFCMath;
 import Library.InOut;
+import Library.Nonograma;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
 import java.awt.Color;
@@ -1086,7 +1087,269 @@ Números de Friedman:
                 System.out.println(s.toString());
             }
         }*/
-        
+
+
+        Nonograma nonograma = new Nonograma(15, 15);
+        nonograma.setColumnDefinition(0, new ArrayList<>(Arrays.asList(10)));
+        nonograma.setColumnDefinition(1, new ArrayList<>(Arrays.asList(5)));
+        nonograma.setColumnDefinition(2, new ArrayList<>(Arrays.asList(5,5)));
+        nonograma.setColumnDefinition(3, new ArrayList<>(Arrays.asList(3,1,1,1)));
+        nonograma.setColumnDefinition(4, new ArrayList<>(Arrays.asList(4,5)));
+        nonograma.setColumnDefinition(5, new ArrayList<>(Arrays.asList(5,1,1,1)));
+        nonograma.setColumnDefinition(6, new ArrayList<>(Arrays.asList(1,1,1,5)));
+        nonograma.setColumnDefinition(7, new ArrayList<>(Arrays.asList(6)));
+        nonograma.setColumnDefinition(8, new ArrayList<>(Arrays.asList(1,1,1,7)));
+        nonograma.setColumnDefinition(9, new ArrayList<>(Arrays.asList(5,7)));
+        nonograma.setColumnDefinition(10, new ArrayList<>(Arrays.asList(4,7)));
+        nonograma.setColumnDefinition(11, new ArrayList<>(Arrays.asList(3,7)));
+        nonograma.setColumnDefinition(12, new ArrayList<>(Arrays.asList(2,7)));
+        nonograma.setColumnDefinition(13, new ArrayList<>(Arrays.asList(2)));
+        nonograma.setColumnDefinition(14, new ArrayList<>(Arrays.asList(10)));
+        nonograma.setRowDefinition(0, new ArrayList<>(Arrays.asList(1)));
+        nonograma.setRowDefinition(1, new ArrayList<>(Arrays.asList(2,5)));
+        nonograma.setRowDefinition(2, new ArrayList<>(Arrays.asList(2,2,1,2)));
+        nonograma.setRowDefinition(3, new ArrayList<>(Arrays.asList(11)));
+        nonograma.setRowDefinition(4, new ArrayList<>(Arrays.asList(5,1,5)));
+        nonograma.setRowDefinition(5, new ArrayList<>(Arrays.asList(15)));
+        nonograma.setRowDefinition(6, new ArrayList<>(Arrays.asList(1,1)));
+        nonograma.setRowDefinition(7, new ArrayList<>(Arrays.asList(1,5,1)));
+        nonograma.setRowDefinition(8, new ArrayList<>(Arrays.asList(1,1,1,1,5,1)));
+        nonograma.setRowDefinition(9, new ArrayList<>(Arrays.asList(1,5,5,1)));
+        nonograma.setRowDefinition(10, new ArrayList<>(Arrays.asList(1,1,1,1,5,1)));
+        nonograma.setRowDefinition(11, new ArrayList<>(Arrays.asList(1,5,5,1)));
+        nonograma.setRowDefinition(12, new ArrayList<>(Arrays.asList(1,5,1)));
+        nonograma.setRowDefinition(13, new ArrayList<>(Arrays.asList(1,5,1)));
+        nonograma.setRowDefinition(14, new ArrayList<>(Arrays.asList(1,5,1)));
+
+
+/*
+        Nonograma nonograma = new Nonograma(20, 20);
+        nonograma.setColumnDefinition(0, new ArrayList<>(Arrays.asList(4)));
+        nonograma.setColumnDefinition(1, new ArrayList<>(Arrays.asList(1,3)));
+        nonograma.setColumnDefinition(2, new ArrayList<>(Arrays.asList(2,2)));
+        nonograma.setColumnDefinition(3, new ArrayList<>(Arrays.asList(6,3,1)));
+        nonograma.setColumnDefinition(4, new ArrayList<>(Arrays.asList(2,4,2,1,1)));
+        nonograma.setColumnDefinition(5, new ArrayList<>(Arrays.asList(6,4,1,1)));
+        nonograma.setColumnDefinition(6, new ArrayList<>(Arrays.asList(2,5,2,1,1)));
+        nonograma.setColumnDefinition(7, new ArrayList<>(Arrays.asList(4,6,2,1)));
+        nonograma.setColumnDefinition(8, new ArrayList<>(Arrays.asList(5,3,2,2)));
+        nonograma.setColumnDefinition(9, new ArrayList<>(Arrays.asList(3,2,1,3,2)));
+        nonograma.setColumnDefinition(10, new ArrayList<>(Arrays.asList(1,1,2,1,2)));
+        nonograma.setColumnDefinition(11, new ArrayList<>(Arrays.asList(1,2,2,2,2)));
+        nonograma.setColumnDefinition(12, new ArrayList<>(Arrays.asList(2,2,2,7)));
+        nonograma.setColumnDefinition(13, new ArrayList<>(Arrays.asList(3,2,2,4)));
+        nonograma.setColumnDefinition(14, new ArrayList<>(Arrays.asList(3,2,2,3)));
+        nonograma.setColumnDefinition(15, new ArrayList<>(Arrays.asList(5,1,2,2)));
+        nonograma.setColumnDefinition(16, new ArrayList<>(Arrays.asList(4,2,2,3)));
+        nonograma.setColumnDefinition(17, new ArrayList<>(Arrays.asList(4,2,4)));
+        nonograma.setColumnDefinition(18, new ArrayList<>(Arrays.asList(7,3)));
+        nonograma.setColumnDefinition(19, new ArrayList<>(Arrays.asList(8)));
+        nonograma.setRowDefinition(0, new ArrayList<>(Arrays.asList(9)));
+        nonograma.setRowDefinition(1, new ArrayList<>(Arrays.asList(4,5)));
+        nonograma.setRowDefinition(2, new ArrayList<>(Arrays.asList(7,5)));
+        nonograma.setRowDefinition(3, new ArrayList<>(Arrays.asList(1,2,2,4)));
+        nonograma.setRowDefinition(4, new ArrayList<>(Arrays.asList(2,2,2,4)));
+        nonograma.setRowDefinition(5, new ArrayList<>(Arrays.asList(4,2,2,3)));
+        nonograma.setRowDefinition(6, new ArrayList<>(Arrays.asList(1,2,2,3,2)));
+        nonograma.setRowDefinition(7, new ArrayList<>(Arrays.asList(1,3,2,4)));
+        nonograma.setRowDefinition(8, new ArrayList<>(Arrays.asList(2,3,2,3)));
+        nonograma.setRowDefinition(9, new ArrayList<>(Arrays.asList(2,6,2,2)));
+        nonograma.setRowDefinition(10, new ArrayList<>(Arrays.asList(3,2,2,2,1)));
+        nonograma.setRowDefinition(11, new ArrayList<>(Arrays.asList(4,1,1,2,1)));
+        nonograma.setRowDefinition(12, new ArrayList<>(Arrays.asList(3,1,1,4)));
+        nonograma.setRowDefinition(13, new ArrayList<>(Arrays.asList(2,2,2,2)));
+        nonograma.setRowDefinition(14, new ArrayList<>(Arrays.asList(3,2,3,3)));
+        nonograma.setRowDefinition(15, new ArrayList<>(Arrays.asList(4,2,7)));
+        nonograma.setRowDefinition(16, new ArrayList<>(Arrays.asList(1,3,7)));
+        nonograma.setRowDefinition(17, new ArrayList<>(Arrays.asList(2,2)));
+        nonograma.setRowDefinition(18, new ArrayList<>(Arrays.asList(3,2)));
+        nonograma.setRowDefinition(19, new ArrayList<>(Arrays.asList(8)));
+*/
+
+/*
+        Nonograma nonograma = new Nonograma(20, 20);
+        nonograma.setColumnDefinition(0, new ArrayList<>(Arrays.asList(3,2)));
+        nonograma.setColumnDefinition(1, new ArrayList<>(Arrays.asList(1,1,3)));
+        nonograma.setColumnDefinition(2, new ArrayList<>(Arrays.asList(1,1,5,2)));
+        nonograma.setColumnDefinition(3, new ArrayList<>(Arrays.asList(7,5)));
+        nonograma.setColumnDefinition(4, new ArrayList<>(Arrays.asList(8,1,3)));
+        nonograma.setColumnDefinition(5, new ArrayList<>(Arrays.asList(5,1,3)));
+        nonograma.setColumnDefinition(6, new ArrayList<>(Arrays.asList(3,1,2)));
+        nonograma.setColumnDefinition(7, new ArrayList<>(Arrays.asList(4,1,2,1,2)));
+        nonograma.setColumnDefinition(8, new ArrayList<>(Arrays.asList(5,2,2,1,1)));
+        nonograma.setColumnDefinition(9, new ArrayList<>(Arrays.asList(6,1,1)));
+        nonograma.setColumnDefinition(10, new ArrayList<>(Arrays.asList(6,1,1)));
+        nonograma.setColumnDefinition(11, new ArrayList<>(Arrays.asList(5,1,2,1,1)));
+        nonograma.setColumnDefinition(12, new ArrayList<>(Arrays.asList(4,2,2,1,2)));
+        nonograma.setColumnDefinition(13, new ArrayList<>(Arrays.asList(3,1,2)));
+        nonograma.setColumnDefinition(14, new ArrayList<>(Arrays.asList(5,1,3)));
+        nonograma.setColumnDefinition(15, new ArrayList<>(Arrays.asList(8,1,3)));
+        nonograma.setColumnDefinition(16, new ArrayList<>(Arrays.asList(7,5)));
+        nonograma.setColumnDefinition(17, new ArrayList<>(Arrays.asList(1,1,5,2)));
+        nonograma.setColumnDefinition(18, new ArrayList<>(Arrays.asList(1,1,3)));
+        nonograma.setColumnDefinition(19, new ArrayList<>(Arrays.asList(3,2)));
+        nonograma.setRowDefinition(0, new ArrayList<>(Arrays.asList(6)));
+        nonograma.setRowDefinition(1, new ArrayList<>(Arrays.asList(10)));
+        nonograma.setRowDefinition(2, new ArrayList<>(Arrays.asList(12)));
+        nonograma.setRowDefinition(3, new ArrayList<>(Arrays.asList(12)));
+        nonograma.setRowDefinition(4, new ArrayList<>(Arrays.asList(3,4,3)));
+        nonograma.setRowDefinition(5, new ArrayList<>(Arrays.asList(3,2,3)));
+        nonograma.setRowDefinition(6, new ArrayList<>(Arrays.asList(2,2)));
+        nonograma.setRowDefinition(7, new ArrayList<>(Arrays.asList(4,4)));
+        nonograma.setRowDefinition(8, new ArrayList<>(Arrays.asList(1,2,2,2,2,1)));
+        nonograma.setRowDefinition(9, new ArrayList<>(Arrays.asList(1,3,1,1,3,1)));
+        nonograma.setRowDefinition(10, new ArrayList<>(Arrays.asList(1,1,1,1)));
+        nonograma.setRowDefinition(11, new ArrayList<>(Arrays.asList(2,2,2,2)));
+        nonograma.setRowDefinition(12, new ArrayList<>(Arrays.asList(1,2,2,1)));
+        nonograma.setRowDefinition(13, new ArrayList<>(Arrays.asList(1,1)));
+        nonograma.setRowDefinition(14, new ArrayList<>(Arrays.asList(16)));
+        nonograma.setRowDefinition(15, new ArrayList<>(Arrays.asList(2,2)));
+        nonograma.setRowDefinition(16, new ArrayList<>(Arrays.asList(2,2)));
+        nonograma.setRowDefinition(17, new ArrayList<>(Arrays.asList(5,5)));
+        nonograma.setRowDefinition(18, new ArrayList<>(Arrays.asList(8,8)));
+        nonograma.setRowDefinition(19, new ArrayList<>(Arrays.asList(2,10,2)));
+*/
+
+/*
+        Nonograma nonograma = new Nonograma(20, 20);
+        nonograma.setColumnDefinition(0, new ArrayList<>(Arrays.asList(9)));
+        nonograma.setColumnDefinition(1, new ArrayList<>(Arrays.asList(5,5)));
+        nonograma.setColumnDefinition(2, new ArrayList<>(Arrays.asList(7,5)));
+        nonograma.setColumnDefinition(3, new ArrayList<>(Arrays.asList(1,2,3)));
+        nonograma.setColumnDefinition(4, new ArrayList<>(Arrays.asList(3,3,2)));
+        nonograma.setColumnDefinition(5, new ArrayList<>(Arrays.asList(4,4)));
+        nonograma.setColumnDefinition(6, new ArrayList<>(Arrays.asList(2,3,3)));
+        nonograma.setColumnDefinition(7, new ArrayList<>(Arrays.asList(2,2,2,2)));
+        nonograma.setColumnDefinition(8, new ArrayList<>(Arrays.asList(8,3,2)));
+        nonograma.setColumnDefinition(9, new ArrayList<>(Arrays.asList(1,4,3,1)));
+        nonograma.setColumnDefinition(10, new ArrayList<>(Arrays.asList(7,2,2,1)));
+        nonograma.setColumnDefinition(11, new ArrayList<>(Arrays.asList(2,2,2,3)));
+        nonograma.setColumnDefinition(12, new ArrayList<>(Arrays.asList(2,2,2,2)));
+        nonograma.setColumnDefinition(13, new ArrayList<>(Arrays.asList(5,2,2,2)));
+        nonograma.setColumnDefinition(14, new ArrayList<>(Arrays.asList(1,1,2,2,2,4)));
+        nonograma.setColumnDefinition(15, new ArrayList<>(Arrays.asList(2,1,1,3,6)));
+        nonograma.setColumnDefinition(16, new ArrayList<>(Arrays.asList(1,1,2,4,6)));
+        nonograma.setColumnDefinition(17, new ArrayList<>(Arrays.asList(2,1,1,5,5)));
+        nonograma.setColumnDefinition(18, new ArrayList<>(Arrays.asList(3,2,9)));
+        nonograma.setColumnDefinition(19, new ArrayList<>(Arrays.asList(4,6)));
+        nonograma.setRowDefinition(0, new ArrayList<>(Arrays.asList(6)));
+        nonograma.setRowDefinition(1, new ArrayList<>(Arrays.asList(7,1,3)));
+        nonograma.setRowDefinition(2, new ArrayList<>(Arrays.asList(2,5,1,2)));
+        nonograma.setRowDefinition(3, new ArrayList<>(Arrays.asList(1,1,1,1,1,1)));
+        nonograma.setRowDefinition(4, new ArrayList<>(Arrays.asList(1,1,2,1,2)));
+        nonograma.setRowDefinition(5, new ArrayList<>(Arrays.asList(1,1,5)));
+        nonograma.setRowDefinition(6, new ArrayList<>(Arrays.asList(10)));
+        nonograma.setRowDefinition(7, new ArrayList<>(Arrays.asList(15)));
+        nonograma.setRowDefinition(8, new ArrayList<>(Arrays.asList(2,2,2,4)));
+        nonograma.setRowDefinition(9, new ArrayList<>(Arrays.asList(3,2,2,4)));
+        nonograma.setRowDefinition(10, new ArrayList<>(Arrays.asList(3,1,2,3)));
+        nonograma.setRowDefinition(11, new ArrayList<>(Arrays.asList(3,2,2,3)));
+        nonograma.setRowDefinition(12, new ArrayList<>(Arrays.asList(3,2,2,3)));
+        nonograma.setRowDefinition(13, new ArrayList<>(Arrays.asList(1,2,1,2,2)));
+        nonograma.setRowDefinition(14, new ArrayList<>(Arrays.asList(2,2,2,6)));
+        nonograma.setRowDefinition(15, new ArrayList<>(Arrays.asList(3,1,1,5)));
+        nonograma.setRowDefinition(16, new ArrayList<>(Arrays.asList(3,2,2,6)));
+        nonograma.setRowDefinition(17, new ArrayList<>(Arrays.asList(4,2,2,5)));
+        nonograma.setRowDefinition(18, new ArrayList<>(Arrays.asList(8,7)));
+        nonograma.setRowDefinition(19, new ArrayList<>(Arrays.asList(15)));
+*/
+/*
+        Nonograma nonograma = new Nonograma(20, 20);
+        nonograma.setColumnDefinition(0, new ArrayList<>(Arrays.asList(2)));
+        nonograma.setColumnDefinition(1, new ArrayList<>(Arrays.asList(2,2,5)));
+        nonograma.setColumnDefinition(2, new ArrayList<>(Arrays.asList(3,3,7)));
+        nonograma.setColumnDefinition(3, new ArrayList<>(Arrays.asList(2,14)));
+        nonograma.setColumnDefinition(4, new ArrayList<>(Arrays.asList(2,5,1,6)));
+        nonograma.setColumnDefinition(5, new ArrayList<>(Arrays.asList(2,1,3,2,5)));
+        nonograma.setColumnDefinition(6, new ArrayList<>(Arrays.asList(1,8,6)));
+        nonograma.setColumnDefinition(7, new ArrayList<>(Arrays.asList(2,4,2,8)));
+        nonograma.setColumnDefinition(8, new ArrayList<>(Arrays.asList(1,1,2,3,4)));
+        nonograma.setColumnDefinition(9, new ArrayList<>(Arrays.asList(2,1,3,4)));
+        nonograma.setColumnDefinition(10, new ArrayList<>(Arrays.asList(2,4,4)));
+        nonograma.setColumnDefinition(11, new ArrayList<>(Arrays.asList(2,3,4)));
+        nonograma.setColumnDefinition(12, new ArrayList<>(Arrays.asList(3,3,4)));
+        nonograma.setColumnDefinition(13, new ArrayList<>(Arrays.asList(13,4)));
+        nonograma.setColumnDefinition(14, new ArrayList<>(Arrays.asList(9,1,2)));
+        nonograma.setColumnDefinition(15, new ArrayList<>(Arrays.asList(1,1,1,1,3,1)));
+        nonograma.setColumnDefinition(16, new ArrayList<>(Arrays.asList(9)));
+        nonograma.setColumnDefinition(17, new ArrayList<>(Arrays.asList(1,7)));
+        nonograma.setColumnDefinition(18, new ArrayList<>(Arrays.asList(1,6)));
+        nonograma.setColumnDefinition(19, new ArrayList<>(Arrays.asList(6)));
+        nonograma.setRowDefinition(0, new ArrayList<>(Arrays.asList(4)));
+        nonograma.setRowDefinition(1, new ArrayList<>(Arrays.asList(7)));
+        nonograma.setRowDefinition(2, new ArrayList<>(Arrays.asList(2,2,3)));
+        nonograma.setRowDefinition(3, new ArrayList<>(Arrays.asList(1,4,5)));
+        nonograma.setRowDefinition(4, new ArrayList<>(Arrays.asList(5,2,2,3)));
+        nonograma.setRowDefinition(5, new ArrayList<>(Arrays.asList(9,3)));
+        nonograma.setRowDefinition(6, new ArrayList<>(Arrays.asList(6,2)));
+        nonograma.setRowDefinition(7, new ArrayList<>(Arrays.asList(5,3)));
+        nonograma.setRowDefinition(8, new ArrayList<>(Arrays.asList(1,1,2)));
+        nonograma.setRowDefinition(9, new ArrayList<>(Arrays.asList(7,3)));
+        nonograma.setRowDefinition(10, new ArrayList<>(Arrays.asList(3,5,2,4)));
+        nonograma.setRowDefinition(11, new ArrayList<>(Arrays.asList(4,1,2,1,1)));
+        nonograma.setRowDefinition(12, new ArrayList<>(Arrays.asList(13,5)));
+        nonograma.setRowDefinition(13, new ArrayList<>(Arrays.asList(13,4)));
+        nonograma.setRowDefinition(14, new ArrayList<>(Arrays.asList(13,4)));
+        nonograma.setRowDefinition(15, new ArrayList<>(Arrays.asList(6,6)));
+        nonograma.setRowDefinition(16, new ArrayList<>(Arrays.asList(11,4)));
+        nonograma.setRowDefinition(17, new ArrayList<>(Arrays.asList(8,4)));
+        nonograma.setRowDefinition(18, new ArrayList<>(Arrays.asList(8,2)));
+        nonograma.setRowDefinition(19, new ArrayList<>(Arrays.asList(9)));
+*/
+/*
+        Nonograma nonograma = new Nonograma(20, 20);
+        nonograma.setColumnDefinition(0, new ArrayList<>(Arrays.asList(8,6)));
+        nonograma.setColumnDefinition(1, new ArrayList<>(Arrays.asList(4,3,5)));
+        nonograma.setColumnDefinition(2, new ArrayList<>(Arrays.asList(3,2,3,1,1,1)));
+        nonograma.setColumnDefinition(3, new ArrayList<>(Arrays.asList(1,3,3,1)));
+        nonograma.setColumnDefinition(4, new ArrayList<>(Arrays.asList(3,1,4,1)));
+        nonograma.setColumnDefinition(5, new ArrayList<>(Arrays.asList(3,2,4)));
+        nonograma.setColumnDefinition(6, new ArrayList<>(Arrays.asList(3,1,1,2,6)));
+        nonograma.setColumnDefinition(7, new ArrayList<>(Arrays.asList(2,5,2,1)));
+        nonograma.setColumnDefinition(8, new ArrayList<>(Arrays.asList(2,4,3)));
+        nonograma.setColumnDefinition(9, new ArrayList<>(Arrays.asList(3,1,4,2,1)));
+        nonograma.setColumnDefinition(10, new ArrayList<>(Arrays.asList(4,3,1,1)));
+        nonograma.setColumnDefinition(11, new ArrayList<>(Arrays.asList(3,2,1)));
+        nonograma.setColumnDefinition(12, new ArrayList<>(Arrays.asList(3,2)));
+        nonograma.setColumnDefinition(13, new ArrayList<>(Arrays.asList(5,1,2)));
+        nonograma.setColumnDefinition(14, new ArrayList<>(Arrays.asList(1,5,2,4)));
+        nonograma.setColumnDefinition(15, new ArrayList<>(Arrays.asList(1,1,2,4,2,2)));
+        nonograma.setColumnDefinition(16, new ArrayList<>(Arrays.asList(3,1,3,2,1)));
+        nonograma.setColumnDefinition(17, new ArrayList<>(Arrays.asList(1,3,2)));
+        nonograma.setColumnDefinition(18, new ArrayList<>(Arrays.asList(3,5)));
+        nonograma.setColumnDefinition(19, new ArrayList<>(Arrays.asList(2)));
+        nonograma.setRowDefinition(0, new ArrayList<>(Arrays.asList(1,2)));
+        nonograma.setRowDefinition(1, new ArrayList<>(Arrays.asList(1,5,2,1)));
+        nonograma.setRowDefinition(2, new ArrayList<>(Arrays.asList(2,2,2,1,3)));
+        nonograma.setRowDefinition(3, new ArrayList<>(Arrays.asList(3,2,2,2,1)));
+        nonograma.setRowDefinition(4, new ArrayList<>(Arrays.asList(2,1,1,1)));
+        nonograma.setRowDefinition(5, new ArrayList<>(Arrays.asList(2,1,3,1)));
+        nonograma.setRowDefinition(6, new ArrayList<>(Arrays.asList(1,1,2,5)));
+        nonograma.setRowDefinition(7, new ArrayList<>(Arrays.asList(1,4,1,5)));
+        nonograma.setRowDefinition(8, new ArrayList<>(Arrays.asList(1,2,1,5)));
+        nonograma.setRowDefinition(9, new ArrayList<>(Arrays.asList(2,3,2)));
+        nonograma.setRowDefinition(10, new ArrayList<>(Arrays.asList(3,4,2)));
+        nonograma.setRowDefinition(11, new ArrayList<>(Arrays.asList(3,4,1,1)));
+        nonograma.setRowDefinition(12, new ArrayList<>(Arrays.asList(2,9)));
+        nonograma.setRowDefinition(13, new ArrayList<>(Arrays.asList(2,3,4)));
+        nonograma.setRowDefinition(14, new ArrayList<>(Arrays.asList(1,1,1,1,3)));
+        nonograma.setRowDefinition(15, new ArrayList<>(Arrays.asList(2,1,2,1,2,2)));
+        nonograma.setRowDefinition(16, new ArrayList<>(Arrays.asList(2,4,1,4,2)));
+        nonograma.setRowDefinition(17, new ArrayList<>(Arrays.asList(3,2,2,1,2,1,2)));
+        nonograma.setRowDefinition(18, new ArrayList<>(Arrays.asList(2,1,2,1,1,2,2)));
+        nonograma.setRowDefinition(19, new ArrayList<>(Arrays.asList(3,6,3)));
+*/
+        System.out.println(nonograma.toString());
+        ArrayList<Nonograma> solutions = nonograma.solve(false);
+        if (solutions.isEmpty()) {
+            System.out.println("No solution!!!");
+        }
+        else {
+            System.out.println("There are " + solutions.size() + " Solutions...");
+            for (Nonograma n : solutions)
+                System.out.println(n.toString());
+        }
+
         System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
         System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 
                                                            Runtime.getRuntime().totalMemory() + "/" + 
