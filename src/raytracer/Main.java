@@ -19,7 +19,14 @@ import java.io.*;
 import java.math.*;
 import java.util.*;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
@@ -1354,6 +1361,7 @@ Números de Friedman:
         System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 
                                                            Runtime.getRuntime().totalMemory() + "/" + 
                                                            Runtime.getRuntime().maxMemory() + ")");
+        System.out.println("JavaFX Runtime version = " + com.sun.javafx.runtime.VersionInfo.getRuntimeVersion());
         
         Complex initialValue = new Complex(0.0, 0.0);
         System.out.println("c = -1 -> " + IFCMath.isMandelbrot(initialValue, new Complex(-1,0), 10));
@@ -1541,7 +1549,29 @@ Números de Friedman:
 
     @Override
     public void start(Stage stage) throws Exception {
+/*        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+        
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        
+        Scene scene = new Scene(root, 300, 250);
+        
         stage.setTitle("Sum of multiples of");
+        stage.setScene(scene);
+        stage.show();*/
+        FXMLLoader loader = new FXMLLoader();
+        Pane pane = (Pane)loader.load(getClass().getModule().getResourceAsStream("dialogs/JProjectEulerP001.fxml"));
+        Scene scene = new Scene(pane);
+        stage.setTitle("Sum of multiples of");
+        stage.setScene(scene);
         stage.show();
     }
 

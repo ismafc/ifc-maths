@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@dialogs/jprojecteulerp001.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2" fx:controller="dialogs.JProjectEulerP001Controller">
+   <children>
+      <Button layoutX="274.0" layoutY="188.0" mnemonicParsing="false" text="Button" />
+   </children>
+</AnchorPane>
