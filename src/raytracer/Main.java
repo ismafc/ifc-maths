@@ -1573,7 +1573,7 @@ Números de Friedman:
         InputStream inputStream = module.getResourceAsStream(fileName);
         Pane pane = (Pane)loader.load(inputStream);
         Scene scene = new Scene(pane);
-        stage.setTitle("Suma de los multiples de...");
+        stage.setTitle("Suma de los múltiples de...");
         stage.setScene(scene);
         stage.show();
     }

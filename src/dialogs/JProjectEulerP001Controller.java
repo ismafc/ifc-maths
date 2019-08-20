@@ -7,14 +7,17 @@ package dialogs;
 
 import ProjectEuler.P001_009.Problem001;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -61,10 +64,36 @@ public class JProjectEulerP001Controller {
         algorithmComboBox.getItems().addAll(Arrays.asList(algorithms));
         algorithmComboBox.getSelectionModel().select(algorithms[last]);        
     }    
+
+    @FXML
+    public void onAddToList(ActionEvent event) {
+        BigInteger add = new BigInteger(addEdit.getText());
+/*        for (BigInteger bi : multiplesList.getItems()) {
+            if (add.mod(bi).compareTo(BigInteger.ZERO) == 0) {
+                JOptionPane.showMessageDialog(null, "El valor es múltiple de " + bi.toString() + ", que ya se encuentra en la lista", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }*/
+        multiplesList.getItems().add(add);
+    }
+
+    @FXML
+    public void onRemoveFromList(ActionEvent event) {
+        ObservableList<BigInteger> items = multiplesList.getItems();
+        items.removeAll(multiplesList.getSelectionModel().getSelectedItems());
+    }
     
     @FXML
-    public void onCalculateAction(ActionEvent event) {
-        
+    public void onCalculate(ActionEvent event) {
+        Problem001 problem001 = new Problem001();
+        BigInteger from = new BigInteger(fromEdit.getText());
+        BigInteger below = new BigInteger(toEdit.getText());
+        Object selectedItem = algorithmComboBox.getSelectionModel().getSelectedItem();
+        Problem001.Algorithm algorithm = (Problem001.Algorithm)selectedItem;
+        ArrayList<BigInteger> values = new ArrayList<>();
+        values.addAll(multiplesList.getItems());
+        BigInteger result = problem001.solve(values, from, below, algorithm);
+        resultLabel.setText(result.toString());
     }
     
 }
