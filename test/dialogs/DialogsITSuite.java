@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author ismael.flores
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({dialogs.JFractalDialogIT.class})
+@Suite.SuiteClasses({JFractalDialogIT.class, JProjectEulerP001ControllerIT.class})
 public class DialogsITSuite {
 
     @BeforeClass
