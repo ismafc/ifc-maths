@@ -9,10 +9,10 @@
 
 <AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dialogs.JProjectEulerP001Controller">
    <children>
-      <Button layoutX="14.0" layoutY="286.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="32.0" prefWidth="367.0" text="Calcular" />
+      <Button fx:id="calculateButton" layoutX="14.0" layoutY="286.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="32.0" prefWidth="367.0" text="Calcular" />
       <ListView fx:id="multiplesList" layoutX="14.0" layoutY="34.0" prefHeight="245.0" prefWidth="200.0" />
-      <Button layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="&gt;&gt;" />
-      <Button layoutX="224.0" layoutY="149.0" minWidth="38.0" mnemonicParsing="false" onAction="#onAddToList" prefHeight="32.0" prefWidth="60.0" text="&lt;&lt;" />
+      <Button fx:id="removeFromListButton" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="&gt;&gt;" />
+      <Button fx:id="addToListButton" layoutX="224.0" layoutY="149.0" minWidth="38.0" mnemonicParsing="false" onAction="#onAddToList" prefHeight="32.0" prefWidth="60.0" text="&lt;&lt;" />
       <TextField fx:id="addEdit" layoutX="300.0" layoutY="149.0" prefHeight="32.0" prefWidth="76.0" text="7" />
       <TextField fx:id="fromEdit" layoutX="224.0" layoutY="34.0" prefHeight="26.0" prefWidth="158.0" text="1" />
       <Label layoutX="224.0" layoutY="14.0" prefHeight="18.0" prefWidth="152.0" text="Desde" />
