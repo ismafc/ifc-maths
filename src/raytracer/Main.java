@@ -1567,13 +1567,16 @@ Números de Friedman:
         stage.setTitle("Sum of multiples of");
         stage.setScene(scene);
         stage.show();*/
+        Locale.setDefault(Locale.ENGLISH);
         String fileName = "dialogs/JProjectEulerP001.fxml";
         FXMLLoader loader = new FXMLLoader();
+        ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
         Module module = getClass().getModule();
         InputStream inputStream = module.getResourceAsStream(fileName);
+        loader.setResources(bundle);
         Pane pane = (Pane)loader.load(inputStream);
         Scene scene = new Scene(pane);
-        stage.setTitle("Suma de los múltiples de...");
+        stage.setTitle(bundle.getString("p001.summultiplesof"));
         stage.setScene(scene);
         stage.show();
     }

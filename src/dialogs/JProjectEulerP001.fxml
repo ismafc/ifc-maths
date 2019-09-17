@@ -9,19 +9,19 @@
 
 <AnchorPane id="AnchorPane" prefHeight="382.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dialogs.JProjectEulerP001Controller">
    <children>
-      <Button fx:id="calculateButton" layoutX="14.0" layoutY="286.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="32.0" prefWidth="367.0" text="Calcular" />
+      <Button fx:id="calculateButton" layoutX="14.0" layoutY="286.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="32.0" prefWidth="367.0" text="%btn.calculate" />
       <ListView fx:id="multiplesList" layoutX="14.0" layoutY="34.0" prefHeight="245.0" prefWidth="200.0" />
-      <Button fx:id="removeFromListButton" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="&gt;&gt;" />
-      <Button fx:id="addToListButton" layoutX="224.0" layoutY="149.0" minWidth="38.0" mnemonicParsing="false" onAction="#onAddToList" prefHeight="32.0" prefWidth="60.0" text="&lt;&lt;" />
+      <Button fx:id="removeFromListButton" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="%btn.removefrommultipleslist" />
+      <Button fx:id="addToListButton" layoutX="224.0" layoutY="149.0" minWidth="38.0" mnemonicParsing="false" onAction="#onAddToList" prefHeight="32.0" prefWidth="60.0" text="%btn.addtomultipleslist" />
       <TextField fx:id="addEdit" layoutX="300.0" layoutY="149.0" prefHeight="32.0" prefWidth="76.0" text="7" />
       <TextField fx:id="fromEdit" layoutX="224.0" layoutY="34.0" prefHeight="26.0" prefWidth="158.0" text="1" />
-      <Label layoutX="224.0" layoutY="14.0" prefHeight="18.0" prefWidth="152.0" text="Desde" />
-      <Label layoutX="224.0" layoutY="71.0" prefHeight="18.0" prefWidth="152.0" text="Hasta (no incluido)" />
+      <Label layoutX="224.0" layoutY="14.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.from" />
+      <Label layoutX="224.0" layoutY="71.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.tonotincluded" />
       <TextField fx:id="toEdit" layoutX="224.0" layoutY="89.0" prefHeight="26.0" prefWidth="158.0" text="1000" />
-      <Label layoutX="14.0" layoutY="14.0" text="Múltiples de:" />
-      <Label layoutX="224.0" layoutY="131.0" prefHeight="18.0" prefWidth="152.0" text="Añadir / Quitar múltiple" />
+      <Label layoutX="14.0" layoutY="14.0" text="%lbl.multiplesof" />
+      <Label layoutX="224.0" layoutY="131.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.addremovemultiple" />
       <ComboBox fx:id="algorithmComboBox" layoutX="224.0" layoutY="251.0" prefHeight="28.0" prefWidth="158.0" />
-      <Label layoutX="224.0" layoutY="233.0" prefHeight="18.0" prefWidth="152.0" text="Algoritmo" />
-      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="325.0" prefHeight="41.0" prefWidth="367.0" text="Resultado" textAlignment="CENTER" />
+      <Label layoutX="224.0" layoutY="233.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.algorithm" />
+      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="325.0" prefHeight="41.0" prefWidth="367.0" text="%lbl.result" textAlignment="CENTER" />
    </children>
 </AnchorPane>

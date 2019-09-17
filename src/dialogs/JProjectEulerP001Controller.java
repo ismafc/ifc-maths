@@ -10,8 +10,7 @@ import ProjectEuler.P001_009.Problem001;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
+import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +39,10 @@ public class JProjectEulerP001Controller {
     @FXML private Button calculateButton;
     @FXML private Button addToListButton;
     @FXML private Button removeFromListButton;
+
+    ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
+    String error = bundle.getString("base.error");
+    String warning = bundle.getString("base.warning");
     
     public class ChangeEditListenerLocal extends ChangeEditListener {
 
@@ -89,7 +92,7 @@ public class JProjectEulerP001Controller {
         Problem001.Algorithm[] algorithms = Problem001.Algorithm.values();
         int last = algorithms.length - 1;
         algorithmComboBox.getItems().addAll(Arrays.asList(algorithms));
-        algorithmComboBox.getSelectionModel().select(algorithms[last]);
+        algorithmComboBox.getSelectionModel().select(algorithms[last]);        
     }    
 
     private void removeSelectedItemsFromMultiplesList() {
@@ -99,13 +102,16 @@ public class JProjectEulerP001Controller {
     
     @FXML
     public void onAddToList(ActionEvent event) {
+        String value = bundle.getString("p001.thevalue");
+        String pinlistp = bundle.getString("p001.pinlistp");
         ArrayList<BigInteger> multiples = new ArrayList<>();
         ArrayList<BigInteger> divisores = new ArrayList<>();
         BigInteger add = new BigInteger(addEdit.getText());
         for (BigInteger bi : multiplesList.getItems()) {
             if (add.equals(bi)) {
-                String msg = "El valor " + add + " ya se encuentra en la lista";
-                JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
+                String alreadyinlist = bundle.getString("p001.alreadyinlist");
+                String msg = value + " " + add + " " + alreadyinlist;
+                JOptionPane.showMessageDialog(null, msg, error, JOptionPane.ERROR_MESSAGE);
                 return;
             }
             else if (add.mod(bi).compareTo(BigInteger.ZERO) == 0)
@@ -115,13 +121,16 @@ public class JProjectEulerP001Controller {
         }
 
         if (divisores.size() > 0) {
-            String msg = "El valor " + add + " es múltiple de " + divisores.toString() + " (en la lista)";
-            JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
+            String ismultipleof = bundle.getString("p001.ismultipleof");
+            String msg = value + " " + add + " " + ismultipleof + " " + divisores.toString() + " " + pinlistp;
+            JOptionPane.showMessageDialog(null, msg, error, JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (multiples.size() > 0) {
-            String msg = "El valor " + add + " divide a " + multiples.toString() + " (en la lista). Añadirlo de todas formas?";
-            if (JOptionPane.showConfirmDialog(null, msg, "Aviso", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION)
+            String divideto = bundle.getString("p001.divideto");
+            String addanyway = bundle.getString("p001.addanyway");
+            String msg = value + " " + add + " " + divideto + " " + multiples.toString() + " " + pinlistp + ". " + addanyway;
+            if (JOptionPane.showConfirmDialog(null, msg, warning, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.NO_OPTION)
                 return;
             multiplesList.getSelectionModel().clearSelection();
             for (BigInteger m : multiples)
@@ -155,7 +164,8 @@ public class JProjectEulerP001Controller {
             resultLabel.setText(result.toString());
         }
         else {
-            JOptionPane.showMessageDialog(null, "El valor 'desde' debe ser menor que el valor 'hasta'", "Error", JOptionPane.ERROR_MESSAGE);            
+            String msg = bundle.getString("p001.fromlessthanto");
+            JOptionPane.showMessageDialog(null, msg, error, JOptionPane.ERROR_MESSAGE);            
         }
     }
 }
