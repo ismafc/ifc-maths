@@ -6,6 +6,7 @@
 package dialogs;
 
 import Library.ChangeEditListener;
+import Library.InOut;
 import ProjectEuler.P001_009.Problem001;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -160,8 +161,10 @@ public class JProjectEulerP001Controller {
             Problem001.Algorithm algorithm = (Problem001.Algorithm)selectedItem;
             ArrayList<BigInteger> values = new ArrayList<>();
             values.addAll(multiplesList.getItems());
+            long millis = System.currentTimeMillis();
             BigInteger result = problem001.solve(values, from, below, algorithm);
-            resultLabel.setText(result.toString());
+            millis = System.currentTimeMillis() - millis;
+            resultLabel.setText(result.toString() + " (" + InOut.getDuration(millis, bundle) + ")");
         }
         else {
             String msg = bundle.getString("p001.fromlessthanto");

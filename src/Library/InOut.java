@@ -6,9 +6,12 @@
 package Library;
 
 import java.math.BigInteger;
+import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 /**
  * In this class we will add several usefull In &amp; Out functions
+ * 
  * @author ismael.flores
  */
 public class InOut {
@@ -16,6 +19,7 @@ public class InOut {
     /** 
      * Convert <b><i>v</i></b> to a <b>long</b>.<br>
      * If <b>v</b> is not a valid <b>long</b> the <b><i>default_value</i></b> is returned
+     * 
      * @param v String to convert to a <b>long</b>
      * @param default_value value returned if <b><i>v</i></b> is not a valid <b>long</b>
      * @param name Argument name used just for display log if needed
@@ -35,6 +39,7 @@ public class InOut {
     /** 
      * Convert <b><i>v</i></b> to a <b>BigInteger</b>.<br>
      * If <b>v</b> is not a valid <b>BigInteger</b> the <b><i>default_value</i></b> is returned
+     * 
      * @param v String to convert to a <b>long</b>
      * @param default_value value returned if <b><i>v</i></b> is not a valid <b>BigInteger</b>
      * @param name Argument name used just for display log if needed
@@ -56,6 +61,7 @@ public class InOut {
      * Argumens have the form: <b>[argument_name]:[value]</b> where <b>value</b> is a <b>long</b>.<br>
      * If <b>value</b> is not a valid <b>long</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * the <b><i>default_value</i></b> is returned
+     * 
      * @param args List of string where we will found argument <b><i>name</i></b>
      * @param default_value value returned if <b>value</b> is not a valid <b>long</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * @param name Argument name searched in <b><i>args</i></b>
@@ -79,6 +85,7 @@ public class InOut {
      * Argumens have the form: <b>[argument_name]:[value]</b> where <b>value</b> is a <b>BigInteger</b>.<br>
      * If <b>value</b> is not a valid <b>BigInteger</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * the <b><i>default_value</i></b> is returned
+     * 
      * @param args List of string where we will found argument <b><i>name</i></b>
      * @param default_value value returned if <b>value</b> is not a valid <b>BigInteger</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * @param name Argument name searched in <b><i>args</i></b>
@@ -95,5 +102,73 @@ public class InOut {
             }
         }
         return value;
+    }
+
+   /**
+     * Convert a millisecond duration to a string format
+     * 
+     * @param millis A duration to convert to a string form
+     * @param bundle Localized resources to use
+     * @return A string of the form "X Days Y Hours Z Minutes A Seconds M Mulliseconds".
+     */
+    public static String getDuration(long millis, ResourceBundle bundle) {
+        if (millis < 0) {
+            throw new IllegalArgumentException("Negative duration is not allowed");
+        }
+
+        long days = TimeUnit.MILLISECONDS.toDays(millis);
+        millis -= TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(millis);
+        millis -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        millis -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+        millis -= TimeUnit.SECONDS.toMillis(seconds);
+
+        StringBuilder sb = new StringBuilder(64);
+        if (days > 0) {
+            sb.append(days);
+            sb.append(" ");
+            if (days != 1)
+                sb.append(bundle.getString("base.days"));
+            else
+                sb.append(bundle.getString("base.day"));
+            sb.append(", ");
+        }
+        if (hours > 0 || days > 0) {
+            sb.append(hours);
+            sb.append(" ");
+            if (hours != 1)
+                sb.append(bundle.getString("base.hours"));
+            else
+                sb.append(bundle.getString("base.hour"));
+            sb.append(", ");
+        }
+        if (minutes > 0 || hours > 0 || days > 0) {
+            sb.append(minutes);
+            sb.append(" ");
+            if (minutes != 1)
+                sb.append(bundle.getString("base.minutes"));
+            else
+                sb.append(bundle.getString("base.minute"));
+            sb.append(", ");
+        }
+        if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) {
+            sb.append(seconds);
+            sb.append(" ");
+            if (seconds != 1)
+                sb.append(bundle.getString("base.seconds"));
+            else
+                sb.append(bundle.getString("base.second"));
+            sb.append(", ");
+        }
+        sb.append(millis);
+        sb.append(" ");
+        if (millis != 1)
+            sb.append(bundle.getString("base.milliseconds"));
+        else
+            sb.append(bundle.getString("base.millisecond"));
+
+        return(sb.toString());
     }
 }
