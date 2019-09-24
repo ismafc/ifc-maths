@@ -105,11 +105,13 @@ public class InOut {
     }
 
    /**
-     * Convert a millisecond duration to a string format
+     * Convert a millisecond duration (<b><i>millis</i></b>) to a string format 
+     * according to localization stored in <b><i>bundle</i></b>
      * 
      * @param millis A duration to convert to a string form
      * @param bundle Localized resources to use
-     * @return A string of the form "X Days Y Hours Z Minutes A Seconds M Mulliseconds".
+     * @return A string with the format:
+     * "X Days, Y Hours, Z Minutes, A Seconds, M Milliseconds"
      */
     public static String getDuration(long millis, ResourceBundle bundle) {
         if (millis < 0) {
@@ -169,6 +171,6 @@ public class InOut {
         else
             sb.append(bundle.getString("base.millisecond"));
 
-        return(sb.toString());
+        return sb.toString();
     }
 }
