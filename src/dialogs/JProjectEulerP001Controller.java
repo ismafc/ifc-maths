@@ -11,6 +11,7 @@ import ProjectEuler.P001_009.Problem001;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -36,6 +37,7 @@ public class JProjectEulerP001Controller {
     @FXML private TextField toEdit;
     @FXML private TextField addEdit;
     @FXML private ComboBox algorithmComboBox;
+    @FXML private Label numbersLabel;
     @FXML private Label resultLabel;
     @FXML private Button calculateButton;
     @FXML private Button addToListButton;
@@ -44,6 +46,9 @@ public class JProjectEulerP001Controller {
     ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
     String error = bundle.getString("base.error");
     String warning = bundle.getString("base.warning");
+    
+    private final int FIRST_VALUES = 3;
+    private final int LAST_VALUES = 3;
     
     public class ChangeEditListenerLocal extends ChangeEditListener {
 
@@ -150,6 +155,30 @@ public class JProjectEulerP001Controller {
         removeSelectedItemsFromMultiplesList();
         updateButtons();
     }
+
+    private String getNumbersText(ArrayList<BigInteger> first, ArrayList<BigInteger> last, BigInteger value) {
+        String txt = "";
+        if (first.isEmpty())
+            txt = bundle.getString("lbl.novaluestoadd");
+        else {
+            boolean overlapped = (value == null || last.contains(value));
+            InOut<BigInteger> io = new InOut<>();
+            if (overlapped) {
+                for (BigInteger i : last) {
+                    if (!first.contains(i)) {
+                        first.add(i);
+                    }
+                }
+                txt += io.getListText(first, " + ");
+            }
+            else {
+                txt += io.getListText(first, " + ");
+                txt += " + ... + ";
+                txt += io.getListText(last, " + ");
+            }
+        }
+        return txt;
+    }
     
     @FXML
     public void onCalculate(ActionEvent event) {
@@ -164,11 +193,17 @@ public class JProjectEulerP001Controller {
             long millis = System.currentTimeMillis();
             BigInteger result = problem001.solve(values, from, below, algorithm);
             millis = System.currentTimeMillis() - millis;
-            resultLabel.setText(result.toString() + " (" + InOut.getDuration(millis, bundle) + ")");
+            resultLabel.setText(result.toString() + " (" + InOut.getDurationText(millis, bundle) + ")");
+            ArrayList<BigInteger> f = problem001.getFirstValues(values, from, below, FIRST_VALUES);
+            ArrayList<BigInteger> l = problem001.getLastValues(values, from, below, LAST_VALUES);
+            BigInteger v = problem001.getValue(values, from, below, FIRST_VALUES + 1);
+            numbersLabel.setText(getNumbersText(f, l, v));
         }
         else {
             String msg = bundle.getString("p001.fromlessthanto");
-            JOptionPane.showMessageDialog(null, msg, error, JOptionPane.ERROR_MESSAGE);            
+            JOptionPane.showMessageDialog(null, msg, error, JOptionPane.ERROR_MESSAGE);
+            resultLabel.setText(bundle.getString("lbl.result"));
+            numbersLabel.setText(bundle.getString("lbl.valuestoadd"));
         }
     }
 }

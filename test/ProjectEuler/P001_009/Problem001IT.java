@@ -543,5 +543,101 @@ public class Problem001IT {
             assertEquals(expResult, instance.solve(algorithm));
         }
     }
+
+    /**
+     * Test of solve method, of class Problem001.
+     */
+    @Test
+    public void testSolve_0args() {
+        System.out.println("solve()");
+        assertEquals(expResult, instance.solve());
+    }
+
+    /**
+     * Test of getFirstValues method, of class Problem001.
+     */
+    @Test
+    public void testGetFirstValues() {
+        System.out.println("getFirstValues(ArrayList<BigInteger> values, BigInteger from, BigInteger below, long nValues)");
+        long nValues = 3L;
+        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
+        ArrayList<BigInteger> expected = new ArrayList<>(Arrays.asList(new BigInteger("3"), 
+                                                                       new BigInteger("5"),
+                                                                       new BigInteger("6")));
+        ArrayList<BigInteger> result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+
+        below_ = new BigInteger("6");
+        expected = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
+        result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+        
+        below_ = new BigInteger("3");
+        expected = new ArrayList<>();
+        result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+        
+        nValues = 5L;
+        below_ = new BigInteger("10");
+        expected = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5"),
+                                                 new BigInteger("6"), new BigInteger("9")));
+        result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+    }
+
+    /**
+     * Test of getLastValues method, of class Problem001.
+     */
+    @Test
+    public void testGetLastValues() {
+        System.out.println("getLastValues(ArrayList<BigInteger> values, BigInteger from, BigInteger below, long nValues)");
+        long nValues = 3L;
+        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
+        ArrayList<BigInteger> expected = new ArrayList<>(Arrays.asList(new BigInteger("995"), 
+                                                                       new BigInteger("996"),
+                                                                       new BigInteger("999")));
+        ArrayList<BigInteger> result = instance.getLastValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+        
+        from_ = new BigInteger("996");
+        expected = new ArrayList<>(Arrays.asList(new BigInteger("996"), new BigInteger("999")));
+        result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+        
+        from_ = new BigInteger("1000");
+        expected = new ArrayList<>();
+        result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+        
+        nValues = 5L;
+        from_ = new BigInteger("993");
+        expected = new ArrayList<>(Arrays.asList(new BigInteger("993"), new BigInteger("995"),
+                                                 new BigInteger("996"), new BigInteger("999")));
+        result = instance.getFirstValues(v, from_, below_, nValues);
+        assertEquals(expected, result);
+    }
+
+    /**
+     * Test of getValue method, of class Problem001.
+     */
+    @Test
+    public void testGetValue() {
+        System.out.println("getValue(ArrayList<BigInteger> values, BigInteger from, BigInteger below, long nValue)");
+        long nValue = 3L;
+        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
+        BigInteger expected = new BigInteger("6");
+        BigInteger result = instance.getValue(v, from_, below_, nValue);
+        assertEquals(expected, result);
+
+        below_ = new BigInteger("6");
+        result = instance.getValue(v, from_, below_, nValue);
+        assertEquals(result, null);
+               
+        nValue = 5L;
+        below_ = new BigInteger("11");
+        expected = new BigInteger("10");
+        result = instance.getValue(v, from_, below_, nValue);
+        assertEquals(expected, result);
+    }
     
 }

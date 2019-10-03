@@ -6,6 +6,7 @@
 package Library;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
@@ -13,9 +14,30 @@ import java.util.concurrent.TimeUnit;
  * In this class we will add several usefull In &amp; Out functions
  * 
  * @author ismael.flores
+ * @param <T> Abstract and generic class
  */
-public class InOut {
+public class InOut<T> {
 
+    /** 
+     * Obtain a string representation of list <b><i>list</i></b><br>. That is:
+     * Elements of this list separated by provided text <b><i>inText</i></b>
+     * 
+     * @param list List to obtain string represetation
+     * @param inText Text to add between each value of list
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/String.html" target="_blank"><b>String</b></a> 
+     * with desired text
+     */
+    public String getListText(ArrayList<T> list, String inText) {
+        String txt = "";
+        for (int i = 0; i < list.size(); i++) {
+            T bi = list.get(i);
+            txt += bi.toString();
+            if (i < list.size() - 1)
+                txt += inText;
+        }
+        return txt;
+    }
+    
     /** 
      * Convert <b><i>v</i></b> to a <b>long</b>.<br>
      * If <b>v</b> is not a valid <b>long</b> the <b><i>default_value</i></b> is returned
@@ -113,7 +135,7 @@ public class InOut {
      * @return A string with the format:
      * "X Days, Y Hours, Z Minutes, A Seconds, M Milliseconds"
      */
-    public static String getDuration(long millis, ResourceBundle bundle) {
+    public static String getDurationText(long millis, ResourceBundle bundle) {
         if (millis < 0) {
             throw new IllegalArgumentException("Negative duration is not allowed");
         }

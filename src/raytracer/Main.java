@@ -1567,7 +1567,7 @@ Números de Friedman:
         stage.setTitle("Sum of multiples of");
         stage.setScene(scene);
         stage.show();*/
-        Locale.setDefault(Locale.ENGLISH);
+//        Locale.setDefault(Locale.ENGLISH);
         String fileName = "dialogs/JProjectEulerP001.fxml";
         FXMLLoader loader = new FXMLLoader();
         ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");

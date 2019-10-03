@@ -514,5 +514,69 @@ public class Problem001 {
         }
         return solution3(values, from, below);
     }
+
+    /** 
+     * Finds the <b><i>nValue</i></b> multiple of any number in <b><i>values</i></b> (values[0], values[1], ..., values[n-1] or values[n]) from <b><i>from</i></b> and below <b><i>below</i></b>.
+     * If total number of values added is less than <b><i>nValue</i></b>, <b><i>null</i></b> is returned
+     * @param values List of values to check with all numbers in range <b>[<i>from</i>, <i>below</i>)</b>
+     * @param from Lower bound (included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param below Upper bound (not included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param nValue Index of value to be returned
+     * @return A <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> value with the <b><i>nValue</i></b> multiple
+     */
+    public BigInteger getValue(ArrayList<BigInteger> values, BigInteger from, BigInteger below, long nValue) {
+        BigInteger value = null;
+        BigInteger i = from;
+        while (i.compareTo(below) == -1 && nValue > 0) {
+            if (IFCMath.mod(i, values)) {
+                value = i;
+                nValue--;
+            }
+            i = i.add(BigInteger.ONE);
+        }
+        return (nValue == 0) ? value : null;
+    }
+    
+    /** 
+     * Finds the first <b><i>nValues</i></b> multiples of any number in <b><i>values</i></b> (values[0], values[1], ..., values[n-1] or values[n]) from <b><i>from</i></b> and below <b><i>below</i></b>.
+     * @param values List of values to check with all numbers in range <b>[<i>from</i>, <i>below</i>)</b>
+     * @param from Lower bound (included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param below Upper bound (not included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param nValues Number of values to be returned
+     * @return An array list of <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with the first <b><i>nValues</i></b> multiples
+     */
+    public ArrayList<BigInteger> getFirstValues(ArrayList<BigInteger> values, BigInteger from, BigInteger below, long nValues) {
+        ArrayList<BigInteger> firstValues = new ArrayList<>(); 
+        BigInteger i = from;
+        while (i.compareTo(below) == -1 && nValues > 0) {
+            if (IFCMath.mod(i, values)) {
+                firstValues.add(i);
+                nValues--;
+            }
+            i = i.add(BigInteger.ONE);
+        }
+        return firstValues;
+    }
+    
+    /** 
+     * Finds the last <b><i>nValues</i></b> multiples of any number in <b><i>values</i></b> (values[0], values[1], ..., values[n-1] or values[n]) from <b><i>from</i></b> and below <b><i>below</i></b>.
+     * @param values List of values to check with all numbers in range <b>[<i>from</i>, <i>below</i>)</b>
+     * @param from Lower bound (included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param below Upper bound (not included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param nValues Number of values to be returned
+     * @return An array list of <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with the last <b><i>nValues</i></b> multiples
+     */
+    public ArrayList<BigInteger> getLastValues(ArrayList<BigInteger> values, BigInteger from, BigInteger below, long nValues) {
+        ArrayList<BigInteger> firstValues = new ArrayList<>(); 
+        BigInteger i = below.subtract(BigInteger.ONE);
+        while (i.compareTo(from) >= 0 && nValues > 0) {
+            if (IFCMath.mod(i, values)) {
+                firstValues.add(0, i);
+                nValues--;
+            }
+            i = i.subtract(BigInteger.ONE);
+        }
+        return firstValues;
+    }
 }
 

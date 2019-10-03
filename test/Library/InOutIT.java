@@ -6,6 +6,8 @@
 package Library;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import org.junit.After;
@@ -130,73 +132,101 @@ public class InOutIT {
     }
 
     /**
-     * Test of getDuration method, of class InOut.
+     * Test of getDurationText(long millis, ResourceBundle bundle) method, of class InOut.
      */
     @Test
-    public void testGetDuration() {
+    public void testGetDurationText() {
         System.out.println("getDuration(long millis, ResourceBundle bundle)");
         Locale.setDefault(Locale.ENGLISH);
         ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
         long millis = 0L;
         String expResult = "0 Milliseconds";
-        String result = InOut.getDuration(millis, bundle);
+        String result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
 
         millis = 2L * 1000L + 1L;
         expResult = "2 Seconds, 1 Millisecond";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         millis = 1L * 60L * 1000L + 5L * 1000L + 12L;
         expResult = "1 Minute, 5 Seconds, 12 Milliseconds";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
 
         millis = 1L * 3600L * 1000L + 15L * 60L * 1000L;
         expResult = "1 Hour, 15 Minutes, 0 Seconds, 0 Milliseconds";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         millis = 28L * 3600L * 1000L + 3L * 60L * 1000L + 1L * 1000L + 123L;
         expResult = "1 Day, 4 Hours, 3 Minutes, 1 Second, 123 Milliseconds";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         millis = 48L * 3600L * 1000L + 12L * 1000L + 1L;
         expResult = "2 Days, 0 Hours, 0 Minutes, 12 Seconds, 1 Millisecond";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         Locale.setDefault(new Locale("es", "ES"));
         bundle = ResourceBundle.getBundle("resources/messages");
         millis = 0L;
         expResult = "0 Milisegundos";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
 
         millis = 2L * 1000L + 1L;
         expResult = "2 Segundos, 1 Milisegundo";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         millis = 1L * 60L * 1000L + 5L * 1000L + 12L;
         expResult = "1 Minuto, 5 Segundos, 12 Milisegundos";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
 
         millis = 1L * 3600L * 1000L + 15L * 60L * 1000L;
         expResult = "1 Hora, 15 Minutos, 0 Segundos, 0 Milisegundos";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         millis = 28L * 3600L * 1000L + 3L * 60L * 1000L + 1L * 1000L + 123L;
         expResult = "1 Día, 4 Horas, 3 Minutos, 1 Segundo, 123 Milisegundos";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
         assertEquals(expResult, result);
         
         millis = 48L * 3600L * 1000L + 12L * 1000L + 1L;
         expResult = "2 Días, 0 Horas, 0 Minutos, 12 Segundos, 1 Milisegundo";
-        result = InOut.getDuration(millis, bundle);
+        result = InOut.getDurationText(millis, bundle);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListText(ArrayList<T> list, String inText) method, of class InOut.
+     */
+    @Test
+    public void testGetListText() {
+        System.out.println("getListText(ArrayList<T> list, String inText)");
+        InOut<BigInteger> instance = new InOut<>();
+        String inText = " + ";
+        String expResult = "3 + 5 + 6";
+        ArrayList<BigInteger> list = new ArrayList<>(Arrays.asList(new BigInteger("3"),
+                                                                   new BigInteger("5"),
+                                                                   new BigInteger("6")));
+        String result = instance.getListText(list, inText);
+        assertEquals(expResult, result);
+
+        expResult = "14";
+        list = new ArrayList<>(Arrays.asList(new BigInteger("14")));
+        result = instance.getListText(list, inText);
+        assertEquals(expResult, result);
+
+        inText = ", ";
+        expResult = "13, 26";
+        list = new ArrayList<>(Arrays.asList(new BigInteger("13"),
+                                             new BigInteger("26")));
+        result = instance.getListText(list, inText);
         assertEquals(expResult, result);
     }
     
