@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -1044,6 +1045,8 @@ Números de Friedman:
         System.out.println("Resultado = " + S);
         if (S.compareTo(BigInteger.ONE) == 1 || S.compareTo(BigInteger.ZERO) == -1)
             return;*/
+
+/*
         ProjectEuler.P001_009.Problem001 P1 = new ProjectEuler.P001_009.Problem001(); 
         ArrayList<BigInteger> V = new ArrayList<>();
         BigInteger MONE = new BigInteger("-1");
@@ -1063,6 +1066,7 @@ Números de Friedman:
             return;
         //ProjectEuler.P140_149.Problem143.problem143(120000);
         // End PE
+*/
 
 //Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(1,0,3,0,9,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
 //Sudoku sudoku = new Sudoku(new ArrayList<>(Arrays.asList(0,0,3,0,9,6,0,0,0,7,4,9,0,0,8,5,3,0,5,0,0,0,0,3,0,1,2,0,8,0,7,0,0,0,0,0,9,0,6,0,3,5,0,4,0,4,7,5,8,0,0,0,9,0,2,3,4,0,0,0,0,8,0,0,0,0,9,1,2,0,0,0,0,0,0,3,0,0,7,2,5)));
@@ -1576,6 +1580,11 @@ Números de Friedman:
         loader.setResources(bundle);
         Pane pane = (Pane)loader.load(inputStream);
         Scene scene = new Scene(pane);
+        stage.setResizable(false);
+        InputStream stream = getClass().getResourceAsStream("/resources/calculator_small.png");
+        InputStream stream_big = getClass().getResourceAsStream("/resources/calculator_big.png");
+        stage.getIcons().add(new Image(stream));
+        stage.getIcons().add(new Image(stream_big));
         stage.setTitle(bundle.getString("p001.summultiplesof"));
         stage.setScene(scene);
         stage.show();

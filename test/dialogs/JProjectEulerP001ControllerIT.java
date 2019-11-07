@@ -92,11 +92,24 @@ public class JProjectEulerP001ControllerIT {
      * Test of onCalculate method, of class JProjectEulerP001Controller.
      */
     @Test
-    public void testOnCalculate() {
+    public void testOnCalculate() throws InterruptedException {
         System.out.println("onCalculate");
         ActionEvent event = null;
         JProjectEulerP001Controller instance = new JProjectEulerP001Controller();
         instance.onCalculate(event);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of onCancel method, of class JProjectEulerP001Controller.
+     */
+    @Test
+    public void testOnCancel() {
+        System.out.println("onCancel");
+        ActionEvent event = null;
+        JProjectEulerP001Controller instance = new JProjectEulerP001Controller();
+        instance.onCancel(event);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -4,31 +4,34 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="427.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dialogs.JProjectEulerP001Controller">
+<AnchorPane id="AnchorPane" prefHeight="436.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dialogs.JProjectEulerP001Controller">
    <children>
-      <Button fx:id="calculateButton" layoutX="14.0" layoutY="286.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="32.0" prefWidth="367.0" text="%btn.calculate" />
       <ListView fx:id="multiplesList" layoutX="14.0" layoutY="34.0" prefHeight="245.0" prefWidth="200.0" />
-      <Button fx:id="removeFromListButton" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="%btn.removefrommultipleslist" />
+      <TextField fx:id="fromEdit" layoutX="224.0" layoutY="34.0" prefHeight="26.0" prefWidth="158.0" text="1" />
+      <TextField fx:id="toEdit" layoutX="224.0" layoutY="89.0" prefHeight="26.0" prefWidth="158.0" text="1000" />
       <Button fx:id="addToListButton" layoutX="224.0" layoutY="149.0" minWidth="38.0" mnemonicParsing="false" onAction="#onAddToList" prefHeight="32.0" prefWidth="60.0" text="%btn.addtomultipleslist" />
       <TextField fx:id="addEdit" layoutX="300.0" layoutY="149.0" prefHeight="32.0" prefWidth="76.0" text="7" />
-      <TextField fx:id="fromEdit" layoutX="224.0" layoutY="34.0" prefHeight="26.0" prefWidth="158.0" text="1" />
+      <Button fx:id="removeFromListButton" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="%btn.removefrommultipleslist" />
+      <ComboBox fx:id="algorithmComboBox" layoutX="224.0" layoutY="251.0" prefHeight="28.0" prefWidth="158.0" />
+      <Button fx:id="calculateButton" layoutX="14.0" layoutY="286.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="32.0" prefWidth="367.0" text="%btn.calculate" />
+      <ProgressBar fx:id="calculationProgressBar" layoutX="15.0" layoutY="390.0" prefHeight="30.0" prefWidth="300.0" progress="0.0" visible="false" />
+      <Button fx:id="cancelButton" layoutX="322.0" layoutY="390.0" minHeight="30.0" minWidth="35.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="30.0" prefWidth="60.0" visible="false" />
       <Label layoutX="224.0" layoutY="14.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.from" />
       <Label layoutX="224.0" layoutY="71.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.tonotincluded" />
-      <TextField fx:id="toEdit" layoutX="224.0" layoutY="89.0" prefHeight="26.0" prefWidth="158.0" text="1000" />
       <Label layoutX="14.0" layoutY="14.0" text="%lbl.multiplesof" />
       <Label layoutX="224.0" layoutY="131.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.addremovemultiple" />
-      <ComboBox fx:id="algorithmComboBox" layoutX="224.0" layoutY="251.0" prefHeight="28.0" prefWidth="158.0" />
       <Label layoutX="224.0" layoutY="233.0" prefHeight="18.0" prefWidth="152.0" text="%lbl.algorithm" />
-      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="372.0" prefHeight="41.0" prefWidth="367.0" text="%lbl.result" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="357.0" prefHeight="26.0" prefWidth="367.0" text="%lbl.result" textAlignment="CENTER" textFill="LIME">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="numbersLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="325.0" prefHeight="41.0" prefWidth="367.0" text="%lbl.valuestoadd" textAlignment="CENTER">
+      <Label fx:id="numbersLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="325.0" prefHeight="26.0" prefWidth="367.0" text="%lbl.valuestoadd" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="11.0" />
          </font>
