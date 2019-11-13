@@ -10,6 +10,7 @@ import Library.InOut;
 import ProjectEuler.P001_009.Problem001;
 import ProjectEuler.P001_009.Problem001Thread;
 import java.io.InputStream;
+import java.lang.Thread.State;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -69,19 +71,61 @@ public class JProjectEulerP001Controller {
     
     Problem001Thread p001thread = null;
     Timeline refreshTimer = new Timeline();
-        
+
+    /**
+     * Local Listener needed because, in addition to check length and type of string,
+     * interface updating is needed in order to enable or disable controls every
+     * time a control changes.
+     */
     public class ChangeEditListenerLocal extends ChangeEditListener {
 
+        /** 
+         * Listener constructor
+         * @param nMaxLength Maximum string length
+         * @param nNaturalNumber Boolean indicanting if string must be a natural number or not
+         */
         public ChangeEditListenerLocal(int nMaxLength, boolean nNaturalNumber) {
             super(nMaxLength, nNaturalNumber);
         }
 
+        /** 
+         * Method called every time the string wants to be changed
+         * This method checks if <b><i>newValue</i></b> fits restrictions of
+         * length (<b><i>naturalNumber</i></b>) and type (<b><i>maxLength</i></b>)
+         * and finally updates interface in order to enable or disable controls
+         * @param observable Wrapping of value being observing (checked/monitoring)
+         * @param oldValue Old value for string
+         * @param newValue New value for string that has to be checked
+         */
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             super.changed(observable, oldValue, newValue);
-            JProjectEulerP001Controller.this.updateButtons();
+            updateButtons();
         }
     }
+    
+    /**
+     * Local handler needed for timer used to update interface during
+     * calculations
+     */
+    public class TimerHandler<ActionEvent> implements EventHandler {
+        @Override
+        public void handle(Event t) {
+            if (p001thread != null) {
+                if (p001thread.calculationInProgress())
+                    calculationProgressBar.setProgress(p001thread.getProgress());
+                else if (p001thread.calculationIsDone()) {
+                    refreshTimer.stop();
+                    setCalculatingMode(false);
+                    Color c = p001thread.getProgress() < 1.0 ? COLOR_ERROR : COLOR_OK;
+                    resultLabel.setTextFill(c);
+                }
+                String result = p001thread.getResult().toString();
+                String duration = InOut.getDurationText(p001thread.getMilliseconds(), bundle);
+                resultLabel.setText(result + " (" + duration + ")");
+            }
+        }
+    };
     
     public void updateButtons() {
         calculateButton.setDisable(false);
@@ -139,31 +183,15 @@ public class JProjectEulerP001Controller {
         InputStream stream = getClass().getResourceAsStream("/resources/stop.png");
         cancelButton.setGraphic(new ImageView(new Image(stream)));
         
-        EventHandler<ActionEvent> onTimer = new EventHandler<>() {
-            public void handle(ActionEvent t) {
-                if (p001thread != null) {
-                    if (!p001thread.getState().equals(Thread.State.NEW) && 
-                        !p001thread.getState().equals(Thread.State.TERMINATED)) {
-                        calculationProgressBar.setProgress(p001thread.getProgress());
-                    }
-                    else if (p001thread.getState().equals(Thread.State.TERMINATED)) {
-                        refreshTimer.stop();
-                        setCalculatingMode(false);
-                        Color c = p001thread.getProgress() < 1.0 ? COLOR_ERROR : COLOR_OK;
-                        resultLabel.setTextFill(c);
-                    }
-                    String result = p001thread.getResult().toString();
-                    String duration = InOut.getDurationText(p001thread.getMilliseconds(), bundle);
-                    resultLabel.setText(result + " (" + duration + ")");
-                }
-            }
-        };
         refreshTimer.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame keyframe = new KeyFrame(Duration.millis(REFRESH_TIME_MS), onTimer);
+        KeyFrame keyframe = new KeyFrame(Duration.millis(REFRESH_TIME_MS), new TimerHandler<>());
         refreshTimer.getKeyFrames().add(keyframe);
         resultLabel.setTextFill(COLOR_OK);
     }    
 
+    /**
+     * Remove all selected items from list
+     */
     private void removeSelectedItemsFromMultiplesList() {
         ObservableList<BigInteger> items = multiplesList.getItems();
         items.removeAll(multiplesList.getSelectionModel().getSelectedItems());        

@@ -262,5 +262,57 @@ public class Problem001ThreadIT {
             assertEquals(new BigInteger("588"), instance.getResult());
         }
     }
+
+    /**
+     * Test of calculationInProgress method, of class Problem001Thread.
+     */
+    @Test
+    public void testCalculationInProgress() throws InterruptedException {
+        System.out.println("calculationInProgress()");
+        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
+        Problem001Thread instance1 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
+        boolean inProgress1a = instance1.calculationInProgress();
+        assertFalse(inProgress1a);
+        instance1.start();
+        Thread.sleep(500);
+        boolean inProgress1b = instance1.calculationInProgress();
+        assertTrue(inProgress1b);
+        instance1.interrupt();
+        
+        Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
+        boolean inProgress2a = instance2.calculationInProgress();
+        assertFalse(inProgress2a);
+        instance2.start();
+        Thread.sleep(500);
+        boolean inProgress2b = instance2.calculationInProgress();
+        assertFalse(inProgress2b); 
+        instance2.interrupt();
+    }
+
+    /**
+     * Test of calculationIsDone method, of class Problem001Thread.
+     */
+    @Test
+    public void testCalculationIsDone() throws InterruptedException {
+        System.out.println("calculationIsDone()");
+        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
+        Problem001Thread instance1 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
+        boolean inProgress1a = instance1.calculationIsDone();
+        assertFalse(inProgress1a);
+        instance1.start();
+        Thread.sleep(500);
+        boolean inProgress1b = instance1.calculationIsDone();
+        assertFalse(inProgress1b);
+        instance1.interrupt();
+        
+        Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
+        boolean inProgress2a = instance2.calculationIsDone();
+        assertFalse(inProgress2a);
+        instance2.start();
+        Thread.sleep(500);
+        boolean inProgress2b = instance2.calculationIsDone();
+        assertTrue(inProgress2b); 
+        instance2.interrupt();
+    }
     
 }

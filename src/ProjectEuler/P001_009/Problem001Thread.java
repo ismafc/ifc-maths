@@ -114,6 +114,23 @@ public class Problem001Thread extends Thread {
     }
 
     /** 
+     * Returns boolean indicanting if calculation is in progress or not 
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> indicating if calculation is in progress or not 
+     */
+    public synchronized boolean calculationInProgress() {
+        State state = getState();
+        return (!state.equals(Thread.State.NEW) && !state.equals(Thread.State.TERMINATED));
+    }
+
+    /** 
+     * Returns boolean indicanting if calculation is completed or not 
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> indicanting if calculation is completed or not 
+     */
+    public synchronized boolean calculationIsDone() {
+        return (getState().equals(Thread.State.TERMINATED));
+    }
+    
+    /** 
      * Finds the sum of all the multiples of any number in <b><i>values</i></b> (values[0], values[1], ..., values[n-1] or values[n]) 
      * from <b><i>nFrom</i></b> and below <b><i>nBelow</i></b> using algorithm <b><i>algorithm</i></b>.
      * Adds result to variable <b><i>result</i></b> and actualize computational cost in variable <b><i>milliseconds</i></b>
