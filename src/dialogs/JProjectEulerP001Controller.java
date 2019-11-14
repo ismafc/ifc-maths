@@ -10,7 +10,6 @@ import Library.InOut;
 import ProjectEuler.P001_009.Problem001;
 import ProjectEuler.P001_009.Problem001Thread;
 import java.io.InputStream;
-import java.lang.Thread.State;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,10 +104,16 @@ public class JProjectEulerP001Controller {
     }
     
     /**
-     * Local handler needed for timer used to update interface during
-     * calculations
+     * Local handler needed for timer. 
+     * Used to update interface during calculations.
+     * @param <ActionEvent> Event launched by timer through KeyFrame
      */
     public class TimerHandler<ActionEvent> implements EventHandler {
+        /**
+         * Method called while calculation is in progress so here we
+         * actualize interface (progress bar and result label)
+         * @param t Event received
+         */
         @Override
         public void handle(Event t) {
             if (p001thread != null) {
@@ -116,10 +121,12 @@ public class JProjectEulerP001Controller {
                     calculationProgressBar.setProgress(p001thread.getProgress());
                 else if (p001thread.calculationIsDone()) {
                     refreshTimer.stop();
-                    setCalculatingMode(false);
+                    updateVisibility();
+                    updateButtons();
                     Color c = p001thread.getProgress() < 1.0 ? COLOR_ERROR : COLOR_OK;
                     resultLabel.setTextFill(c);
                 }
+                // Update resultLabel with actual calculated value and time
                 String result = p001thread.getResult().toString();
                 String duration = InOut.getDurationText(p001thread.getMilliseconds(), bundle);
                 resultLabel.setText(result + " (" + duration + ")");
@@ -127,6 +134,10 @@ public class JProjectEulerP001Controller {
         }
     };
     
+    /**
+     * This method updates the state of all buttons depending on values 
+     * found in controls (basically if they are empty or not)
+     */
     public void updateButtons() {
         calculateButton.setDisable(false);
         addToListButton.setDisable(false);
@@ -146,7 +157,12 @@ public class JProjectEulerP001Controller {
             addToListButton.setDisable(true);
     }
     
-    private void setCalculatingMode(boolean calculating) {
+    /**
+     * This method updates the visibility of controls
+     * depending on state of calculation.
+     */
+    private void updateVisibility() {
+        boolean calculating = p001thread.calculationInProgress();
         calculationProgressBar.setVisible(calculating);
         cancelButton.setVisible(calculating);
         calculateButton.setDisable(calculating);
@@ -157,9 +173,6 @@ public class JProjectEulerP001Controller {
         toEdit.setDisable(calculating);
         addEdit.setDisable(calculating);
         algorithmComboBox.setDisable(calculating);
-
-        if (!calculating)
-            updateButtons();
     }
     
     /**
@@ -197,6 +210,11 @@ public class JProjectEulerP001Controller {
         items.removeAll(multiplesList.getSelectionModel().getSelectedItems());        
     }
     
+    /**
+     * Function called when <b><i>addToListButton</i></b> is clicked and, so,
+     * we want to add a number to list of multiples of. 
+     * @param event Event received
+     */
     @FXML
     public void onAddToList(ActionEvent event) {
         String value = bundle.getString("p001.thevalue");
@@ -236,6 +254,7 @@ public class JProjectEulerP001Controller {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.NO)
                 return;
+            // If we decide to add this value, its multiples in list can be removed
             multiplesList.getSelectionModel().clearSelection();
             for (BigInteger m : multiples)
                 multiplesList.getSelectionModel().select(m);
@@ -248,12 +267,28 @@ public class JProjectEulerP001Controller {
         updateButtons();
     }
 
+    /**
+     * Function called when <b><i>removeFromListButton</i></b> is clicked and, so,
+     * we want to remove numbers from list of multiples of. 
+     * @param event Event received
+     */
     @FXML
     public void onRemoveFromList(ActionEvent event) {
         removeSelectedItemsFromMultiplesList();
         updateButtons();
     }
 
+    /**
+     * Build a string with the numbers in list <b><i>first</i></b> separated by
+     * <b>'+'</b> followed by <b>' + ... + '</b> and the numbers 
+     * in list <b><i>last</i></b> separated by <b>'+'</b>. If both list overlaps,
+     * text <b>' + ... + '</b> is not needed. <b><i>value</i></b> is next value to
+     * <b><i>first</i></b> list and is used to check if both lists overlaps.
+     * @param first List of first numbers to show separated by <b>'+'</b>
+     * @param last List of lasts numbers to show separated by <b>'+'</b>
+     * @param value Next value to first list, used to check if both lists overlaps
+     * @return String with desired result (sum of numbers)
+     */
     private String getNumbersText(ArrayList<BigInteger> first, ArrayList<BigInteger> last, BigInteger value) {
         String txt = "";
         if (first.isEmpty())
@@ -278,6 +313,11 @@ public class JProjectEulerP001Controller {
         return txt;
     }
     
+    /**
+     * Function called when <b><i>calculateButton</i></b> is clicked and, so,
+     * we want to begin calculation.
+     * @param event Event received
+     */
     @FXML
     public void onCalculate(ActionEvent event) {
         BigInteger from = new BigInteger(fromEdit.getText());
@@ -296,7 +336,7 @@ public class JProjectEulerP001Controller {
             calculationProgressBar.setProgress(0.0);
             resultLabel.setTextFill(COLOR_CALCULATING);
             resultLabel.setText(bundle.getString("lbl.result"));
-            setCalculatingMode(true);
+            updateVisibility();
 
             // Actualize numbersLabel with list of first and last added values
             Problem001 problem001 = new Problem001();
@@ -316,6 +356,11 @@ public class JProjectEulerP001Controller {
         }
     }
     
+    /**
+     * Function called when <b><i>cancelButton</i></b> is clicked and, so,
+     * we want to cancel the current calculation in progress.
+     * @param event Event received
+     */
     @FXML
     public void onCancel(ActionEvent event) {
         if (p001thread != null)
