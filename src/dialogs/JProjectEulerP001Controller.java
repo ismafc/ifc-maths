@@ -8,7 +8,7 @@ package dialogs;
 import Library.ChangeEditListener;
 import Library.InOut;
 import ProjectEuler.P001_009.Problem001;
-import ProjectEuler.P001_009.Problem001Thread;
+import ProjectEuler.P001_009.Problem001Parallel;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class JProjectEulerP001Controller {
     private final Color COLOR_CALCULATING = Color.BLUE;
     private final Color COLOR_ERROR = Color.RED;
     
-    Problem001Thread p001thread = null;
+    Problem001Parallel p001parallel = null;
     Timeline refreshTimer = new Timeline();
 
     /**
@@ -116,19 +116,19 @@ public class JProjectEulerP001Controller {
          */
         @Override
         public void handle(Event t) {
-            if (p001thread != null) {
-                if (p001thread.calculationInProgress())
-                    calculationProgressBar.setProgress(p001thread.getProgress());
-                else if (p001thread.calculationIsDone()) {
+            if (p001parallel != null) {
+                if (p001parallel.calculationInProgress())
+                    calculationProgressBar.setProgress(p001parallel.getProgress());
+                else if (p001parallel.calculationIsDone()) {
                     refreshTimer.stop();
                     updateVisibility();
                     updateButtons();
-                    Color c = p001thread.getProgress() < 1.0 ? COLOR_ERROR : COLOR_OK;
+                    Color c = p001parallel.getProgress() < 1.0 ? COLOR_ERROR : COLOR_OK;
                     resultLabel.setTextFill(c);
                 }
                 // Update resultLabel with actual calculated value and time
-                String result = p001thread.getResult().toString();
-                String duration = InOut.getDurationText(p001thread.getMilliseconds(), bundle);
+                String result = p001parallel.getResult().toString();
+                String duration = InOut.getDurationText(p001parallel.getMilliseconds(), bundle);
                 resultLabel.setText(result + " (" + duration + ")");
             }
         }
@@ -162,7 +162,7 @@ public class JProjectEulerP001Controller {
      * depending on state of calculation.
      */
     private void updateVisibility() {
-        boolean calculating = p001thread.calculationInProgress();
+        boolean calculating = p001parallel.calculationInProgress();
         calculationProgressBar.setVisible(calculating);
         cancelButton.setVisible(calculating);
         calculateButton.setDisable(calculating);
@@ -329,9 +329,9 @@ public class JProjectEulerP001Controller {
             values.addAll(multiplesList.getItems());
 
             // Launch calculation and timer to refresh progress bar
-            p001thread = new Problem001Thread();
-            p001thread.set(values, from, below, algorithm);
-            p001thread.start();
+            p001parallel = new Problem001Parallel();
+            p001parallel.set(values, from, below, algorithm);
+            p001parallel.start();
             refreshTimer.play();
             calculationProgressBar.setProgress(0.0);
             resultLabel.setTextFill(COLOR_CALCULATING);
@@ -363,7 +363,7 @@ public class JProjectEulerP001Controller {
      */
     @FXML
     public void onCancel(ActionEvent event) {
-        if (p001thread != null)
-            p001thread.doStop();
+        if (p001parallel != null)
+            p001parallel.doStop();
     }
 }

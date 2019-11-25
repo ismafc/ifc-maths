@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * This class encapsulates the calculation of problem 1 in a separated thread and
  * executes it in slots/blocks/steps if the computational cost can be long.
- * Process can be stopped between blocks externally calling <b>doStop</b> function.
+ * Process can be stopped between blocks externally calling {@link #doStop() doStop} method.
  * 
  * @author ismael.flores
  * @version 1.0
@@ -22,12 +22,12 @@ public class Problem001Thread extends Thread {
 
     final private Problem001 problem001 = new Problem001();
     final private List<BigInteger> lAux = Arrays.asList(new BigInteger("3"), new BigInteger("5"));
-    private ArrayList<BigInteger> values = new ArrayList<>(lAux);
-    private BigInteger from = BigInteger.ONE;
-    private BigInteger below = new BigInteger("1000");
-    private Problem001.Algorithm algorithm = Problem001.Algorithm.SOLUTION1;
-    private BigInteger result = null;
-    private long milliseconds = 0;
+    protected ArrayList<BigInteger> values = new ArrayList<>(lAux);
+    protected BigInteger from = BigInteger.ONE;
+    protected BigInteger below = new BigInteger("1000");
+    protected Problem001.Algorithm algorithm = Problem001.Algorithm.SOLUTION1;
+    protected BigInteger result = null;
+    protected long milliseconds = 0;
     
     private BigInteger steps = null;
     private BigInteger slot = null;
@@ -35,10 +35,21 @@ public class Problem001Thread extends Thread {
 
     private boolean doStop = false;
 
+    /** 
+     * Default constructor method. 
+     * It calls {@link #set} method with default parameters.
+     */
     public Problem001Thread() {
         set(values, from, below, algorithm);
     }
 
+    /** 
+     * Constructor method. It calls {@link #set} method.
+     * @param _values List of values to check with all numbers in range [{@link #from}, {@link #below})
+     * @param _from Lower bound (included). It defines range [{@link #from}, {@link #below}) to check with all values in {@link #values}
+     * @param _below Upper bound (not included). It defines range [{@link #from}, {@link #below}) to check with all values in {@link #values}
+     * @param _algorithm Algorithm we want to use to calculate the desired value
+     */
     public Problem001Thread(ArrayList<BigInteger> _values, BigInteger _from, BigInteger _below, Problem001.Algorithm _algorithm) {
         set(_values, _from, _below, _algorithm);
     }
@@ -46,9 +57,9 @@ public class Problem001Thread extends Thread {
     /** 
      * Initializes variables needed to make calculations. Depending on these values
      * calculates steps and slot size needed to split calculations in pieces
-     * @param _values List of values to check with all numbers in range <b>[<i>from</i>, <i>below</i>)</b>
-     * @param _from Lower bound (included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
-     * @param _below Upper bound (not included). It defines range <b>[<i>from</i>, <i>below</i>)</b> to check with all values in <b><i>values</i></b>
+     * @param _values List of values to check with all numbers in range [{@link #from}, {@link #below})
+     * @param _from Lower bound (included). It defines range [{@link #from}, {@link #below}) to check with all values in {@link #values}
+     * @param _below Upper bound (not included). It defines range [{@link #from}, {@link #below}) to check with all values in {@link #values}
      * @param _algorithm Algorithm we want to use to calculate the desired value
      */
     public final void set(ArrayList<BigInteger> _values, BigInteger _from, BigInteger _below, Problem001.Algorithm _algorithm) {
@@ -63,9 +74,9 @@ public class Problem001Thread extends Thread {
 
     /** 
      * Calculates steps and slot size needed to split calculations in pieces based
-     * on the interval <b>[<i>from</i>, <i>below</i>)</b> and <b><i>algorithm</i></b>
-     * if interval size es less than 2000000000 and <b><i>algorithm</i></b> is <b>SOLUTION3</b> slot will be 2000000000
-     * if interval size es less than 200000 and <b><i>algorithm</i></b> is <b>SOLUTION1</b> or <b>SOLUTION2</b> slot will be 200000
+     * on the interval [{@link #from}, {@link #below}) and {@link #algorithm}
+     * if interval size es less than 2000000000 and {@link #algorithm} is {@link Problem001.Algorithm#SOLUTION3} slot will be 2000000000
+     * if interval size es less than 200000 and {@link #algorithm} is {@link Problem001.Algorithm#SOLUTION1} or {@link Problem001.Algorithm#SOLUTION2} slot will be 200000
      */
     private void initializeSteps() {
         slot = (algorithm == Problem001.Algorithm.SOLUTION3 ? new BigInteger("2000000000") : new BigInteger("200000"));
@@ -76,8 +87,8 @@ public class Problem001Thread extends Thread {
     }
 
     /** 
-     * Returns <b><i>result</i></b> which contains actual calculation
-     * If <b><i>step</i></b> = <b><i>steps</i></b> result contains final result
+     * Returns {@link #result} which contains actual calculation.
+     * If {@link #step} = {@link #steps} result contains final result
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with calculation already done
      */
     public synchronized BigInteger getResult() {
@@ -85,8 +96,8 @@ public class Problem001Thread extends Thread {
     }
 
     /** 
-     * Returns <b><i>milliseconds</i></b> which contains actual calculation time spent
-     * If <b><i>step</i></b> = <b><i>steps</i></b> milliseconds contains final time spent
+     * Returns {@link #milliseconds} which contains actual calculation time spent
+     * If {@link #step} = {@link #steps} milliseconds contains final time spent
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with time already spent in calculations
      */
     public synchronized long getMilliseconds() {
@@ -94,11 +105,10 @@ public class Problem001Thread extends Thread {
     }
 
     /** 
-     * Sets variable <b><i>doStop</i></b> to TRUE
+     * Sets variable {@link #doStop} to TRUE
      * This variable is checked each step in order to decide if calculation
      * must be stopped or not. 
      * It is checked throught method {@link #keepRunning() keepRunning} 
-     * 
      */
     public synchronized void doStop() {
         doStop = true;
@@ -106,7 +116,7 @@ public class Problem001Thread extends Thread {
 
     /** 
      * Calculates progress of calculation.
-     * It indicates progress done, that is \(\frac{step}{steps}\)
+     * It indicates amount of progress done, that is \(\frac{step}{steps}\)
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Double.html" target="_blank"><b>Double</b></a> value in range [0..1]
      */
     public synchronized double getProgress() {
@@ -131,12 +141,12 @@ public class Problem001Thread extends Thread {
     }
     
     /** 
-     * Finds the sum of all the multiples of any number in <b><i>values</i></b> (values[0], values[1], ..., values[n-1] or values[n]) 
-     * from <b><i>nFrom</i></b> and below <b><i>nBelow</i></b> using algorithm <b><i>algorithm</i></b>.
-     * Adds result to variable <b><i>result</i></b> and actualize computational cost in variable <b><i>milliseconds</i></b>
-     * Actualizes <b><i>step</i></b> to the next one (adding 1)
-     * @param nFrom Lower bound (included). It defines range <b>[<i>nFrom</i>, <i>nBelow</i>)</b> to check with all values in <b><i>values</i></b>
-     * @param nBelow Upper bound (not included). It defines range <b>[<i>nFrom</i>, <i>nBelow</i>)</b> to check with all values in <b><i>values</i></b>
+     * Finds the sum of all the multiples of any number in {@link #values} (values[0], values[1], ..., values[n-1] or values[n]) 
+     * from <b><i>nFrom</i></b> and below <b><i>nBelow</i></b> using algorithm {@link #algorithm}.
+     * Adds result to variable {@link #result} and actualize computational cost in variable {@link #milliseconds}
+     * Actualizes {@link #step} to the next one (adding 1)
+     * @param nFrom Lower bound (included). It defines range <b>[<i>nFrom</i>, <i>nBelow</i>)</b> to check with all values in {@link #values}
+     * @param nBelow Upper bound (not included). It defines range <b>[<i>nFrom</i>, <i>nBelow</i>)</b> to check with all values in {@link #values}
      */
     private synchronized void updateResult(BigInteger nFrom, BigInteger nBelow) {
         long millis = System.currentTimeMillis();
@@ -146,7 +156,7 @@ public class Problem001Thread extends Thread {
     }
            
     /** 
-     * Calculates next below value according to actual <b><i>slot</i></b> and
+     * Calculates next below value according to actual {@link #slot} and
      * given parameter <b><i>_from</i></b> with first value
      * @param _from Lower bound (included)
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with below value
@@ -160,21 +170,21 @@ public class Problem001Thread extends Thread {
     
     /** 
      * Check if calculation has to continue.  
-     * Calculation is done if <b><i>step</i></b> = <b><i>steps</i></b> and 
-     * calculation has to be stopped if <b><i>doStop</i></b> = true
-     * @return True if calculation has to continue. False if calculation has to be stopped or has finished
+     * Calculation is done if {@link #step} = {@link #steps} and 
+     * calculation has to be stopped if {@link #doStop} = true
+     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> with True if calculation has to continue. False if calculation has to be stopped or has finished
      */
-    private synchronized boolean keepRunning() {
+    protected synchronized boolean keepRunning() {
         return doStop == false && step.compareTo(steps) != 0;
     }
     
     /** 
-     * Calculates result in pieces of <b><i>slot</i></b> values
-     * Every <b><i>step</i></b> we check if <b><i>doStop</i></b> is true 
+     * Calculates result in pieces of {@link #slot} values
+     * Every {@link #step} we check if {@link #doStop} is true 
      * (someone wants to stop calculation) or calculation is done.
-     * If another step is needed, we update <b><i>result</i></b> and <b><i>milliseconds</i></b>
+     * If another step is needed, we update {@link #result} and {@link #milliseconds}
      * with the calculation of interval <b>[<i>nFrom</i>, <i>nBelow</i>)</b> and
-     * set new interval <b>[<i>nFrom</i>, <i>nBelow</i>)</b> and <b><i>step</i></b>
+     * set new interval <b>[<i>nFrom</i>, <i>nBelow</i>)</b> and {@link #step}
      */
     @Override
     public void run() {

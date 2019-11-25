@@ -141,27 +141,6 @@ public class Problem001ThreadIT {
     }
 
     /**
-     * Test of getSteps method, of class Problem001Thread.
-     */
-/*    @Test
-    public void testGetSteps() {
-        System.out.println("getSteps()");
-        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
-        Problem001Thread instance = new Problem001Thread(v, from_, below_, Problem001.Algorithm.SOLUTION1);
-        assertEquals(BigInteger.ONE, instance.getSteps());
-
-        // Check big value and from
-        instance = new Problem001Thread(v, new BigInteger("7000000000"), new BigInteger("10000000000"), Problem001.Algorithm.SOLUTION1);
-        assertEquals(new BigInteger("15000"), instance.getSteps());
-
-        instance = new Problem001Thread(v, from_, new BigInteger("10000000000"), Problem001.Algorithm.SOLUTION1);
-        assertEquals(new BigInteger("50000"), instance.getSteps());
-        
-        instance = new Problem001Thread(v, from_, new BigInteger("10000000000"), Problem001.Algorithm.SOLUTION3);
-        assertEquals(new BigInteger("5"), instance.getSteps());
-    }*/
-
-    /**
      * Test of doStop method, of class Problem001Thread.
      */
     @Test
@@ -170,14 +149,12 @@ public class Problem001ThreadIT {
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
         Problem001Thread instance = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
         instance.start();
-        Thread.sleep(1500);
+        Thread.sleep(500);
         instance.doStop();
-        while (instance.getState() != Thread.State.TERMINATED)
-            Thread.sleep(500);
-        long milis = instance.getMilliseconds();
-        instance.interrupt();
+        while (instance.calculationInProgress())
+            Thread.sleep(250);
         
-        assertTrue(milis < 2000);
+        assertTrue(instance.getProgress() < 1.0);
     }
 
     /**
@@ -189,19 +166,19 @@ public class Problem001ThreadIT {
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
         Problem001Thread instance1 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
         instance1.start();
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         double progress1 = instance1.getProgress();
         instance1.interrupt();
         
         Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION2);
         instance2.start();
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         double progress2 = instance2.getProgress();
         instance2.interrupt();
         
         Problem001Thread instance3 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
         instance3.start();
-        Thread.sleep(500);
+        Thread.sleep(250);
         double progress3 = instance3.getProgress();
         instance3.interrupt();
 
@@ -210,19 +187,19 @@ public class Problem001ThreadIT {
         
         Problem001Thread instance4 = new Problem001Thread(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION1);
         instance4.start();
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         double progress4 = instance4.getProgress();
         instance4.interrupt();
         
         Problem001Thread instance5 = new Problem001Thread(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION2);
         instance5.start();
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         double progress5 = instance5.getProgress();
         instance5.interrupt();
         
         Problem001Thread instance6 = new Problem001Thread(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION3);
         instance6.start();
-        Thread.sleep(500);
+        Thread.sleep(250);
         double progress6 = instance6.getProgress();
         instance6.interrupt();
 
@@ -313,6 +290,43 @@ public class Problem001ThreadIT {
         boolean inProgress2b = instance2.calculationIsDone();
         assertTrue(inProgress2b); 
         instance2.interrupt();
+    }
+
+    /**
+     * Test of keepRunning method, of class Problem001Thread.
+     */
+    @Test
+    public void testKeepRunning() throws InterruptedException {
+        System.out.println("keepRunning()");
+        ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
+        Problem001Thread instance1 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
+        boolean inProgress1a = instance1.keepRunning();
+        assertTrue(inProgress1a);
+        instance1.start();
+        Thread.sleep(500);
+        boolean inProgress1b = instance1.keepRunning();
+        assertTrue(inProgress1b);
+        instance1.interrupt();
+        
+        Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
+        boolean inProgress2a = instance2.keepRunning();
+        assertTrue(inProgress2a);
+        instance2.start();
+        Thread.sleep(500);
+        boolean inProgress2b = instance2.keepRunning();
+        assertFalse(inProgress2b); 
+        instance2.interrupt();
+        
+        Problem001Thread instance3 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
+        boolean inProgress3a = instance3.keepRunning();
+        assertTrue(inProgress3a);
+        instance3.start();
+        instance3.doStop();
+        while (instance3.calculationInProgress())
+            Thread.sleep(250);
+        boolean inProgress3b = instance3.keepRunning();
+        assertFalse(inProgress3b); 
+        instance3.interrupt();
     }
     
 }
