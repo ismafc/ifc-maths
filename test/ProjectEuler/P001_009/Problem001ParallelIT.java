@@ -56,7 +56,7 @@ public class Problem001ParallelIT {
      */
     @Test
     public void testSetNumberOfThreads() throws InterruptedException {
-        System.out.println("setNumberOfThreads(long nNumberOfThreads)");
+        System.out.print("setNumberOfThreads(long nNumberOfThreads): ");
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
         Problem001Parallel instance1 = new Problem001Parallel(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
         instance1.setNumberOfThreads(1);
@@ -71,6 +71,7 @@ public class Problem001ParallelIT {
         double progress2 = instance2.getProgress();
         instance2.doStop();
         
+        System.out.println("(" + progress1 + " <= " + progress2 + ")");
         assertTrue(progress1 <= progress2);
     }
 
@@ -79,7 +80,7 @@ public class Problem001ParallelIT {
      */
     @Test
     public void testGetProgress() throws InterruptedException {
-        System.out.println("getProgress()");
+        System.out.print("getProgress(): ");
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
         Problem001Parallel instance1 = new Problem001Parallel(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
         instance1.start();
@@ -99,7 +100,9 @@ public class Problem001ParallelIT {
         double progress3 = instance3.getProgress();
         instance3.doStop();
 
-        assertTrue(progress1 < progress2 && progress2 <= progress3);
+        System.out.print("(" + progress1 + " < " + progress2 + " <= " + progress3 + " == 1.0) ");
+        assertTrue(progress1 < progress2);
+        assertTrue(progress2 <= progress3);
         assertTrue(progress3 == 1.0);
         
         Problem001Parallel instance4 = new Problem001Parallel(v, from_, new BigInteger("300000000"), Problem001.Algorithm.SOLUTION1);
@@ -120,9 +123,15 @@ public class Problem001ParallelIT {
         double progress6 = instance6.getProgress();
         instance6.doStop();
 
-        assertTrue(progress4 < progress5 && progress5 <= progress6);
+        System.out.print("(" + progress4 + " < " + progress5 + " <= " + progress6 + " == 1.0) ");
+        assertTrue(progress4 < progress5);
+        assertTrue(progress5 <= progress6);
         assertTrue(progress6 == 1.0);
-        assertTrue(progress4 < progress1 && progress5 <= progress2);
+
+        System.out.print("(" + progress4 + " < " + progress1 + ") ");
+        System.out.println("(" + progress5 + " < " + progress2 + ") ");
+        assertTrue(progress4 < progress1);
+        assertTrue(progress5 < progress2);
     }
 
     /**
@@ -130,7 +139,7 @@ public class Problem001ParallelIT {
      */
     @Test
     public void testDoStop() throws InterruptedException {
-        System.out.println("doStop()");
+        System.out.print("doStop(): ");
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
         Problem001Parallel instance = new Problem001Parallel(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION1);
         instance.start();
@@ -138,7 +147,9 @@ public class Problem001ParallelIT {
         while (instance.calculationInProgress())
             Thread.sleep(250);
         
-        assertTrue(instance.getProgress() < 1.0);
+        double progress = instance.getProgress();
+        System.out.println("(" + progress + " < 1.0)");
+        assertTrue(progress < 1.0);
     }
 
     /**
