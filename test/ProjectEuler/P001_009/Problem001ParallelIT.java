@@ -64,12 +64,16 @@ public class Problem001ParallelIT {
         Thread.sleep(1000);
         double progress1 = instance1.getProgress();
         instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(100);
         
         Problem001Parallel instance2 = new Problem001Parallel(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
         instance2.start();
         Thread.sleep(1000);
         double progress2 = instance2.getProgress();
         instance2.doStop();
+        while (instance2.calculationInProgress())
+            Thread.sleep(100);
         
         System.out.println("(" + progress1 + " <= " + progress2 + ")");
         assertTrue(progress1 <= progress2);
@@ -82,46 +86,58 @@ public class Problem001ParallelIT {
     public void testGetProgress() throws InterruptedException {
         System.out.print("getProgress(): ");
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
-        Problem001Parallel instance1 = new Problem001Parallel(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
+        Problem001Parallel instance1 = new Problem001Parallel(v, from_, new BigInteger("80000000"), Problem001.Algorithm.SOLUTION1);
         instance1.start();
         Thread.sleep(1000);
-        double progress1 = instance1.getProgress();
         instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(100);
+        double progress1 = instance1.getProgress();
         
-        Problem001Parallel instance2 = new Problem001Parallel(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION2);
+        Problem001Parallel instance2 = new Problem001Parallel(v, from_, new BigInteger("80000000"), Problem001.Algorithm.SOLUTION2);
         instance2.start();
         Thread.sleep(1000);
-        double progress2 = instance2.getProgress();
         instance2.doStop();
+        while (instance2.calculationInProgress())
+            Thread.sleep(100);
+        double progress2 = instance2.getProgress();
         
-        Problem001Parallel instance3 = new Problem001Parallel(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
+        Problem001Parallel instance3 = new Problem001Parallel(v, from_, new BigInteger("80000000"), Problem001.Algorithm.SOLUTION3);
         instance3.start();
         Thread.sleep(250);
-        double progress3 = instance3.getProgress();
         instance3.doStop();
+        while (instance3.calculationInProgress())
+            Thread.sleep(100);
+        double progress3 = instance3.getProgress();
 
         System.out.print("(" + progress1 + " < " + progress2 + " <= " + progress3 + " == 1.0) ");
         assertTrue(progress1 < progress2);
         assertTrue(progress2 <= progress3);
         assertTrue(progress3 == 1.0);
         
-        Problem001Parallel instance4 = new Problem001Parallel(v, from_, new BigInteger("300000000"), Problem001.Algorithm.SOLUTION1);
+        Problem001Parallel instance4 = new Problem001Parallel(v, from_, new BigInteger("200000000"), Problem001.Algorithm.SOLUTION1);
         instance4.start();
         Thread.sleep(1000);
-        double progress4 = instance4.getProgress();
         instance4.doStop();
+        while (instance4.calculationInProgress())
+            Thread.sleep(100);
+        double progress4 = instance4.getProgress();
         
-        Problem001Parallel instance5 = new Problem001Parallel(v, from_, new BigInteger("300000000"), Problem001.Algorithm.SOLUTION2);
+        Problem001Parallel instance5 = new Problem001Parallel(v, from_, new BigInteger("200000000"), Problem001.Algorithm.SOLUTION2);
         instance5.start();
         Thread.sleep(1000);
-        double progress5 = instance5.getProgress();
         instance5.doStop();
+        while (instance5.calculationInProgress())
+            Thread.sleep(100);
+        double progress5 = instance5.getProgress();
         
-        Problem001Parallel instance6 = new Problem001Parallel(v, from_, new BigInteger("300000000"), Problem001.Algorithm.SOLUTION3);
+        Problem001Parallel instance6 = new Problem001Parallel(v, from_, new BigInteger("200000000"), Problem001.Algorithm.SOLUTION3);
         instance6.start();
         Thread.sleep(250);
-        double progress6 = instance6.getProgress();
         instance6.doStop();
+        while (instance6.calculationInProgress())
+            Thread.sleep(100);
+        double progress6 = instance6.getProgress();
 
         System.out.print("(" + progress4 + " < " + progress5 + " <= " + progress6 + " == 1.0) ");
         assertTrue(progress4 < progress5);
@@ -205,6 +221,8 @@ public class Problem001ParallelIT {
         boolean inProgress1b = instance1.keepRunning();
         assertTrue(inProgress1b);
         instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(100);
         
         Problem001Parallel instance2 = new Problem001Parallel(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION3);
         boolean inProgress2a = instance2.keepRunning();
@@ -214,6 +232,8 @@ public class Problem001ParallelIT {
         boolean inProgress2b = instance2.keepRunning();
         assertFalse(inProgress2b); 
         instance2.doStop();
+        while (instance2.calculationInProgress())
+            Thread.sleep(100);
         
         Problem001Parallel instance3 = new Problem001Parallel(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION1);
         boolean inProgress3a = instance3.keepRunning();

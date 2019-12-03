@@ -7,6 +7,8 @@ package ProjectEuler.P001_009;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class encapsulates the calculation of problem 1 in a separated thread that
@@ -159,30 +161,50 @@ public class Problem001Parallel extends Problem001Thread {
             p001thread.start();
             listThreads.add(p001thread);
         }
+        if (abortRequired)
+            doStop();
     }
-            
+
+    /** 
+     * This method waits until all used threads have finished their calculations
+     * due to an user stop or an efective final of calculation
+     */
+    private synchronized void waitForThreads() {
+        for (Problem001Thread p001thread : listThreads) {
+            while (p001thread.calculationInProgress()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    String msg = "Sleep Exception in waitForThreads (Problem001Parallel)";
+                    Logger.getLogger(Problem001Parallel.class.getName()).log(Level.SEVERE, msg, ex);
+                }
+            }
+        }
+    }
+    
     /** 
      * Adjust number of threads to reality then creates {@link #numberOfThreads}
      * threads, each one initialized with a piece of calculation, and starts all of them.
      * Then updates result and computational cost while threads are in progress.
      * A sleep inside loop is needed because we don't need to update result continually.
-     * Also final update is needed after main loop.
+     * Also final update is needed after main loop and waiting for used threads
+     * to be finalized.
      */
     @Override
     public void run() {
         adjustNumberOfThreads();
         createAndStartThreads();
-        if (abortRequired)
-            doStop();
         while (keepRunning()) {
             updateResult();
             try {
                 Thread.sleep(250);
             } catch (InterruptedException ex) {
-                System.out.println("Sleep Exception in run (Problem001Parallel): " + ex.toString());
+                String msg = "Sleep Exception in run (Problem001Parallel)";
+                Logger.getLogger(Problem001Parallel.class.getName()).log(Level.SEVERE, msg, ex);
             }
         }
         updateResult();
+        waitForThreads();
     }
     
 }

@@ -18,7 +18,7 @@ import java.util.List;
  * @author ismael.flores
  * @version 1.0
  */
-public class Problem001Thread extends Thread {
+public class Problem001Thread extends Thread implements Problem001Interface {
 
     final private Problem001 problem001 = new Problem001();
     final private List<BigInteger> lAux = Arrays.asList(new BigInteger("3"), new BigInteger("5"));
@@ -62,6 +62,7 @@ public class Problem001Thread extends Thread {
      * @param _below Upper bound (not included). It defines range [{@link #from}, {@link #below}) to check with all values in {@link #values}
      * @param _algorithm Algorithm we want to use to calculate the desired value
      */
+    @Override
     public final void set(ArrayList<BigInteger> _values, BigInteger _from, BigInteger _below, Problem001.Algorithm _algorithm) {
         values = _values;
         from = _from;
@@ -91,6 +92,7 @@ public class Problem001Thread extends Thread {
      * If {@link #step} = {@link #steps} result contains final result
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with calculation already done
      */
+    @Override
     public synchronized BigInteger getResult() {
         return result;
     }
@@ -100,6 +102,7 @@ public class Problem001Thread extends Thread {
      * If {@link #step} = {@link #steps} milliseconds contains final time spent
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with time already spent in calculations
      */
+    @Override
     public synchronized long getMilliseconds() {
         return milliseconds;
     }
@@ -110,6 +113,7 @@ public class Problem001Thread extends Thread {
      * must be stopped or not. 
      * It is checked throught method {@link #keepRunning() keepRunning} 
      */
+    @Override
     public synchronized void doStop() {
         doStop = true;
     }
@@ -119,6 +123,7 @@ public class Problem001Thread extends Thread {
      * It indicates amount of progress done, that is \(\frac{step}{steps}\)
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Double.html" target="_blank"><b>Double</b></a> value in range [0..1]
      */
+    @Override
     public synchronized double getProgress() {
         return step.doubleValue() / steps.doubleValue();
     }
@@ -127,6 +132,7 @@ public class Problem001Thread extends Thread {
      * Returns boolean indicanting if calculation is in progress or not 
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> indicating if calculation is in progress or not 
      */
+    @Override
     public synchronized boolean calculationInProgress() {
         State state = getState();
         return (!state.equals(Thread.State.NEW) && !state.equals(Thread.State.TERMINATED));
@@ -136,6 +142,7 @@ public class Problem001Thread extends Thread {
      * Returns boolean indicanting if calculation is completed or not 
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> indicanting if calculation is completed or not 
      */
+    @Override
     public synchronized boolean calculationIsDone() {
         return (getState().equals(Thread.State.TERMINATED));
     }
