@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 public class Problem001Parallel extends Problem001Thread {
     private final ArrayList<Problem001Thread> listThreads = new ArrayList<>(); 
     private long numberOfThreads = Runtime.getRuntime().availableProcessors();
-    private boolean abortRequired = false;
     
     /** 
      * Default constructor method. 
@@ -98,6 +97,8 @@ public class Problem001Parallel extends Problem001Thread {
      */
     @Override
     protected synchronized boolean keepRunning() {
+        if (doStop)
+            return false;
         if (listThreads.isEmpty())
             return true;
         for (Problem001Thread p001thread : listThreads) {
@@ -117,7 +118,8 @@ public class Problem001Parallel extends Problem001Thread {
         double progress = 0.0;
         for (Problem001Thread p001thread : listThreads)
             progress += p001thread.getProgress();
-        return progress / (double)listThreads.size();
+        int size = listThreads.size();
+        return (size == 0 ? 0.0 : (progress / (double)size));
     }
 
     /** 
@@ -127,7 +129,7 @@ public class Problem001Parallel extends Problem001Thread {
     @Override
     public synchronized void doStop() {
         if (listThreads.isEmpty())
-            abortRequired = true;
+            doStop = true;
         else {
             for (Problem001Thread p001thread : listThreads)
                 p001thread.doStop();
@@ -155,14 +157,14 @@ public class Problem001Parallel extends Problem001Thread {
      * correct parameters.
      */
     private synchronized void createAndStartThreads() {
-        for (long i = 0; i < numberOfThreads; i++) {
-            Problem001Thread p001thread = new Problem001Thread();
-            p001thread.set(values, getFrom(i), getFrom(i + 1), algorithm);
-            p001thread.start();
-            listThreads.add(p001thread);
+        if (!doStop) {
+            for (long i = 0; i < numberOfThreads; i++) {
+                Problem001Thread p001thread = new Problem001Thread();
+                p001thread.set(values, getFrom(i), getFrom(i + 1), algorithm);
+                p001thread.start();
+                listThreads.add(p001thread);
+            }
         }
-        if (abortRequired)
-            doStop();
     }
 
     /** 

@@ -33,7 +33,7 @@ public class Problem001Thread extends Thread implements Problem001Interface {
     private BigInteger slot = null;
     private BigInteger step = null;
 
-    private boolean doStop = false;
+    protected boolean doStop = false;
 
     /** 
      * Default constructor method. 
