@@ -104,8 +104,6 @@ public class Problem001Parallel extends Problem001Thread {
     protected synchronized boolean keepRunning() {
         if (doStop)
             return false;
-        if (listThreads.isEmpty())
-            return true;
         for (Problem001Thread p001thread : listThreads) {
             if (p001thread.keepRunning())
                 return true;

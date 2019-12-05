@@ -170,19 +170,25 @@ public class Problem001ThreadIT {
         instance1.start();
         Thread.sleep(1000);
         double progress1 = instance1.getProgress();
-        instance1.interrupt();
+        instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION2);
         instance2.start();
         Thread.sleep(1000);
         double progress2 = instance2.getProgress();
-        instance2.interrupt();
+        instance2.doStop();
+        while (instance2.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance3 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
         instance3.start();
         Thread.sleep(250);
         double progress3 = instance3.getProgress();
-        instance3.interrupt();
+        instance3.doStop();
+        while (instance3.calculationInProgress())
+            Thread.sleep(200);
 
         System.out.print("(" + progress1 + " < " + progress2 + " <= " + progress3 + " == 1.0) ");
         assertTrue(progress1 < progress2);
@@ -193,19 +199,25 @@ public class Problem001ThreadIT {
         instance4.start();
         Thread.sleep(1000);
         double progress4 = instance4.getProgress();
-        instance4.interrupt();
+        instance4.doStop();
+        while (instance4.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance5 = new Problem001Thread(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION2);
         instance5.start();
         Thread.sleep(1000);
         double progress5 = instance5.getProgress();
-        instance5.interrupt();
+        instance5.doStop();
+        while (instance5.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance6 = new Problem001Thread(v, from_, new BigInteger("1000000000"), Problem001.Algorithm.SOLUTION3);
         instance6.start();
         Thread.sleep(250);
         double progress6 = instance6.getProgress();
-        instance6.interrupt();
+        instance6.doStop();
+        while (instance6.calculationInProgress())
+            Thread.sleep(200);
 
         System.out.print("(" + progress4 + " < " + progress5 + " <= " + progress6 + " == 1.0) ");
         assertTrue(progress4 < progress5);
@@ -264,7 +276,9 @@ public class Problem001ThreadIT {
         Thread.sleep(500);
         boolean inProgress1b = instance1.calculationInProgress();
         assertTrue(inProgress1b);
-        instance1.interrupt();
+        instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
         boolean inProgress2a = instance2.calculationInProgress();
@@ -272,8 +286,10 @@ public class Problem001ThreadIT {
         instance2.start();
         Thread.sleep(500);
         boolean inProgress2b = instance2.calculationInProgress();
-        assertFalse(inProgress2b); 
-        instance2.interrupt();
+        assertFalse(inProgress2b);
+        instance2.doStop();
+        while (instance2.calculationInProgress())
+            Thread.sleep(200);
     }
 
     /**
@@ -290,7 +306,9 @@ public class Problem001ThreadIT {
         Thread.sleep(500);
         boolean inProgress1b = instance1.calculationIsDone();
         assertFalse(inProgress1b);
-        instance1.interrupt();
+        instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
         boolean inProgress2a = instance2.calculationIsDone();
@@ -299,7 +317,9 @@ public class Problem001ThreadIT {
         Thread.sleep(500);
         boolean inProgress2b = instance2.calculationIsDone();
         assertTrue(inProgress2b); 
-        instance2.interrupt();
+        instance2.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(200);
     }
 
     /**
@@ -316,7 +336,9 @@ public class Problem001ThreadIT {
         Thread.sleep(500);
         boolean inProgress1b = instance1.keepRunning();
         assertTrue(inProgress1b);
-        instance1.interrupt();
+        instance1.doStop();
+        while (instance1.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance2 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION3);
         boolean inProgress2a = instance2.keepRunning();
@@ -325,7 +347,9 @@ public class Problem001ThreadIT {
         Thread.sleep(500);
         boolean inProgress2b = instance2.keepRunning();
         assertFalse(inProgress2b); 
-        instance2.interrupt();
+        instance2.doStop();
+        while (instance2.calculationInProgress())
+            Thread.sleep(200);
         
         Problem001Thread instance3 = new Problem001Thread(v, from_, new BigInteger("100000000"), Problem001.Algorithm.SOLUTION1);
         boolean inProgress3a = instance3.keepRunning();
@@ -336,7 +360,9 @@ public class Problem001ThreadIT {
             Thread.sleep(250);
         boolean inProgress3b = instance3.keepRunning();
         assertFalse(inProgress3b); 
-        instance3.interrupt();
+        instance3.doStop();
+        while (instance3.calculationInProgress())
+            Thread.sleep(200);
     }
     
 }
