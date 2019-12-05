@@ -67,16 +67,16 @@ public class Problem001Parallel extends Problem001Thread {
 
     /** 
      * Calculates {@link #from} value of required thread.
+     * We don't have to care about correct value of {@link #numberOfThreads} because
+     * we are sure it is in range [1..{@link #below}-{@link #from}]
      * @param i thread index, in [0, {@link #numberOfThreads}]) interval, to calculate {@link #from} value
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with {@link #from} value of required thread
      */
     private synchronized BigInteger getFrom(long i) {
-        if (numberOfThreads <= 0)
-            return (i <= 0 ? from : below);
-        BigInteger slots = BigInteger.valueOf(numberOfThreads);
+        BigInteger not = BigInteger.valueOf(numberOfThreads);
         BigInteger islot = BigInteger.valueOf(i);
         BigInteger nValues = below.subtract(from);
-        return from.add(nValues.multiply(islot).divide(slots));
+        return from.add(nValues.multiply(islot).divide(not));
     }
     
     /** 
