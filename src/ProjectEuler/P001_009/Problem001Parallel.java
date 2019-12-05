@@ -47,15 +47,20 @@ public class Problem001Parallel extends Problem001Thread {
     
     /** 
      * Sets number of threads we want to use to calculate value. 
-     * If calculation is already in progress this value is not updatable.
+     * If calculation is already in progress this value is not updatable so this
+     * function must be called before thread is launched (<b>start()</b> is called).
+     * Also, if <b><i>nNumberOfThreads</i></b> is less or equals zero, this value
+     * is not updatable.
      * @param nNumberOfThreads number of threads we want to use
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> with True if {@link #numberOfThreads} has been updated or False otherwise
      */
     public synchronized boolean setNumberOfThreads(long nNumberOfThreads) {
         boolean updated = false;
         if (!calculationInProgress()) {
-            numberOfThreads = nNumberOfThreads;
-            updated = true;
+            if (nNumberOfThreads > 0) {
+                numberOfThreads = nNumberOfThreads;
+                updated = true;
+            }
         }
         return updated;
     }
@@ -83,10 +88,10 @@ public class Problem001Parallel extends Problem001Thread {
      */
     private synchronized void adjustNumberOfThreads() {
         if (numberOfThreads <= 0)
-            numberOfThreads = Runtime.getRuntime().availableProcessors();        
-        BigInteger slots = BigInteger.valueOf(numberOfThreads);
+            numberOfThreads = Runtime.getRuntime().availableProcessors();
+        BigInteger nof = BigInteger.valueOf(numberOfThreads);
         BigInteger nValues = below.subtract(from);
-        if (nValues.compareTo(slots) <= 0)
+        if (nValues.compareTo(nof) <= 0)
             numberOfThreads = nValues.longValue();
     }
    
@@ -178,7 +183,8 @@ public class Problem001Parallel extends Problem001Thread {
                     Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     String msg = "Sleep Exception in waitForThreads (Problem001Parallel)";
-                    Logger.getLogger(Problem001Parallel.class.getName()).log(Level.SEVERE, msg, ex);
+                    String className = Problem001Parallel.class.getName();
+                    Logger.getLogger(className).log(Level.SEVERE, msg, ex);
                 }
             }
         }
@@ -202,7 +208,8 @@ public class Problem001Parallel extends Problem001Thread {
                 Thread.sleep(250);
             } catch (InterruptedException ex) {
                 String msg = "Sleep Exception in run (Problem001Parallel)";
-                Logger.getLogger(Problem001Parallel.class.getName()).log(Level.SEVERE, msg, ex);
+                String className = Problem001Parallel.class.getName();
+                Logger.getLogger(className).log(Level.SEVERE, msg, ex);
             }
         }
         updateResult();

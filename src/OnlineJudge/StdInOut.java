@@ -30,7 +30,7 @@ public class StdInOut {
         }
         catch (IOException e)
         {
-            return (null);
+            return null;
         }
 
         if ((car < 0) && (lg == 0)) return (null);  // eof

@@ -202,7 +202,6 @@ public class IFCMath {
                 break;
             if (n.mod(i) == BigInteger.ZERO) {
                 factors.add(i);
-                System.out.println(i);
                 while (n.mod(i) == BigInteger.ZERO) {
                     n = n.divide(i);
                 }

@@ -9,6 +9,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * In this class we will add several usefull In &amp; Out functions
@@ -52,8 +54,10 @@ public class InOut<T> {
         long value = default_value;
         try {
             value = Long.parseLong(v);
-        } catch (NumberFormatException e) {
-            System.out.println(name + " is not a number: Assuming " + default_value);
+        } catch (NumberFormatException ex) {
+            String msg = name + " is not a number: Assuming " + default_value;
+            String className = InOut.class.getName();
+            Logger.getLogger(className).log(Level.SEVERE, msg, ex);
         }
         return value;
     }
@@ -72,8 +76,10 @@ public class InOut<T> {
         BigInteger value = default_value;
         try {
             value = new BigInteger(v);
-        } catch (NumberFormatException e) {
-            System.out.println(name + " is not a number: Assuming " + default_value);
+        } catch (NumberFormatException ex) {
+            String msg = name + " is not a number: Assuming " + default_value;
+            String className = InOut.class.getName();
+            Logger.getLogger(className).log(Level.SEVERE, msg, ex);
         }
         return value;
     }

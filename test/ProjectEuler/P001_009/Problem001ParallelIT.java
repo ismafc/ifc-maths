@@ -88,7 +88,7 @@ public class Problem001ParallelIT {
         ArrayList<BigInteger> v = new ArrayList<>(Arrays.asList(a_, b_));
         Problem001Parallel instance1 = new Problem001Parallel(v, from_, new BigInteger("80000000"), Problem001.Algorithm.SOLUTION1);
         instance1.start();
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         instance1.doStop();
         while (instance1.calculationInProgress())
             Thread.sleep(100);
@@ -96,7 +96,7 @@ public class Problem001ParallelIT {
         
         Problem001Parallel instance2 = new Problem001Parallel(v, from_, new BigInteger("80000000"), Problem001.Algorithm.SOLUTION2);
         instance2.start();
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         instance2.doStop();
         while (instance2.calculationInProgress())
             Thread.sleep(100);
@@ -104,7 +104,7 @@ public class Problem001ParallelIT {
         
         Problem001Parallel instance3 = new Problem001Parallel(v, from_, new BigInteger("80000000"), Problem001.Algorithm.SOLUTION3);
         instance3.start();
-        Thread.sleep(250);
+        Thread.sleep(500);
         instance3.doStop();
         while (instance3.calculationInProgress())
             Thread.sleep(100);
@@ -117,7 +117,7 @@ public class Problem001ParallelIT {
         
         Problem001Parallel instance4 = new Problem001Parallel(v, from_, new BigInteger("200000000"), Problem001.Algorithm.SOLUTION1);
         instance4.start();
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         instance4.doStop();
         while (instance4.calculationInProgress())
             Thread.sleep(100);
@@ -125,7 +125,7 @@ public class Problem001ParallelIT {
         
         Problem001Parallel instance5 = new Problem001Parallel(v, from_, new BigInteger("200000000"), Problem001.Algorithm.SOLUTION2);
         instance5.start();
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         instance5.doStop();
         while (instance5.calculationInProgress())
             Thread.sleep(100);
@@ -133,7 +133,7 @@ public class Problem001ParallelIT {
         
         Problem001Parallel instance6 = new Problem001Parallel(v, from_, new BigInteger("200000000"), Problem001.Algorithm.SOLUTION3);
         instance6.start();
-        Thread.sleep(250);
+        Thread.sleep(500);
         instance6.doStop();
         while (instance6.calculationInProgress())
             Thread.sleep(100);

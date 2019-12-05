@@ -102,6 +102,9 @@ public class SudokuCell implements Iterable<Integer> {
             sc = (SudokuCell)super.clone();
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(SudokuCell.class.getName()).log(Level.SEVERE, null, ex);
+            String msg = "Exception conning SudokuCell";
+            String className = SudokuCell.class.getName();
+            Logger.getLogger(className).log(Level.SEVERE, msg, ex);
         }
         sc.setPosibles(posibles);
         return sc;
