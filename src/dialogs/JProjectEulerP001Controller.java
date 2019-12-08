@@ -330,6 +330,7 @@ public class JProjectEulerP001Controller {
             // Launch calculation and timer to refresh progress bar
             p001 = new Problem001Parallel();
             p001.set(values, from, below, algorithm);
+            //((Problem001Parallel)p001).setNumberOfThreads(12);
             p001.start();
             refreshTimer.play();
             calculationProgressBar.setProgress(0.0);

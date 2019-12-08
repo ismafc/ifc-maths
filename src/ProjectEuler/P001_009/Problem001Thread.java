@@ -9,6 +9,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class encapsulates the calculation of problem 1 in a separated thread and
@@ -201,6 +203,13 @@ public class Problem001Thread extends Thread implements Problem001Interface {
             updateResult(nFrom, nBelow);
             nFrom = nBelow;
             nBelow = getNewBelow(nFrom);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                String msg = "Sleep Exception in run (Problem001Thread)";
+                String className = Problem001Thread.class.getName();
+                Logger.getLogger(className).log(Level.SEVERE, msg, ex);
+            }
         }
     }
 }
