@@ -131,12 +131,9 @@ public class Problem001Parallel extends Problem001Thread {
      */
     @Override
     public synchronized void doStop() {
-        if (listThreads.isEmpty())
-            doStop = true;
-        else {
-            for (Problem001Thread p001thread : listThreads)
-                p001thread.doStop();
-        }
+        doStop = true;
+        for (Problem001Thread p001thread : listThreads)
+            p001thread.doStop();
     }
     
     /** 
