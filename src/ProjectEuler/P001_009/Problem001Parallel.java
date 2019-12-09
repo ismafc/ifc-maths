@@ -112,20 +112,6 @@ public class Problem001Parallel extends Problem001Thread {
     }
     
     /** 
-     * Calculates progress of calculation.
-     * It indicates amount of progress done (average progress of all threads)
-     * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Double.html" target="_blank"><b>Double</b></a> value in range [0..1]
-     */
-    @Override
-    public synchronized double getProgress() {
-        double progress = 0.0;
-        for (Problem001Thread p001thread : listThreads)
-            progress += p001thread.getProgress();
-        int size = listThreads.size();
-        return (size == 0 ? 0.0 : (progress / (double)size));
-    }
-
-    /** 
      * Requires all threads to stop. Is posible that threads are not still created
      * so we have to store this requirement in order to execute it later.
      */
@@ -140,15 +126,21 @@ public class Problem001Parallel extends Problem001Thread {
      * Updates result in variable {@link #result} and actualize computational cost in variable {@link #milliseconds}
      * Result is the sum of threads partial results.
      * Computational cost is the average of all threads computational costs (because they run in parallel)
+     * Updates also progress of calculation (variable {@link #progress}).
+     * It indicates amount of progress done (average progress of all threads)
+     * that is a value in range [0..1]
      */
     private synchronized void updateResult() {
         result = BigInteger.ZERO;
         milliseconds = 0;
+        progress = 0.0;
         for (Problem001Thread p001thread : listThreads) {
             result = result.add(p001thread.getResult());
             milliseconds += p001thread.getMilliseconds();
+            progress += p001thread.getProgress();
         }
-        milliseconds /= numberOfThreads;
+        milliseconds /= numberOfThreads;        
+        progress /= numberOfThreads;
     }
     
     /** 

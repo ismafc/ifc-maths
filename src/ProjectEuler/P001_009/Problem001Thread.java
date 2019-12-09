@@ -30,6 +30,7 @@ public class Problem001Thread extends Thread implements Problem001Interface {
     protected Problem001.Algorithm algorithm = Problem001.Algorithm.SOLUTION1;
     protected BigInteger result = null;
     protected long milliseconds = 0;
+    protected double progress = 0.0;
     
     private BigInteger steps = null;
     private BigInteger slot = null;
@@ -122,12 +123,13 @@ public class Problem001Thread extends Thread implements Problem001Interface {
 
     /** 
      * Calculates progress of calculation.
-     * It indicates amount of progress done, that is \(\frac{step}{steps}\)
+     * It indicates amount of progress done, that is \(\frac{step}{steps}\) previously
+     * updated in {@link #updateResult(BigInteger nFrom, BigInteger nBelow) updateResult} 
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Double.html" target="_blank"><b>Double</b></a> value in range [0..1]
      */
     @Override
     public synchronized double getProgress() {
-        return step.doubleValue() / steps.doubleValue();
+        return progress;
     }
 
     /** 
@@ -162,8 +164,9 @@ public class Problem001Thread extends Thread implements Problem001Interface {
         result = result.add(problem001.solve(values, nFrom, nBelow, algorithm));
         milliseconds += (System.currentTimeMillis() - millis);
         step = step.add(BigInteger.ONE);
+        progress = step.doubleValue() / steps.doubleValue();
     }
-           
+
     /** 
      * Calculates next below value according to actual {@link #slot} and
      * given parameter <b><i>_from</i></b> with first value
