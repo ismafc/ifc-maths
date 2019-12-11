@@ -22,20 +22,83 @@ import java.util.logging.Logger;
  */
 public class Problem001Thread extends Thread implements Problem001Interface {
 
+    /**
+     * Object used to make partial calculations ({@link Problem001})
+     */
     final private Problem001 problem001 = new Problem001();
+    
+    /**
+     * List of values to check if divide to target value. So, to check if target
+     * value is multiple of some vaue in this list.
+     * Initialized to {3, 5} by default. Used to populate {@link #values}
+     */
     final private List<BigInteger> lAux = Arrays.asList(new BigInteger("3"), new BigInteger("5"));
+
+    /**
+     * List of values to check if divide to target value. So, to check if target
+     * value is multiple of some vaue in this list.
+     * Initialized to {@link #lAux} by default.
+     */
     protected ArrayList<BigInteger> values = new ArrayList<>(lAux);
+
+    /**
+     * First value in range (included) to check if it is multiple of some value in {@link #values}.
+     * initialized to 1 by default
+     */
     protected BigInteger from = BigInteger.ONE;
+    
+    /**
+     * Last value in range (not included) to check if it is multiple of some value in {@link #values}.
+     * Initialized to 1000 by default
+     */
     protected BigInteger below = new BigInteger("1000");
+    
+    /**
+     * Algorithm used to obtain final result.
+     * Initialized to {@link Problem001.Algorithm#SOLUTION1 SOLUTION1} by default
+     */
     protected Problem001.Algorithm algorithm = Problem001.Algorithm.SOLUTION1;
-    protected BigInteger result = null;
+
+    /**
+     * Current calculated value. It must be partial or final.
+     * Initialized to 0 by default.
+     */
+    protected BigInteger result = BigInteger.ZERO;
+
+    /**
+     * Current time spent in calculation. It must be partial or final.
+     * Initialized to 0 by default. Units in milliseconds.
+     */
     protected long milliseconds = 0;
+    
+    /**
+     * Current progress done in calculation. It must be partial or final.
+     * Initialized to 0 by default. Range in [0..1]
+     */
     protected double progress = 0.0;
     
-    private BigInteger steps = null;
-    private BigInteger slot = null;
-    private BigInteger step = null;
+    /**
+     * Number of parts in which calculation is divided.
+     * Initialized to 1 by default.
+     */
+    private BigInteger steps = BigInteger.ONE;
 
+    /**
+     * Size of each part in which calculation is divided.
+     * Initialized to {@link #below}-{@link #from} by default (all values)
+     */
+    private BigInteger slot = below.subtract(from);
+    
+    /**
+     * Current part being calculated.
+     * Initialized to 0 by default.
+     */
+    private BigInteger step = BigInteger.ZERO;
+
+    /**
+     * Stores if a stop in current calculation is required (<b>true</b>) or not (<b>false</b>)
+     * Initialized to <b>false</b> by default.
+     */
     protected boolean doStop = false;
 
     /** 
@@ -92,7 +155,8 @@ public class Problem001Thread extends Thread implements Problem001Interface {
 
     /** 
      * Returns {@link #result} which contains actual calculation.
-     * If {@link #step} = {@link #steps} result contains final result
+     * If {@link #step} = {@link #steps}, that is {@link #progress} = 1.0,  
+     * result contains final result
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with calculation already done
      */
     @Override
@@ -102,7 +166,8 @@ public class Problem001Thread extends Thread implements Problem001Interface {
 
     /** 
      * Returns {@link #milliseconds} which contains actual calculation time spent
-     * If {@link #step} = {@link #steps} milliseconds contains final time spent
+     * If {@link #step} = {@link #steps}, that is {@link #progress} = 1.0,
+     * milliseconds contains final time spent
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with time already spent in calculations
      */
     @Override

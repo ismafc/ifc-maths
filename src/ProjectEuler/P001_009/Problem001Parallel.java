@@ -22,7 +22,18 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class Problem001Parallel extends Problem001Thread {
+
+    /**
+     * List of {@link Problem001Thread} in which we divide the calculation.
+     * Each part is executed in an independent thread.
+     */
     private final ArrayList<Problem001Thread> listThreads = new ArrayList<>(); 
+    
+    /**
+     * Number of parts in which we divide the calculation. Each part
+     * will be calculated in an independent thread.
+     * Initialized to number of available processors.
+     */
     private long numberOfThreads = Runtime.getRuntime().availableProcessors();
     
     /** 
