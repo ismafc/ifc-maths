@@ -282,14 +282,32 @@ public class MatrixNxMNGTest {
      */
     @Test
     public void testMul_MatrixNxM() {
-        System.out.println("mul");
-        MatrixNxM m = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.mul(m);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("mul(MatrixNxM)");
+        
+        MatrixNxM instance = new MatrixNxM(matrix1);
+        assertTrue(instance.mul(matrix1));
+        assertEquals(instance, new MatrixNxM(new double[][] {{1}}));
+
+        instance = new MatrixNxM(matrix2);
+        assertTrue(instance.mul(matrix2));
+        assertEquals(instance, new MatrixNxM(new double[][] {{1, 0}, {-8, 25}}));
+
+        instance = new MatrixNxM(matrix3);
+        assertTrue(instance.mul(matrix3));
+        assertEquals(instance, new MatrixNxM(new double[][] {{33, -5, 16}, {21, 0, 14}, {3, 4, 11}}));
+
+        instance = new MatrixNxM(matrix4);
+        assertTrue(instance.mul(matrix4));
+        assertEquals(instance, new MatrixNxM(new double[][] {{6, 3, 6, 10}, {7, 4, 6, 5}, {6, 2, 6, 7}, {11, 7, 13, 19}}));
+        
+        instance = new MatrixNxM(matrix23);
+        assertTrue(instance.mul(matrix23.transpose()));
+        assertEquals(instance, new MatrixNxM(new double[][] {{6, -7}, {-7, 13}}));
+
+        instance = new MatrixNxM(matrix23);
+        assertFalse(instance.mul(matrix23));
+        assertFalse(matrix1.mul(matrix2));
+        assertFalse(matrix3.mul(matrix4));
     }
 
     /**
@@ -297,14 +315,31 @@ public class MatrixNxMNGTest {
      */
     @Test
     public void testMul_MatrixNxM_MatrixNxM() {
-        System.out.println("mul");
-        MatrixNxM m1 = null;
-        MatrixNxM m2 = null;
-        MatrixNxM expResult = null;
-        MatrixNxM result = MatrixNxM.mul(m1, m2);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("mul(MatrixNxM, MatrixNxM)");
+        MatrixNxM instance = MatrixNxM.mul(matrix1, matrix1);
+        assertNotNull(instance);
+        assertEquals(instance, new MatrixNxM(new double[][] {{1}}));
+
+        instance = MatrixNxM.mul(matrix2, matrix2);
+        assertNotNull(instance);
+        assertEquals(instance, new MatrixNxM(new double[][] {{1, 0}, {-8, 25}}));
+
+        instance = MatrixNxM.mul(matrix3, matrix3);
+        assertNotNull(instance);
+        assertEquals(instance, new MatrixNxM(new double[][] {{33, -5, 16}, {21, 0, 14}, {3, 4, 11}}));
+
+        instance = MatrixNxM.mul(matrix4, matrix4);
+        assertNotNull(instance);
+        assertEquals(instance, new MatrixNxM(new double[][] {{6, 3, 6, 10}, {7, 4, 6, 5}, {6, 2, 6, 7}, {11, 7, 13, 19}}));
+        
+        instance = MatrixNxM.mul(matrix23, matrix23.transpose());
+        assertNotNull(instance);
+        assertEquals(instance, new MatrixNxM(new double[][] {{6, -7}, {-7, 13}}));
+
+        instance = MatrixNxM.mul(matrix23, matrix23);
+        assertNull(instance);
+        assertNull(MatrixNxM.mul(matrix1,matrix2));
+        assertNull(MatrixNxM.mul(matrix3,matrix4));
     }
 
     /**
@@ -488,12 +523,17 @@ public class MatrixNxMNGTest {
      */
     @Test
     public void testDiv() {
-        System.out.println("div");
-        double v = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        instance.div(v);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("div(double)");
+        matrix1.div(4);
+        assertEquals(matrix1, new MatrixNxM(new double[][] {{0.25}}));
+        matrix2.div(2);
+        assertEquals(matrix2, new MatrixNxM(new double[][] {{-0.5, 0}, {-1, 2.5}}));
+        matrix23.div(-3);
+        assertEquals(matrix23, new MatrixNxM(new double[][] {{1.0 / 3.0, 1.0 / 3.0, -2.0 / 3.0}, {-1, 0, 2.0 / 3.0}}));
+        matrix3.div(-1);
+        assertEquals(matrix3, new MatrixNxM(new double[][] {{-6, 1, -2}, {-3, -1, -2}, {0, -1, -3}}));
+        matrix4.div(1);
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{1, 0, 1, 2}, {0, 1, 2, 1}, {3, 1, 1, 0}, {1, 1, 2, 4}}));
     }
 
     /**
@@ -501,14 +541,25 @@ public class MatrixNxMNGTest {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        MatrixNxM m = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.add(m);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("add");       
+        MatrixNxM instance = new MatrixNxM(matrix1);
+        assertTrue(instance.add(matrix1));
+        assertEquals(instance, new MatrixNxM(new double[][] {{2}}));
+        instance = new MatrixNxM(matrix2);
+        assertTrue(instance.add(matrix2));
+        assertEquals(instance, new MatrixNxM(new double[][] {{-2, 0}, {-4, 10}}));
+        instance = new MatrixNxM(matrix3);
+        assertTrue(instance.add(matrix3));
+        assertEquals(instance, new MatrixNxM(new double[][] {{12, -2, 4}, {6, 2, 4}, {0, 2, 6}}));
+        instance = new MatrixNxM(matrix4);
+        assertTrue(instance.add(matrix4));
+        assertEquals(instance, new MatrixNxM(new double[][] {{2, 0, 2, 4}, {0, 2, 4, 2}, {6, 2, 2, 0}, {2, 2, 4, 8}}));
+        instance = new MatrixNxM(matrix23);
+        assertTrue(instance.add(matrix23));
+        assertEquals(instance, new MatrixNxM(new double[][] {{-2, -2, 4}, {6, 0, -4}}));
+        assertFalse(instance.add(matrix1));
+        assertFalse(matrix2.add(matrix3));
+        assertFalse(matrix4.add(matrix23));
     }
 
     /**
@@ -517,13 +568,33 @@ public class MatrixNxMNGTest {
     @Test
     public void testSub() {
         System.out.println("sub");
-        MatrixNxM m = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.sub(m);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MatrixNxM instance = new MatrixNxM(matrix1);
+        assertTrue(instance.sub(matrix1));
+        assertEquals(instance, new MatrixNxM(new double[][] {{0}}));
+        instance = new MatrixNxM(matrix2);
+        assertTrue(instance.sub(matrix2));
+        assertEquals(instance, new MatrixNxM(new double[][] {{0, 0}, {0, 0}}));
+        instance = new MatrixNxM(matrix3);
+        assertTrue(instance.sub(matrix3));
+        assertEquals(instance, new MatrixNxM(new double[][] {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}));
+        instance = new MatrixNxM(matrix4);
+        assertTrue(instance.sub(matrix4));
+        assertEquals(instance, new MatrixNxM(new double[][] {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}));
+        instance = new MatrixNxM(matrix23);
+        assertTrue(instance.sub(matrix23));
+        assertEquals(instance, new MatrixNxM(new double[][] {{0, 0, 0}, {0, 0, 0}}));
+
+        instance = new MatrixNxM(matrix23);
+        assertTrue(instance.sub(new MatrixNxM(new double[][] {{12, -2, 4}, {6, 2, 4}})));
+        assertEquals(instance, new MatrixNxM(new double[][] {{-13, 1, -2}, {-3, -2, -6}}));
+
+        instance = new MatrixNxM(new MatrixNxM(new double[][] {{12, -2, 4}, {6, 2, 4}}));
+        assertTrue(instance.sub(matrix23));
+        assertEquals(instance, new MatrixNxM(new double[][] {{13, -1, 2}, {3, 2, 6}}));
+
+        assertFalse(instance.sub(matrix1));
+        assertFalse(matrix2.sub(matrix3));
+        assertFalse(matrix4.sub(matrix23));
     }
 
     /**
@@ -532,12 +603,11 @@ public class MatrixNxMNGTest {
     @Test
     public void testDeterminant_0args() {
         System.out.println("determinant");
-        MatrixNxM instance = new MatrixNxM();
-        double expResult = 0.0;
-        double result = instance.determinant();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(matrix1.determinant(), 1.0);
+        assertEquals(matrix2.determinant(), -5.0);
+        assertEquals(matrix3.determinant(), 21.0);
+        assertEquals(matrix4.determinant(), -11.0);
+        assertEquals(matrix23.determinant(), Double.NaN);
     }
 
     /**
@@ -585,12 +655,11 @@ public class MatrixNxMNGTest {
     @Test
     public void testDeterminant_doubleArrArr() {
         System.out.println("determinant");
-        double[][] v = null;
-        double expResult = 0.0;
-        double result = MatrixNxM.determinant(v);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(MatrixNxM.determinant(matrix1.values), 1.0);
+        assertEquals(MatrixNxM.determinant(matrix2.values), -5.0);
+        assertEquals(MatrixNxM.determinant(matrix3.values), 21.0);
+        assertEquals(MatrixNxM.determinant(matrix4.values), -11.0);
+        assertEquals(MatrixNxM.determinant(matrix23.values), Double.NaN);
     }
 
     /**
@@ -645,12 +714,11 @@ public class MatrixNxMNGTest {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        MatrixNxM instance = new MatrixNxM();
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(matrix1.hashCode(), 1073312987);
+        assertEquals(matrix2.hashCode(), 68025938);
+        assertEquals(matrix3.hashCode(), -722114269);
+        assertEquals(matrix4.hashCode(), 913968602);
+        assertEquals(matrix23.hashCode(), 1545605709);
     }
     
 }

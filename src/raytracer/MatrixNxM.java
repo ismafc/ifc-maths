@@ -267,6 +267,8 @@ public class MatrixNxM {
                     v[i][j] += values[i][k] * m.values[k][j];
             }
         }
+        rows = v.length;
+        columns = v[0].length;
         values = v;
         inverseMatrix = null;
         return true;
