@@ -348,10 +348,16 @@ public class MatrixNxMNGTest {
     @Test
     public void testToNull() {
         System.out.println("toNull");
-        MatrixNxM instance = new MatrixNxM();
-        instance.toNull();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        matrix1.toNull();
+        assertEquals(matrix1, new MatrixNxM(new double[][] {{0}}));
+        matrix2.toNull();
+        assertEquals(matrix2, new MatrixNxM(new double[][] {{0, 0}, {0, 0}}));
+        matrix3.toNull();
+        assertEquals(matrix3, new MatrixNxM(new double[][] {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}));
+        matrix4.toNull();
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}));
+        matrix23.toNull();
+        assertEquals(matrix23, new MatrixNxM(new double[][] {{0, 0, 0}, {0, 0, 0}}));
     }
 
     /**
@@ -360,12 +366,15 @@ public class MatrixNxMNGTest {
     @Test
     public void testToIdentity() {
         System.out.println("toIdentity");
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toIdentity();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(matrix1.toIdentity());
+        assertEquals(matrix1, new MatrixNxM(new double[][] {{1}}));
+        assertTrue(matrix2.toIdentity());
+        assertEquals(matrix2, new MatrixNxM(new double[][] {{1, 0}, {0, 1}}));
+        assertTrue(matrix3.toIdentity());
+        assertEquals(matrix3, new MatrixNxM(new double[][] {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}));
+        assertTrue(matrix4.toIdentity());
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}));
+        assertFalse(matrix23.toIdentity());
     }
 
     /**
