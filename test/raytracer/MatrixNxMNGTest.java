@@ -66,11 +66,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of getRows method, of class MatrixNxM.
+     * Test of getRows() method, of class MatrixNxM.
      */
     @Test
     public void testGetRows() {
-        System.out.println("getRows");
+        System.out.println("getRows()");
         assertEquals(1, matrix1.getRows());
         assertEquals(2, matrix2.getRows());
         assertEquals(3, matrix3.getRows());
@@ -79,11 +79,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of getColumns method, of class MatrixNxM.
+     * Test of getColumns() method, of class MatrixNxM.
      */
     @Test
     public void testGetColumns() {
-        System.out.println("getColumns");
+        System.out.println("getColumns()");
         assertEquals(1, matrix1.getColumns());
         assertEquals(2, matrix2.getColumns());
         assertEquals(3, matrix3.getColumns());
@@ -92,11 +92,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of equals method, of class MatrixNxM.
+     * Test of equals(MatrixNxM) method, of class MatrixNxM.
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
+        System.out.println("equals(MatrixNxM)");
         assertTrue(matrix1.equals(new MatrixNxM(m1)));
         m1[0][0] = -1;
         assertFalse(matrix1.equals(new MatrixNxM(m1)));
@@ -144,11 +144,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of transpose method, of class MatrixNxM.
+     * Test of transpose() method, of class MatrixNxM.
      */
     @Test
     public void testTranspose() {
-        System.out.println("transpose");
+        System.out.println("transpose()");
         assertEquals(matrix1.transpose(), new MatrixNxM(new double[][] {{1}}));
         assertEquals(matrix2.transpose(), new MatrixNxM(new double[][] {{-1, -2}, {0, 5}}));
         assertEquals(matrix3.transpose(), new MatrixNxM(new double[][] {{6, 3, 0}, {-1, 1, 1}, {2, 2, 3}}));
@@ -157,11 +157,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of getInverse method, of class MatrixNxM.
+     * Test of getInverse() method, of class MatrixNxM.
      */
     @Test
     public void testGetInverse() {
-        System.out.println("getInverse");
+        System.out.println("getInverse()");
         assertEquals(matrix1.getInverse(), new MatrixNxM(new double[][] {{1}}));
         assertEquals(matrix2.getInverse(), new MatrixNxM(new double[][] {{-1, 0}, {-2.0 / 5.0, 1.0 / 5.0}}));
         assertEquals(matrix3.getInverse(), new MatrixNxM(new double[][] {{1.0 / 21.0, 5.0 / 21.0, -4.0 / 21.0}, 
@@ -175,11 +175,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of invert method, of class MatrixNxM.
+     * Test of invert() method, of class MatrixNxM.
      */
     @Test
     public void testInvert() {
-        System.out.println("invert");
+        System.out.println("invert()");
         assertTrue(matrix1.invert());
         assertEquals(matrix1, new MatrixNxM(new double[][] {{1}}));
         
@@ -200,7 +200,7 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of set method, of class MatrixNxM.
+     * Test of set(int, int, double) method, of class MatrixNxM.
      */
     @Test
     public void testSet_3args() {
@@ -219,7 +219,7 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of get method, of class MatrixNxM.
+     * Test of get(int, int) method, of class MatrixNxM.
      */
     @Test
     public void testGet() {
@@ -241,7 +241,7 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of set method, of class MatrixNxM.
+     * Test of set(MatrixNxM) method, of class MatrixNxM.
      */
     @Test
     public void testSet_MatrixNxM() {
@@ -260,7 +260,7 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of mul method, of class MatrixNxM.
+     * Test of mul(double) method, of class MatrixNxM.
      */
     @Test
     public void testMul_double() {
@@ -278,7 +278,7 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of mul method, of class MatrixNxM.
+     * Test of mul(MatrixNxM) method, of class MatrixNxM.
      */
     @Test
     public void testMul_MatrixNxM() {
@@ -311,7 +311,7 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of mul method, of class MatrixNxM.
+     * Test of mul(MatrixNxM, MatrixNxM) method, of class MatrixNxM.
      */
     @Test
     public void testMul_MatrixNxM_MatrixNxM() {
@@ -343,11 +343,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of toNull method, of class MatrixNxM.
+     * Test of toNull() method, of class MatrixNxM.
      */
     @Test
     public void testToNull() {
-        System.out.println("toNull");
+        System.out.println("toNull()");
         matrix1.toNull();
         assertEquals(matrix1, new MatrixNxM(new double[][] {{0}}));
         matrix2.toNull();
@@ -361,11 +361,11 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of toIdentity method, of class MatrixNxM.
+     * Test of toIdentity() method, of class MatrixNxM.
      */
     @Test
     public void testToIdentity() {
-        System.out.println("toIdentity");
+        System.out.println("toIdentity()");
         assertTrue(matrix1.toIdentity());
         assertEquals(matrix1, new MatrixNxM(new double[][] {{1}}));
         assertTrue(matrix2.toIdentity());
@@ -378,63 +378,48 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of toTranslation method, of class MatrixNxM.
-     */
-    @Test
-    public void testToTranslation() {
-        System.out.println("toTranslation");
-        Object3D o = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toTranslation(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toRotationX method, of class MatrixNxM.
+     * Test of toRotationX(double) method, of class MatrixNxM.
      */
     @Test
     public void testToRotationX() {
-        System.out.println("toRotationX");
-        double r = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toRotationX(r);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("toRotationX(double)");
+        double r = Math.PI / 4.0;
+        assertFalse(matrix1.toRotationX(r));
+        assertFalse(matrix2.toRotationX(r));
+        assertFalse(matrix3.toRotationX(r));
+        assertTrue(matrix4.toRotationX(r));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{1, 0, 0, 0}, {0, Math.cos(r), -Math.sin(r), 0}, {0, Math.sin(r), Math.cos(r), 0}, {0, 0, 0, 1}}));
+        assertFalse(matrix23.toRotationX(r));
     }
 
     /**
-     * Test of toRotationY method, of class MatrixNxM.
+     * Test of toRotationY(double) method, of class MatrixNxM.
      */
     @Test
     public void testToRotationY() {
-        System.out.println("toRotationY");
-        double r = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toRotationY(r);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("toRotationY(double)");
+        double r = Math.PI / 4.0;
+        assertFalse(matrix1.toRotationY(r));
+        assertFalse(matrix2.toRotationY(r));
+        assertFalse(matrix3.toRotationY(r));
+        assertTrue(matrix4.toRotationY(r));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{Math.cos(r), 0, Math.sin(r), 0}, {0, 1, 0, 0}, {-Math.sin(r), 0, Math.cos(r), 0}, {0, 0, 0, 1}}));
+        assertFalse(matrix23.toRotationY(r));
     }
 
     /**
-     * Test of toRotationZ method, of class MatrixNxM.
+     * Test of toRotationZ(double) method, of class MatrixNxM.
      */
     @Test
     public void testToRotationZ() {
-        System.out.println("toRotationZ");
-        double r = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toRotationZ(r);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("toRotationZ(double)");
+        double r = Math.PI / 4.0;
+        assertFalse(matrix1.toRotationZ(r));
+        assertFalse(matrix2.toRotationZ(r));
+        assertFalse(matrix3.toRotationZ(r));
+        assertTrue(matrix4.toRotationZ(r));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{Math.cos(r), -Math.sin(r), 0, 0}, {Math.sin(r), Math.cos(r), 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}));
+        assertFalse(matrix23.toRotationZ(r));
     }
 
     /**
@@ -672,49 +657,49 @@ public class MatrixNxMNGTest {
     }
 
     /**
-     * Test of toString method, of class MatrixNxM.
+     * Test of toString() method, of class MatrixNxM.
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
-        MatrixNxM instance = new MatrixNxM();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("toString()");
+        assertEquals(matrix1.toString(), "{{1.0}}");
+        assertEquals(matrix2.toString(), "{{-1.0,0.0},{-2.0,5.0}}");
+        assertEquals(matrix3.toString(), "{{6.0,-1.0,2.0},{3.0,1.0,2.0},{0.0,1.0,3.0}}");
+        assertEquals(matrix4.toString(), "{{1.0,0.0,1.0,2.0},{0.0,1.0,2.0,1.0},{3.0,1.0,1.0,0.0},{1.0,1.0,2.0,4.0}}");
+        assertEquals(matrix23.toString(), "{{-1.0,-1.0,2.0},{3.0,0.0,-2.0}}");
     }
 
     /**
-     * Test of toScale method, of class MatrixNxM.
+     * Test of toScale(double, double, double) method, of class MatrixNxM.
      */
     @Test
     public void testToScale_3args() {
-        System.out.println("toScale");
-        double sx = 0.0;
-        double sy = 0.0;
-        double sz = 0.0;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toScale(sx, sy, sz);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("toScale(double, double, double)");
+        double x = 4.0;
+        double y = 5.0;
+        double z = -2.0;
+        assertFalse(matrix1.toScale(x, y, z));
+        assertFalse(matrix2.toScale(x, y, z));
+        assertFalse(matrix3.toScale(x, y, z));
+        assertFalse(matrix23.toScale(x, y, z));
+        assertTrue(matrix4.toScale(x, y, z));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{4.0, 0, 0, 0}, {0, 5.0, 0, 0}, {0, 0, -2.0, 0}, {0, 0, 0, 1}}));
     }
 
     /**
-     * Test of toScale method, of class MatrixNxM.
+     * Test of toScale(Object3D) method, of class MatrixNxM.
      */
     @Test
     public void testToScale_Object3D() {
-        System.out.println("toScale");
-        Object3D o = null;
-        MatrixNxM instance = new MatrixNxM();
-        boolean expResult = false;
-        boolean result = instance.toScale(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("toScale(Object3D)");
+        Object3D o = new Object3D(4.0, 5.0, -2.0);
+        assertFalse(matrix1.toScale(o));
+        assertFalse(matrix2.toScale(o));
+        assertFalse(matrix3.toScale(o));
+        assertFalse(matrix23.toScale(o));
+        assertFalse(matrix23.toScale(null));
+        assertTrue(matrix4.toScale(o));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{4.0, 0, 0, 0}, {0, 5.0, 0, 0}, {0, 0, -2.0, 0}, {0, 0, 0, 1}}));
     }
 
     /**
@@ -728,6 +713,39 @@ public class MatrixNxMNGTest {
         assertEquals(matrix3.hashCode(), -722114269);
         assertEquals(matrix4.hashCode(), 913968602);
         assertEquals(matrix23.hashCode(), 1545605709);
+    }
+
+    /**
+     * Test of toTranslation(double, double, double) method, of class MatrixNxM.
+     */
+    @Test
+    public void testToTranslation_3args() {
+        System.out.println("toTranslation(double, double, double)");
+        double x = 4.0;
+        double y = 5.0;
+        double z = -2.0;
+        assertFalse(matrix1.toTranslation(x, y, z));
+        assertFalse(matrix2.toTranslation(x, y, z));
+        assertFalse(matrix3.toTranslation(x, y, z));
+        assertFalse(matrix23.toTranslation(x, y, z));
+        assertTrue(matrix4.toTranslation(x, y, z));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{1, 0, 0, 4.0}, {0, 1, 0, 5.0}, {0, 0, 1, -2.0}, {0, 0, 0, 1}}));
+    }
+
+    /**
+     * Test of toTranslation(Object3D) method, of class MatrixNxM.
+     */
+    @Test
+    public void testToTranslation_Object3D() {
+        System.out.println("toTranslation(Object3D)");
+        Object3D o = new Object3D(4.0, 5.0, -2.0);
+        assertFalse(matrix1.toTranslation(o));
+        assertFalse(matrix2.toTranslation(o));
+        assertFalse(matrix3.toTranslation(o));
+        assertFalse(matrix23.toTranslation(o));
+        assertFalse(matrix23.toTranslation(null));
+        assertTrue(matrix4.toTranslation(o));
+        assertEquals(matrix4, new MatrixNxM(new double[][] {{1, 0, 0, 4.0}, {0, 1, 0, 5.0}, {0, 0, 1, -2.0}, {0, 0, 0, 1}}));
     }
     
 }

@@ -314,19 +314,32 @@ public class MatrixNxM {
     }
 
     /** 
+     * Makes this matrix a translation defined by 'tx','ty' and 'tz'
+     * @param tx units to translate in X axis
+     * @param ty units to translate in X axis
+     * @param tz units to translate in X axis
+     * @return True if this is a 4 x 4 matrix and False otherwise
+     */
+    public boolean toTranslation(double tx, double ty, double tz) {
+        if (rows != 4 || columns != 4)
+            return false;
+        toIdentity();
+        values[0][3] = tx;
+        values[1][3] = ty;
+        values[2][3] = tz;
+        inverseMatrix = null;
+        return true;
+    }
+    
+    /** 
      * Makes this matrix a translation defined by 'o'
      * @param o 3D Object defining the translation in each axe
      * @return True if this is a 4 x 4 matrix and False if not
      */
     public boolean toTranslation(Object3D o) {
-        if (rows != 4 || columns != 4)
+        if (o == null)
             return false;
-        toIdentity();
-        values[0][3] = o.x;
-        values[1][3] = o.y;
-        values[2][3] = o.z;
-        inverseMatrix = null;
-        return true;
+        return toTranslation(o.x, o.y, o.z);
     }
 
     /** 
@@ -353,14 +366,9 @@ public class MatrixNxM {
      * @return True if this is a 4 x 4 matrix or Object3D is not null and False otherwise
      */
     public boolean toScale(Object3D o) {
-        if (rows != 4 || columns != 4 || o == null)
+        if (o == null)
             return false;
-        toIdentity();
-        values[0][0] = o.x;
-        values[1][1] = o.y;
-        values[2][2] = o.z;
-        inverseMatrix = null;
-        return true;
+        return toScale(o.x, o.y, o.z);
     }
     
     /** 
@@ -710,18 +718,20 @@ public class MatrixNxM {
     }
     
     /** 
-     * Returns a String representation for this object
+     * Returns a String representation for this object based on
+     * WolframAlpha/Mathemática representation
      * @return String representing this object
      */
     @Override
     public String toString() {
-        String str = "";
+        String str = "{";
         for (int i = 0; i < rows; i++) {
-            str += "(";
+            str += "{";
             for (int j = 0; j < columns; j++)
-                str += values[i][j] + ((j < columns - 1) ? ", " : "");
-            str += ")" + ((i < rows - 1) ? " - " : "");
+                str += values[i][j] + ((j < columns - 1) ? "," : "");
+            str += "}" + ((i < rows - 1) ? "," : "");
         }
+        str += "}";
         return str;
     }
 }
