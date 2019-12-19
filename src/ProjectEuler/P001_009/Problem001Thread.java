@@ -272,7 +272,7 @@ public class Problem001Thread extends Thread implements Problem001Interface {
             nFrom = nBelow;
             nBelow = getNewBelow(nFrom);
             try {
-                Thread.sleep(50);
+                Thread.sleep(10);
             } catch (InterruptedException ex) {
                 String msg = "Sleep Exception in run (Problem001Thread)";
                 String className = Problem001Thread.class.getName();

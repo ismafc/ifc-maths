@@ -156,6 +156,64 @@ public class JProjectEulerP001Controller {
             addToListButton.setDisable(true);
     }
     
+    public static void statistics(int samples, BigInteger from, BigInteger below, String separator) throws InterruptedException {
+        System.out.println("Class Problem001Thread...");
+        BigInteger a_ = new BigInteger("3");
+        BigInteger b_ = new BigInteger("5");
+        ArrayList<BigInteger> values = new ArrayList<>(Arrays.asList(a_, b_));
+        for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
+            System.out.println("Algorithm " + algorithm + ":");
+            String cpu_time_by_thread = "";
+            String real_time = "";
+            for (int i = 1; i <= samples; i++) {
+                Problem001Thread p001t = new Problem001Thread();
+                p001t.set(values, from, below, algorithm);
+                long ms = System.currentTimeMillis();
+                p001t.start();
+                while (!p001t.calculationIsDone()) {
+                    Thread.sleep(100);
+                }
+                real_time += (System.currentTimeMillis() - ms);
+                cpu_time_by_thread += p001t.getMilliseconds();
+                if (i < samples) {
+                    cpu_time_by_thread += separator;
+                    real_time += separator;
+                }
+            }
+            System.out.println("CPU time by thread (ms): " + cpu_time_by_thread);
+            System.out.println("Real time (ms): " + real_time);
+        }
+        
+        System.out.println("Class Problem001Parallel:");
+        for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
+            System.out.println("Algorithm " + algorithm + ":");
+            for (int nThreads = 1; nThreads <= Runtime.getRuntime().availableProcessors(); nThreads++) {
+                System.out.println(nThreads + " threads:");
+                String cpu_time_by_thread = "";
+                String real_time = "";
+                for (int i = 1; i <= samples; i++) {
+                    Problem001Parallel p001p = new Problem001Parallel();
+                    p001p.set(values, from, below, algorithm);
+                    p001p.setNumberOfThreads(nThreads);
+                    long ms = System.currentTimeMillis();
+                    p001p.start();
+                    while (!p001p.calculationIsDone()) {
+                        Thread.sleep(100);
+                    }
+                    real_time += (System.currentTimeMillis() - ms);
+                    cpu_time_by_thread += p001p.getMilliseconds();
+                    if (i < samples) {
+                        cpu_time_by_thread += separator;
+                        real_time += separator;
+                    }
+                }
+                System.out.println("CPU time by thread (ms): " + cpu_time_by_thread);
+                System.out.println("Real time (ms): " + real_time);
+            }
+            System.out.println("");
+        }        
+    }
+    
     /**
      * This method updates the visibility of controls
      * depending on state of calculation.

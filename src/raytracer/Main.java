@@ -11,8 +11,12 @@ import Library.Complex;
 import Library.IFCMath;
 import Library.InOut;
 import Library.Nonograma;
+import ProjectEuler.P001_009.Problem001;
+import ProjectEuler.P001_009.Problem001Parallel;
+import ProjectEuler.P001_009.Problem001Thread;
 import dialogs.JFractalDialog;
 import ProjectEuler.Triangle;
+import dialogs.JProjectEulerP001Controller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.*;
@@ -1546,6 +1550,9 @@ Números de Friedman:
         stage.setScene(scene);
         stage.show();*/
 //        Locale.setDefault(Locale.ENGLISH);
+
+//        JProjectEulerP001Controller.statistics(20, new BigInteger("1"), new BigInteger("10000000"), ";");
+
         String fileName = "dialogs/JProjectEulerP001.fxml";
         FXMLLoader loader = new FXMLLoader();
         ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
