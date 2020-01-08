@@ -1,0 +1,1 @@
+java -jar --add-modules javafx.base,javafx.controls,javafx.fxml --module-path C:\master\javafx-sdk-13.0.1\lib --add-exports javafx.base/com.sun.javafx.runtime=ALL-UNNAMED .\dist\mates.jar
