@@ -155,26 +155,51 @@ public class JProjectEulerP001Controller {
         if (addEdit.getText() == null || addEdit.getText().isEmpty())
             addToListButton.setDisable(true);
     }
+
+    public static void calculate(Problem001Thread p001, ArrayList<BigInteger> values, BigInteger from, BigInteger below, Problem001.Algorithm algorithm) throws InterruptedException {
+        p001.set(values, from, below, algorithm);
+        p001.start();
+        while (!p001.calculationIsDone()) {
+            Thread.sleep(100);
+        }
+    }
     
-    public static void statistics(int samples, BigInteger from, BigInteger below, String separator) throws InterruptedException {
+    public static BigInteger calculateThread(ArrayList<BigInteger> values, BigInteger from, BigInteger below, Problem001.Algorithm algorithm) throws InterruptedException {
+        Problem001Thread p001t = new Problem001Thread();
+        calculate(p001t, values, from, below, algorithm);
+        return p001t.getResult();
+    }
+
+    public static long measureTimeThread(ArrayList<BigInteger> values, BigInteger from, BigInteger below, Problem001.Algorithm algorithm) throws InterruptedException {
+        Problem001Thread p001t = new Problem001Thread();
+        calculate(p001t, values, from, below, algorithm);
+        return p001t.getMilliseconds();
+    }
+
+    public static BigInteger calculateParallel(ArrayList<BigInteger> values, BigInteger from, BigInteger below, Problem001.Algorithm algorithm, long nThreads) throws InterruptedException {
+        Problem001Parallel p001p = new Problem001Parallel();
+        p001p.setNumberOfThreads(nThreads);
+        calculate(p001p, values, from, below, algorithm);
+        return p001p.getResult();
+    }
+
+    public static long measureTimeParallel(ArrayList<BigInteger> values, BigInteger from, BigInteger below, Problem001.Algorithm algorithm, long nThreads) throws InterruptedException {
+        Problem001Parallel p001p = new Problem001Parallel();
+        p001p.setNumberOfThreads(nThreads);
+        calculate(p001p, values, from, below, algorithm);
+        return p001p.getMilliseconds();
+    }
+    
+    public static void statistics(int samples, ArrayList<BigInteger> values, BigInteger from, BigInteger below, String separator) throws InterruptedException {
         System.out.println("Class Problem001Thread...");
-        BigInteger a_ = new BigInteger("3");
-        BigInteger b_ = new BigInteger("5");
-        ArrayList<BigInteger> values = new ArrayList<>(Arrays.asList(a_, b_));
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
             System.out.println("Algorithm " + algorithm + ":");
             String cpu_time_by_thread = "";
             String real_time = "";
             for (int i = 1; i <= samples; i++) {
-                Problem001Thread p001t = new Problem001Thread();
-                p001t.set(values, from, below, algorithm);
                 long ms = System.currentTimeMillis();
-                p001t.start();
-                while (!p001t.calculationIsDone()) {
-                    Thread.sleep(100);
-                }
+                cpu_time_by_thread += measureTimeThread(values, from, below, algorithm);
                 real_time += (System.currentTimeMillis() - ms);
-                cpu_time_by_thread += p001t.getMilliseconds();
                 if (i < samples) {
                     cpu_time_by_thread += separator;
                     real_time += separator;
@@ -192,16 +217,9 @@ public class JProjectEulerP001Controller {
                 String cpu_time_by_thread = "";
                 String real_time = "";
                 for (int i = 1; i <= samples; i++) {
-                    Problem001Parallel p001p = new Problem001Parallel();
-                    p001p.set(values, from, below, algorithm);
-                    p001p.setNumberOfThreads(nThreads);
                     long ms = System.currentTimeMillis();
-                    p001p.start();
-                    while (!p001p.calculationIsDone()) {
-                        Thread.sleep(100);
-                    }
+                    cpu_time_by_thread += measureTimeParallel(values, from, below, algorithm, nThreads);
                     real_time += (System.currentTimeMillis() - ms);
-                    cpu_time_by_thread += p001p.getMilliseconds();
                     if (i < samples) {
                         cpu_time_by_thread += separator;
                         real_time += separator;
