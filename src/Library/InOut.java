@@ -132,6 +132,27 @@ public class InOut<T> {
         return value;
     }
 
+    /** 
+     * Finds the first argument called <b><i>name</i></b> in arguments <b><i>args</i></b>.<br>
+     * Argumens have the form: <b>[argument_name]:[value]</b> where <b>value</b> is a <b>String</b>.<br>
+     * If <b>value</b> is not a valid <b>String</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
+     * the <b><i>default_value</i></b> is returned
+     * 
+     * @param args List of string where we will found argument <b><i>name</i></b>
+     * @param default_value value returned if <b>value</b> is not a valid <b>String</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
+     * @param name Argument name searched in <b><i>args</i></b>
+     * @return <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html" target="_blank"><b>String</b></a> with value of argument <b><i>name</i></b> found 
+     * or <b><i>default_value</i></b> if <b>value</b> is not a valid <b>String</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
+     */
+    public static String getArgument(String[] args, String default_value, String name) {
+        String value = default_value;
+        for (String param : args) {
+            if (param.startsWith(name + ":"))
+                value = param.substring(name.length() + 1);
+        }
+        return value;
+    }
+    
    /**
      * Convert a millisecond duration (<b><i>millis</i></b>) to a string format 
      * according to localization stored in <b><i>bundle</i></b>

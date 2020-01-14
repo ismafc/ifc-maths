@@ -23,6 +23,7 @@ import java.io.*;
 import java.math.*;
 import java.util.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -1551,24 +1552,107 @@ Números de Friedman:
         stage.show();*/
 //        Locale.setDefault(Locale.ENGLISH);
 
-//        JProjectEulerP001Controller.statistics(20, new BigInteger("1"), new BigInteger("10000000"), ";");
+        // Read ACTION parameter in command-line
+        List<String> argsl = getParameters().getUnnamed();
+        String[] args = (argsl.size() > 0 ? argsl.toArray(new String[0]) : new String[0]);
+        String action1 = InOut.getArgument(args, (String)null, "ACTION");
+        String action2 = getParameters().getNamed().get("ACTION");
+        String action = (action1 == null ? (action2 == null ? "UNDEFINED" : action2) : action1);
+  
+        // Read V1, V2, ... , Vn parameters in command-line
+        ArrayList<BigInteger> values = new ArrayList<>();
+        long i = 1;
+        BigInteger v1 = InOut.getArgument(args, (BigInteger)null, "V" + i);
+        String v2 = getParameters().getNamed().get("V" + i);
+        BigInteger v = (v1 == null ? (v2 == null ? null : new BigInteger(v2)) : v1);
+        while (v != null) {
+            values.add(v);
+            i++;
+            v1 = InOut.getArgument(args, (BigInteger)null, "V" + i);
+            v2 = getParameters().getNamed().get("V" + i);
+            v = (v1 == null ? (v2 == null ? null : new BigInteger(v2)) : v1);
+        }
+        if (values.isEmpty())
+            values = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
+ 
+        // Read FROM parameter in command-line
+        BigInteger from1 = InOut.getArgument(args, (BigInteger)null, "FROM");
+        String from2 = getParameters().getNamed().get("FROM");
+        BigInteger from = (from1 == null ? (from2 == null ? null : new BigInteger(from2)) : from1);
+        if (from ==  null)
+            from = new BigInteger("1");
 
-        String fileName = "dialogs/JProjectEulerP001.fxml";
-        FXMLLoader loader = new FXMLLoader();
-        ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
-        Module module = getClass().getModule();
-        InputStream inputStream = module.getResourceAsStream(fileName);
-        loader.setResources(bundle);
-        Pane pane = (Pane)loader.load(inputStream);
-        Scene scene = new Scene(pane);
-        stage.setResizable(false);
-        InputStream stream = getClass().getResourceAsStream("/resources/calculator_small.png");
-        InputStream stream_big = getClass().getResourceAsStream("/resources/calculator_big.png");
-        stage.getIcons().add(new Image(stream));
-        stage.getIcons().add(new Image(stream_big));
-        stage.setTitle(bundle.getString("p001.summultiplesof"));
-        stage.setScene(scene);
-        stage.show();
+        // Read BELOW parameter in command-line
+        BigInteger below1 = InOut.getArgument(args, (BigInteger)null, "BELOW");
+        String below2 = getParameters().getNamed().get("BELOW");
+        BigInteger below = (below1 == null ? (below2 == null ? null : new BigInteger(below2)) : below1);
+        if (below ==  null)
+            below = new BigInteger("1000");
+
+        // Read SAMPLES parameter in command-line
+        long samples1 = InOut.getArgument(args, Long.MIN_VALUE, "SAMPLES");
+        String samples2 = getParameters().getNamed().get("SAMPLES");
+        long samples = (samples1 == Long.MIN_VALUE ? (samples2 == null ? Long.MIN_VALUE : Long.parseLong(samples2)) : samples1);
+
+        // Read SEPARATOR parameter in command-line
+        String separator1 = InOut.getArgument(args, (String)null, "SEPARATOR");
+        String separator2 = getParameters().getNamed().get("SEPARATOR");
+        String separator = (separator1 == null ? (separator2 == null ? "UNDEFINED" : separator2) : separator1);
+
+        // Read ALGORITHM parameter in command-line
+        String algorithm1 = InOut.getArgument(args, (String)null, "ALGORITHM");
+        String algorithm2 = getParameters().getNamed().get("ALGORITHM");
+        String algorithm_txt = (algorithm1 == null ? (algorithm2 == null ? "UNDEFINED" : algorithm2) : algorithm1);
+        Problem001.Algorithm algorithm = Problem001.Algorithm.SOLUTION1;
+        try {
+            algorithm = Problem001.Algorithm.valueOf(algorithm_txt);
+        } catch(IllegalArgumentException ex) {
+        }
+        
+        // Read THREADS parameter in command-line
+        long nThreads1 = InOut.getArgument(args, Long.MIN_VALUE, "THREADS");
+        String nThreads2 = getParameters().getNamed().get("THREADS");
+        long nThreads = (nThreads1 == Long.MIN_VALUE ? (nThreads2 == null ? Long.MIN_VALUE : Long.parseLong(nThreads2)) : nThreads1);
+        if (nThreads == Long.MIN_VALUE)
+            nThreads = Runtime.getRuntime().availableProcessors();
+               
+        switch (action) {
+            case "STATISTICS":
+                if (samples == Long.MIN_VALUE)
+                    samples = 20;
+                if (separator.equals("UNDEFINED"))
+                    separator = ";";
+                JProjectEulerP001Controller.statistics(samples, values, from, below, separator);
+                Platform.exit();
+                break;
+            case "CMD":
+                BigInteger result = JProjectEulerP001Controller.calculateParallel(values, from, below, algorithm, nThreads);
+                System.out.println("Result = " + result.toString());
+                Platform.exit();
+                break;
+            default:
+                String fileName = "dialogs/JProjectEulerP001.fxml";
+                FXMLLoader loader = new FXMLLoader();
+                ResourceBundle bundle = ResourceBundle.getBundle("resources/messages");
+                Module module = getClass().getModule();
+                InputStream inputStream = module.getResourceAsStream(fileName);
+                loader.setResources(bundle);
+                Pane pane = (Pane)loader.load(inputStream);
+                ((JProjectEulerP001Controller)loader.getController()).setValues(values);
+                ((JProjectEulerP001Controller)loader.getController()).setFrom(from);
+                ((JProjectEulerP001Controller)loader.getController()).setBelow(below);
+                ((JProjectEulerP001Controller)loader.getController()).setAlgorithm(algorithm);
+                Scene scene = new Scene(pane);
+                stage.setResizable(false);
+                InputStream stream = getClass().getResourceAsStream("/resources/calculator_small.png");
+                InputStream stream_big = getClass().getResourceAsStream("/resources/calculator_big.png");
+                stage.getIcons().add(new Image(stream));
+                stage.getIcons().add(new Image(stream_big));
+                stage.setTitle(bundle.getString("p001.summultiplesof"));
+                stage.setScene(scene);
+                stage.show();
+                break;
+        }
     }
 
 }

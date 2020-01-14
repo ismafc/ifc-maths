@@ -229,5 +229,51 @@ public class InOutNGTest {
         result = instance.getListText(list, inText);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getArgument(String[] args, String default_value, String name) method, of class InOut.
+     */
+    @Test
+    public void testGetArgument_3args_3() {
+        System.out.println("getArgument(String[] args, String default_value, String name)");
+        String default_value = "-1";
+        String name = "V1";
+        String expResult = "3";
+        String result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+
+        name = "V2";
+        expResult = "5";
+        result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+        
+        name = "FROM";
+        expResult = "1";
+        result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+        
+        name = "BELOW";
+        expResult = "1000";
+        result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+
+        // Not found
+        name = "V3";
+        expResult = "-1";
+        result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+        
+        // Invalid value
+        name = "P";
+        expResult = "error";
+        result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+
+        // Big Value
+        name = "BIG";
+        expResult = "18362781233492778327891";
+        result = InOut.getArgument(args, default_value, name);
+        assertEquals(expResult, result);
+    }
     
 }

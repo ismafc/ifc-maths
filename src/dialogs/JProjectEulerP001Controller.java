@@ -67,6 +67,11 @@ public class JProjectEulerP001Controller {
     private final Color COLOR_CALCULATING = Color.BLUE;
     private final Color COLOR_ERROR = Color.RED;
     
+    private ArrayList<BigInteger> values = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
+    private BigInteger from = new BigInteger("1");
+    private BigInteger below = new BigInteger("1000");
+    Problem001.Algorithm algorithm = Problem001.Algorithm.SOLUTION1;
+    
     Problem001Interface p001 = null;
     Timeline refreshTimer = new Timeline();
 
@@ -190,13 +195,13 @@ public class JProjectEulerP001Controller {
         return p001p.getMilliseconds();
     }
     
-    public static void statistics(int samples, ArrayList<BigInteger> values, BigInteger from, BigInteger below, String separator) throws InterruptedException {
+    public static void statistics(long samples, ArrayList<BigInteger> values, BigInteger from, BigInteger below, String separator) throws InterruptedException {
         System.out.println("Class Problem001Thread...");
         for (Problem001.Algorithm algorithm : Problem001.Algorithm.values()) {
             System.out.println("Algorithm " + algorithm + ":");
             String cpu_time_by_thread = "";
             String real_time = "";
-            for (int i = 1; i <= samples; i++) {
+            for (long i = 1; i <= samples; i++) {
                 long ms = System.currentTimeMillis();
                 cpu_time_by_thread += measureTimeThread(values, from, below, algorithm);
                 real_time += (System.currentTimeMillis() - ms);
@@ -216,7 +221,7 @@ public class JProjectEulerP001Controller {
                 System.out.println(nThreads + " threads:");
                 String cpu_time_by_thread = "";
                 String real_time = "";
-                for (int i = 1; i <= samples; i++) {
+                for (long i = 1; i <= samples; i++) {
                     long ms = System.currentTimeMillis();
                     cpu_time_by_thread += measureTimeParallel(values, from, below, algorithm, nThreads);
                     real_time += (System.currentTimeMillis() - ms);
@@ -250,23 +255,50 @@ public class JProjectEulerP001Controller {
         algorithmComboBox.setDisable(calculating);
     }
     
+    public void setValues(ArrayList<BigInteger> _values) {
+        values = _values;
+        initializeMultiplesList();
+    }
+
+    public void setFrom(BigInteger _from) {
+        from = _from;
+        fromEdit.setText(from.toString());
+    }
+
+    public void setBelow(BigInteger _below) {
+        below = _below;
+        toEdit.setText(below.toString());
+    }
+
+    public void setAlgorithm(Problem001.Algorithm _algorithm) {
+        algorithm = _algorithm;
+        algorithmComboBox.getSelectionModel().select(algorithm);
+    }
+    
+    private void initializeMultiplesList() {
+        multiplesList.getItems().clear();
+        for (BigInteger v : values)
+            multiplesList.getItems().add(v);
+        if (!values.isEmpty())
+            multiplesList.getSelectionModel().select(multiplesList.getItems().get(0));
+    }
+   
     /**
      * Initializes the controller class.
      */
     public void initialize() {
-        multiplesList.getItems().add(new BigInteger("3"));
-        multiplesList.getItems().add(new BigInteger("5"));
-        multiplesList.getSelectionModel().select(new BigInteger("3"));
-        multiplesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        initializeMultiplesList();
+        multiplesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);        
 
         fromEdit.textProperty().addListener(new ChangeEditListenerLocal(15, true));
+        fromEdit.setText(from.toString());
         toEdit.textProperty().addListener(new ChangeEditListenerLocal(20, true));
+        toEdit.setText(below.toString());
         addEdit.textProperty().addListener(new ChangeEditListenerLocal(10, true));
         
         Problem001.Algorithm[] algorithms = Problem001.Algorithm.values();
-        int last = algorithms.length - 1;
         algorithmComboBox.getItems().addAll(Arrays.asList(algorithms));
-        algorithmComboBox.getSelectionModel().select(algorithms[last]);
+        algorithmComboBox.getSelectionModel().select(algorithm);
         
         InputStream stream = getClass().getResourceAsStream("/resources/stop.png");
         cancelButton.setGraphic(new ImageView(new Image(stream)));
