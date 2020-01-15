@@ -45,7 +45,7 @@ public class JProjectEulerP001Controller {
 
     @FXML private ListView<BigInteger> multiplesList;
     @FXML private TextField fromEdit;
-    @FXML private TextField toEdit;
+    @FXML private TextField belowEdit;
     @FXML private TextField addEdit;
     @FXML private ComboBox algorithmComboBox;
     @FXML private Label numbersLabel;
@@ -149,7 +149,7 @@ public class JProjectEulerP001Controller {
         
         if (fromEdit.getText() == null || fromEdit.getText().isEmpty())
             calculateButton.setDisable(true);
-        if (toEdit.getText() == null || toEdit.getText().isEmpty())
+        if (belowEdit.getText() == null || belowEdit.getText().isEmpty())
             calculateButton.setDisable(true);
         if (multiplesList.getItems().isEmpty())
             calculateButton.setDisable(true);
@@ -250,7 +250,7 @@ public class JProjectEulerP001Controller {
         addToListButton.setDisable(calculating);
         multiplesList.setDisable(calculating);
         fromEdit.setDisable(calculating);
-        toEdit.setDisable(calculating);
+        belowEdit.setDisable(calculating);
         addEdit.setDisable(calculating);
         algorithmComboBox.setDisable(calculating);
     }
@@ -267,7 +267,7 @@ public class JProjectEulerP001Controller {
 
     public void setBelow(BigInteger _below) {
         below = _below;
-        toEdit.setText(below.toString());
+        belowEdit.setText(below.toString());
     }
 
     public void setAlgorithm(Problem001.Algorithm _algorithm) {
@@ -292,8 +292,8 @@ public class JProjectEulerP001Controller {
 
         fromEdit.textProperty().addListener(new ChangeEditListenerLocal(15, true));
         fromEdit.setText(from.toString());
-        toEdit.textProperty().addListener(new ChangeEditListenerLocal(20, true));
-        toEdit.setText(below.toString());
+        belowEdit.textProperty().addListener(new ChangeEditListenerLocal(20, true));
+        belowEdit.setText(below.toString());
         addEdit.textProperty().addListener(new ChangeEditListenerLocal(10, true));
         
         Problem001.Algorithm[] algorithms = Problem001.Algorithm.values();
@@ -428,7 +428,7 @@ public class JProjectEulerP001Controller {
     @FXML
     public void onCalculate(ActionEvent event) {
         BigInteger from = new BigInteger(fromEdit.getText());
-        BigInteger below = new BigInteger(toEdit.getText());
+        BigInteger below = new BigInteger(belowEdit.getText());
         if (from.compareTo(below) == -1) {
             Object selectedItem = algorithmComboBox.getSelectionModel().getSelectedItem();
             Problem001.Algorithm algorithm = (Problem001.Algorithm)selectedItem;

@@ -13,7 +13,7 @@
    <children>
       <ListView fx:id="multiplesList" layoutX="14.0" layoutY="34.0" prefHeight="245.0" prefWidth="200.0" />
       <TextField fx:id="fromEdit" layoutX="224.0" layoutY="34.0" prefHeight="26.0" prefWidth="158.0" text="1" />
-      <TextField fx:id="toEdit" layoutX="224.0" layoutY="89.0" prefHeight="26.0" prefWidth="158.0" text="1000" />
+      <TextField fx:id="belowEdit" layoutX="224.0" layoutY="89.0" prefHeight="26.0" prefWidth="158.0" text="1000" />
       <Button fx:id="addToListButton" layoutX="224.0" layoutY="149.0" minWidth="38.0" mnemonicParsing="false" onAction="#onAddToList" prefHeight="32.0" prefWidth="60.0" text="%btn.addtomultipleslist" />
       <TextField fx:id="addEdit" layoutX="300.0" layoutY="149.0" prefHeight="32.0" prefWidth="76.0" text="7" />
       <Button fx:id="removeFromListButton" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#onRemoveFromList" prefHeight="32.0" prefWidth="152.0" text="%btn.removefrommultipleslist" />
