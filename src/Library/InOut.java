@@ -7,10 +7,12 @@ package Library;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 
 /**
  * In this class we will add several usefull In &amp; Out functions
@@ -90,7 +92,7 @@ public class InOut<T> {
      * If <b>value</b> is not a valid <b>long</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * the <b><i>default_value</i></b> is returned
      * 
-     * @param args List of string where we will found argument <b><i>name</i></b>
+     * @param args List of string where we will find argument <b><i>name</i></b>
      * @param default_value value returned if <b>value</b> is not a valid <b>long</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * @param name Argument name searched in <b><i>args</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/Long.html" target="_blank"><b>Long</b></a> with value of argument <b><i>name</i></b> found 
@@ -114,7 +116,7 @@ public class InOut<T> {
      * If <b>value</b> is not a valid <b>BigInteger</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * the <b><i>default_value</i></b> is returned
      * 
-     * @param args List of string where we will found argument <b><i>name</i></b>
+     * @param args List of string where we will find argument <b><i>name</i></b>
      * @param default_value value returned if <b>value</b> is not a valid <b>BigInteger</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * @param name Argument name searched in <b><i>args</i></b>
      * @return <a href="https://docs.oracle.com/javase/10/docs/api/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with value of argument <b><i>name</i></b> found 
@@ -138,7 +140,7 @@ public class InOut<T> {
      * If <b>value</b> is not a valid <b>String</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * the <b><i>default_value</i></b> is returned
      * 
-     * @param args List of string where we will found argument <b><i>name</i></b>
+     * @param args List of string where we will find argument <b><i>name</i></b>
      * @param default_value value returned if <b>value</b> is not a valid <b>String</b> or <b>argument_name</b> is not found in <b><i>args</i></b>
      * @param name Argument name searched in <b><i>args</i></b>
      * @return <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html" target="_blank"><b>String</b></a> with value of argument <b><i>name</i></b> found 
@@ -150,6 +152,83 @@ public class InOut<T> {
             if (param.startsWith(name + ":"))
                 value = param.substring(name.length() + 1);
         }
+        return value;
+    }
+    
+    /** 
+     * return value of parameter called <b><i>name</i></b> in parameters <b><i>p</i></b>.<br>
+     * Parameters could have two forms:<br> 
+     * 1.- <b>[name]:[value]</b> where <b>value</b> is a <b>String</b>.<br>
+     * 2.- <b>--[name]=[value]</b> where <b>value</b> is a <b>String</b>.<br>
+     * If <b>value</b> is not a valid <b>String</b> or <b>name</b> is not found in <b><i>p</i></b>
+     * the <b><i>defaultValue</i></b> is returned.<br>
+     * <b><i>uppercase</i></b> indicates if returned value must be uppercased or not.
+     * 
+     * @param p List of <a href="https://openjfx.io/javadoc/11/javafx.graphics/javafx/application/Application.Parameters.html" target="_blank"><b>Parameter</b></a> where we will find argument <b><i>name</i></b>
+     * @param name Argument name searched in <b><i>p</i></b>
+     * @param defaultValue value returned if <b>value</b> is not a valid <b>String</b> or <b>name</b> is not found in <b><i>p</i></b>
+     * @param uppercase <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Boolean.html" target="_blank"><b>Boolean</b></a> indicating if <b>value</b> must be returned as uppercase or not
+     * @return <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html" target="_blank"><b>String</b></a> with value of argument <b><i>name</i></b> found 
+     * or <b><i>defaultValue</i></b> if <b>value</b> is not a valid <b>String</b> or <b>name</b> is not found in <b><i>p</i></b>
+     */
+    public static String getParameter(Application.Parameters p, String name, String defaultValue, boolean uppercase) {
+        if (p == null)
+            return defaultValue;
+        List<String> argsl = p.getUnnamed();
+        String[] args = (argsl.size() > 0 ? argsl.toArray(new String[0]) : new String[0]);
+        String value1 = getArgument(args, (String)null, name);
+        String value2 = p.getNamed().get(name);
+        String value = (value1 == null ? (value2 == null ? defaultValue : value2) : value1);
+        return (uppercase? value.toUpperCase() : value);
+    }
+
+    /** 
+     * return value of parameter called <b><i>name</i></b> in parameters <b><i>p</i></b>.<br>
+     * Parameters could have two forms:<br> 
+     * 1.- <b>[name]:[value]</b> where <b>value</b> is a <b>BigInteger</b>.<br>
+     * 2.- <b>--[name]=[value]</b> where <b>value</b> is a <b>BigInteger</b>.<br>
+     * If <b>value</b> is not a valid <b>BigInteger</b> or <b>name</b> is not found in <b><i>p</i></b>
+     * the <b><i>defaultValue</i></b> is returned.<br>
+     * 
+     * @param p List of <a href="https://openjfx.io/javadoc/11/javafx.graphics/javafx/application/Application.Parameters.html" target="_blank"><b>Parameter</b></a> where we will find argument <b><i>name</i></b>
+     * @param name Argument name searched in <b><i>p</i></b>
+     * @param defaultValue value returned if <b>value</b> is not a valid <b>BigInteger</b> or <b>name</b> is not found in <b><i>p</i></b>
+     * @return <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/math/BigInteger.html" target="_blank"><b>BigInteger</b></a> with value of argument <b><i>name</i></b> found 
+     * or <b><i>defaultValue</i></b> if <b>value</b> is not a valid <b>String</b> or <b>name</b> is not found in <b><i>p</i></b>
+     */
+    public static BigInteger getParameter(Application.Parameters p, String name, BigInteger defaultValue) {
+        if (p == null)
+            return defaultValue;
+        List<String> argsl = p.getUnnamed();
+        String[] args = (argsl.size() > 0 ? argsl.toArray(new String[0]) : new String[0]);
+        BigInteger value1 = InOut.getArgument(args, (BigInteger)null, name);
+        String value2 = p.getNamed().get(name);
+        BigInteger value = (value1 == null ? (value2 == null ? defaultValue : new BigInteger(value2)) : value1);
+        return value;
+    }
+    
+    /** 
+     * return value of parameter called <b><i>name</i></b> in parameters <b><i>p</i></b>.<br>
+     * Parameters could have two forms:<br> 
+     * 1.- <b>[name]:[value]</b> where <b>value</b> is a <b>long</b>.<br>
+     * 2.- <b>--[name]=[value]</b> where <b>value</b> is a <b>long</b>.<br>
+     * If <b>value</b> is not a valid <b>long</b> or <b>name</b> is not found in <b><i>p</i></b>
+     * the <b><i>defaultValue</i></b> is returned.<br>
+     * 
+     * @param p List of <a href="https://openjfx.io/javadoc/11/javafx.graphics/javafx/application/Application.Parameters.html" target="_blank"><b>Parameter</b></a> where we will find argument <b><i>name</i></b>
+     * @param name Argument name searched in <b><i>p</i></b>
+     * @param defaultValue value returned if <b>value</b> is not a valid <b>String</b> or <b>name</b> is not found in <b><i>p</i></b>
+     * @return <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Long.html" target="_blank"><b>long</b></a> with value of argument <b><i>name</i></b> found 
+     * or <b><i>defaultValue</i></b> if <b>value</b> is not a valid <b>String</b> or <b>name</b> is not found in <b><i>p</i></b>
+     */
+    public static long getParameter(Application.Parameters p, String name, long defaultValue) {
+        if (p == null)
+            return defaultValue;
+        List<String> argsl = p.getUnnamed();
+        String[] args = (argsl.size() > 0 ? argsl.toArray(new String[0]) : new String[0]);
+        long value1 = InOut.getArgument(args, Long.MIN_VALUE, name);
+        String value2 = p.getNamed().get(name);
+        long value = (value1 == Long.MIN_VALUE ? (value2 == null ? defaultValue : Long.parseLong(value2)) : value1);
         return value;
     }
     

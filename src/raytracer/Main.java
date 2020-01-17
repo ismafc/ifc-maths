@@ -1532,91 +1532,34 @@ Números de Friedman:
 
     @Override
     public void start(Stage stage) throws Exception {
-/*        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        stage.setTitle("Sum of multiples of");
-        stage.setScene(scene);
-        stage.show();*/
 //        Locale.setDefault(Locale.ENGLISH);
 
         // Read 'action' parameter in command-line
-        List<String> argsl = getParameters().getUnnamed();
-        String[] args = (argsl.size() > 0 ? argsl.toArray(new String[0]) : new String[0]);
-        String action1 = InOut.getArgument(args, (String)null, "action");
-        String action2 = getParameters().getNamed().get("action");
-        String action = (action1 == null ? (action2 == null ? "INTERFACE" : action2) : action1);
-        action = action.toUpperCase();
-  
+        String action = InOut.getParameter(getParameters(), "action", "INTERFACE", true);
+        
         // Read v1, v2, ... , vn parameters in command-line
-        ArrayList<BigInteger> values = new ArrayList<>();
-        long i = 1;
-        BigInteger v1 = InOut.getArgument(args, (BigInteger)null, "v" + i);
-        String v2 = getParameters().getNamed().get("v" + i);
-        BigInteger v = (v1 == null ? (v2 == null ? null : new BigInteger(v2)) : v1);
-        while (v != null) {
-            values.add(v);
-            i++;
-            v1 = InOut.getArgument(args, (BigInteger)null, "v" + i);
-            v2 = getParameters().getNamed().get("v" + i);
-            v = (v1 == null ? (v2 == null ? null : new BigInteger(v2)) : v1);
-        }
-        if (values.isEmpty())
-            values = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
+        ArrayList<BigInteger> values = JProjectEulerP001Controller.getValuesParameters(getParameters());
  
         // Read 'from' parameter in command-line
-        BigInteger from1 = InOut.getArgument(args, (BigInteger)null, "from");
-        String from2 = getParameters().getNamed().get("from");
-        BigInteger from = (from1 == null ? (from2 == null ? null : new BigInteger(from2)) : from1);
-        if (from ==  null)
-            from = new BigInteger("1");
-
+        BigInteger from = InOut.getParameter(getParameters(), "from", new BigInteger("1"));
+        
         // Read 'below' parameter in command-line
-        BigInteger below1 = InOut.getArgument(args, (BigInteger)null, "below");
-        String below2 = getParameters().getNamed().get("below");
-        BigInteger below = (below1 == null ? (below2 == null ? null : new BigInteger(below2)) : below1);
-        if (below ==  null)
-            below = new BigInteger("1000");
+        BigInteger below = InOut.getParameter(getParameters(), "below", new BigInteger("1000"));
 
         // Read 'samples' parameter in command-line
-        long samples1 = InOut.getArgument(args, Long.MIN_VALUE, "samples");
-        String samples2 = getParameters().getNamed().get("samples");
-        long samples = (samples1 == Long.MIN_VALUE ? (samples2 == null ? 20 : Long.parseLong(samples2)) : samples1);
+        long samples = InOut.getParameter(getParameters(), "samples", 20);
 
         // Read 'separator' parameter in command-line
-        String separator1 = InOut.getArgument(args, (String)null, "separator");
-        String separator2 = getParameters().getNamed().get("separator");
-        String separator = (separator1 == null ? (separator2 == null ? ";" : separator2) : separator1);
+        String separator = InOut.getParameter(getParameters(), "separator", ";", false);
 
         // Read 'algorithm' parameter in command-line
-        String algorithm1 = InOut.getArgument(args, (String)null, "algorithm");
-        String algorithm2 = getParameters().getNamed().get("algorithm");
-        String algorithm_txt = (algorithm1 == null ? (algorithm2 == null ? "SOLUTION1" : algorithm2) : algorithm1);
-        Problem001.Algorithm algorithm = Problem001.Algorithm.valueOf(algorithm_txt);
+        Problem001.Algorithm algorithm = JProjectEulerP001Controller.getAlgorithmParameter(getParameters(), Problem001.Algorithm.SOLUTION1);
         
         // Read 'threads' parameter in command-line
-        long nThreads1 = InOut.getArgument(args, Long.MIN_VALUE, "threads");
-        String nThreads2 = getParameters().getNamed().get("threads");
-        long nThreads = (nThreads1 == Long.MIN_VALUE ? (nThreads2 == null ? Long.MIN_VALUE : Long.parseLong(nThreads2)) : nThreads1);
-        if (nThreads == Long.MIN_VALUE)
-            nThreads = Runtime.getRuntime().availableProcessors();
+        long nThreads = InOut.getParameter(getParameters(), "threads", Runtime.getRuntime().availableProcessors());
 
         // Read 'method' parameter in command-line
-        String method1 = InOut.getArgument(args, (String)null, "method");
-        String method2 = getParameters().getNamed().get("method");
-        String method = (method1 == null ? (method2 == null ? "PARALLEL" : method2) : method1);
+        String method = InOut.getParameter(getParameters(), "method", "PARALLEL", true);
 
         switch (action) {
             case "STATISTICS":

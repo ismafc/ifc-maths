@@ -12,10 +12,12 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application.Parameters;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -161,6 +163,34 @@ public class JProjectEulerP001Controller {
             addToListButton.setDisable(true);
     }
 
+    // Read 'algorithm' parameter in command-line
+    public static Problem001.Algorithm getAlgorithmParameter(Parameters p, Problem001.Algorithm defaultValue) {        
+        Problem001.Algorithm algorithm = null;
+        String algorithm_txt = InOut.getParameter(p, "algorithm", defaultValue.toString(), false);
+        try {
+            algorithm = Problem001.Algorithm.valueOf(algorithm_txt);
+        }
+        catch (Exception e) {
+            algorithm = defaultValue;
+        }
+        return algorithm;
+    }
+    
+    // Read v1, v2, ... , vn parameters in command-line
+    public static ArrayList<BigInteger> getValuesParameters(Parameters p) {        
+        ArrayList<BigInteger> values = new ArrayList<>();
+        long i = 1;
+        BigInteger value = InOut.getParameter(p, "v" + i, (BigInteger)null);
+        while (value != null) {
+            values.add(value);
+            i++;
+            value = InOut.getParameter(p, "v" + i, (BigInteger)null);
+        }
+        if (values.isEmpty())
+            values = new ArrayList<>(Arrays.asList(new BigInteger("3"), new BigInteger("5")));
+        return values;
+    }
+    
     public static void calculate(Problem001Thread p001, ArrayList<BigInteger> values, BigInteger from, BigInteger below, Problem001.Algorithm algorithm) throws InterruptedException {
         p001.set(values, from, below, algorithm);
         p001.start();
