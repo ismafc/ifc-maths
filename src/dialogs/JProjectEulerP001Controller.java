@@ -165,13 +165,12 @@ public class JProjectEulerP001Controller {
 
     // Read 'algorithm' parameter in command-line
     public static Problem001.Algorithm getAlgorithmParameter(Parameters p, Problem001.Algorithm defaultValue) {        
-        Problem001.Algorithm algorithm = null;
+        Problem001.Algorithm algorithm = defaultValue;
         String algorithm_txt = InOut.getParameter(p, "algorithm", defaultValue.toString(), false);
         try {
             algorithm = Problem001.Algorithm.valueOf(algorithm_txt);
         }
         catch (Exception e) {
-            algorithm = defaultValue;
         }
         return algorithm;
     }

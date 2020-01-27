@@ -1561,6 +1561,12 @@ Números de Friedman:
         // Read 'method' parameter in command-line
         String method = InOut.getParameter(getParameters(), "method", "PARALLEL", true);
 
+        if (from.compareTo(below) != -1) {
+            System.out.println("Error: 'from' must be less than 'below'");
+            Platform.exit();
+            return;
+        }
+        
         switch (action) {
             case "STATISTICS":
                 JProjectEulerP001Controller.statistics(samples, values, from, below, separator);
