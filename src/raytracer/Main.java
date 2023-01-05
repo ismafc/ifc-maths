@@ -1328,7 +1328,7 @@ Números de Friedman:
         nonograma.setRowDefinition(17, new ArrayList<>(Arrays.asList(3,2,2,1,2,1,2)));
         nonograma.setRowDefinition(18, new ArrayList<>(Arrays.asList(2,1,2,1,1,2,2)));
         nonograma.setRowDefinition(19, new ArrayList<>(Arrays.asList(3,6,3)));
-*/
+
         System.out.println(nonograma.toString());
         ArrayList<Nonograma> solutions = nonograma.solve(false);
         if (solutions.isEmpty()) {
@@ -1338,7 +1338,7 @@ Números de Friedman:
             System.out.println("There are " + solutions.size() + " Solutions...");
             for (Nonograma n : solutions)
                 System.out.println(n.toString());
-        }
+        }*/
 
         System.out.println("#Processors = " + Runtime.getRuntime().availableProcessors());
         System.out.println("Memory (free/total/Max) = (" + Runtime.getRuntime().freeMemory() + "/" + 
@@ -1395,8 +1395,8 @@ Números de Friedman:
         myDialog.setAnimationFrameTime(40);
         myDialog.GO();
 */
-/*  
-        final int MAX_FRACTAL_DIMENSION = 300;
+  
+/*        final int MAX_FRACTAL_DIMENSION = 300;
         JFractalDialog myDialog = new JFractalDialog((JFrame)null, "Mandelbrot set", true);
         myDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         myDialog.setPreferredSize(new Dimension(MAX_FRACTAL_DIMENSION, MAX_FRACTAL_DIMENSION));
@@ -1407,10 +1407,9 @@ Números de Friedman:
         for (int s = 5; s < 50; s++)
             myDialog.createMandelbrot(s);
         myDialog.GO();
-*/
 
-//        myDialog.setVisible(true);
-//        myDialog.STOP();
+        myDialog.setVisible(true);
+        myDialog.STOP();*/
         
         // a = 5.0 + 6.0i
         // b = -3.0 + 4.0i
@@ -1526,6 +1525,22 @@ Números de Friedman:
         mat.toRotationZ(Math.PI/4);
         mat.transform(bb);
         System.out.println(bb);
+
+        Scanner sc = new Scanner(System.in);
+        long t = sc.nextLong(); 
+        for (int i = 0; i < t; i++) {
+            long a = sc.nextLong();
+            long b = sc.nextLong();
+            long c = sc.nextLong();
+
+            if (a > b && a > c) {
+                System.out.println("Alice");
+            } else if (b > a && b > c) {
+                System.out.println("Bob");
+            } else {
+                System.out.println("Charlie");
+            }
+        }
         
         Application.launch(args);
     }
