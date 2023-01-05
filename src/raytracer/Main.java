@@ -1526,6 +1526,8 @@ Números de Friedman:
         mat.transform(bb);
         System.out.println(bb);
 
+/*        
+        // CodeCheff
         Scanner sc = new Scanner(System.in);
         long t = sc.nextLong(); 
         for (int i = 0; i < t; i++) {
@@ -1541,7 +1543,7 @@ Números de Friedman:
                 System.out.println("Charlie");
             }
         }
-        
+*/        
         Application.launch(args);
     }
 
